@@ -24,6 +24,7 @@ import GetMoreInfoPage from '../GetMoreInfoPage/GetMoreInfoPage';
 import './App.css';
 import PrimingPage from '../PrimingPage/PrimingPage';
 import ServiceChoicePage from '../ServiceChoicePage/ServiceChoicePage';
+import ClientLocationInfoPage from '../ClientLocationInfoPage/ClientLocationInfoPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -93,6 +94,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ClientLocationInfoPage else shows LoginPage
+            exact
+            path="/clientlocationinfopage"
+          >
+            <ClientLocationInfoPage />
           </ProtectedRoute>
 
           <Route

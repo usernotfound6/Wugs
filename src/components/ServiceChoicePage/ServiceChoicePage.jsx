@@ -7,12 +7,12 @@ import {useSelector} from 'react-redux';
 function ServiceChoicePage() {
   // Using hooks we're creating local state for a "heading" variable with
   // a default value of 'Functional Component'
-  const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Functional Component');
+//   const store = useSelector((store) => store);
+//   const [heading, setHeading] = useState('Functional Component');
 
   return (
     <div>
-      <h2>{heading}</h2>
+      <h2>Service Choice Page</h2>
     </div>
   );
 }
