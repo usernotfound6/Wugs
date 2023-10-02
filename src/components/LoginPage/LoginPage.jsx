@@ -10,7 +10,7 @@ function LoginPage() {
       <LoginForm />
 
       <center>
-        <h1>PETER  WAS HERE</h1>
+        <h1> Peter was here</h1>
         <button
           type="button"
           className="btn btn_asLink"
