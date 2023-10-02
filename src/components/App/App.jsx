@@ -25,6 +25,11 @@ import './App.css';
 import PrimingPage from '../PrimingPage/PrimingPage';
 import ServiceChoicePage from '../ServiceChoicePage/ServiceChoicePage';
 import ClientLocationInfoPage from '../ClientLocationInfoPage/ClientLocationInfoPage';
+import DemographicsPage from '../DemographicsPage/DemographicsPage';
+import FoodPreferencesPage from '../FoodPreferencesPage/FoodPreferencesPage';
+import AdditionalInfoPage from '../AdditionalInfoPage/AdditionalInfoPage';
+import ReviewPage from '../ReviewPage/ReviewPage';
+import AdminPage from '../AdminPage/AdminPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -55,7 +60,7 @@ function App() {
           <Route
             // shows GetMoreInfoPage at all times (logged in or not)
             exact
-            path="/getmoreinfopage"
+            path="/getmoreinfo"
           >
             <GetMoreInfoPage />
           </Route>
@@ -75,7 +80,7 @@ function App() {
           <ProtectedRoute
             // logged in shows PrimingPage else shows LoginPage
             exact
-            path="/primingpage"
+            path="/priming"
           >
             <PrimingPage/>
           </ProtectedRoute>
@@ -83,7 +88,7 @@ function App() {
           <ProtectedRoute
             // logged in shows ServiceChoicePage else shows LoginPage
             exact
-            path="/servicechoicepage"
+            path="/servicechoice"
           >
             <ServiceChoicePage/>
           </ProtectedRoute>
@@ -99,9 +104,49 @@ function App() {
           <ProtectedRoute
             // logged in shows ClientLocationInfoPage else shows LoginPage
             exact
-            path="/clientlocationinfopage"
+            path="/clientlocationinfo"
           >
             <ClientLocationInfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows DemographicsPage else shows LoginPage
+            exact
+            path="/demographics"
+          >
+            <DemographicsPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows FoodPreferencesPage else shows LoginPage
+            exact
+            path="/foodpreferences"
+          >
+            <FoodPreferencesPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AdditionalInfoPage else shows LoginPage
+            exact
+            path="/additionalinfo"
+          >
+            <AdditionalInfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ReviewPage else shows LoginPage
+            exact
+            path="/review"
+          >
+            <ReviewPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows AdminPage else shows LoginPage
+            exact
+            path="/admin"
+          >
+            <AdminPage />
           </ProtectedRoute>
 
           <Route
