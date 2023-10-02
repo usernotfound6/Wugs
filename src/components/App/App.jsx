@@ -30,6 +30,7 @@ import FoodPreferencesPage from '../FoodPreferencesPage/FoodPreferencesPage';
 import AdditionalInfoPage from '../AdditionalInfoPage/AdditionalInfoPage';
 import ReviewPage from '../ReviewPage/ReviewPage';
 import AdminPage from '../AdminPage/AdminPage';
+import ClientStatusPage from '../ClientStatusPage/ClientStatusPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,19 @@ function App() {
           >
             <GetMoreInfoPage />
           </Route>
+
+
+
+
+
+{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+
+
+{                                               /* PROTECTED */                                                  } 
+
+
+
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -148,6 +162,24 @@ function App() {
           >
             <AdminPage />
           </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ClientStatusPage else shows LoginPage
+            exact
+            path="/clientstatus"
+          >
+            <ClientStatusPage />
+          </ProtectedRoute>
+
+
+
+{                                               /* PROTECTED */                                             } 
+
+
+
+{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+
+
 
           <Route
             exact
