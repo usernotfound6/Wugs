@@ -23,6 +23,7 @@ import GetMoreInfoPage from '../GetMoreInfoPage/GetMoreInfoPage';
 
 import './App.css';
 import PrimingPage from '../PrimingPage/PrimingPage';
+import ServiceChoicePage from '../ServiceChoicePage/ServiceChoicePage';
 
 function App() {
   const dispatch = useDispatch();
@@ -71,11 +72,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
+            // logged in shows PrimingPage else shows LoginPage
             exact
             path="/primingpage"
           >
             <PrimingPage/>
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows ServiceChoicePage else shows LoginPage
+            exact
+            path="/servicechoicepage"
+          >
+            <ServiceChoicePage/>
           </ProtectedRoute>
 
           <ProtectedRoute
