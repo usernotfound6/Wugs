@@ -1,38 +1,84 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import './LandingPage.css';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import "./LandingPage.css";
+import { Card } from "@mui/material";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { CardActionArea } from "@mui/material";
+import Grid from "@mui/material/Grid";
 
 // CUSTOM COMPONENTS
 // import RegisterForm from '../RegisterForm/RegisterForm';
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome');
+  const [heading, setHeading] = useState("Welcome");
   const history = useHistory();
 
   const onLogin = (event) => {
-    history.push('/login');
+    history.push("/login");
   };
 
   return (
     <div className="container">
-      <h2>{heading}</h2>
-
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          {/* add learn more card and button */}
-           {/* add get snacking card and button */}
-        </div>
-        <div className="grid-col grid-col_4">
-          {/* <RegisterForm /> */}
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
-        </div>
-      </div>
+    
+        <img src= "https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"></img>
+      
+      <center>
+        <h4>Already a Member?</h4>
+        <button className="btn btn_sizeSm" onClick={onLogin}>
+          Login
+        </button>
+      </center>
+      <h2>Welcome</h2>
+      <Grid container spacing={2}>
+        <Grid item xs={2} sm={6}>
+          <Card elevation={24} sx={{ margin: 'auto', maxWidth: 280, backgroundColor: "lightgray", borderRadius: 3,}}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="240"
+                src="https://thumb.tildacdn.com/tild3139-3131-4538-b831-613333356461/-/format/webp/pic4.jpeg"
+                alt="Wugs Services"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Learn More
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  See which Wugs service is right for your space. Whether it's
+                  Micro-Markets, Smart Coolers, or Snack Boxes, Wugs could be
+                  the perfect upgrade to your food and beverage needs. Click
+                  here to get more details.
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Card elevation={24} sx={{ margin: 'auto', maxWidth: 280, backgroundColor: "lightgray", borderRadius: 3,}}>
+            <CardActionArea>
+              <CardMedia
+                component="img"
+                height="240"
+                src="https://thumb.tildacdn.com/tild6665-3033-4534-b666-316131636265/-/resize/576x/-/format/webp/Screen_Shot_2023-02-.png"
+                alt="Wugs On-Boarding Portal"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  Get Snacking
+                </Typography>
+                <Typography variant="body1" color="text.secondary">
+                  With our new streamlined on-boarding process, adding Wugs to
+                  your space has never been easier. With this all-in-one
+                  process, you can now revolutionize your snacking space in less
+                  time than ever. Click here to get started!
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Grid>
+      </Grid>
     </div>
   );
 }
