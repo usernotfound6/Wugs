@@ -2,9 +2,13 @@
 Grid
 -------------------------------------------------------------------------------- */
 .container {
-  background-color:rgb(53, 49, 49)
+  background-color:rgb(53, 49, 49);
+  
 }
 
+#react-root {
+  background-color:rgb(53, 49, 49);
+}
 
 
 .grid {

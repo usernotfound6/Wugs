@@ -21,19 +21,32 @@ function LandingPage() {
 
   return (
     <div className="container">
-    
-        <img src= "https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"></img>
-      
-      <center>
+      <img
+        src="https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"
+        height={250}
+        style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
+      ></img>
+
+      <div style={{ position: "absolute", right: 40, top: 120 }}>
         <h4>Already a Member?</h4>
         <button className="btn btn_sizeSm" onClick={onLogin}>
           Login
         </button>
-      </center>
-      <h2>Welcome</h2>
+      </div>
+      <h2></h2>
       <Grid container spacing={2}>
         <Grid item xs={2} sm={6}>
-          <Card elevation={24} sx={{ margin: 'auto', maxWidth: 280, backgroundColor: "lightgray", borderRadius: 3,}}>
+          <Card
+            elevation={24}
+            sx={{
+              margin: "auto",
+            
+              maxWidth: 280,
+              minWidth: 280,
+              backgroundColor: "lightgray",
+              borderRadius: 3,
+            }}
+          >
             <CardActionArea>
               <CardMedia
                 component="img"
@@ -56,7 +69,16 @@ function LandingPage() {
           </Card>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Card elevation={24} sx={{ margin: 'auto', maxWidth: 280, backgroundColor: "lightgray", borderRadius: 3,}}>
+          <Card
+            elevation={24}
+            sx={{
+              margin: "auto",
+              maxWidth: 280,
+              minWidth: 280,
+              backgroundColor: "lightgray",
+              borderRadius: 3,
+            }}
+          >
             <CardActionArea>
               <CardMedia
                 component="img"
