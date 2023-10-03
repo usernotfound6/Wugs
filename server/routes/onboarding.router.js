@@ -140,17 +140,16 @@ router.put("/additionalinfo", (req, res) => {
   // POST route code here
 
   let queryText = `UPDATE client
-  SET number_of_people = $1,
-  demographics = $2,
-  neighborhood_info = $3,
-  industry = $4
-  WHERE client.id = 16;`;
+  SET demensions = $1,
+  pictures = $2,
+  visit = $3
+  WHERE client.id = 14;`;
   pool
     .query(queryText, [
-      req.body.number_of_people,
-      req.body.demographics,
-      req.body.neighborhood_info,
-      req.body.industry,
+      req.body.demensions,
+      req.body.pictures,
+      req.body.visit,
+      
       
     ])
     .then((result) => {
