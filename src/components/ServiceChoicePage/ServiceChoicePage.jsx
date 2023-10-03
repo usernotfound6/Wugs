@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 // Path: /servicechoice
 
@@ -24,15 +25,24 @@ function ServiceChoicePage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("micromarket checked?", micromarketChecked);
-    console.log("smartcoolers checked?", smartcoolersChecked);
-    console.log("snackboxes checked?", snackboxesChecked);
-
-    let servicesObj = {
-      micro_market: micromarketChecked,
-      smart_cooler: smartcoolersChecked,
-      snack_boxes: snackboxesChecked
+    // console.log("micromarket checked?", micromarketChecked);
+    // console.log("smartcoolers checked?", smartcoolersChecked);
+    // console.log("snackboxes checked?", snackboxesChecked);
+    let servicesArray = [];
+    if (micromarketChecked) {
+      servicesArray.push(1);
     }
+    if (smartcoolersChecked) {
+      servicesArray.push(2);
+    }
+    if (snackboxesChecked) {
+      servicesArray.push(3);
+    }
+    let servicesObj = {
+      services: servicesArray,
+    }
+    // console.log(servicesArray);
+
 
 
   }
@@ -50,7 +60,7 @@ function ServiceChoicePage() {
           checked={micromarketChecked}
           onChange={handleMicromarketChange}
         />
-        <label for="micromarket">Micro Markets</label><br />
+        <label htmlFor="micromarket">Micro Markets</label><br />
 
         <input
           type="checkbox"
@@ -60,7 +70,7 @@ function ServiceChoicePage() {
           checked={smartcoolersChecked}
           onChange={handleSmartcoolersChange}
         />
-        <label for="smartcoolers">Smart Coolers</label><br />
+        <label htmlFor="smartcoolers">Smart Coolers</label><br />
 
         <input
           type="checkbox"
@@ -70,7 +80,7 @@ function ServiceChoicePage() {
           checked={snackboxesChecked}
           onChange={handleSnackboxesChange}
         />
-        <label for="snackboxes">Snack Boxes</label><br />
+        <label htmlFor="snackboxes">Snack Boxes</label><br />
 
         <button type="submit" value="Submit" onClick={handleSubmit}>NEXT</button>
       </form>
