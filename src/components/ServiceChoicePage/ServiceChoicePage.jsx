@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 
 // Path: /servicechoice
 
@@ -8,6 +7,8 @@ import axios from 'axios';
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 function ServiceChoicePage() {
+
+  const dispatch = useDispatch();
 
   const [micromarketChecked, setMicromarketChecked] = useState(false);
   const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
@@ -43,7 +44,8 @@ function ServiceChoicePage() {
     }
     // console.log(servicesArray);
 
-
+    // dispatch goes here for PUT
+    dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
 
   }
 
