@@ -51,6 +51,7 @@ router.put("/clientlocationinfo", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
+  });
 
 
 
@@ -111,10 +112,10 @@ router.put("/servicechoice", (req, res) => {
 // Product Choice router --------------------------------------
 router.put("/foodpreferences", (req, res) => {
   const client_id = req.body.client_id;
-  const service_id = req.body.service_id;
+  const service_id = req.body.product_id;
 
-  const deleteQuery = `DELETE FROM client_service WHERE client_id = $1`;
-  const insertQuery = `INSERT INTO client_service (client_id, service_id) VALUES ($1, $2)`;
+  const deleteQuery = `DELETE FROM client_product WHERE client_id = $1`;
+  const insertQuery = `INSERT INTO client_product (client_id, product_id) VALUES ($1, $2)`;
 
   const deleteValues = [client_id];
   const insertValues = [client_id, service_id];
@@ -132,6 +133,7 @@ router.put("/foodpreferences", (req, res) => {
       res.sendStatus(500);
     });
 });
+
 
 
 
