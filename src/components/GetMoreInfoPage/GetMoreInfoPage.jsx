@@ -10,9 +10,10 @@ import {
   DialogContent,
   DialogActions,
   DialogContentText,
-  Typography,
 } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
+import "./GetMoreInfoPage.css";
 
 // Path: /getmoreinfo
 
@@ -102,7 +103,7 @@ function GetMoreInfoPage() {
   };
 
   return (
-    <div>
+    <div className='wholebody'>
       <h3 style={{ marginLeft: "12px" }}>Get In Touch With Us</h3>
       <Box
         component="form"
