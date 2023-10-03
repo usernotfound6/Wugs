@@ -38,7 +38,7 @@ function GetMoreInfoPage() {
   }
 
   // Function to format the phone number as you type
-  const handlePhoneChange = (event) => {
+  const handleFormatPhoneNumber = (event) => {
     const inputValue = event.target.value.replace(/\D/g, '');
     // Remove non-digit characters
     let formattedValue = getFormattedPhoneNum(inputValue);
@@ -47,20 +47,6 @@ function GetMoreInfoPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    // // formatting 1234567890 to 123-456-7890
-    // let phoneToFormat = phone;
-    // if (!phoneToFormat || isNaN(phoneToFormat || phoneToFormat.length < 10 || phoneToFormat.length > 10)) {
-    //   alert('phone must be a 10-digit number');
-    // }
-    // if (typeof (phoneToFormat) !== 'string') {
-    //   phoneToFormat = phoneToFormat.toString()
-    // }
-    // if (phoneToFormat.length === 10) {
-    //   phoneToFormat = phoneToFormat.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
-    // } else {
-    //   alert('something went wrong');
-    // }
 
     // console.log("inside handleSubmit");
     let getMoreInfoObject = {
@@ -80,11 +66,17 @@ function GetMoreInfoPage() {
       .catch(error => {
         console.error("error with interested party POST:", error);
       })
+    setName('');
+    setEmail('');
+    setPhone('');
+    setIndustry('');
+    setAboutClient('');
+    setWhyWugs('');
   }
 
   return (
     <div>
-      <h2>Get More Info Page</h2>
+      <h2>Contact Wugs</h2>
 
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label><br />
@@ -92,7 +84,7 @@ function GetMoreInfoPage() {
           type="text"
           id="name"
           name="name"
-          placeholder="ex: John Doe"
+          placeholder="John Doe"
           value={name}
           onChange={(event) => setName(event.target.value)}
           required
@@ -103,7 +95,7 @@ function GetMoreInfoPage() {
           type="email"
           id="email"
           name="email"
-          placeholder="ex: john.doe@gmail.com"
+          placeholder="john.doe@gmail.com"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           required
@@ -114,9 +106,9 @@ function GetMoreInfoPage() {
           type="tel"
           id="phone"
           name="phone"
-          placeholder="ex: 123-456-7890"
+          placeholder="(123) 456-7890"
           value={phone}
-          onChange={handlePhoneChange}
+          onChange={handleFormatPhoneNumber}
           required
         /><br />
 
@@ -125,7 +117,7 @@ function GetMoreInfoPage() {
           type="text"
           id="industry"
           name="industry"
-          placeholder="ex: School, Office, Warehouse"
+          placeholder="School, Office, Warehouse, etc"
           value={industry}
           onChange={(event) => setIndustry(event.target.value)}
         /><br />
@@ -135,18 +127,18 @@ function GetMoreInfoPage() {
           id="aboutClient"
           name="aboutClient"
           value={aboutClient}
-          placeholder="ex: We operate a university library serving students and faculty."
+          placeholder="Example: We operate a university library serving students and faculty."
           onChange={(event) => setAboutClient(event.target.value)}
           rows="4"
           cols="50"
         ></textarea><br />
 
-        <label htmlFor="whyWugs">Why did you choose Wugs?</label><br />
+        <label htmlFor="whyWugs">What brings you to Wugs today?</label><br />
         <textarea
           id="whyWugs"
           name="whyWugs"
           value={whyWugs}
-          placeholder="ex: Having a market on-site would be a great convenience for our students and staff."
+          placeholder="Example: Having a mini-market on-site would be a great convenience for our students and staff."
           onChange={(event) => setWhyWugs(event.target.value)}
           rows="4"
           cols="50"
