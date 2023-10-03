@@ -18,8 +18,44 @@ router.get("/", (req, res) => {
     });
 });
 
+// Client Location router --------------------------------------
+
+router.put("/clientlocationinfo", (req, res) => {
+  // POST route code here
+
+  let queryText = `UPDATE client
+  SET 
+  business_name = $1,
+  address = $2,
+  website = $3,
+  manager_id = $4,
+  phone = $5,
+  hours_of_operation = $6,
+  minimarket_location = $7
+  WHERE client.id = 16;`;
+  pool
+    .query(queryText, [
+      req.body.business_name,
+      req.body.address,
+      req.body.website,
+      req.body.manager_id,
+      req.body.phone,
+      req.body.hours_of_operation,
+      req.body.minimarket_location,
+      
+    ])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 
 
+
+// Demographic router --------------------------------------
 
 router.put("/demographic", (req, res) => {
   // POST route code here
@@ -71,31 +107,32 @@ router.put("/servicechoice", (req, res) => {
       res.sendStatus(500);
     });
 });
-// router.put("/servicechoice", (req, res) => {
-//   const client_id = req.body.client_id;
-//   const service_ids = req.body.service_id; // Assuming this is an array
 
-//   const deleteQuery = `DELETE FROM client_service WHERE client_id = $1`;
-//   const insertQuery = `INSERT INTO client_service (client_id, service_id) VALUES ($1, $2)`;
+// Product Choice router --------------------------------------
+router.put("/foodpreferences", (req, res) => {
+  const client_id = req.body.client_id;
+  const service_id = req.body.service_id;
 
-//   const deleteValues = [client_id];
-  
-//   // Use Promise.all to handle multiple inserts
-//   Promise.all(
-//     service_ids.map((service_id) => {
-//       const insertValues = [client_id, service_id];
-//       return pool.query(deleteQuery, deleteValues)
-//         .then(() => pool.query(insertQuery, insertValues));
-//     })
-//   )
-//     .then(() => {
-//       res.sendStatus(200);
-//     })
-//     .catch((err) => {
-//       console.log("Error completing PUT service query", err);
-//       res.sendStatus(500);
-//     });
-// });
+  const deleteQuery = `DELETE FROM client_service WHERE client_id = $1`;
+  const insertQuery = `INSERT INTO client_service (client_id, service_id) VALUES ($1, $2)`;
+
+  const deleteValues = [client_id];
+  const insertValues = [client_id, service_id];
+
+  pool
+    .query(deleteQuery, deleteValues)
+    .then(() => {
+      return pool.query(insertQuery, insertValues);
+    })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log("Error completing PUT service query", err);
+      res.sendStatus(500);
+    });
+});
+
 
 
 
