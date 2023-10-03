@@ -8,12 +8,11 @@ function* updateServices(action) {
     // new client info here - sending PUT, no reducer needed
 
     try {
-        const servicesArray = action.payload;
-        console.log("servicesArray:", servicesArray)
-        console.log(user.id)
-        const response = yield axios.put('/api/onboarding', servicesArray)
+        const servicesObj = action.payload;
+        console.log("client_id:", servicesObj.client_id)
+        console.log("service_id array:", servicesObj.service_id)
+        const response = yield axios.put('/api/onboarding/servicechoice', servicesObj)
         console.log(response.data)
-
     }
     catch (error) {
         console.log("error with PUT on client side", error)
