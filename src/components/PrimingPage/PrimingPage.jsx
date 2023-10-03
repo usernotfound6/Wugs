@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FastfoodIcon from '@mui/icons-material/Fastfood';
 
-
+// Path: /priming
 
 function PrimingPage() {
 

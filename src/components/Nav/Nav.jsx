@@ -28,8 +28,35 @@ function Nav() {
               Home
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/getmoreinfo">
+              Interested Page
+            </Link>
+            <Link className="navLink" to="/priming">
+              Priming Page
+            </Link>
+            <Link className="navLink" to="/servicechoice">
+              Service Choice Page
+            </Link>
+            <Link className="navLink" to="/clientlocationinfo">
+              Client Location Info Page
+            </Link>
+            <Link className="navLink" to="/demographics">
+              Demographics Page
+            </Link>
+            <Link className="navLink" to="/foodpreferences">
+              Food Preferences Page
+            </Link>
+            <Link className="navLink" to="/additionalinfo">
+              Addl Info Page
+            </Link>
+            <Link className="navLink" to="/review">
+              Review Page
+            </Link>
+            <Link className="navLink" to="/clientstatus">
+              Client Status Page
+            </Link>
+            <Link className="navLink" to="/admin">
+              Admin View Page
             </Link>
 
             <LogOutButton className="navLink" />

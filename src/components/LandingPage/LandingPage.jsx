@@ -11,6 +11,8 @@ import Grid from "@mui/material/Grid";
 // CUSTOM COMPONENTS
 // import RegisterForm from '../RegisterForm/RegisterForm';
 
+// Path: /home (when not logged in)
+
 function LandingPage() {
   const history = useHistory();
 
