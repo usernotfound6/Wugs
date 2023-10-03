@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
 
 // Client Location router ------------------------------------------------------------------------------------------------------------------
 
-router.put("/clientlocationinfo", (req, res) => {
+router.put("/clientlocationinfo/:id", (req, res) => {
   // POST route code here
 
   let queryText = `UPDATE client
@@ -42,6 +42,7 @@ router.put("/clientlocationinfo", (req, res) => {
       req.body.phone,
       req.body.hours_of_operation,
       req.body.minimarket_location,
+      req.params.id
     ])
     .then((result) => {
       res.sendStatus(200);
@@ -54,7 +55,7 @@ router.put("/clientlocationinfo", (req, res) => {
 
 // Demographic router ------------------------------------------------------------------------------------------------------------------
 
-router.put("/demographic", (req, res) => {
+router.put("/demographic/:id", (req, res) => {
   // POST route code here
 
   let queryText = `UPDATE client
@@ -69,6 +70,7 @@ router.put("/demographic", (req, res) => {
       req.body.demographics,
       req.body.neighborhood_info,
       req.body.industry,
+      req.params.id
     ])
     .then((result) => {
       res.sendStatus(200);
@@ -144,7 +146,7 @@ router.put("/foodpreferences", (req, res) => {
 
 // addtional info router ------------------------------------------------------------------------------------------------------------------
 
-router.put("/additionalinfo", (req, res) => {
+router.put("/additionalinfo/:id", (req, res) => {
   // POST route code here
 
   let queryText = `UPDATE client
@@ -153,7 +155,7 @@ router.put("/additionalinfo", (req, res) => {
   visit = $3
   WHERE client.id = $4;`;
   pool
-    .query(queryText, [req.body.demensions, req.body.pictures, req.body.visit])
+    .query(queryText, [req.body.demensions, req.body.pictures, req.body.visit, req.params.id])
     .then((result) => {
       res.sendStatus(200);
     })
