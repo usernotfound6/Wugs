@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -9,7 +9,20 @@ function AboutPage() {
   return (
     <div className="container">
       <div>
-        <p>This about page is for anyone to read!</p>
+      <img
+      src="https://thumb.tildacdn.com/tild6135-6332-4735-b064-643336306437/-/format/webp/IMG_5076.jpg"
+      style={{ display: 'flex', margin: 'auto', height: 500, borderRadius: '15px' }}
+      alt="Your Image"
+    />
+        <div style={{ textAlign:'center', margin:'auto', height: 140, width: 360}}>
+        <p>
+          Wugs spurs inclusivity through global foods and beverages. Our
+          convenient self-checkout markets serve to celebrate the diversity of
+          your workplace. Our grab & go markets and smart fridges offer
+          everything from delicious fresh sushi to flavorful Jarritos, plantain
+          chips, and halal options.
+        </p>
+        </div>
       </div>
     </div>
   );

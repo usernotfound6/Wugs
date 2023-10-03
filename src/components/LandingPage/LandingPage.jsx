@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./LandingPage.css";
-import { Card } from "@mui/material";
+import { Card, Button } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -23,26 +23,33 @@ function LandingPage() {
       <img
         src="https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"
         height={250}
-        style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
+        style={{ display: "flex", marginLeft: "auto", marginRight: "auto" }}
       ></img>
 
       <div style={{ position: "absolute", right: 40, top: 120 }}>
         <h4>Already a Member?</h4>
-        <button className="btn btn_sizeSm" onClick={onLogin}>
+        <Button
+          style={{ position: "absolute", right: 10 }}
+          color="success"
+          variant="contained"
+          autoFocus
+          onClick={onLogin}
+        >
           Login
-        </button>
+        </Button>
       </div>
       <h2></h2>
-      <Grid container spacing={2}>
-        <Grid item xs={2} sm={6}>
+      <Grid container spacing={8}>
+        <Grid item xs={12} sm={6}>
           <Card
             elevation={24}
             sx={{
               margin: "auto",
-
-              maxWidth: 280,
+              marginTop: -7,
+              marginBottom: 6,
+              maxWidth: 340,
               minWidth: 280,
-              backgroundColor: "lightgray",
+              backgroundColor: "beige",
               borderRadius: 3,
             }}
             onClick={() => {
@@ -75,9 +82,10 @@ function LandingPage() {
             elevation={24}
             sx={{
               margin: "auto",
-              maxWidth: 280,
+              marginTop: -7,
+              maxWidth: 340,
               minWidth: 280,
-              backgroundColor: "lightgray",
+              backgroundColor: "beige",
               borderRadius: 3,
             }}
             onClick={() => {

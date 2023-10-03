@@ -103,7 +103,7 @@ function GetMoreInfoPage() {
   };
 
   return (
-    <div className='wholebody'>
+    <div className="wholebody">
       <h3 style={{ marginLeft: "12px" }}>Get In Touch With Us</h3>
       <Box
         component="form"
@@ -124,6 +124,19 @@ function GetMoreInfoPage() {
           value={name}
           onChange={(event) => setName(event.target.value)}
           required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
         />
         <br />
 
@@ -138,6 +151,19 @@ function GetMoreInfoPage() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
         />
         <br />
 
@@ -152,6 +178,19 @@ function GetMoreInfoPage() {
           value={phone}
           onChange={handleFormatPhoneNumber}
           required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
         />
         <br />
 
@@ -165,6 +204,19 @@ function GetMoreInfoPage() {
           placeholder="School, Office, Warehouse, etc"
           value={industry}
           onChange={(event) => setIndustry(event.target.value)}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
         />
         <br />
 
@@ -179,6 +231,19 @@ function GetMoreInfoPage() {
           placeholder="Example: We operate a university library serving students and faculty."
           value={aboutClient}
           onChange={(event) => setAboutClient(event.target.value)}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
         />
         <br />
 
@@ -194,6 +259,19 @@ function GetMoreInfoPage() {
           placeholder="Example: Having a mini-market on-site would be a great convenience for our students and staff."
           value={whyWugs}
           onChange={(event) => setWhyWugs(event.target.value)}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
         />
         <br />
       </Box>
