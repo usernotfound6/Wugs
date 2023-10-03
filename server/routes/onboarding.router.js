@@ -51,7 +51,7 @@ router.put("/clientlocationinfo", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
-});
+
 
 
 
