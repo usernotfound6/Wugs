@@ -32,7 +32,7 @@ router.put("/clientlocationinfo", (req, res) => {
   phone = $5,
   hours_of_operation = $6,
   minimarket_location = $7
-  WHERE client.id = 16;`;
+  WHERE client.id = $8;`;
   pool
     .query(queryText, [
       req.body.business_name,
@@ -66,7 +66,7 @@ router.put("/demographic", (req, res) => {
   demographics = $2,
   neighborhood_info = $3,
   industry = $4
-  WHERE client.id = 16;`;
+  WHERE client.id = $5;`;
   pool
     .query(queryText, [
       req.body.number_of_people,
@@ -143,7 +143,7 @@ router.put("/additionalinfo", (req, res) => {
   SET demensions = $1,
   pictures = $2,
   visit = $3
-  WHERE client.id = 14;`;
+  WHERE client.id = $4;`;
   pool
     .query(queryText, [
       req.body.demensions,
