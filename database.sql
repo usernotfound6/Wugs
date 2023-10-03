@@ -14,7 +14,7 @@ CREATE TABLE "user" (
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(50),
   last_name VARCHAR(50),
-  email VARCHAR(80),
+  username VARCHAR(80) UNIQUE NOT NULL,
   password VARCHAR(1000),
   admin BOOLEAN DEFAULT false
 );
