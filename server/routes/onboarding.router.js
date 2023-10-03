@@ -134,6 +134,33 @@ router.put("/foodpreferences", (req, res) => {
     });
 });
 
+// addtional info router --------------------------------------
+
+router.put("/additionalinfo", (req, res) => {
+  // POST route code here
+
+  let queryText = `UPDATE client
+  SET demensions = $1,
+  pictures = $2,
+  visit = $3
+  WHERE client.id = 14;`;
+  pool
+    .query(queryText, [
+      req.body.demensions,
+      req.body.pictures,
+      req.body.visit,
+      
+      
+    ])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 
 
 
