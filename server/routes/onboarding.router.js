@@ -42,7 +42,6 @@ router.put("/clientlocationinfo", (req, res) => {
       req.body.phone,
       req.body.hours_of_operation,
       req.body.minimarket_location,
-      
     ])
     .then((result) => {
       res.sendStatus(200);
@@ -51,10 +50,7 @@ router.put("/clientlocationinfo", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
-  });
-
-
-
+});
 
 // Demographic router --------------------------------------
 
@@ -73,7 +69,6 @@ router.put("/demographic", (req, res) => {
       req.body.demographics,
       req.body.neighborhood_info,
       req.body.industry,
-      
     ])
     .then((result) => {
       res.sendStatus(200);
@@ -85,19 +80,48 @@ router.put("/demographic", (req, res) => {
 });
 
 // Service Choice router --------------------------------------
+// router.put("/servicechoice", (req, res) => {
+//   const client_id = req.body.client_id;
+//   const service_id = req.body.service_id;
+
+//   const deleteQuery = `DELETE FROM client_service WHERE client_id = $1`;
+//   const insertQuery = `INSERT INTO client_service (client_id, service_id) VALUES ($1, $2)`;
+
+//   const deleteValues = [client_id];
+//   const insertValues = [client_id, service_id];
+
+//   pool
+//     .query(deleteQuery, deleteValues)
+//     .then(() => {
+//       return pool.query(insertQuery, insertValues);
+//     })
+//     .then(() => {
+//       res.sendStatus(200);
+//     })
+//     .catch((err) => {
+//       console.log("Error completing PUT service query", err);
+//       res.sendStatus(500);
+//     });
+// });
+
 router.put("/servicechoice", (req, res) => {
   const client_id = req.body.client_id;
-  const service_id = req.body.service_id;
+  const service_id = req.body.service_id; // Assuming service_id is an array
 
   const deleteQuery = `DELETE FROM client_service WHERE client_id = $1`;
-  const insertQuery = `INSERT INTO client_service (client_id, service_id) VALUES ($1, $2)`;
 
   const deleteValues = [client_id];
-  const insertValues = [client_id, service_id];
 
   pool
     .query(deleteQuery, deleteValues)
     .then(() => {
+      // Use a loop to insert multiple rows
+      const insertQuery = `
+        INSERT INTO client_service (client_id, service_id)
+        SELECT $1, unnest($2::int[])
+      `;
+      const insertValues = [client_id, service_id];
+
       return pool.query(insertQuery, insertValues);
     })
     .then(() => {
@@ -112,17 +136,21 @@ router.put("/servicechoice", (req, res) => {
 // Product Choice router --------------------------------------
 router.put("/foodpreferences", (req, res) => {
   const client_id = req.body.client_id;
-  const service_id = req.body.product_id;
+  const product_id = req.body.product_id;
 
   const deleteQuery = `DELETE FROM client_product WHERE client_id = $1`;
-  const insertQuery = `INSERT INTO client_product (client_id, product_id) VALUES ($1, $2)`;
-
   const deleteValues = [client_id];
-  const insertValues = [client_id, service_id];
 
   pool
     .query(deleteQuery, deleteValues)
     .then(() => {
+      // Use a loop to insert multiple rows unnest($2::int[]) is used to "unnest" or expand the array of service IDs
+      const insertQuery = `
+        INSERT INTO client_product (client_id, product_id)
+        SELECT $1, unnest($2::int[])
+      `;
+      const insertValues = [client_id, product_id];
+
       return pool.query(insertQuery, insertValues);
     })
     .then(() => {
@@ -133,6 +161,30 @@ router.put("/foodpreferences", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+// router.put("/foodpreferences", (req, res) => {
+//   const client_id = req.body.client_id;
+//   const service_id = req.body.product_id;
+
+//   const deleteQuery = `DELETE FROM client_product WHERE client_id = $1`;
+//   const insertQuery = `INSERT INTO client_product (client_id, product_id) VALUES ($1, $2)`;
+
+//   const deleteValues = [client_id];
+//   const insertValues = [client_id, service_id];
+
+//   pool
+//     .query(deleteQuery, deleteValues)
+//     .then(() => {
+//       return pool.query(insertQuery, insertValues);
+//     })
+//     .then(() => {
+//       res.sendStatus(200);
+//     })
+//     .catch((err) => {
+//       console.log("Error completing PUT service query", err);
+//       res.sendStatus(500);
+//     });
+// });
 
 // addtional info router --------------------------------------
 
@@ -145,13 +197,7 @@ router.put("/additionalinfo", (req, res) => {
   visit = $3
   WHERE client.id = $4;`;
   pool
-    .query(queryText, [
-      req.body.demensions,
-      req.body.pictures,
-      req.body.visit,
-      
-      
-    ])
+    .query(queryText, [req.body.demensions, req.body.pictures, req.body.visit])
     .then((result) => {
       res.sendStatus(200);
     })
@@ -160,10 +206,5 @@ router.put("/additionalinfo", (req, res) => {
       res.sendStatus(500);
     });
 });
-
-
-
-
-
 
 module.exports = router;
