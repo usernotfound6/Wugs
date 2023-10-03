@@ -10,6 +10,8 @@ function ServiceChoicePage() {
 
   const dispatch = useDispatch();
 
+  const user = useSelector((store) => store.user);
+
   const [micromarketChecked, setMicromarketChecked] = useState(false);
   const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
   const [snackboxesChecked, setSnackboxesChecked] = useState(false);
@@ -40,13 +42,13 @@ function ServiceChoicePage() {
       servicesArray.push(3);
     }
     let servicesObj = {
-      services: servicesArray,
+      client_id: user.id,
+      service_id: servicesArray,
     }
     // console.log(servicesArray);
 
     // dispatch goes here for PUT
     dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
-
   }
 
   return (
