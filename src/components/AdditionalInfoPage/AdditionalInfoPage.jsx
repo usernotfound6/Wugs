@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
 
+// Path: /additionalinfo
+
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
 // component name AdditionalInfo with the name for the new component.
