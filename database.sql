@@ -38,7 +38,7 @@ CREATE TABLE client (
   neighborhood_info VARCHAR(300),
   demographics VARCHAR(300),
   number_of_people INTEGER,
-  target_age_group VARCHAR(100),
+  target_age_group VARCHAR(200),
   industry VARCHAR(255),
   pictures VARCHAR(200)[],
   contract VARCHAR(200),
@@ -84,7 +84,7 @@ CREATE TABLE interested (
   why_wugs VARCHAR(300)
 );
 
-INSERT INTO "user" (first_name, last_name, email, password, admin)
+INSERT INTO "user" (first_name, last_name, username, password, admin)
 VALUES
 ('John', 'Doe', 'john.doe@email.com', 'hashed_password_here', false),
 ('Jane', 'Smith', 'jane.smith@email.com', 'hashed_password_here', false),
