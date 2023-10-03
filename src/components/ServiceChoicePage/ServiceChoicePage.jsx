@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import Stepper from '../Stepper/Stepper'
 
 // Path: /servicechoice
 
@@ -39,6 +40,7 @@ function ServiceChoicePage() {
 
   return (
     <div>
+      <Stepper/>
       <h2>Products I'm interested in...</h2>
 
       <form>

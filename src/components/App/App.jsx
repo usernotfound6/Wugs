@@ -118,7 +118,7 @@ function App() {
           <ProtectedRoute
             // logged in shows ClientLocationInfoPage else shows LoginPage
             exact
-            path="/clientlocationinfo"
+            path="/locationinfo"
           >
             <ClientLocationInfoPage />
           </ProtectedRoute>

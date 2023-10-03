@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,6 +12,8 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 
 
 function PrimingPage() {
+
+  const history = useHistory();
 
 
   const styles = {
@@ -54,7 +57,9 @@ function PrimingPage() {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="large" variant="contained"><FastfoodIcon/> GET SNACKING!</Button>
+          <Button size="large" variant="contained" onClick={() => {
+                history.push('/servicechoice');
+              }}><FastfoodIcon/> GET SNACKING!</Button>
         </CardActions>
       </Card>
     </Box>
