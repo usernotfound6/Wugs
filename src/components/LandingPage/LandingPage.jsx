@@ -12,7 +12,6 @@ import Grid from "@mui/material/Grid";
 // import RegisterForm from '../RegisterForm/RegisterForm';
 
 function LandingPage() {
-  const [heading, setHeading] = useState("Welcome");
   const history = useHistory();
 
   const onLogin = (event) => {
@@ -40,11 +39,14 @@ function LandingPage() {
             elevation={24}
             sx={{
               margin: "auto",
-            
+
               maxWidth: 280,
               minWidth: 280,
               backgroundColor: "lightgray",
               borderRadius: 3,
+            }}
+            onClick={() => {
+              history.push("/getmoreinfo");
             }}
           >
             <CardActionArea>
@@ -77,6 +79,9 @@ function LandingPage() {
               minWidth: 280,
               backgroundColor: "lightgray",
               borderRadius: 3,
+            }}
+            onClick={() => {
+              history.push("/priming");
             }}
           >
             <CardActionArea>
