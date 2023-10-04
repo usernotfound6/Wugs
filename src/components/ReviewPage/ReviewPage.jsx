@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import { InlineWidget } from "react-calendly";
+
 
 // Path: /review
 
@@ -13,8 +15,12 @@ function ReviewPage() {
   // const [heading, setHeading] = useState('Functional Component');
 
   return (
-    <div>
-      <h2>Review and Schedule Appointment</h2>
+    <div className="App">
+      <header className="App-header">{/* Your other content */}</header>
+
+      <InlineWidget url="https://calendly.com/dontyellwillcry" />
+      <h3>CALANDLY</h3>
+      {/* <button onClick={getGif}>Get Gif</button> */}
     </div>
   );
 }
