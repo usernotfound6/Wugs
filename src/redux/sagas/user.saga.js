@@ -15,10 +15,18 @@ function* fetchUser() {
     // from the server session (req.user)
     const response = yield axios.get('/api/user', config);
 
+    console.log('response.data is:', response.data)
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
+
+    // once user signed in, if admin it'll fetch data for all clients, if client it'll fetch only its client info
+    if (response.data.admin) {
+      yield put({ type: 'FETCH_ALL_CLIENTS' });
+    } else {
+      yield put({ type: 'FETCH_CLIENT', payload: response.data.id });
+    }
   } catch (error) {
     console.log('User get request failed', error);
   }

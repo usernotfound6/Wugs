@@ -9,9 +9,10 @@ const router = express.Router();
  * The big client GET 
  */
 router.get("/client/:id", (req, res) => {
+  const clientId = [Number(req.params.id)];
+  console.log('clientId is:', clientId)
 
-  const clientId = [req.params.id];
-  // in query updated client table to c, user to u, service to s... for readability ? can switch back
+  // in query updated client table to c, user to u, service to s... for readability
   const sqlQuery = `
   SELECT
     c.id AS client_id,
@@ -41,7 +42,7 @@ router.get("/client/:id", (req, res) => {
       client AS c
     JOIN
       "user" AS u ON c.manager_id = u.id
-    JOIN
+    LEFT JOIN
       status AS s ON c.status_id = s.id
     WHERE
       c.id = $1;
@@ -51,7 +52,7 @@ router.get("/client/:id", (req, res) => {
       res.send(result.rows);
     })
     .catch(error => {
-      console.log("error on big client GET", error)
+      console.log("error on single client GET", error)
       res.sendStatus(500);
     })
 })

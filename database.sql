@@ -26,7 +26,7 @@ CREATE TABLE client (
   micromarket_location VARCHAR(255),
   neighborhood_info VARCHAR(300),
   demographics VARCHAR(300),
-  number_of_people INTEGER,
+  number_of_people VARCHAR(40),
   target_age_group VARCHAR(200),
   industry VARCHAR(255),
   pictures VARCHAR(200)[],
