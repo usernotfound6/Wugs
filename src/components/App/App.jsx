@@ -39,12 +39,14 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    if (user.admin) {
-      dispatch({ type: 'FETCH_ALL_CLIENTS' })
-    } else {
-      dispatch({ type: 'FETCH_CLIENT', payload: user.id })
-    }
+    // if (user.admin) {
+    //   dispatch({ type: 'FETCH_ALL_CLIENTS' })
+    // } else {
+    //   dispatch({ type: 'FETCH_CLIENT', payload: user.id })
+    // }
   }, [dispatch]);
+
+  console.log(user.id)
 
   return (
     <Router>

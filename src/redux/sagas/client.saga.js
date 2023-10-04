@@ -7,7 +7,14 @@ function* getClient(action) {
   // get all client info from table here then send to reducer!
 
   try {
-    console.log("payload is:", action.payload)
+    const clientId = action.payload;
+    console.log('clientId is:', clientId)
+    const response = yield axios.get(`/api/onboarding/client/${clientId}`);
+    const clientInfo = response.data[0];
+    console.log("client's info in saga:", clientInfo)
+
+    yield put({ type: 'SET_SINGLE_CLIENT',  payload: clientInfo})
+
   }
   catch (error) {
     console.log("error with GET on client side", error)
