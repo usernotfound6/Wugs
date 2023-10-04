@@ -12,6 +12,7 @@ import {
   DialogContentText,
 } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import MyStepper from '../MyStepper/MyStepper'
 
 
 // Path: /clientlocationmoreinfo
@@ -64,7 +65,7 @@ function ClientLocationInfoPage() {
 
   const handleConfirmSubmit = () => {
     setOpenConfirmation(false);
-    history.push("/home");
+    history.push("/demographics");
   };
 
   const handleCloseConfirmation = () => {
@@ -95,6 +96,9 @@ function ClientLocationInfoPage() {
       .catch((error) => {
         console.error("error with client location PUT:", error);
       });
+
+      history.push("/demographics");
+      
     setBusinessName("");
     setAddress("");
     setWebsite("");
@@ -105,6 +109,7 @@ function ClientLocationInfoPage() {
 
   return (
     <div className="wholebody">
+         <MyStepper step={1} />
       <h3 style={{ marginLeft: "12px" }}>Who Are We Serving?</h3>
       <Box
         component="form"
