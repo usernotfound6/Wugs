@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import MyStepper from '../MyStepper/MyStepper'
 
 // Basic functional component structure for React with default state
 // value setup. When making a new component be sure to replace the
@@ -12,6 +13,7 @@ function FoodPreferencesPage() {
 
   return (
     <div>
+      <MyStepper step={3}/>
       <h2>Food Preferences</h2>
     </div>
   );

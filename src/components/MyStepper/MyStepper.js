@@ -93,13 +93,13 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg, #050c42 25%, #f3cf2a 100%)',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-        'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,#050c42 0%,#050c42 50%,#050c42 100%)',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -122,17 +122,17 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   ...(ownerState.active && {
-    backgroundImage: //Completed Steps styling
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    backgroundImage: //current step
+      'linear-gradient( 136deg, #f3cf2a 0%, #f3cf2a 50%, #050c42 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
-    backgroundImage: //Current step
-      'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+    backgroundImage: //Completed Steps styling
+      'linear-gradient( 136deg, #f3cf2a 0%, #050c42 50%, #050c42 100%)',
   }),
   ...(!ownerState.active && !ownerState.completed && {
-    backgroundColor: 'lightgray', // Change the background color of future steps
-    color: 'black', // Change the text color of future steps
+    backgroundColor: '#fefefe', // Change the background color of future steps
+    color: '#050c42', // Change the text color of future steps
   }),
 }));
 
@@ -177,14 +177,16 @@ ColorlibStepIcon.propTypes = {
 
 const steps = ['Services', 'Location Info', 'About Your Community', 'Food Choices', 'Additional info', 'Review and Complete!']
 
-  function MyStepper() {
+  function MyStepper(props) {
+
+    const {step} = props
 
   return (
 
 
     <div>
 
-<Stepper alternativeLabel activeStep={1} connector={<ColorlibConnector />}>
+<Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Stepper from '../Stepper/Stepper'
+import MyStepper from '../MyStepper/MyStepper'
+import { useHistory } from 'react-router-dom';
 
 // Path: /servicechoice
 
@@ -8,6 +9,9 @@ import Stepper from '../Stepper/Stepper'
 // value setup. When making a new component be sure to replace the
 // component name TemplateFunction with the name for the new component.
 function ServiceChoicePage() {
+
+  const history = useHistory();
+
 
   const [micromarketChecked, setMicromarketChecked] = useState(false);
   const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
@@ -34,13 +38,15 @@ function ServiceChoicePage() {
       smart_cooler: smartcoolersChecked,
       snack_boxes: snackboxesChecked
     }
-
+    history.push('/locationinfo')
 
   }
 
+  
+
   return (
     <div>
-      <Stepper/>
+      <MyStepper step={0} />
       <h2>Products I'm interested in...</h2>
 
       <form>
