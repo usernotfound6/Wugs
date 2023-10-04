@@ -23,13 +23,15 @@ router.post('/register', (req, res, next) => {
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
 
-  const queryText = `WITH inserted_user AS (
+  const queryText = `
+  WITH inserted_user AS (
     INSERT INTO "user" (username, password, first_name, last_name)
     VALUES ($1, $2, $3, $4)
     RETURNING id
   )
   INSERT INTO client (manager_id)
-  SELECT id FROM inserted_user;`;
+  SELECT id FROM inserted_user;
+  `;
 
   pool
     .query(queryText, [username, password, first_name, last_name])

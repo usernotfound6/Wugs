@@ -31,6 +31,7 @@ router.get("/client/:id", (req, res) => {
     c.wugs_visit,
     c.contract,
     c.admin_notes,
+    s.status_name,
     u.first_name,
     u.last_name,
     u.username,
@@ -40,6 +41,8 @@ router.get("/client/:id", (req, res) => {
       client AS c
     JOIN
       "user" AS u ON c.manager_id = u.id
+    JOIN
+      status AS s ON c.status_id = s.id
     WHERE
       c.id = $1;
   `;
