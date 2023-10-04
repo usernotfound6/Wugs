@@ -22,15 +22,30 @@ function DemographicsPage() {
   const [ageGroup, setAgeGroup] = React.useState('');
   const [industry, setIndustry] = React.useState('');
   const [openConfirmation, setOpenConfirmation] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
   };
 
+  const handleHelpIconHover = (event) => {
+    const rect = event.target.getBoundingClientRect();
+    setPosition({
+      top: rect.top - 200, // Adjust this value to control the vertical position
+      left: rect.left + rect.width, // Adjust this value to control the horizontal position
+    });
+    setOpenConfirmation(true);
+  };
+
+  const handleHelpIconLeave = () => {
+    setOpenConfirmation(false);
+  };
+
+
   return (
     <div>
       <MyStepper step={2} />
-      <Typography variant="h4">Who are YOU serving? <HelpIcon onClick={() => { setOpenConfirmation(true) }} /></Typography>
+      <Typography variant="h4">Who are YOU serving?  <HelpIcon onMouseEnter={handleHelpIconHover} /></Typography>
       <div style={{ padding: '1em' }}>
         <FormControl>
           <InputLabel id="age-select-label"># of people on site</InputLabel>
@@ -53,18 +68,18 @@ function DemographicsPage() {
       </div>
       <Dialog
         open={openConfirmation}
-        onClose={() => { setOpenConfirmation(false) }}
+        onClose={() => setOpenConfirmation(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         PaperProps={{
           style: {
-            background: "beige",
+            background: 'beige',
+            position: 'absolute',
+            top: `${position.top}px`,
+            left: `${position.left}px`,
           },
         }}
       >
-        <DialogTitle id="alert-dialog-title">
-          About Demographics
-        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <strong># OF PEOPLE ON SITE:</strong>
@@ -86,14 +101,6 @@ function DemographicsPage() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => { setOpenConfirmation(false) }}
-            color="success"
-            variant="contained"
-            autoFocus
-          >
-            Go Back
-          </Button>
         </DialogActions>
       </Dialog>
     </div>
