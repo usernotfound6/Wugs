@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import MyStepper from '../MyStepper/MyStepper'
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
-// Path: /servicechoice
-
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function ServiceChoicePage() {
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
+  const user = useSelector((store) => store.user);
 
   const [micromarketChecked, setMicromarketChecked] = useState(false);
   const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
@@ -29,17 +27,30 @@ function ServiceChoicePage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("micromarket checked?", micromarketChecked);
-    console.log("smartcoolers checked?", smartcoolersChecked);
-    console.log("snackboxes checked?", snackboxesChecked);
-
-    let servicesObj = {
-      micro_market: micromarketChecked,
-      smart_cooler: smartcoolersChecked,
-      snack_boxes: snackboxesChecked
+    // console.log("micromarket checked?", micromarketChecked);
+    // console.log("smartcoolers checked?", smartcoolersChecked);
+    // console.log("snackboxes checked?", snackboxesChecked);
+    let servicesArray = [];
+    if (micromarketChecked) {
+      servicesArray.push(1);
     }
+    
     history.push('/locationinfo')
 
+    if (smartcoolersChecked) {
+      servicesArray.push(2);
+    }
+    if (snackboxesChecked) {
+      servicesArray.push(3);
+    }
+    // let servicesObj = {
+    //   client_id: // client.id, <-- needs to be client ID not user ID!!
+    //   service_id: servicesArray,
+    // }
+    // console.log(servicesArray);
+
+    // dispatch goes here for PUT
+    // dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
   }
 
   
@@ -58,7 +69,7 @@ function ServiceChoicePage() {
           checked={micromarketChecked}
           onChange={handleMicromarketChange}
         />
-        <label for="micromarket">Micro Markets</label><br />
+        <label htmlFor="micromarket">Micro Markets</label><br />
 
         <input
           type="checkbox"
@@ -68,7 +79,7 @@ function ServiceChoicePage() {
           checked={smartcoolersChecked}
           onChange={handleSmartcoolersChange}
         />
-        <label for="smartcoolers">Smart Coolers</label><br />
+        <label htmlFor="smartcoolers">Smart Coolers</label><br />
 
         <input
           type="checkbox"
@@ -78,7 +89,7 @@ function ServiceChoicePage() {
           checked={snackboxesChecked}
           onChange={handleSnackboxesChange}
         />
-        <label for="snackboxes">Snack Boxes</label><br />
+        <label htmlFor="snackboxes">Snack Boxes</label><br />
 
         <button type="submit" value="Submit" onClick={handleSubmit}>NEXT</button>
       </form>
