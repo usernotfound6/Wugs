@@ -14,7 +14,7 @@ import {
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
-// Path: /getmoreinfo
+// Path: /clientlocationmoreinfo
 
 function ClientLocationInfoPage() {
   const [businessname, setBusinessName] = useState("");
