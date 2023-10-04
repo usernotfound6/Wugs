@@ -41,14 +41,14 @@ function ServiceChoicePage() {
     if (snackboxesChecked) {
       servicesArray.push(3);
     }
-    let servicesObj = {
-      client_id: user.id,
-      service_id: servicesArray,
-    }
+    // let servicesObj = {
+    //   client_id: // client.id, <-- needs to be client ID not user ID!!
+    //   service_id: servicesArray,
+    // }
     // console.log(servicesArray);
 
     // dispatch goes here for PUT
-    dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
+    // dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
   }
 
   return (
