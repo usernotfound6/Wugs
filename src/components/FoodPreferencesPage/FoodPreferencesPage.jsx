@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useSelector} from 'react-redux';
+import MyStepper from '../MyStepper/MyStepper'
 
 // Path: /foodpreferences
 
@@ -14,6 +15,7 @@ function FoodPreferencesPage() {
 
   return (
     <div>
+      <MyStepper step={3}/>
       <h2>Food Preferences</h2>
     </div>
   );
