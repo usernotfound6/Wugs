@@ -2,11 +2,8 @@ const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
 
-
-
-
 /**
- * The big client GET 
+ * The single client GET 
  */
 router.get("/client/:id", (req, res) => {
   const clientId = [Number(req.params.id)];
@@ -57,6 +54,53 @@ router.get("/client/:id", (req, res) => {
     })
 })
 
+/**
+ * The GET for ALL clients
+ */
+router.get("/allclients", (req, res) => {
+
+  // in query updated client table to c, user to u, service to s... for readability
+  const sqlQuery = `
+  SELECT
+    c.id AS client_id,
+    c.business_name,
+    c.address,
+    c.website,
+    c.phone,
+    c.hours_of_operation,
+    c.micromarket_location,
+    c.neighborhood_info,
+    c.demographics,
+    c.number_of_people,
+    c.target_age_group,
+    c.industry,
+    c.pictures,
+    c.dimensions,
+    c.wugs_visit,
+    c.contract,
+    c.admin_notes,
+    s.status_name,
+    u.first_name,
+    u.last_name,
+    u.username,
+      ARRAY(SELECT DISTINCT service.service_name FROM client_service JOIN service ON client_service.service_id = service.id WHERE client_service.client_id = c.id) AS service_names,
+      ARRAY(SELECT DISTINCT product.type FROM client_product JOIN product ON client_product.product_id = product.id WHERE client_product.client_id = c.id) AS product_types
+    FROM
+      client AS c
+    JOIN
+      "user" AS u ON c.manager_id = u.id
+    LEFT JOIN
+      status AS s ON c.status_id = s.id;
+  `;
+  pool.query(sqlQuery)
+    .then(result => {
+      res.send(result.rows);
+    })
+    .catch(error => {
+      console.log("error on single client GET", error)
+      res.sendStatus(500);
+    })
+});
 
 
 /**
