@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import MyStepper from '../MyStepper/MyStepper'
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
-// Path: /servicechoice
-
-// Basic functional component structure for React with default state
-// value setup. When making a new component be sure to replace the
-// component name TemplateFunction with the name for the new component.
 function ServiceChoicePage() {
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const user = useSelector((store) => store.user);
 
   const [micromarketChecked, setMicromarketChecked] = useState(false);
   const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
@@ -32,23 +33,30 @@ function ServiceChoicePage() {
     if (micromarketChecked) {
       servicesArray.push(1);
     }
+    
+    history.push('/locationinfo')
+
     if (smartcoolersChecked) {
       servicesArray.push(2);
     }
     if (snackboxesChecked) {
       servicesArray.push(3);
     }
-    let servicesObj = {
-      services: servicesArray,
-    }
+    // let servicesObj = {
+    //   client_id: // client.id, <-- needs to be client ID not user ID!!
+    //   service_id: servicesArray,
+    // }
     // console.log(servicesArray);
 
-
-
+    // dispatch goes here for PUT
+    // dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
   }
+
+  
 
   return (
     <div>
+      <MyStepper step={0} />
       <h2>Products I'm interested in...</h2>
 
       <form>

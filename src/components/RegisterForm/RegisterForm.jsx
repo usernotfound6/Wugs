@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function RegisterForm() {
+  const history = useHistory()
+
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -25,6 +28,7 @@ function RegisterForm() {
           last_name: lastName,
         },
       });
+      history.push('/priming')
     } else {
       setPasswordMismatchError('Passwords do not match');
     }

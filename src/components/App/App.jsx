@@ -39,7 +39,14 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    // if (user.admin) {
+    //   dispatch({ type: 'FETCH_ALL_CLIENTS' })
+    // } else {
+    //   dispatch({ type: 'FETCH_CLIENT', payload: user.id })
+    // }
   }, [dispatch]);
+
+  console.log(user.id)
 
   return (
     <Router>
@@ -70,11 +77,11 @@ function App() {
 
 
 
-{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+          {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
 
 
-{                                               /* PROTECTED */                                                  } 
+          {                                               /* PROTECTED */}
 
 
 
@@ -96,7 +103,7 @@ function App() {
             exact
             path="/priming"
           >
-            <PrimingPage/>
+            <PrimingPage />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -104,7 +111,7 @@ function App() {
             exact
             path="/servicechoice"
           >
-            <ServiceChoicePage/>
+            <ServiceChoicePage />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -118,7 +125,7 @@ function App() {
           <ProtectedRoute
             // logged in shows ClientLocationInfoPage else shows LoginPage
             exact
-            path="/clientlocationinfo"
+            path="/locationinfo"
           >
             <ClientLocationInfoPage />
           </ProtectedRoute>
@@ -173,11 +180,11 @@ function App() {
 
 
 
-{                                               /* PROTECTED */                                             } 
+          {                                               /* PROTECTED */}
 
 
 
-{/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+          {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
 
 
