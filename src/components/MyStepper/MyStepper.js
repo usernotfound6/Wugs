@@ -14,6 +14,7 @@ import Diversity3Icon from '@mui/icons-material/Diversity3';
 import FeedIcon from '@mui/icons-material/Feed';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
 
+
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,
@@ -112,7 +113,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 }));
 
 const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#fff',
   zIndex: 1,
   color: '#fff',
   width: 50,
@@ -189,11 +190,10 @@ const steps = ['Services', 'Location Info', 'About Your Community', 'Food Choice
 <Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel className="custom-step-label" StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
-      <h2>Client Location Form</h2>
     </div>
   );
 }
