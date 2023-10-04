@@ -6,7 +6,10 @@ import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import Avatar from "@mui/material/Avatar";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -20,13 +23,7 @@ const theme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(10),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+
 
 function ReviewPage() {
   const history = useHistory();
@@ -80,13 +77,13 @@ function ReviewPage() {
             // Add any other custom styles here
           }}
         >
-          <Box
+          {/* <Box
             sx={{
-              bgcolor: "rgba(255, 235, 180, 0.5)",
+              bgcolor: "rgba(255, 225, 160, 0.4)",
               height: "80vh",
               width: "100%",
             }}
-          >
+          > */}
             <header
               className="App-header"
               style={{
@@ -100,36 +97,137 @@ function ReviewPage() {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={12}>
                 <Grid item xs={6} md={4}>
-                  <Typography onClick={() => handlePrevious("/servicechoice")}>
-                    Products I'm interested in..
-                  </Typography>
+                  <Card variant="outlined" sx={{ backgroundColor: '#F3CF2A', boxShadow: 5 }}>
+                    <CardContent
+                      onClick={() => handlePrevious("/servicechoice")}
+                    >
+                      <Typography
+                        sx={{ fontSize: 24 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        Products I'm interested in..
+                      </Typography>
+                      <Typography variant="h8" component="div">
+                        a;sldjf;lakjsdf;lajs;lkdfj
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        adjective
+                      </Typography>
+                      <Typography variant="body2">
+                        well meaning and kindly.
+                        <br />
+                        {'"a benevolent smile"'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Typography
-                    onClick={() => handlePrevious("/foodpreferences")}
-                  >
-                    Foods we're interested in..
-                  </Typography>
+                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                    <CardContent
+                      onClick={() => handlePrevious("/foodpreferences")}
+                    >
+                      <Typography
+                        sx={{ fontSize: 24 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        Foods we're interested in..
+                      </Typography>
+                      <Typography variant="h8" component="div">
+                        a;sldjf;lakjsdf;lajs;lkdfj
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        adjective
+                      </Typography>
+                      <Typography variant="body2">
+                        well meaning and kindly.
+                        <br />
+                        {'"a benevolent smile"'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Typography
-                    onClick={() => handlePrevious("/clientlocationinfo")}
-                  >
-                    Who we are..
-                  </Typography>
+                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                    <CardContent
+                      onClick={() => handlePrevious("/clientlocationinfo")}
+                    >
+                      <Typography
+                        sx={{ fontSize: 24 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        Who we are...
+                      </Typography>
+                      <Typography variant="h8" component="div">
+                        a;sldjf;lakjsdf;lajs;lkdfj
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        adjective
+                      </Typography>
+                      <Typography variant="body2">
+                        well meaning and kindly.
+                        <br />
+                        {'"a benevolent smile"'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Typography onClick={() => handlePrevious("/additionalinfo")}>
-                    Additional info
-                  </Typography>
+                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                    <CardContent
+                      onClick={() => handlePrevious("/additionalinfo")}
+                    >
+                      <Typography
+                        sx={{ fontSize: 24 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        Additional info
+                      </Typography>
+                      <Typography variant="h8" component="div">
+                        a;sldjf;lakjsdf;lajs;lkdfj
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        adjective
+                      </Typography>
+                      <Typography variant="body2">
+                        well meaning and kindly.
+                        <br />
+                        {'"a benevolent smile"'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Typography onClick={() => handlePrevious("/demographics")}>
-                    Who we're serving..
-                  </Typography>
+                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                    <CardContent
+                      onClick={() => handlePrevious("/demographics")}
+                    >
+                      <Typography
+                        sx={{ fontSize: 24 }}
+                        color="text.secondary"
+                        gutterBottom
+                      >
+                        Who we're serving..
+                      </Typography>
+                      <Typography variant="h8" component="div">
+                        a;sldjf;lakjsdf;lajs;lkdfj
+                      </Typography>
+                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                        adjective
+                      </Typography>
+                      <Typography variant="body2">
+                        well meaning and kindly.
+                        <br />
+                        {'"a benevolent smile"'}
+                      </Typography>
+                    </CardContent>
+                  </Card>
                 </Grid>
               </Grid>
-            </Box>
+            {/* </Box> */}
 
             <PopupWidget
               url="https://calendly.com/dontyellwillcry"
