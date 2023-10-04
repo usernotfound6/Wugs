@@ -97,7 +97,7 @@ function ReviewPage() {
             <Box sx={{ flexGrow: 1 }}>
               <Grid container spacing={12}>
                 <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: '#F3CF2A', boxShadow: 5 }}>
+                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
                     <CardContent
                       onClick={() => handlePrevious("/servicechoice")}
                     >
@@ -123,7 +123,7 @@ function ReviewPage() {
                   </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
                     <CardContent
                       onClick={() => handlePrevious("/foodpreferences")}
                     >
@@ -149,7 +149,7 @@ function ReviewPage() {
                   </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
                     <CardContent
                       onClick={() => handlePrevious("/clientlocationinfo")}
                     >
@@ -175,7 +175,7 @@ function ReviewPage() {
                   </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
                     <CardContent
                       onClick={() => handlePrevious("/additionalinfo")}
                     >
@@ -201,7 +201,7 @@ function ReviewPage() {
                   </Card>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: '#ADD8E6', boxShadow: 5 }}>
+                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
                     <CardContent
                       onClick={() => handlePrevious("/demographics")}
                     >
