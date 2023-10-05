@@ -28,7 +28,7 @@ function ReviewPage() {
   const history = useHistory();
   const singleClient = useSelector((store) => store.client);
   const rootElement = document.getElementById("popup-root");
-  console.log(singleClient);
+  console.log("Here is the singleClient", singleClient);
 
   function handlePrevious(path) {
     console.log("inside handlePrevious");
@@ -54,10 +54,9 @@ function ReviewPage() {
   }
   // useEffect(() => {
   //   dispatch({ type: "FETCH_USER" });
-  // }, []); // Empty dependency array means it runs only once on mount
+  // }, []); 
 
-  // const store = useSelector((store) => store);
-  // const [heading, setHeading] = useState('Functional Component');
+ 
 
   return (
     // <div className="App">
