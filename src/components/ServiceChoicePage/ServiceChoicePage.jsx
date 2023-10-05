@@ -34,7 +34,7 @@ function ServiceChoicePage() {
       servicesArray.push(1);
     }
     
-    history.push('/locationinfo')
+    history.push('/clientlocationinfo')
 
     if (smartcoolersChecked) {
       servicesArray.push(2);
