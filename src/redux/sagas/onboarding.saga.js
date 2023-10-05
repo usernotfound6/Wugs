@@ -19,8 +19,23 @@ function* updateServices(action) {
     }
 }
 
+function* updateDemographics(action) {
+
+    try {
+        const servicesObj = action.payload;
+        console.log("client_id:", servicesObj.client_id)
+        console.log("demographic object:", servicesObj)
+        const response = yield axios.put(`/api/onboarding/demographic/${servicesObj.client_id}`, servicesObj)
+        console.log(response.data)
+    }
+    catch (error) {
+        console.log("error with Demographic PUT on client side", error)
+    }
+}
+
 function* onboardingSaga() {
     yield takeLatest('UPDATE_SERVICES', updateServices)
+    yield takeLatest('UPDATE_DEMOGRAPHICS', updateDemographics)
 }
 
 export default onboardingSaga;

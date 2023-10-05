@@ -163,14 +163,16 @@ router.put("/demographic/:id", (req, res) => {
   SET number_of_people = $1,
   demographics = $2,
   neighborhood_info = $3,
-  industry = $4
-  WHERE client.id = $5;`;
+  industry = $4,
+  target_age_group = $5
+  WHERE client.id = $6;`;
   pool
     .query(queryText, [
       req.body.number_of_people,
       req.body.demographics,
       req.body.neighborhood_info,
       req.body.industry,
+      req.body.age_group,
       req.params.id
     ])
     .then((result) => {
