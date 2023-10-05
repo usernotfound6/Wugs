@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MyStepper from '../MyStepper/MyStepper'
 import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
@@ -21,8 +21,14 @@ function DemographicsPage() {
   const [demographic, setDemographic] = React.useState('');
   const [ageGroup, setAgeGroup] = React.useState('');
   const [industry, setIndustry] = React.useState('');
+  const [neighborhood, setNeighborhood] = React.useState('');
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  const client = useSelector((store) => store.singleClient)
+
+  console.log("Client", client.singleClient.client_id)
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
@@ -40,6 +46,22 @@ function DemographicsPage() {
   const handleHelpIconLeave = () => {
     setOpenConfirmation(false);
   };
+
+  const postDemographics = () => {
+    console.log("Clicked on Demographics Next")
+    dispatch({
+        type: 'UPDATE_DEMOGRAPHICS', payload: {
+          client_id: client.singleClient.client_id,
+          number_of_people: peopleCount,
+          age_group: ageGroup,
+          demographics: demographic,
+          industry: industry   , 
+          neighborhood_info: neighborhood
+        }
+    }
+    )
+    
+}
 
 
   return (
@@ -64,6 +86,7 @@ function DemographicsPage() {
           <TextField id="demographic" label="Demographic" variant="outlined" onChange={(event) => setDemographic(event.target.value)} />
           <TextField id="ageGroup" label="Age Group" variant="outlined" onChange={(event) => setAgeGroup(event.target.value)} />
           <TextField id="industry" label="Industry" variant="outlined" onChange={(event) => setIndustry(event.target.value)} />
+          <TextField id="neighborhood" label="About Your Neighborhood" variant="outlined" onChange={(event) => setNeighborhood(event.target.value)} />
         </FormControl>
       </div>
       <Dialog
@@ -103,6 +126,7 @@ function DemographicsPage() {
         <DialogActions>
         </DialogActions>
       </Dialog>
+      <Button variant="contained" onClick={postDemographics}>SUBMIT/NEXT</Button>
     </div>
   );
 }
