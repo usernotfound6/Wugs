@@ -25,9 +25,9 @@ function DemographicsPage() {
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  const client = useSelector((store) => store.singleClient)
+  const client = useSelector((store) => store.client)
 
-  console.log("Client", client.singleClient.client_id)
+  // console.log("Client", client.client_id)
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
@@ -51,7 +51,7 @@ function DemographicsPage() {
     console.log("Clicked on Demographics Next")
     dispatch({
         type: 'UPDATE_DEMOGRAPHICS', payload: {
-          client_id: client.singleClient.client_id,
+          client_id: client.client_id,
           number_of_people: peopleCount,
           age_group: ageGroup,
           demographics: demographic,
