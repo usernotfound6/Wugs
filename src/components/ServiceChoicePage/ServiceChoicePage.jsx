@@ -9,6 +9,8 @@ function ServiceChoicePage() {
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
+  const singleClient = useSelector((store) => store.client);
+
 
   const [micromarketChecked, setMicromarketChecked] = useState(false);
   const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
@@ -42,14 +44,14 @@ function ServiceChoicePage() {
     if (snackboxesChecked) {
       servicesArray.push(3);
     }
-    // let servicesObj = {
-    //   client_id: // client.id, <-- needs to be client ID not user ID!!
-    //   service_id: servicesArray,
-    // }
+    let servicesObj = {
+      client_id: singleClient.client_id,// client.id, <-- needs to be client ID not user ID!!
+      service_id: servicesArray,
+    }
     // console.log(servicesArray);
 
     // dispatch goes here for PUT
-    // dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
+    dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
   }
 
   
