@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import MyStepper from '../MyStepper/MyStepper';
 import {
   Button,
   Dialog,
@@ -105,6 +106,9 @@ function ClientLocationInfoPage() {
 
   return (
     <div className="wholebody">
+      <div>
+        <MyStepper step={1}/>
+      </div>
       <h3 style={{ marginLeft: "12px" }}>Who Are We Serving?</h3>
       <Box
         component="form"
