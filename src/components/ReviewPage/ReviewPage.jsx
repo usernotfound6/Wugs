@@ -23,13 +23,11 @@ const theme = createTheme({
   },
 });
 
-
-
 function ReviewPage() {
   const history = useHistory();
   const singleClient = useSelector((store) => store.client);
   const rootElement = document.getElementById("popup-root");
-  console.log(singleClient)
+  console.log(singleClient);
 
   function handlePrevious(path) {
     switch (path) {
@@ -85,149 +83,174 @@ function ReviewPage() {
               width: "100%",
             }}
           > */}
-            <header
-              className="App-header"
-              style={{
-                textAlign: "center", // Center text horizontally
-                margin: "50px 0", // Add top and bottom margins
-                padding: "30px",
-              }}
-            >
-              {/* Your other content */}Review and Schedule apppointment
-            </header>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={12}>
-                <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                    <CardContent
-                      onClick={() => handlePrevious("/servicechoice")}
+          <header
+            className="App-header"
+            style={{
+              textAlign: "center", // Center text horizontally
+              margin: "50px 0", // Add top and bottom margins
+              padding: "30px",
+            }}
+          >
+            {/* Your other content */}Review and Schedule apppointment
+          </header>
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={12}>
+              <Grid item xs={6} md={4}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    boxShadow: 5,
+                  }}
+                >
+                  <CardContent onClick={() => handlePrevious("/servicechoice")}>
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="text.secondary"
+                      gutterBottom
                     >
-                      <Typography
-                        sx={{ fontSize: 24 }}
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        Products I'm interested in..
-                      </Typography>
-                      <Typography variant="h8" component="div">
-                        a;sldjf;lakjsdf;lajs;lkdfj
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        adjective
-                      </Typography>
-                      <Typography variant="body2">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                    <CardContent
-                      onClick={() => handlePrevious("/foodpreferences")}
-                    >
-                      <Typography
-                        sx={{ fontSize: 24 }}
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        Foods we're interested in..
-                      </Typography>
-                      <Typography variant="h8" component="div">
-                        a;sldjf;lakjsdf;lajs;lkdfj
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        adjective
-                      </Typography>
-                      <Typography variant="body2">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                    <CardContent
-                      onClick={() => handlePrevious("/clientlocationinfo")}
-                    >
-                      <Typography
-                        sx={{ fontSize: 24 }}
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        Who we are...
-                      </Typography>
-                      <Typography variant="h8" component="div">
-                        a;sldjf;lakjsdf;lajs;lkdfj
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        adjective
-                      </Typography>
-                      <Typography variant="body2">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                    <CardContent
-                      onClick={() => handlePrevious("/additionalinfo")}
-                    >
-                      <Typography
-                        sx={{ fontSize: 24 }}
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        Additional info
-                      </Typography>
-                      <Typography variant="h8" component="div">
-                        a;sldjf;lakjsdf;lajs;lkdfj
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        adjective
-                      </Typography>
-                      <Typography variant="body2">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-                <Grid item xs={6} md={4}>
-                  <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                    <CardContent
-                      onClick={() => handlePrevious("/demographics")}
-                    >
-                      <Typography
-                        sx={{ fontSize: 24 }}
-                        color="text.secondary"
-                        gutterBottom
-                      >
-                        Who we're serving..
-                      </Typography>
-                      <Typography variant="h8" component="div">
-                        a;sldjf;lakjsdf;lajs;lkdfj
-                      </Typography>
-                      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        adjective
-                      </Typography>
-                      <Typography variant="body2">
-                        well meaning and kindly.
-                        <br />
-                        {'"a benevolent smile"'}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+                      Products I'm interested in..
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      Services:
+                      <ul>
+                        {singleClient.service_names.map(
+                          (serviceName, index) => (
+                            <li key={index}>{serviceName}</li>
+                          )
+                        )}
+                      </ul>
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Grid>
+              <Grid item xs={6} md={4}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    boxShadow: 5,
+                  }}
+                >
+                  <CardContent
+                    onClick={() => handlePrevious("/foodpreferences")}
+                  >
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Foods we're interested in..
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      Services:
+                      <ul>
+                        {singleClient.product_types.map(
+                          (producttypes, index) => (
+                            <li key={index}>{producttypes}</li>
+                          )
+                        )}
+                      </ul>
+                    </Typography>
+                   
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    boxShadow: 5,
+                  }}
+                >
+                  <CardContent
+                    onClick={() => handlePrevious("/clientlocationinfo")}
+                  >
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Who we are...
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      a;sldjf;lakjsdf;lajs;lkdfj
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      adjective
+                    </Typography>
+                    <Typography variant="body2">
+                      well meaning and kindly.
+                      <br />
+                      {'"a benevolent smile"'}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    boxShadow: 5,
+                  }}
+                >
+                  <CardContent
+                    onClick={() => handlePrevious("/additionalinfo")}
+                  >
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Additional info
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      a;sldjf;lakjsdf;lajs;lkdfj
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      adjective
+                    </Typography>
+                    <Typography variant="body2">
+                      well meaning and kindly.
+                      <br />
+                      {'"a benevolent smile"'}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    boxShadow: 5,
+                  }}
+                >
+                  <CardContent onClick={() => handlePrevious("/demographics")}>
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="text.secondary"
+                      gutterBottom
+                    >
+                      Who we're serving..
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      a;sldjf;lakjsdf;lajs;lkdfj
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                      adjective
+                    </Typography>
+                    <Typography variant="body2">
+                      well meaning and kindly.
+                      <br />
+                      {'"a benevolent smile"'}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
             {/* </Box> */}
 
             <PopupWidget
