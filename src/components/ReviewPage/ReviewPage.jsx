@@ -27,8 +27,9 @@ const theme = createTheme({
 
 function ReviewPage() {
   const history = useHistory();
-
+  const singleClient = useSelector((store) => store.singleClient);
   const rootElement = document.getElementById("popup-root");
+  console.log(singleClient)
 
   function handlePrevious(path) {
     switch (path) {
