@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get("/client/:id", (req, res) => {
   const clientId = [Number(req.params.id)];
-  console.log('clientId is:', clientId)
+  // console.log('clientId is:', clientId)
 
   // in query updated client table to c, user to u, service to s... for readability
   const sqlQuery = `
