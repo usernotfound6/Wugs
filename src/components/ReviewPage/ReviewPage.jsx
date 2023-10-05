@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -13,7 +13,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { InlineWidget, PopupWidget, PopupButton } from "react-calendly";
 
 // Path: /review
@@ -24,12 +24,14 @@ const theme = createTheme({
 });
 
 function ReviewPage() {
+  const dispatch = useDispatch();
   const history = useHistory();
   const singleClient = useSelector((store) => store.client);
   const rootElement = document.getElementById("popup-root");
   console.log(singleClient);
 
   function handlePrevious(path) {
+    console.log("inside handlePrevious");
     switch (path) {
       case "/servicechoice":
         history.push("/servicechoice");
@@ -50,6 +52,9 @@ function ReviewPage() {
       // code block? Not sure what to add for default
     }
   }
+  // useEffect(() => {
+  //   dispatch({ type: "FETCH_USER" });
+  // }, []); // Empty dependency array means it runs only once on mount
 
   // const store = useSelector((store) => store);
   // const [heading, setHeading] = useState('Functional Component');
@@ -99,14 +104,15 @@ function ReviewPage() {
                 <Card
                   variant="outlined"
                   sx={{
-                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    backgroundColor: "#eaeaea",
                     boxShadow: 5,
+                    color: "black",
                   }}
                 >
                   <CardContent onClick={() => handlePrevious("/servicechoice")}>
                     <Typography
                       sx={{ fontSize: 24 }}
-                      color="text.secondary"
+                      color="black"
                       gutterBottom
                     >
                       Products I'm interested in..
@@ -114,7 +120,7 @@ function ReviewPage() {
                     <Typography variant="h8" component="div">
                       Services:
                       <ul>
-                        {singleClient.service_names.map(
+                        {singleClient.service_names?.map(
                           (serviceName, index) => (
                             <li key={index}>{serviceName}</li>
                           )
@@ -128,8 +134,9 @@ function ReviewPage() {
                 <Card
                   variant="outlined"
                   sx={{
-                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    backgroundColor: "#eaeaea",
                     boxShadow: 5,
+                    color: "black",
                   }}
                 >
                   <CardContent
@@ -137,7 +144,7 @@ function ReviewPage() {
                   >
                     <Typography
                       sx={{ fontSize: 24 }}
-                      color="text.secondary"
+                      color="black"
                       gutterBottom
                     >
                       Foods we're interested in..
@@ -145,14 +152,13 @@ function ReviewPage() {
                     <Typography variant="h8" component="div">
                       Services:
                       <ul>
-                        {singleClient.product_types.map(
-                          (producttypes, index) => (
-                            <li key={index}>{producttypes}</li>
+                        {singleClient.product_types?.map(
+                          (productType, index) => (
+                            <li key={index}>{productType}</li>
                           )
                         )}
                       </ul>
                     </Typography>
-                   
                   </CardContent>
                 </Card>
               </Grid>
@@ -160,8 +166,9 @@ function ReviewPage() {
                 <Card
                   variant="outlined"
                   sx={{
-                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    backgroundColor: "#eaeaea",
                     boxShadow: 5,
+                    color: "black",
                   }}
                 >
                   <CardContent
@@ -169,21 +176,23 @@ function ReviewPage() {
                   >
                     <Typography
                       sx={{ fontSize: 24 }}
-                      color="text.secondary"
+                      color="black"
                       gutterBottom
                     >
                       Who we are...
                     </Typography>
                     <Typography variant="h8" component="div">
-                      a;sldjf;lakjsdf;lajs;lkdfj
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      adjective
-                    </Typography>
-                    <Typography variant="body2">
-                      well meaning and kindly.
-                      <br />
-                      {'"a benevolent smile"'}
+                      <ul>
+                        <li>{singleClient.business_name}</li>
+                        <li>{singleClient.address}</li>
+                        <li>{singleClient.website}</li>
+                        <li>{singleClient.phone}</li>
+                        <li>
+                          {singleClient.first_name}, {singleClient.last_name}
+                        </li>
+                        {/* <li>{singleClient}</li> */}
+                        {/* <li>{singleClient}</li> */}
+                      </ul>
                     </Typography>
                   </CardContent>
                 </Card>
@@ -192,8 +201,9 @@ function ReviewPage() {
                 <Card
                   variant="outlined"
                   sx={{
-                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    backgroundColor: "#eaeaea",
                     boxShadow: 5,
+                    color: "black",
                   }}
                 >
                   <CardContent
@@ -201,21 +211,13 @@ function ReviewPage() {
                   >
                     <Typography
                       sx={{ fontSize: 24 }}
-                      color="text.secondary"
+                      color="black"
                       gutterBottom
                     >
                       Additional info
                     </Typography>
                     <Typography variant="h8" component="div">
                       a;sldjf;lakjsdf;lajs;lkdfj
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      adjective
-                    </Typography>
-                    <Typography variant="body2">
-                      well meaning and kindly.
-                      <br />
-                      {'"a benevolent smile"'}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -224,28 +226,30 @@ function ReviewPage() {
                 <Card
                   variant="outlined"
                   sx={{
-                    backgroundColor: "rgba(243, 207, 42, 0)",
+                    backgroundColor: "#eaeaea",
                     boxShadow: 5,
+                    color: "black",
                   }}
+                  onClick={() => handlePrevious("/demographics")}
                 >
                   <CardContent onClick={() => handlePrevious("/demographics")}>
                     <Typography
                       sx={{ fontSize: 24 }}
-                      color="text.secondary"
+                      color="black"
                       gutterBottom
                     >
                       Who we're serving..
                     </Typography>
                     <Typography variant="h8" component="div">
-                      a;sldjf;lakjsdf;lajs;lkdfj
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      adjective
-                    </Typography>
-                    <Typography variant="body2">
-                      well meaning and kindly.
-                      <br />
-                      {'"a benevolent smile"'}
+                      <ul>
+                        <li>{singleClient.demographics}</li>
+                        {/* <li>{singleClient.address}</li> */}
+                        {/* <li>{singleClient.website}</li> */}
+                        {/* <li>{singleClient.phone}</li> */}
+                        {/* <li>{singleClient.first_name}, {singleClient.last_name}</li> */}
+                        {/* <li>{singleClient}</li> */}
+                        {/* <li>{singleClient}</li> */}
+                      </ul>
                     </Typography>
                   </CardContent>
                 </Card>
