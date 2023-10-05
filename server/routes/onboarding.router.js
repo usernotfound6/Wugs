@@ -254,12 +254,12 @@ router.put("/additionalinfo/:id", (req, res) => {
   // POST route code here
 
   let queryText = `UPDATE client
-  SET demensions = $1,
+  SET dimensions = $1,
   pictures = $2,
-  visit = $3
+  wugs_visit = $3
   WHERE client.id = $4;`;
   pool
-    .query(queryText, [req.body.demensions, req.body.pictures, req.body.visit, req.params.id])
+    .query(queryText, [req.body.dimensions, req.body.pictures, req.body.wugs_visit, req.params.id])
     .then((result) => {
       res.sendStatus(200);
     })
