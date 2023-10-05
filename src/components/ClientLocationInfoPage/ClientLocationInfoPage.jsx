@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -27,7 +27,12 @@ function ClientLocationInfoPage() {
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
+  const client = useSelector((store) => store.client)
+
+  console.log("Client", client.client_id)
+
   const history = useHistory();
+  const dispatch = useDispatch();
 
     // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
     function getFormattedPhoneNum(input) {
@@ -73,11 +78,10 @@ function ClientLocationInfoPage() {
   };
 
   const handleSubmit = (event) => {
-    setOpenConfirmation(true);
-    event.preventDefault();
 
     // console.log("inside handleSubmit");
     let clientLocationInfoObject = {
+      client_id: client.client_id,
       businessname: businessname,
       address: address,
       website: website,
@@ -88,14 +92,15 @@ function ClientLocationInfoPage() {
     };
     console.log(clientLocationInfoObject);
 
-    axios
-      .put("/api/clientlocationinfo/:id", clientLocationInfoObject)
-      .then((response) => {
-        console.log("success with client location PUT:", response);
-      })
-      .catch((error) => {
-        console.error("error with client location PUT:", error);
-      });
+  
+      console.log("Clicked on Client Location Next")
+      dispatch({
+          type: 'UPDATE_CLIENT_LOCATION', payload: {
+           clientLocationInfoObject
+          }
+      }
+      )
+      
 
       history.push("/demographics");
       
@@ -106,6 +111,7 @@ function ClientLocationInfoPage() {
     setHours("");
     setMicroMarket("");
   };
+
 
   return (
     <div className="wholebody">
