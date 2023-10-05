@@ -65,7 +65,7 @@ function ClientLocationInfoPage() {
 
   const handleConfirmSubmit = () => {
     setOpenConfirmation(false);
-    history.push("/home");
+    history.push("/demographics");
   };
 
   const handleCloseConfirmation = () => {
@@ -96,6 +96,9 @@ function ClientLocationInfoPage() {
       .catch((error) => {
         console.error("error with client location PUT:", error);
       });
+
+      history.push("/demographics");
+      
     setBusinessName("");
     setAddress("");
     setWebsite("");

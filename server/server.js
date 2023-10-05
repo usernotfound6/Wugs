@@ -31,7 +31,6 @@ app.use('/api/onboarding', onboardingRouter);
 app.use('/api/interested', interestedRouter);
 app.use('/api/admin', adminRouter);
 
-
 // Serve static files
 app.use(express.static('build'));
 
