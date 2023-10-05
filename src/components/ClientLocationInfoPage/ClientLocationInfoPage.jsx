@@ -264,7 +264,7 @@ function ClientLocationInfoPage() {
           multiline
           rows={1}
           placeholder="Ex: Lobby, Cafeteria"
-          value={hours}
+          value={micromarket}
           onChange={(event) => setMicroMarket(event.target.value)}
           sx={{
             "& .MuiOutlinedInput-root": {
