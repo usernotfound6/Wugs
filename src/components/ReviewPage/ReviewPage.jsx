@@ -26,9 +26,9 @@ const theme = createTheme({
 function ReviewPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const singleClient = useSelector((store) => store.client);
+  const client = useSelector((store) => store.client);
   const rootElement = document.getElementById("popup-root");
-  console.log("Here is the singleClient", singleClient);
+  console.log("Here is the client", client);
 
   function handlePrevious(path) {
     console.log("inside handlePrevious");
@@ -119,7 +119,7 @@ function ReviewPage() {
                     <Typography variant="h8" component="div">
                       Services:
                       <ul>
-                        {singleClient.service_names?.map(
+                        {client.service_names?.map(
                           (serviceName, index) => (
                             <li key={index}>{serviceName}</li>
                           )
@@ -151,7 +151,7 @@ function ReviewPage() {
                     <Typography variant="h8" component="div">
                       Services:
                       <ul>
-                        {singleClient.product_types?.map(
+                        {client.product_types?.map(
                           (productType, index) => (
                             <li key={index}>{productType}</li>
                           )
@@ -182,15 +182,15 @@ function ReviewPage() {
                     </Typography>
                     <Typography variant="h8" component="div">
                       <ul>
-                        <li>{singleClient.business_name}</li>
-                        <li>{singleClient.address}</li>
-                        <li>{singleClient.website}</li>
-                        <li>{singleClient.phone}</li>
+                        <li>{client.business_name}</li>
+                        <li>{client.address}</li>
+                        <li>{client.website}</li>
+                        <li>{client.phone}</li>
                         <li>
-                          {singleClient.first_name}, {singleClient.last_name}
+                          {client.first_name}, {client.last_name}
                         </li>
-                        {/* <li>{singleClient}</li> */}
-                        {/* <li>{singleClient}</li> */}
+                        {/* <li>{client}</li> */}
+                        {/* <li>{client}</li> */}
                       </ul>
                     </Typography>
                   </CardContent>
@@ -241,13 +241,13 @@ function ReviewPage() {
                     </Typography>
                     <Typography variant="h8" component="div">
                       <ul>
-                        <li>{singleClient.demographics}</li>
-                        {/* <li>{singleClient.address}</li> */}
-                        {/* <li>{singleClient.website}</li> */}
-                        {/* <li>{singleClient.phone}</li> */}
-                        {/* <li>{singleClient.first_name}, {singleClient.last_name}</li> */}
-                        {/* <li>{singleClient}</li> */}
-                        {/* <li>{singleClient}</li> */}
+                        <li>{client.demographics}</li>
+                        {/* <li>{client.address}</li> */}
+                        {/* <li>{client.website}</li> */}
+                        {/* <li>{client.phone}</li> */}
+                        {/* <li>{client.first_name}, {client.last_name}</li> */}
+                        {/* <li>{client}</li> */}
+                        {/* <li>{client}</li> */}
                       </ul>
                     </Typography>
                   </CardContent>
