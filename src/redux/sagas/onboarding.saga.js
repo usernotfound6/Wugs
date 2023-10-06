@@ -19,7 +19,7 @@ function* updateServices(action) {
         console.log("error with PUT on client side", error)
     }
 }
-function* updateClientLocation(action) {
+
 
     try {
         const locationObj = action.payload;
@@ -33,6 +33,7 @@ function* updateClientLocation(action) {
         console.log("error with Client Location PUT on client side", error)
     }
 }
+
 
 function* updateDemographics(action) {
 
@@ -61,6 +62,21 @@ function* updateAdditionalInfo(action) {
     }
     catch (error) {
         console.log("error with Additional info PUT on client side", error)
+    }
+}
+
+function* updateClientLocation(action) {
+
+    try {
+        const servicesObj = action.payload;
+        const id = servicesObj.clientLocationInfoObject.client_id
+        console.log("ClientLocation object:", servicesObj)
+        console.log("ID", id)
+        const response = yield axios.put(`/api/onboarding/clientlocationinfo/${id}`, servicesObj)
+        console.log(response.data)
+    }
+    catch (error) {
+        console.log("error with updateClientLocation PUT on client side", error)
     }
 }
 

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -141,12 +140,12 @@ function ColorlibStepIcon(props) {
   const { active, completed, className } = props;
 
   const icons = {
-    1: <KitchenIcon/>,
-    2: <MapsHomeWorkIcon/>,
-    3: <Diversity3Icon/>,
-    4: <LunchDiningIcon/>,
-    5: <FeedIcon/>,
-    6: <FactCheckIcon/>
+    1: <KitchenIcon />,
+    2: <MapsHomeWorkIcon />,
+    3: <Diversity3Icon />,
+    4: <LunchDiningIcon />,
+    5: <FeedIcon />,
+    6: <FactCheckIcon />
 
 
   };
@@ -178,16 +177,16 @@ ColorlibStepIcon.propTypes = {
 
 const steps = ['Services', 'Location Info', 'About Your Community', 'Food Choices', 'Additional info', 'Review and Complete!']
 
-  function MyStepper(props) {
+function MyStepper(props) {
 
-    const {step} = props
+  const { step } = props
 
   return (
 
 
     <div>
 
-<Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
+      <Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel className="custom-step-label" StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
