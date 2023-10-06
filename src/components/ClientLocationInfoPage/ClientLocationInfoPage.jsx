@@ -27,9 +27,6 @@ function ClientLocationInfoPage() {
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
-
-  const dispatch = useDispatch();
-
   const client = useSelector((store) => store.client)
 
   const history = useHistory();
