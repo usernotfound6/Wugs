@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { InlineWidget, PopupWidget, PopupButton } from "react-calendly";
+import { Button } from '@mui/material';
 
 // Path: /clientstatus
 
@@ -102,14 +103,22 @@ function ClientStatusPage() {
                     <Typography variant="h8" component="div">
                       Location: {client.business_name}
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Not sure we'd need anything here?
-                    </Typography>
-                    <Typography variant="body2">
-                      Maybe instead of words here we can have an Edit button
-                      <br />
-                      {'"more text"'}
-                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="primary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                   </CardContent>
                 </Card>
               </Grid>
@@ -134,14 +143,22 @@ function ClientStatusPage() {
                         None Indicated
                       </Typography>
                     }
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Not sure we'd need anything here?
-                    </Typography>
-                    <Typography variant="body2">
-                      Maybe instead of words here we can have an Edit button
-                      <br />
-                      {'"more text"'}
-                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="primary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                   </CardContent>
                 </Card>
               </Grid>
@@ -166,14 +183,22 @@ function ClientStatusPage() {
                         None Indicated
                       </Typography>
                     }
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      Not sure we'd need anything here?
-                    </Typography>
-                    <Typography variant="body2">
-                      Maybe instead of words here we can have an Edit button
-                      <br />
-                      {'"more text"'}
-                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="primary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                   </CardContent>
                 </Card>
               </Grid>
@@ -185,19 +210,27 @@ function ClientStatusPage() {
                       color="text.secondary"
                       gutterBottom
                     >
-                      Additional info
+                      Vending Users at Your Location
                     </Typography>
                     <Typography variant="h8" component="div">
                       a;sldjf;lakjsdf;lajs;lkdfj
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      adjective
-                    </Typography>
-                    <Typography variant="body2">
-                      well meaning and kindly.
-                      <br />
-                      {'"a benevolent smile"'}
-                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="primary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                   </CardContent>
                 </Card>
               </Grid>
@@ -214,14 +247,22 @@ function ClientStatusPage() {
                     <Typography variant="h8" component="div">
                       a;sldjf;lakjsdf;lajs;lkdfj
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                      adjective
-                    </Typography>
-                    <Typography variant="body2">
-                      well meaning and kindly.
-                      <br />
-                      {'"a benevolent smile"'}
-                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="primary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                   </CardContent>
                 </Card>
               </Grid>
