@@ -129,17 +129,15 @@ router.put("/clientlocationinfo/:id", (req, res) => {
   business_name = $1,
   address = $2,
   website = $3,
-  manager_id = $4,
-  phone = $5,
-  hours_of_operation = $6,
-  minimarket_location = $7
+  phone = $4,
+  hours_of_operation = $5,
+  minimarket_location = $6
   WHERE client.id = $8;`;
   pool
     .query(queryText, [
       req.body.business_name,
       req.body.address,
       req.body.website,
-      req.body.manager_id,
       req.body.phone,
       req.body.hours_of_operation,
       req.body.minimarket_location,
