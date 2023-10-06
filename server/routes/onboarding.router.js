@@ -187,7 +187,6 @@ router.put("/demographic/:id", (req, res) => {
 
 // Service Choice router ------------------------------------------------------------------------------------------------------------------
 
-
 router.put("/servicechoice", (req, res) => {
   console.log("req.body is:", req.body)
   const client_id = req.body.client_id;

@@ -13,9 +13,24 @@ function* updateServices(action) {
         console.log("service_id array:", servicesObj.service_id)
         const response = yield axios.put('/api/onboarding/servicechoice', servicesObj)
         console.log(response.data)
+        yield put({type: "FETCH_USER"});
     }
     catch (error) {
         console.log("error with PUT on client side", error)
+    }
+}
+function* updateClientLocation(action) {
+
+    try {
+        const locationObj = action.payload;
+        console.log("client_id:", locationObj.client_id)
+        console.log("location object:", locationObj)
+        const response = yield axios.put(`/api/onboarding/clientlocationinfo/${locationObj.client_id}`, locationObj)
+        console.log(response.data)
+        yield put({type: "FETCH_USER"});
+    }
+    catch (error) {
+        console.log("error with Client Location PUT on client side", error)
     }
 }
 
@@ -27,6 +42,8 @@ function* updateDemographics(action) {
         console.log("demographic object:", servicesObj)
         const response = yield axios.put(`/api/onboarding/demographic/${servicesObj.client_id}`, servicesObj)
         console.log(response.data)
+        yield put({type: "FETCH_USER"});
+
     }
     catch (error) {
         console.log("error with Demographic PUT on client side", error)
@@ -65,6 +82,7 @@ function* updateClientLocation(action) {
 function* onboardingSaga() {
     yield takeLatest('UPDATE_SERVICES', updateServices)
     yield takeLatest('UPDATE_DEMOGRAPHICS', updateDemographics)
+    yield takeLatest('UPDATE_CLIENT_LOCATION', updateClientLocation)
     yield takeLatest('UPDATE_ADDINFO', updateAdditionalInfo)
     yield takeLatest('UPDATE_CLIENT_LOCATION', updateClientLocation)
 }

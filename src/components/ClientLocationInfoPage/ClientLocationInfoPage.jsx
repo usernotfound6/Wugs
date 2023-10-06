@@ -27,45 +27,47 @@ function ClientLocationInfoPage() {
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
+
   const dispatch = useDispatch();
 
   const client = useSelector((store) => store.client)
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
-    // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
-    function getFormattedPhoneNum(input) {
-      let output = "(";
-      input.replace(
-        /^\D*(\d{0,3})\D*(\d{0,3})\D*(\d{0,4})/,
-        function (match, g1, g2, g3) {
-          if (g1.length) {
-            output += g1;
-            if (g1.length == 3) {
-              output += ")";
-              if (g2.length) {
-                output += " " + g2;
-                if (g2.length == 3) {
-                  output += " - ";
-                  if (g3.length) {
-                    output += g3;
-                  }
+  // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
+  function getFormattedPhoneNum(input) {
+    let output = "(";
+    input.replace(
+      /^\D*(\d{0,3})\D*(\d{0,3})\D*(\d{0,4})/,
+      function (match, g1, g2, g3) {
+        if (g1.length) {
+          output += g1;
+          if (g1.length == 3) {
+            output += ")";
+            if (g2.length) {
+              output += " " + g2;
+              if (g2.length == 3) {
+                output += " - ";
+                if (g3.length) {
+                  output += g3;
                 }
               }
             }
           }
         }
-      );
-      return output;
-    }
-  
-    // Function to format the phone number as you type
-    const handleFormatPhoneNumber = (event) => {
-      const inputValue = event.target.value.replace(/\D/g, "");
-      // Remove non-digit characters
-      let formattedValue = getFormattedPhoneNum(inputValue);
-      setPhone(formattedValue);
-    };
+      }
+    );
+    return output;
+  }
+
+  // Function to format the phone number as you type
+  const handleFormatPhoneNumber = (event) => {
+    const inputValue = event.target.value.replace(/\D/g, "");
+    // Remove non-digit characters
+    let formattedValue = getFormattedPhoneNum(inputValue);
+    setPhone(formattedValue);
+  };
 
   const handleConfirmSubmit = () => {
     setOpenConfirmation(false);
@@ -76,7 +78,9 @@ function ClientLocationInfoPage() {
     setOpenConfirmation(false);
   };
 
+
   const handleSubmit = () => {
+
 
     // console.log("inside handleSubmit");
     let clientLocationInfoObject = {
@@ -89,20 +93,16 @@ function ClientLocationInfoPage() {
       micromarket_location: micromarket,
 
     };
-    console.log("ClientObject", clientLocationInfoObject);
-
   
-      console.log("Clicked on Client Location Next")
       dispatch({
           type: 'UPDATE_CLIENT_LOCATION', payload: {
            clientLocationInfoObject
           }
       }
       )
-      
 
-      history.push("/demographics");
-      
+    history.push("/demographics");
+
     setBusinessName("");
     setAddress("");
     setWebsite("");
@@ -111,10 +111,11 @@ function ClientLocationInfoPage() {
     setMicroMarket("");
   };
 
+
   return (
     <div className="wholebody">
       <div>
-        <MyStepper step={1}/>
+        <MyStepper step={1} />
       </div>
       <h3 style={{ marginLeft: "12px" }}>Who Are We Serving?</h3>
       <Box

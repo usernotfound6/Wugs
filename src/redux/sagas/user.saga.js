@@ -21,6 +21,7 @@ function* fetchUser() {
     // the client-side code know the user is logged in
     yield put({ type: 'SET_USER', payload: response.data });
 
+    console.log("response.data.id", response.data.id)
     // once user signed in, if admin it'll fetch data for all clients, if client it'll fetch only its client info
     if (response.data.admin) {
       yield put({ type: 'FETCH_ALL_CLIENTS' });
