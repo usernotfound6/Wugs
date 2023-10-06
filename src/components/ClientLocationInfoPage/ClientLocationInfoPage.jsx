@@ -29,7 +29,7 @@ function ClientLocationInfoPage() {
 
   const client = useSelector((store) => store.client)
 
-  console.log("Client", client.client_id)
+  console.log("Client!!!!!!", client.client_id)
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -95,9 +95,9 @@ function ClientLocationInfoPage() {
   
       console.log("Clicked on Client Location Next")
       dispatch({
-          type: 'UPDATE_CLIENT_LOCATION', payload: {
+          type: 'UPDATE_CLIENT_LOCATION', payload: 
            clientLocationInfoObject
-          }
+          
       }
       )
       
