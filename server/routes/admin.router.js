@@ -21,14 +21,16 @@ router.get("/", (req, res) => {
 
   router.put("/:id", (req, res) => {
     // POST route code here
-  
+  console.log("router.put for Admin", req.body)
     let queryText = `UPDATE client
     SET 
-    admin_notes = $1
-    WHERE client.id = $2;`;
+    admin_notes = $1,
+    status_id = $2
+    WHERE client.id = $3;`;
     pool
       .query(queryText, [
         req.body.admin_notes,
+        req.body.status_id,
         req.params.id
         
       ])

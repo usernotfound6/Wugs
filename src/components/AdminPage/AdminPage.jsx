@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Columns from "./Columns";
-import BasicSelect from "./BasicSelect";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -21,7 +20,6 @@ function AdminPage() {
   console.log("In Admin page", admin);
   const columns = Columns(); // The actual Column is saved in Columns.js as its own component
 
-  
   // This const is mapping over the admin reducer and setting the info found there as the tables row data
   const rows = admin?.map((client) => ({
     id: client.id,
@@ -83,15 +81,17 @@ function AdminPage() {
 
   function editClient() {
     dispatch({
-      // type: "SAVE_FAVORITE",
-      // payload: { id: recipe.recipe_id }, // Remember to put your payload in an object or your Saga/router will get mad
+      type: "UPDATE_CLIENT",
+      payload: {
+        admin_notes: input,
+        status_id: status,
+        id: selectedRowId,
+      },
     });
   }
 
-  
-
   return (
-    <div style={{ height: 400, width: "100%",}}>
+    <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -110,36 +110,37 @@ function AdminPage() {
           </Typography>
           {/* <BasicSelect/> */}
           <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Status</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={status}
-          label="Status"
-          onChange={dropdown}
-        >
-          <MenuItem value={1}>Onboarding Incomplete</MenuItem>
-          <MenuItem value={2}>Pending Wugs Approval</MenuItem>
-          <MenuItem value={3}>Render In Progress</MenuItem>
-          <MenuItem value={4}>Contract Sent Awaiting Completion</MenuItem>
-          <MenuItem value={5}>Pending Contract Approval</MenuItem>
-          <MenuItem value={6}>Account Active</MenuItem>
-          <MenuItem value={7}>Account Inactive</MenuItem>
-        </Select>
-        <div style={{ marginTop: "20px" }}>
-          <TextField
-            id="filled-multiline-static"
-            label="Client Notes"
-            multiline
-            rows={4}
-            //   defaultValue="Default Value"
-            variant="filled"
-            onChange={inputField}
-          />
-        </div>
-      </FormControl>
-    </Box>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Status</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={status}
+                label="Status"
+                onChange={dropdown}
+              >
+                <MenuItem value={1}>Onboarding Incomplete</MenuItem>
+                <MenuItem value={2}>Pending Wugs Approval</MenuItem>
+                <MenuItem value={3}>Render In Progress</MenuItem>
+                <MenuItem value={4}>Contract Sent Awaiting Completion</MenuItem>
+                <MenuItem value={5}>Pending Contract Approval</MenuItem>
+                <MenuItem value={6}>Account Active</MenuItem>
+                <MenuItem value={7}>Account Inactive</MenuItem>
+              </Select>
+              <div style={{ marginTop: "20px" }}>
+                <TextField
+                  id="filled-multiline-static"
+                  label="Client Notes"
+                  multiline
+                  rows={4}
+                  //   defaultValue="Default Value"
+                  variant="filled"
+                  onChange={inputField}
+                />
+              </div>
+              <Button onClick={editClient}>Submit</Button>
+            </FormControl>
+          </Box>
           {/* <MultilineTextFields/> */}
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             ID: {selectedRowId} {/* Display the selected row's ID */}

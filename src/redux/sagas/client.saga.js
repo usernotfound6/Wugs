@@ -28,11 +28,23 @@ function* getAllClients(action) {
   }
 }
 
+function* updateClient(action) {
+  try {
+    const clientEdit = action.payload; 
+    yield axios.put(`/api/admin/${clientEdit.id}`, clientEdit);
+    yield put({ type: "FETCH_RECIPE" });
+  } catch (error) {
+    console.log("error sending put", error);
+  }
+}
+
 
 
 function* clientSaga() {
   yield takeLatest('FETCH_CLIENT', getClient)
   yield takeLatest('FETCH_ALL_CLIENTS', getAllClients)
+  yield takeLatest('UPDATE_CLIENT', updateClient)
+
 }
 
 export default clientSaga;
