@@ -47,10 +47,26 @@ function* updateAdditionalInfo(action) {
     }
 }
 
+function* updateClientLocation(action) {
+
+    try {
+        const servicesObj = action.payload;
+        const id = servicesObj.clientLocationInfoObject.client_id
+        console.log("ClientLocation object:", servicesObj)
+        console.log("ID", id)
+        const response = yield axios.put(`/api/onboarding/clientlocationinfo/${id}`, servicesObj)
+        console.log(response.data)
+    }
+    catch (error) {
+        console.log("error with updateClientLocation PUT on client side", error)
+    }
+}
+
 function* onboardingSaga() {
     yield takeLatest('UPDATE_SERVICES', updateServices)
     yield takeLatest('UPDATE_DEMOGRAPHICS', updateDemographics)
     yield takeLatest('UPDATE_ADDINFO', updateAdditionalInfo)
+    yield takeLatest('UPDATE_CLIENT_LOCATION', updateClientLocation)
 }
 
 export default onboardingSaga;
