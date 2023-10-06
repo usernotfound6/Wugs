@@ -27,6 +27,7 @@ function* updateClientLocation(action) {
         console.log("location object:", locationObj)
         const response = yield axios.put(`/api/onboarding/clientlocationinfo/${locationObj.client_id}`, locationObj)
         console.log(response.data)
+        yield put({type: "FETCH_USER"});
     }
     catch (error) {
         console.log("error with Client Location PUT on client side", error)
