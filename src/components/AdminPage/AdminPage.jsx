@@ -77,7 +77,7 @@ function AdminPage() {
       headerName: (
         <div style={{ color: "#ffebb4" }}>Hours of Operation</div>
       ),
-      width: 130,
+      width: 190,
       renderCell: (params) => (
         <div style={{ color: "#ffebb4" }}>{params.value}</div>
       ),
@@ -87,7 +87,7 @@ function AdminPage() {
       headerName: (
         <div style={{ color: "#ffebb4" }}>Market Location</div>
       ),
-      width: 130,
+      width: 190,
       renderCell: (params) => (
         <div style={{ color: "#ffebb4" }}>{params.value}</div>
       ),
@@ -97,7 +97,7 @@ function AdminPage() {
       headerName: (
         <div style={{ color: "#ffebb4" }}>Neighborhood Info</div>
       ),
-      width: 130,
+      width: 190,
       renderCell: (params) => (
         <div style={{ color: "#ffebb4" }}>{params.value}</div>
       ),
@@ -107,7 +107,7 @@ function AdminPage() {
       headerName: (
         <div style={{ color: "#ffebb4" }}>Demographics</div>
       ),
-      width: 130,
+      width: 190,
       renderCell: (params) => (
         <div style={{ color: "#ffebb4" }}>{params.value}</div>
       ),
@@ -117,7 +117,7 @@ function AdminPage() {
       headerName: (
         <div style={{ color: "#ffebb4" }}># of people</div>
       ),
-      width: 130,
+      width: 90,
       renderCell: (params) => (
         <div style={{ color: "#ffebb4" }}>{params.value}</div>
       ),
@@ -127,7 +127,7 @@ function AdminPage() {
       headerName: (
         <div style={{ color: "#ffebb4" }}>Age Group</div>
       ),
-      width: 130,
+      width: 150,
       renderCell: (params) => (
         <div style={{ color: "#ffebb4" }}>{params.value}</div>
       ),
