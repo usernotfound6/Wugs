@@ -28,6 +28,7 @@ function ReviewPage() {
   const history = useHistory();
   const client = useSelector((store) => store.client);
   const rootElement = document.getElementById("popup-root");
+
   console.log("Here is the client", client);
 
   function handlePrevious(path) {

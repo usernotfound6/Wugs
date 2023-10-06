@@ -34,7 +34,7 @@ CREATE TABLE client (
   wugs_visit BOOLEAN default false,
   contract VARCHAR(200),
   admin_notes VARCHAR(500),
-  status_id INTEGER REFERENCES status(id)
+  status_id INTEGER REFERENCES status(id) default 1
 );
 
 -- Create the 'service' table
