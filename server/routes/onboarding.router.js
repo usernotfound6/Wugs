@@ -123,27 +123,28 @@ router.get("/clientservice/:id", (req, res) => {
 
 router.put("/clientlocationinfo/:id", (req, res) => {
   // POST route code here
+  console.log("req.body", req.body)
+
+  let queryParams = req.body.clientLocationInfoObject
 
   let queryText = `UPDATE client
   SET 
   business_name = $1,
   address = $2,
   website = $3,
-  manager_id = $4,
-  phone = $5,
-  hours_of_operation = $6,
-  micromarket_location = $7
-  WHERE client.id = $8;`;
+  phone = $4,
+  hours_of_operation = $5,
+  micromarket_location = $6
+  WHERE client.id = $7;`;
   pool
     .query(queryText, [
-      req.body.business_name,
-      req.body.address,
-      req.body.website,
-      req.body.manager_id,
-      req.body.phone,
-      req.body.hours_of_operation,
-      req.body.micromarket_location,
-      req.params.id
+      queryParams.business_name,
+      queryParams.address,
+      queryParams.website,
+      queryParams.phone,
+      queryParams.hours_of_operation,
+      queryParams.micromarket_location,
+      queryParams.client_id
     ])
     .then((result) => {
       res.sendStatus(200);

@@ -27,9 +27,10 @@ function ClientLocationInfoPage() {
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
-  const client = useSelector((store) => store.client)
 
-  console.log("Client", client.client_id)
+  const dispatch = useDispatch();
+
+  const client = useSelector((store) => store.client)
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -77,7 +78,9 @@ function ClientLocationInfoPage() {
     setOpenConfirmation(false);
   };
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = () => {
+
 
     // console.log("inside handleSubmit");
     let clientLocationInfoObject = {
@@ -90,11 +93,13 @@ function ClientLocationInfoPage() {
       micromarket_location: micromarket,
 
     };
-    console.log("clientLocationInfoObject.client_id:", clientLocationInfoObject.client_id)
-    console.log("clientLocationInfoObject:", clientLocationInfoObject);
-
-    console.log("Clicked on Client Location Next")
-    dispatch({ type: 'UPDATE_CLIENT_LOCATION', payload: clientLocationInfoObject })
+  
+      dispatch({
+          type: 'UPDATE_CLIENT_LOCATION', payload: {
+           clientLocationInfoObject
+          }
+      }
+      )
 
     history.push("/demographics");
 
