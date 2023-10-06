@@ -53,14 +53,8 @@ function ReviewPage() {
       // code block? Not sure what to add for default
     }
   }
-  // useEffect(() => {
-  //   dispatch({ type: "FETCH_USER" });
-  // }, []); 
-
- 
 
   return (
-    // <div className="App">
     <ThemeProvider theme={theme}>
       <div>
         <style type="text/css">
@@ -78,16 +72,8 @@ function ReviewPage() {
           sx={{
             width: "100%", // Custom width
             height: "70vh", // Custom height
-            // Add any other custom styles here
           }}
         >
-          {/* <Box
-            sx={{
-              bgcolor: "rgba(255, 225, 160, 0.4)",
-              height: "80vh",
-              width: "100%",
-            }}
-          > */}
           <header
             className="App-header"
             style={{
@@ -96,7 +82,7 @@ function ReviewPage() {
               padding: "30px",
             }}
           >
-            {/* Your other content */}Review and Schedule apppointment
+            Review and Schedule apppointment
           </header>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={12}>
@@ -120,11 +106,9 @@ function ReviewPage() {
                     <Typography variant="h8" component="div">
                       Services:
                       <ul>
-                        {client.service_names?.map(
-                          (serviceName, index) => (
-                            <li key={index}>{serviceName}</li>
-                          )
-                        )}
+                        {client.service_names?.map((serviceName, index) => (
+                          <li key={index}>{serviceName}</li>
+                        ))}
                       </ul>
                     </Typography>
                   </CardContent>
@@ -152,11 +136,9 @@ function ReviewPage() {
                     <Typography variant="h8" component="div">
                       Services:
                       <ul>
-                        {client.product_types?.map(
-                          (productType, index) => (
-                            <li key={index}>{productType}</li>
-                          )
-                        )}
+                        {client.product_types?.map((productType, index) => (
+                          <li key={index}>{productType}</li>
+                        ))}
                       </ul>
                     </Typography>
                   </CardContent>
@@ -243,19 +225,12 @@ function ReviewPage() {
                     <Typography variant="h8" component="div">
                       <ul>
                         <li>{client.demographics}</li>
-                        {/* <li>{client.address}</li> */}
-                        {/* <li>{client.website}</li> */}
-                        {/* <li>{client.phone}</li> */}
-                        {/* <li>{client.first_name}, {client.last_name}</li> */}
-                        {/* <li>{client}</li> */}
-                        {/* <li>{client}</li> */}
                       </ul>
                     </Typography>
                   </CardContent>
                 </Card>
               </Grid>
             </Grid>
-            {/* </Box> */}
 
             <PopupWidget
               url="https://calendly.com/dontyellwillcry"
@@ -264,7 +239,7 @@ function ReviewPage() {
               textColor="#ffffff"
               color="#00a2ff"
               style={{
-                position: "absolute",
+                position: "flex",
                 top: "50px",
                 left: "20px",
               }}
