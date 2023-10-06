@@ -18,7 +18,7 @@ function* getClient(action) {
 
 function* getAllClients(action) {
   try {
-    const response = yield axios.get('/api/onboarding/allclients');
+    const response = yield axios.get('/api/admin');
     const allClients = response.data;
     console.log("all clients' info in saga:", allClients)
     yield put({ type: 'SET_ALL_CLIENTS', payload: allClients })

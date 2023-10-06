@@ -39,11 +39,7 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    // if (user.admin) {
-    //   dispatch({ type: 'FETCH_ALL_CLIENTS' })
-    // } else {
-    //   dispatch({ type: 'FETCH_CLIENT', payload: user.id })
-    // }
+    dispatch({ type: "FETCH_ALL_CLIENTS" });
   }, [dispatch]);
 
   console.log(user.id)

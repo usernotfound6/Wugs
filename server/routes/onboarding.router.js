@@ -132,7 +132,7 @@ router.put("/clientlocationinfo/:id", (req, res) => {
   manager_id = $4,
   phone = $5,
   hours_of_operation = $6,
-  minimarket_location = $7
+  micromarket_location = $7
   WHERE client.id = $8;`;
   pool
     .query(queryText, [
@@ -142,7 +142,7 @@ router.put("/clientlocationinfo/:id", (req, res) => {
       req.body.manager_id,
       req.body.phone,
       req.body.hours_of_operation,
-      req.body.minimarket_location,
+      req.body.micromarket_location,
       req.params.id
     ])
     .then((result) => {
@@ -254,12 +254,12 @@ router.put("/additionalinfo/:id", (req, res) => {
   // POST route code here
 
   let queryText = `UPDATE client
-  SET demensions = $1,
+  SET dimensions = $1,
   pictures = $2,
-  visit = $3
+  wugs_visit = $3
   WHERE client.id = $4;`;
   pool
-    .query(queryText, [req.body.demensions, req.body.pictures, req.body.visit, req.params.id])
+    .query(queryText, [req.body.dimensions, req.body.pictures, req.body.wugs_visit, req.params.id])
     .then((result) => {
       res.sendStatus(200);
     })
