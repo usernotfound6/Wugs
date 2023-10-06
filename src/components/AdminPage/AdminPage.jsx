@@ -2,207 +2,23 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Columns from "./Columns";
 
 function AdminPage() {
   const dispatch = useDispatch();
 
-  
+  const [selectedRows, setSelectedRows] = useState([]);
+
   const admin = useSelector((store) => store.admin);
   console.log("In Admin page", admin);
+  const columns = Columns(); // Use the Columns component to get the column definitions
 
-  const columns = [
-    {
-      field: "id",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>ID</div>
-      ),
-      width: 70,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "business_name",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Business Name</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "address",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Address</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "website",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Website</div>
-      ),
-      width: 90,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "manager_id",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Manager ID</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "phone",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Phone #</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "hours_of_operation",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Hours of Operation</div>
-      ),
-      width: 190,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "micromarket_location",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Market Location</div>
-      ),
-      width: 190,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "neighborhood_info",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Neighborhood Info</div>
-      ),
-      width: 190,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "demographics",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Demographics</div>
-      ),
-      width: 190,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "number_of_people",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}># of people</div>
-      ),
-      width: 90,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "target_age_group",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Age Group</div>
-      ),
-      width: 150,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "industry",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Industry</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "pictures",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Pictures</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "dimensions",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Dimensions</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "wugs_visit",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Wugs Visit</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "contract",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Contract</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "admin_notes",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Admin Notes</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "status_id",
-      headerName: (
-        <div style={{ color: "#ffebb4" }}>Status</div>
-      ),
-      width: 130,
-      renderCell: (params) => (
-        <div style={{ color: "#ffebb4" }}>{params.value}</div>
-      ),
-    },
-  ];
+
+  
 
   const rows = admin?.map((client) => ({
     id: client.id,
@@ -226,23 +42,82 @@ function AdminPage() {
     status_id: client.status_id,
   }));
 
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+  const [open, setOpen] = useState(false);
+  const [selectedRowIds, setSelectedRowIds] = useState([]);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleCheckboxClick = (rowId) => {
+    console.log(rowId)
+    // Toggle the selected state of the clicked row
+    if (selectedRowIds.includes(rowId)) {
+      setSelectedRowIds(selectedRowIds.filter((id) => id !== rowId));
+    } else {
+      setSelectedRowIds([...selectedRowIds, rowId]);
+    }
+
+    // Open the modal if at least one row is selected
+    if (selectedRowIds.length === 0) {
+      handleClose();
+    } else {
+      handleOpen();
+    }
+  };
+
+    
+
+    
+  
   return (
+   
     <div style={{ height: 400, width: "100%" }}>
-      {admin?.length > 0 ? (
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-        />
-      ) : (
-        <p>Loading...</p>
-      )}
+      
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: { page: 0, pageSize: 5 },
+          },
+        }}
+        pageSizeOptions={[5, 10]}
+        // checkboxSelection  // Enable built-in checkboxes
+        onSelectionModelChange={(newSelection) => {
+          setSelectedRowIds(newSelection.selectionModel);
+        }}
+        onRowClick={(params) => {
+          // Handle row click event (optional)
+          handleCheckboxClick(params.id);
+        }}
+      />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
+      
     </div>
   );
 }
