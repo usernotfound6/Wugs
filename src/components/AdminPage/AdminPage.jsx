@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Columns from "./Columns";
 import BasicSelect from "./BasicSelect";
+import MultilineTextFields from "./MultiLineTextField";
 
 function AdminPage() {
   const [selectedRowId, setSelectedRowId] = useState(null);
@@ -80,6 +81,7 @@ function AdminPage() {
             Text in a modal
           </Typography>
           <BasicSelect/>
+          <MultilineTextFields/>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             ID: {selectedRowId} {/* Display the selected row's ID */}
           </Typography>
