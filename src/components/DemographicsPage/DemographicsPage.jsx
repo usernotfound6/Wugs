@@ -27,7 +27,8 @@ function DemographicsPage() {
 
   const client = useSelector((store) => store.client)
 
-  // console.log("Client", client.client_id)
+  console.log("Client", client.client_id)
+
   const dispatch = useDispatch();
 
   const handleChange = (event) => {

@@ -31,7 +31,6 @@ function ClientStatusPage() {
   const user = useSelector((store) => store.user);
   const rootElement = document.getElementById("popup-root");
 
-
   return (
     <ThemeProvider theme={theme}>
       <div>

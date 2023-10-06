@@ -1,4 +1,3 @@
-// import { combineReducers } from "redux";
 
 const allClients = (state = [], action) => {
     if (action.type === 'SET_ALL_CLIENTS') {
