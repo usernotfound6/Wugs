@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
+import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MyStepper from '../MyStepper/MyStepper';
@@ -12,7 +12,6 @@ import {
   DialogActions,
   DialogContentText,
 } from "@mui/material";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 
 // Path: /clientlocationmoreinfo
@@ -29,8 +28,6 @@ function ClientLocationInfoPage() {
 
   const client = useSelector((store) => store.client)
 
-
-  console.log("Client!!!!!!", client.client_id)
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -79,35 +76,26 @@ function ClientLocationInfoPage() {
 
 
   const handleSubmit = () => {
-
-
     // console.log("inside handleSubmit");
     let clientLocationInfoObject = {
       client_id: client.client_id,
-      businessname: businessname,
+      business_name: businessname,
       address: address,
       website: website,
       phone: phone,
       hours_of_operation: hours,
       micromarket_location: micromarket,
-
     };
-  
-      dispatch({
-          type: 'UPDATE_CLIENT_LOCATION', payload: 
-           clientLocationInfoObject
-          
-      }
-      )
+    dispatch({ type: 'UPDATE_CLIENT_LOCATION', payload: clientLocationInfoObject })
 
     history.push("/demographics");
-
-    setBusinessName("");
-    setAddress("");
-    setWebsite("");
-    setPhone("");
-    setHours("");
-    setMicroMarket("");
+    // are these necessary when moving to the next page?
+    // setBusinessName("");
+    // setAddress("");
+    // setWebsite("");
+    // setPhone("");
+    // setHours("");
+    // setMicroMarket("");
   };
 
 

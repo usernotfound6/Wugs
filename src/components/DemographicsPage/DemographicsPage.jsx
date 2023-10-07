@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
 import MyStepper from '../MyStepper/MyStepper'
 import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
@@ -30,6 +31,7 @@ function DemographicsPage() {
   console.log("Client", client.client_id)
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
@@ -50,20 +52,17 @@ function DemographicsPage() {
 
   const postDemographics = () => {
     console.log("Clicked on Demographics Next")
-    dispatch({
-        type: 'UPDATE_DEMOGRAPHICS', payload: {
-          client_id: client.client_id,
-          number_of_people: peopleCount,
-          age_group: ageGroup,
-          demographics: demographic,
-          industry: industry   , 
-          neighborhood_info: neighborhood
-        }
-    }
-    )
-    
-}
-
+    let demographicsObject = {
+      client_id: client.client_id,
+      number_of_people: peopleCount,
+      age_group: ageGroup,
+      demographics: demographic,
+      industry: industry,
+      neighborhood_info: neighborhood
+    };
+    dispatch({ type: 'UPDATE_DEMOGRAPHICS', payload: demographicsObject })
+    history.push("/foodpreferences");
+  }
 
   return (
     <div>
@@ -109,19 +108,19 @@ function DemographicsPage() {
             <strong># OF PEOPLE ON SITE:</strong>
             <br />
             Your best estimation at the number of people on site.
-            <br/>
+            <br />
             <strong>DEMOGRAPHIC:</strong>
             <br />
             We'd love to hear about what the culture and diversity of your location, this helps us to best serve you and provide recomendations for a diverse selection of snacking options.
-            <br/>
+            <br />
             <strong>AGE GROUP:</strong>
             <br />
             Your general age groups to help us provide product reccomendations.
-            <br/>
+            <br />
             <strong>INDUSTRY:</strong>
             <br />
             Decribe the primary operations and business of your location.
-            <br/>
+            <br />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
