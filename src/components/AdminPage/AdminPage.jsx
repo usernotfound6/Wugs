@@ -68,12 +68,10 @@ function AdminPage() {
   const [status, setStatus] = React.useState("");
   const [input, setInput] = React.useState("");
 
-  console.log("inside status state", status);
 
   const dropdown = (event) => {
     setStatus(event.target.value);
   };
-  console.log("MultilineTextField Input", input);
 
   const inputField = (event) => {
     setInput(event.target.value);
