@@ -21,18 +21,18 @@ function* updateServices(action) {
 }
 
 
-    try {
-        const locationObj = action.payload;
-        console.log("client_id:", locationObj.client_id)
-        console.log("location object:", locationObj)
-        const response = yield axios.put(`/api/onboarding/clientlocationinfo/${locationObj.client_id}`, locationObj)
-        console.log(response.data)
-        yield put({type: "FETCH_USER"});
-    }
-    catch (error) {
-        console.log("error with Client Location PUT on client side", error)
-    }
-}
+//     try {
+//         const locationObj = action.payload;
+//         console.log("client_id:", locationObj.client_id)
+//         console.log("location object:", locationObj)
+//         const response = yield axios.put(`/api/onboarding/clientlocationinfo/${locationObj.client_id}`, locationObj)
+//         console.log(response.data)
+//         yield put({type: "FETCH_USER"});
+//     }
+//     catch (error) {
+//         console.log("error with Client Location PUT on client side", error)
+//     }
+// }
 
 
 function* updateDemographics(action) {

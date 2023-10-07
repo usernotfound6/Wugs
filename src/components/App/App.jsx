@@ -39,7 +39,8 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
-    // dispatch({ type: "FETCH_ALL_CLIENTS" });
+    dispatch({ type: 'FETCH_ALL_CLIENTS' });
+
   }, [dispatch]);
 
   console.log(user.id)

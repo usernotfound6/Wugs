@@ -199,7 +199,7 @@ function ReviewPage() {
                       Additional info
                     </Typography>
                     <Typography variant="h8" component="div">
-                      a;sldjf;lakjsdf;lajs;lkdfj
+                      {client.dimensions}
                     </Typography>
                   </CardContent>
                 </Card>
