@@ -52,12 +52,11 @@ function ServiceChoicePage() {
       servicesArray.push(3);
     }
     let servicesObj = {
-      client_id: singleClient.client_id, // client.id, <-- needs to be client ID not user ID!!
+      client_id: singleClient.client_id,
       service_id: servicesArray,
     };
     // console.log(servicesArray);
-
-    // dispatch goes here for PUT
+    // dispatch for PUT
     dispatch({ type: "UPDATE_SERVICES", payload: servicesObj });
   };
 

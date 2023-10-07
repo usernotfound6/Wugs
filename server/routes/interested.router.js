@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-    console.log('req.body:', req.body)
+    console.log('req.body:', req.body);
     const queryParams = [
         req.body.name,  //1
         req.body.email,  //2
@@ -21,7 +21,7 @@ router.post('/', (req, res) => {
         req.body.industry,  //4
         req.body.about_you,  //5
         req.body.why_wugs  //6
-    ]
+    ];
 
     const sqlQuery = `
         INSERT INTO interested (name, email, phone_number, industry, about_you, why_wugs)
@@ -29,16 +29,14 @@ router.post('/', (req, res) => {
         ($1, $2, $3, $4, $5, $6);
     `;
     pool.query(sqlQuery, queryParams)
-        .then(response => {
-            console.log("success with POST server-side:", response)
+        .then(result => {
+            console.log("success with POST server-side")
             res.sendStatus(201);
         })
         .catch(error => {
             console.log("error with POST server-side:", error)
             res.sendStatus(500);
         })
-
-
 });
 
 module.exports = router;
