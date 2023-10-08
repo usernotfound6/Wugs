@@ -75,6 +75,18 @@ CREATE TABLE interested (
   why_wugs VARCHAR(300)
 );
 
+-- Remove the existing foreign key constraint named "client_product_client_id_fkey"
+ALTER TABLE client_product
+DROP CONSTRAINT client_product_client_id_fkey;
+
+-- Add a new foreign key constraint to the "client_product" table
+-- The new constraint ensures that the "client_id" in "client_product" references the "id" in "client"
+-- ON DELETE CASCADE specifies that when a record in "client" is deleted, all related records in "client_product" will also be deleted
+ALTER TABLE client_product
+ADD CONSTRAINT client_product_client_id_fkey
+FOREIGN KEY (client_id) REFERENCES client(id)
+ON DELETE CASCADE;
+
 INSERT INTO "user" (first_name, last_name, username, password, admin)
 VALUES
 ('John', 'Doe', 'john.doe@email.com', 'hashed_password_here', false),

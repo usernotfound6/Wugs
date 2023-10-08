@@ -98,12 +98,7 @@ function AdminPage() {
 
   return (
     <div style={{ height: 400, width: "100%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        // Rest of your DataGrid configuration
-        onRowClick={handleRowClick} // Attach the click handler to the rows
-      />
+      <DataGrid rows={rows} columns={columns} onRowClick={handleRowClick} />
       <Modal
         open={open}
         onClose={handleClose}
@@ -139,7 +134,6 @@ function AdminPage() {
                   label="Client Notes"
                   multiline
                   rows={4}
-                  //   defaultValue="Default Value"
                   variant="filled"
                   onChange={inputField}
                 />
@@ -148,9 +142,8 @@ function AdminPage() {
               <Button onClick={deleteClient}>Delete</Button>
             </FormControl>
           </Box>
-          {/* <MultilineTextFields/> */}
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            ID: {selectedRowId} {/* Display the selected row's ID */}
+            ID: {selectedRowId}
           </Typography>
         </Box>
       </Modal>

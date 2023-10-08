@@ -40,8 +40,10 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", rejectUnauthenticated, (req, res) => {
   const clientId = req.params.id;
 
-  const deleteQuery1 = " DELETE FROM client_service WHERE client_id = $1;";
+  const deleteQuery1 = "DELETE FROM client_service WHERE client_id = $1;";
   const deleteQuery2 = "DELETE FROM client WHERE id = $1;";
+  // const deleteQuery3 = 'DELETE FROM "user" WHERE id = $1;';
+  const deleteQuery4 = "DELETE FROM client_product WHERE client_id = $1;"; // New query
 
   // Execute the first DELETE query
   pool
@@ -51,13 +53,23 @@ router.delete("/:id", rejectUnauthenticated, (req, res) => {
       return pool.query(deleteQuery2, [clientId]);
     })
     .then(() => {
-      // Both DELETE operations were successful
-      res.status(200).json({ message: "Recipe and related data deleted" });
+      // Execute the third DELETE query
+    //   return pool.query(deleteQuery3, [clientId]);
+    // })
+    // .then(() => {
+      // Execute the fourth DELETE query
+      return pool.query(deleteQuery4, [clientId]);
+    })
+    .then(() => {
+      // All four DELETE operations were successful
+      res.status(200).json({ message: "Data deleted successfully" });
     })
     .catch((error) => {
       console.log("Error DELETE /api/recipe", error);
       res.sendStatus(500);
     });
 });
+
+
 
 module.exports = router;
