@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import { useSelector } from 'react-redux';
-import { Box, Button, Card, CardContent, Modal, TextField, Typography } from '@mui/material';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import LogOutButton from "../LogOutButton/LogOutButton";
+import { useSelector } from "react-redux";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useHistory} from "react-router-dom";
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -12,8 +20,8 @@ function UserPage() {
   const history = useHistory();
 
   const handleButton = () => {
-    history.push("/clientstatus")
-  }
+    history.push("/clientstatus");
+  };
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -24,12 +32,33 @@ function UserPage() {
   const [phone, setPhone] = useState(client.phone || "");
   const [username, setUsername] = useState(user.username || "");
 
+  // New state variables for photo slider
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  // Array of photo URLs
+  const photos = ["https://thumb.tildacdn.com/tild3334-3861-4632-a237-663363353830/-/format/webp/Follow_Wugs_On.jpg",
+   "https://thumb.tildacdn.com/tild6230-3666-4663-b236-323863323562/-/format/webp/IMG_4905.jpg",
+    "https://thumb.tildacdn.com/tild3636-6236-4366-a165-313136626436/-/format/webp/IMG_5099.jpg",
+  "https://thumb.tildacdn.com/tild6135-6332-4735-b064-643336306437/-/format/webp/IMG_5076.jpg",];
+
+  // Function to handle photo navigation
+  const goToNextPhoto = () => {
+    setPhotoIndex((prevIndex) =>
+      prevIndex === photos.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  // Use useEffect to automatically advance photos after 5 seconds
+  useEffect(() => {
+    const timer = setTimeout(goToNextPhoto, 5000); // 5000 milliseconds (5 seconds)
+  }, [photoIndex]);
+
   const handleSave = () => {
-    console.log("firstName is:", firstName)
-    console.log("lastName is:", lastName)
-    console.log("phone is:", phone)
+    console.log("firstName is:", firstName);
+    console.log("lastName is:", lastName);
+    console.log("phone is:", phone);
     // console.log("username is:", username)
-  }
+  };
 
   return (
     <div className="container">
@@ -37,27 +66,30 @@ function UserPage() {
       <h2>Onboarding Status: {client.status_name}</h2>
       {/* <p>Your ID is: {user.id}</p> */}
       <LogOutButton className="btn" />
+      <div className="container2">
       <Card
         variant="outlined"
         sx={{
           backgroundColor: "#eaeaea",
           boxShadow: 5,
           color: "black",
-          margin: "50px 0"
+          
+          marginTop: 2,
+          width: 350,
+
+          
         }}
       >
         <CardContent>
-          <Typography
-            sx={{ fontSize: 24 }}
-            color="black"
-            gutterBottom
-          >
+          <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
             Your Contact Info:
           </Typography>
           <Typography variant="h8" component="div">
             <ul>
               <li>Username (email): {user.username}</li>
-              <li>Primary Contact: {user.first_name} {user.last_name}</li>
+              <li>
+                Primary Contact: {user.first_name} {user.last_name}
+              </li>
               <li>Phone: {client.phone || "Phone number required"}</li>
             </ul>
           </Typography>
@@ -85,17 +117,19 @@ function UserPage() {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: 400,
-              bgcolor: 'background.paper',
-              border: '2px solid #000',
-              boxShadow: 24,
-              p: 4,
-            }}>
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: 400,
+                bgcolor: "background.paper",
+                border: "2px solid #000",
+                boxShadow: 24,
+                p: 4,
+              }}
+            >
               <Typography id="modal-modal-title" variant="h6" component="h2">
                 Edit your contact info:
               </Typography>
@@ -212,7 +246,8 @@ function UserPage() {
                   }}
                 />
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Please note: your username will be changed to this new email if updated.
+                  Please note: your username will be changed to this new email
+                  if updated.
                 </Typography>
               </Box>
               <Button
@@ -234,27 +269,58 @@ function UserPage() {
           </Modal>
 
           {/* ----------- MODAL END ----------- */}
-
-
         </CardContent>
       </Card>
 
-      <Button
-        onClick={handleButton}
-        sx={{
-          marginTop: 1.5,
-          marginLeft: 2,
-          height: 50,
-          width: 350,
-          borderRadius: 1,
-        }}
-        color="success"
-        variant="contained"
-        autoFocus
-      >
-        Update Services or Preferences
-      </Button>
-
+      <div className="photo-slider">
+        <Card
+          variant="outlined"
+          sx={{
+            backgroundColor: 'transparent',
+          
+        
+            
+            margin: 'auto',
+          }}
+        >
+          <CardContent>
+            {/* Photo slider */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+             
+              <img
+                src={photos[photoIndex]}
+                alt={`Photo ${photoIndex + 1}`}
+                style={{ maxWidth: '600px', maxHeight: '600px', minWidth: '600px', minHeight: '600px', borderRadius: 18  }}
+              />
+          
+            </div>
+          </CardContent>
+        </Card>
+        </div>
+      </div>
+      <div className="button-container">
+        <Button
+          onClick={handleButton}
+          sx={{
+            marginTop: 1.5,
+            marginLeft: 2,
+            height: 50,
+            width: 350,
+            borderRadius: 1,
+          }}
+          color="success"
+          variant="contained"
+          autoFocus
+        >
+          Update Services or Preferences
+        </Button>
+      </div>
     </div>
   );
 }
