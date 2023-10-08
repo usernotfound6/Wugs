@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 // Path: /foodpreferences
 
-const ImageButton = styled(ButtonBase)(({ theme }) => ({
+const ImageButton = styled(ButtonBase)(({ theme, isClicked }) => ({
   position: 'relative',
   height: 200,
   [theme.breakpoints.down('sm')]: {
@@ -27,6 +27,18 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
       border: '4px solid currentColor',
     },
   },
+  // Apply hover styles to the clicked button
+  ...(isClicked && {
+    '& .MuiImageBackdrop-root': {
+      opacity: 0.15,
+    },
+    '& .MuiImageMarked-root': {
+      opacity: 0,
+    },
+    '& .MuiTypography-root': {
+      border: '4px solid currentColor',
+    },
+  }),
 }));
 
 const ImageSrc = styled('span')({
@@ -73,6 +85,11 @@ const ImageMarked = styled('span')(({ theme }) => ({
 }));
 
 function FoodPreferencesPage() {
+
+  const [clickedButtons, setClickedButtons] = useState([]);
+
+  console.log("ClickedButtons", clickedButtons)
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -81,23 +98,40 @@ function FoodPreferencesPage() {
 
   const products = useSelector((store) => store.products.data);
 
-  const handleClick = () => {
-    console.log("InOnClick, products=", products);
-  }
+  const handleClick = (productId) => {
+    // Toggle the clicked state for the clicked button
+    const updatedClickedButtons = clickedButtons.includes(productId)
+      ? clickedButtons.filter((id) => id !== productId)
+      : [...clickedButtons, productId];
 
+    setClickedButtons(updatedClickedButtons);
+  };
+
+  const handleSave = () => {
+    // Send the clickedButtons data in a payload
+    const payload = {
+      clickedButtons,
+    };
+
+    console.log('Clicked Buttons:', clickedButtons);
+    // Dispatch an action with the payload to save the data
+    dispatch({ type: 'SAVE_CLICKED_BUTTONS', payload });
+  };
   return (
     <div>
       <MyStepper step={3} />
       <h2>Food Preferences</h2>
-      <Box onClick={handleClick} sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
         {products && products.length > 0 ? (
           products.map((product) => (
             <ImageButton
               focusRipple
-              key={product.type}
+              key={product.id}
+              onClick={() => handleClick(product.id)}
               style={{
                 width: '20em',
               }}
+              isClicked={clickedButtons.includes(product.id)}
             >
               <ImageSrc style={{ backgroundImage: `url(${product.url})` }} />
               <ImageBackdrop className="MuiImageBackdrop-root" />
@@ -123,6 +157,7 @@ function FoodPreferencesPage() {
           <p>No products available.</p>
         )}
       </Box>
+      <button onClick={handleSave}>Save Clicked Buttons</button>
     </div>
   );
 }
