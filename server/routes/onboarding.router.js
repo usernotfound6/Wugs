@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require("../modules/pool");
+const { rejectUnauthenticated } = require("../modules/authentication-middleware");
 const router = express.Router();
 
 /**
@@ -54,8 +55,6 @@ router.get("/client/:id", (req, res) => {
       res.sendStatus(500);
     })
 })
-
-
 
 // Service Choice router ------------------------------------------------------------------------------------------------------------------
 
@@ -227,6 +226,59 @@ router.put("/additionalinfo/:id", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
+});
+
+
+/**
+ * PUT - transaction type PUT for 2 queries!
+ */
+
+router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
+  const clientId = Number(req.params.id);
+  console.log("clientId:", clientId);
+  console.log("req.body:", req.body)
+
+  const clientQueryParams = [
+    req.body.phone, //1
+    clientId //2
+  ];
+  const userQueryParams = [
+    req.body.first_name, //1
+    req.body.last_name, //2
+    req.body.username, //3
+    req.body.user_id //4
+  ];
+
+  const connection = await pool.connect();
+  try {
+    await connection.query('BEGIN');
+    const clientSqlText = `
+    UPDATE client
+    SET 
+      phone = $1
+    WHERE id = $2;
+  `;
+    const userSqlText = `
+    UPDATE "user"
+    SET 
+      first_name = $1,
+      last_name = $2,
+      username = $3
+    WHERE id = $4;
+  `;
+    // first run query to update client
+    await connection.query(clientSqlText, clientQueryParams);
+    // then run query to update user table
+    await connection.query(userSqlText, userQueryParams)
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  } catch (error) {
+    await connection.query('ROLLBACK');
+    console.log('Transaction Error - Rolling back transfer', error);
+    res.sendStatus(500);
+  } finally {
+    connection.release();
+  }
 });
 
 module.exports = router;

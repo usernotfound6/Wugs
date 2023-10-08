@@ -57,9 +57,25 @@ function* updateAdditionalInfo(action) {
         console.log("Additonal Info object:", servicesObj)
         const response = yield axios.put(`/api/onboarding/additionalinfo/${servicesObj.client_id}`, servicesObj)
         console.log(response.data)
+        yield put({ type: "FETCH_USER" });
     }
     catch (error) {
         console.log("error with Additional info PUT on client side", error)
+    }
+}
+
+function* updateContactInfoInStatus(action) {
+    try {
+        const contactInfoObj = action.payload;
+        const client_id = contactInfoObj.client_id;
+        console.log("client_id:", contactInfoObj.client_id);
+        console.log("contactInfoObj:", contactInfoObj)
+        const response = yield axios.put(`/api/onboarding/changecontact/${client_id}`, contactInfoObj);
+        console.log(response.data);
+        yield put({ type: "FETCH_USER" });
+    }
+    catch (error) {
+        console.log("error with PUT on client side", error);
     }
 }
 
@@ -68,6 +84,7 @@ function* onboardingSaga() {
     yield takeLatest('UPDATE_CLIENT_LOCATION', updateClientLocationInfo)
     yield takeLatest('UPDATE_DEMOGRAPHICS', updateDemographics)
     yield takeLatest('UPDATE_ADDINFO', updateAdditionalInfo)
+    yield takeLatest('UPDATE_CONTACT_INFO', updateContactInfoInStatus)
 }
 
 export default onboardingSaga;
