@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 // Path: /foodpreferences
 
-const ImageButton = styled(ButtonBase)(({ theme, isClicked }) => ({
+const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
   position: 'relative',
   height: 200,
   [theme.breakpoints.down('sm')]: {
@@ -28,7 +28,7 @@ const ImageButton = styled(ButtonBase)(({ theme, isClicked }) => ({
     },
   },
   // Apply hover styles to the clicked button
-  ...(isClicked && {
+  ...(isclicked && {
     '& .MuiImageBackdrop-root': {
       opacity: 0.15,
     },
@@ -88,7 +88,7 @@ function FoodPreferencesPage() {
 
   const [clickedButtons, setClickedButtons] = useState([]);
 
-  console.log("ClickedButtons", clickedButtons)
+  // console.log("ClickedButtons", clickedButtons)
 
   const dispatch = useDispatch();
 
@@ -97,6 +97,9 @@ function FoodPreferencesPage() {
   }, [dispatch]);
 
   const products = useSelector((store) => store.products.data);
+  const client = useSelector((store) => store.client)
+
+  console.log("client id=", client.client_id)
 
   const handleClick = (productId) => {
     // Toggle the clicked state for the clicked button
@@ -110,13 +113,15 @@ function FoodPreferencesPage() {
   const handleSave = () => {
     // Send the clickedButtons data in a payload
     const payload = {
-      clickedButtons,
+      clickedButtons: clickedButtons,
+      client_id: client.client_id
     };
 
     console.log('Clicked Buttons:', clickedButtons);
     // Dispatch an action with the payload to save the data
-    dispatch({ type: 'SAVE_CLICKED_BUTTONS', payload });
+    dispatch({ type: 'UPDATE_FOOD_PREFERENCES', payload });
   };
+
   return (
     <div>
       <MyStepper step={3} />
@@ -131,7 +136,7 @@ function FoodPreferencesPage() {
               style={{
                 width: '20em',
               }}
-              isClicked={clickedButtons.includes(product.id)}
+              isclicked={clickedButtons.includes(product.id)}
             >
               <ImageSrc style={{ backgroundImage: `url(${product.url})` }} />
               <ImageBackdrop className="MuiImageBackdrop-root" />
