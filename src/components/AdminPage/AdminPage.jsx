@@ -68,7 +68,6 @@ function AdminPage() {
   const [status, setStatus] = React.useState("");
   const [input, setInput] = React.useState("");
 
-
   const dropdown = (event) => {
     setStatus(event.target.value);
   };
@@ -83,6 +82,15 @@ function AdminPage() {
       payload: {
         admin_notes: input,
         status_id: status,
+        id: selectedRowId,
+      },
+    });
+  }
+
+  function deleteClient() {
+    dispatch({
+      type: "DELETE_CLIENT",
+      payload: {
         id: selectedRowId,
       },
     });
@@ -137,6 +145,7 @@ function AdminPage() {
                 />
               </div>
               <Button onClick={editClient}>Submit</Button>
+              <Button onClick={deleteClient}>Delete</Button>
             </FormControl>
           </Box>
           {/* <MultilineTextFields/> */}
