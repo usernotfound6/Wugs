@@ -46,9 +46,19 @@ const Columns = () => {
           ),
         },
         {
-          field: "manager_id",
+          field: "first_name",
           headerName: (
-            <div style={{ color: "#ffebb4" }}>Manager ID</div>
+            <div style={{ color: "#ffebb4" }}>First Name</div>
+          ),
+          width: 130,
+          renderCell: (params) => (
+            <div style={{ color: "#ffebb4" }}>{params.value}</div>
+          ),
+        },
+        {
+          field: "last_name",
+          headerName: (
+            <div style={{ color: "#ffebb4" }}>Last Name</div>
           ),
           width: 130,
           renderCell: (params) => (

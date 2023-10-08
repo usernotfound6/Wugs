@@ -22,11 +22,12 @@ function AdminPage() {
 
   // This const is mapping over the admin reducer and setting the info found there as the tables row data
   const rows = admin?.map((client) => ({
-    id: client.id,
+    id: client.client_id,
     business_name: client.business_name,
     address: client.address,
     website: client.website,
-    manager_id: client.manager_id,
+    first_name: client.first_name,
+    last_name: client.last_name,
     phone: client.phone,
     hours_of_operation: client.hours_of_operation,
     micromarket_location: client.micromarket_location,
@@ -40,7 +41,7 @@ function AdminPage() {
     wugs_visit: client.wugs_visit,
     contract: client.contract,
     admin_notes: client.admin_notes,
-    status_id: client.status_id,
+    status_id: client.status_name,
   }));
 
   const style = {
