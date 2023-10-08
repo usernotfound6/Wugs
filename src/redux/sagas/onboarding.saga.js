@@ -1,49 +1,47 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-//PETER: Deleted what I originally put here, but leaving this for now because we might need a client saga later anyways ?!?
-
-
 function* updateServices(action) {
     // new client info here - sending PUT, no reducer needed
-
     try {
         const servicesObj = action.payload;
-        console.log("client_id:", servicesObj.client_id)
-        console.log("service_id array:", servicesObj.service_id)
-        const response = yield axios.put('/api/onboarding/servicechoice', servicesObj)
-        console.log(response.data)
-        yield put({type: "FETCH_USER"});
+        const client_id = servicesObj.client_id;
+        console.log("client_id:", servicesObj.client_id);
+        console.log("service_id array:", servicesObj.service_id);
+        const response = yield axios.put(`/api/onboarding/servicechoice/${client_id}`, servicesObj);
+        console.log(response.data);
+        yield put({ type: "FETCH_USER" });
     }
     catch (error) {
-        console.log("error with PUT on client side", error)
+        console.log("error with PUT on client side", error);
     }
 }
 
+function* updateClientLocationInfo(action) {
 
-//     try {
-//         const locationObj = action.payload;
-//         console.log("client_id:", locationObj.client_id)
-//         console.log("location object:", locationObj)
-//         const response = yield axios.put(`/api/onboarding/clientlocationinfo/${locationObj.client_id}`, locationObj)
-//         console.log(response.data)
-//         yield put({type: "FETCH_USER"});
-//     }
-//     catch (error) {
-//         console.log("error with Client Location PUT on client side", error)
-//     }
-// }
-
+    try {
+        const locationObj = action.payload;
+        const client_id = locationObj.client_id;
+        console.log("client location object:", locationObj);
+        console.log("client_id", client_id);
+        const response = yield axios.put(`/api/onboarding/clientlocationinfo/${client_id}`, locationObj)
+        console.log(response.data)
+        yield put({ type: "FETCH_USER" })
+    }
+    catch (error) {
+        console.log("error with updateClientLocation PUT on client side", error)
+    }
+}
 
 function* updateDemographics(action) {
 
     try {
-        const servicesObj = action.payload;
-        console.log("client_id:", servicesObj.client_id)
-        console.log("demographic object:", servicesObj)
-        const response = yield axios.put(`/api/onboarding/demographic/${servicesObj.client_id}`, servicesObj)
+        const demographicsObj = action.payload;
+        console.log("client_id:", demographicsObj.client_id)
+        console.log("demographics object:", demographicsObj)
+        const response = yield axios.put(`/api/onboarding/demographics/${demographicsObj.client_id}`, demographicsObj)
         console.log(response.data)
-        yield put({type: "FETCH_USER"});
+        yield put({ type: "FETCH_USER" });
 
     }
     catch (error) {
@@ -65,26 +63,11 @@ function* updateAdditionalInfo(action) {
     }
 }
 
-function* updateClientLocation(action) {
-
-    try {
-        const servicesObj = action.payload;
-        const id = servicesObj.clientLocationInfoObject.client_id
-        console.log("ClientLocation object:", servicesObj)
-        console.log("ID", id)
-        const response = yield axios.put(`/api/onboarding/clientlocationinfo/${id}`, servicesObj)
-        console.log(response.data)
-    }
-    catch (error) {
-        console.log("error with updateClientLocation PUT on client side", error)
-    }
-}
-
 function* onboardingSaga() {
     yield takeLatest('UPDATE_SERVICES', updateServices)
+    yield takeLatest('UPDATE_CLIENT_LOCATION', updateClientLocationInfo)
     yield takeLatest('UPDATE_DEMOGRAPHICS', updateDemographics)
     yield takeLatest('UPDATE_ADDINFO', updateAdditionalInfo)
-    yield takeLatest('UPDATE_CLIENT_LOCATION', updateClientLocation)
 }
 
 export default onboardingSaga;
