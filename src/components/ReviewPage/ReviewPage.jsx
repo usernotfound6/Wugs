@@ -70,19 +70,19 @@ function ReviewPage() {
         <Container
           maxWidth="lg"
           sx={{
-            width: "100%", // Custom width
-            height: "70vh", // Custom height
+            width: "100%",
+            height: "70vh",
           }}
         >
           <header
             className="App-header"
             style={{
-              textAlign: "center", // Center text horizontally
-              margin: "50px 0", // Add top and bottom margins
+              textAlign: "center",
+              margin: "50px 0",
               padding: "30px",
             }}
           >
-            Review and Schedule apppointment
+            <h1>Review and Schedule apppointment</h1>
           </header>
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={12}>
@@ -172,8 +172,6 @@ function ReviewPage() {
                         <li>
                           {client.first_name}, {client.last_name}
                         </li>
-                        {/* <li>{client}</li> */}
-                        {/* <li>{client}</li> */}
                       </ul>
                     </Typography>
                   </CardContent>
