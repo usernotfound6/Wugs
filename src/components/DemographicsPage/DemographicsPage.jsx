@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import MyStepper from '../MyStepper/MyStepper'
-import Typography from '@mui/material/Typography';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 import HelpIcon from '@mui/icons-material/Help';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import Button from '@mui/material/Button'
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography
+} from '@mui/material';
 
 function DemographicsPage() {
 
@@ -52,17 +53,20 @@ function DemographicsPage() {
 
   const postDemographics = () => {
     console.log("Clicked on Demographics Next")
-    let demographicsObject = {
-      client_id: client.client_id,
-      number_of_people: peopleCount,
-      age_group: ageGroup,
-      demographics: demographic,
-      industry: industry,
-      neighborhood_info: neighborhood
-    };
-    dispatch({ type: 'UPDATE_DEMOGRAPHICS', payload: demographicsObject })
-    history.push("/foodpreferences");
-  }
+    dispatch({
+        type: 'UPDATE_DEMOGRAPHICS', payload: {
+          client_id: client.client_id,
+          number_of_people: peopleCount,
+          age_group: ageGroup,
+          demographics: demographic,
+          industry: industry   , 
+          neighborhood_info: neighborhood
+        }
+    }
+    )
+    history.push('/foodpreferences')
+    
+}
 
   return (
     <div>
