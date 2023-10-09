@@ -12,6 +12,7 @@ const userRouter = require('./routes/user.router');
 const onboardingRouter = require('./routes/onboarding.router');
 const interestedRouter = require('./routes/interested.router');
 const adminRouter = require('./routes/admin.router');
+const productsRouter = require('./routes/products.router')
 
 
 // Body parser middleware
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/api/onboarding', onboardingRouter);
 app.use('/api/interested', interestedRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/products', productsRouter);
 
 // Serve static files
 app.use(express.static('build'));

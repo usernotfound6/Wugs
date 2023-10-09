@@ -164,23 +164,23 @@ router.put("/demographics/:id", (req, res) => {
 });
 
 // Product Choice router ------------------------------------------------------------------------------------------------------------------
-router.put("/foodpreferences", (req, res) => {
-  const clientId = Number(req.params.id);
-  console.log("clientId:", clientId);
-  const product_id = req.body.product_id;
 
-  const deleteQuery = `DELETE FROM client_product WHERE client_id = $1`;
-  const deleteValues = clientId;
+router.post("/foodpreferences", (req, res) => {
+  const client_id = req.body.client_id;
+  const product_ids = req.body.clickedButtons;
 
+  const deleteQuery = `DELETE FROM client_product WHERE client_id = \$1 AND product_id NOT IN (${product_ids.join()})`;
+  const deleteValues = [client_id];
   pool
     .query(deleteQuery, deleteValues)
     .then(() => {
-      // Use a loop to insert multiple rows unnest($2::int[]) is used to "unnest" or expand the array of service IDs
       const insertQuery = `
         INSERT INTO client_product (client_id, product_id)
-        SELECT $1, unnest($2::int[])
+        SELECT \$1, unnest(\$2::int[])
+        ON CONFLICT (client_id, product_id) DO NOTHING
       `;
-      const insertValues = [clientId, product_id];
+
+      const insertValues = [client_id, product_ids];
 
       return pool.query(insertQuery, insertValues);
     })
@@ -193,6 +193,7 @@ router.put("/foodpreferences", (req, res) => {
       res.sendStatus(500);
     });
 });
+
 
 
 
