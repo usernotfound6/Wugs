@@ -21,7 +21,7 @@ export default function* rootSaga() {
     userSaga(),
     clientSaga(),
     onboardingSaga(),
-    productsSaga()
+    productsSaga(),
     interestedSaga()
   ]);
 }
