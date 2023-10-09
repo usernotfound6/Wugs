@@ -133,7 +133,7 @@ function AdminPage() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" component="h2" color={"black"}>
             Details
             <ul>
               <li>Business: {selectedRowData.business_name}</li>
@@ -181,7 +181,7 @@ function AdminPage() {
       </Modal>
       {/* ..................USER Table................... */}
 
-      <h1>User Table</h1>
+      <h1>Interested Table</h1>
 
       <DataGrid
         rows={interestedRows}
