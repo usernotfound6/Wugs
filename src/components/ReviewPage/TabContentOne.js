@@ -42,6 +42,7 @@ const TabContentOne = () => {
       >
         <Card
           variant="outlined"
+          onClick={() => handlePrevious("/servicechoice")}
           sx={{
             width: "500px", // Set the desired width
             height: "400px", // Set the desired height
@@ -51,7 +52,7 @@ const TabContentOne = () => {
             margin: "50px", // Adjust the margin as needed
           }}
         >
-          <CardContent onClick={() => handlePrevious("/servicechoice")}>
+          <CardContent >
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
               Products I'm interested in..
             </Typography>
