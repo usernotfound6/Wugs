@@ -18,10 +18,17 @@ function ServiceChoicePage() {
 
   const user = useSelector((store) => store.user);
   const singleClient = useSelector((store) => store.client);
+  //Do we still need this? 👆
+  const client = useSelector((store) => store.client)
 
-  const [micromarketChecked, setMicromarketChecked] = useState(false);
-  const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
-  const [snackboxesChecked, setSnackboxesChecked] = useState(false);
+  let defaultMicroMarketCheckedState = client.service_names.includes("Micro Markets")
+  let defaultSmartCoolerChecked = client.service_names.includes("Smart Coolers")
+  let defaultSnackBoxesChecked = client.service_names.includes("Snack Boxes")
+
+
+  const [micromarketChecked, setMicromarketChecked] = useState(defaultMicroMarketCheckedState);
+  const [smartcoolersChecked, setSmartcoolersChecked] = useState(defaultSmartCoolerChecked);
+  const [snackboxesChecked, setSnackboxesChecked] = useState(defaultSnackBoxesChecked);
 
   const handleMicromarketChange = () => {
     setMicromarketChecked(!micromarketChecked);
