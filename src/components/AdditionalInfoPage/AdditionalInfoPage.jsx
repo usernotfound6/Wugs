@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MyStepper from '../MyStepper/MyStepper'
 import {
@@ -19,6 +20,7 @@ function AdditionalInfoPage() {
   const client = useSelector((store) => store.client)
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleSubmit = () => {
     dispatch({
@@ -29,6 +31,7 @@ function AdditionalInfoPage() {
         pictures: ["PICTURES HERE"]
       }
     })
+    history.push('/review')
   }
 
 

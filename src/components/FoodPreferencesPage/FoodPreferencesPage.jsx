@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import MyStepper from '../MyStepper/MyStepper';
 import { styled } from '@mui/material/styles';
+import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import ButtonBase from '@mui/material/ButtonBase';
+import {ButtonBase, Button} from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 // Path: /foodpreferences
@@ -91,6 +92,7 @@ function FoodPreferencesPage() {
   // console.log("ClickedButtons", clickedButtons)
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PRODUCTS' });
@@ -98,8 +100,6 @@ function FoodPreferencesPage() {
 
   const products = useSelector((store) => store.products.data);
   const client = useSelector((store) => store.client)
-
-  console.log("client id=", client.client_id)
 
   const handleClick = (productId) => {
     // Toggle the clicked state for the clicked button
@@ -120,12 +120,15 @@ function FoodPreferencesPage() {
     console.log('Clicked Buttons:', clickedButtons);
     // Dispatch an action with the payload to save the data
     dispatch({ type: 'UPDATE_FOOD_PREFERENCES', payload });
+    history.push('/additionalinfo')
+
   };
 
   return (
     <div>
       <MyStepper step={3} />
-      <h2>Food Preferences</h2>
+      <Typography variant="h4">SNACK OPTIONS</Typography>
+      <Typography variant="subtitle1">Select any you'd like to learn more about!</Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
         {products && products.length > 0 ? (
           products.map((product) => (
@@ -162,7 +165,7 @@ function FoodPreferencesPage() {
           <p>No products available.</p>
         )}
       </Box>
-      <button onClick={handleSave}>Save Clicked Buttons</button>
+      <Button variant="contained" onClick={handleSave}>NEXT</Button>
     </div>
   );
 }

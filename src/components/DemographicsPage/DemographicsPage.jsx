@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import MyStepper from '../MyStepper/MyStepper'
 import Typography from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
@@ -12,7 +13,6 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button'
 
 function DemographicsPage() {
@@ -30,6 +30,7 @@ function DemographicsPage() {
   console.log("Client", client.client_id)
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
@@ -61,6 +62,7 @@ function DemographicsPage() {
         }
     }
     )
+    history.push('/foodpreferences')
     
 }
 
