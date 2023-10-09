@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import TabContentOne from "./TabContentOne";
 import TabContentTwo from "./TabContentTwo";
+import TabContentThree from "./TabContentThree";
+import TabContentFour from "./TabContentFour";
+import TabContentFive from "./TabContentFive";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -85,10 +88,10 @@ function ReviewPage() {
             aria-label="scrollable auto tabs example"
           >
             <Tab label="Products I'm interested in.." />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
-            <Tab label="Item Four" />
-            <Tab label="Item Five" />
+            <Tab label="Foods we're interested in.." />
+            <Tab label="Who we are..." />
+            <Tab label="Additional info" />
+            <Tab label="Who we're serving.." />
           </Tabs>
         </div>
         <Container
@@ -100,7 +103,9 @@ function ReviewPage() {
         >
           {value === 0 && <TabContentOne />}
           {value === 1 && <TabContentTwo />}
-          {/* {value === 2 && <TabContentThree />} */}
+          {value === 2 && <TabContentThree />}
+          {value === 3 && <TabContentFour />}
+          {value === 4 && <TabContentFive />}
           <PopupWidget
             url="https://calendly.com/dontyellwillcry"
             rootElement={rootElement}
