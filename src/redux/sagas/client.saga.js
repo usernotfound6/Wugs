@@ -28,11 +28,35 @@ function* getAllClients(action) {
   }
 }
 
+function* updateClient(action) {
+  try {
+    const clientEdit = action.payload; 
+    yield axios.put(`/api/admin/${clientEdit.id}`, clientEdit);
+    yield put({ type: "FETCH_ALL_CLIENTS" });
+  } catch (error) {
+    console.log("error sending put", error);
+  }
+}
+
+function* deleteClient(action) {
+  try {
+    const clientDelete = action.payload; 
+    yield axios.delete(`/api/admin/${clientDelete.id}`, clientDelete);
+    yield put({ type: "FETCH_ALL_CLIENTS" });
+  } catch (error) {
+    console.log("error sending put", error);
+  }
+}
+
 
 
 function* clientSaga() {
   yield takeLatest('FETCH_CLIENT', getClient)
   yield takeLatest('FETCH_ALL_CLIENTS', getAllClients)
+  yield takeLatest('UPDATE_CLIENT', updateClient)
+  yield takeLatest('DELETE_CLIENT', deleteClient)
+
+
 }
 
 export default clientSaga;

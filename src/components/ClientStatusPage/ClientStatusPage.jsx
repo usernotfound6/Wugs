@@ -101,7 +101,13 @@ function ClientStatusPage() {
                       Phone: {client.phone}
                     </Typography>
                     <Typography variant="h8" component="div">
-                      Location: {client.business_name}
+                      Business: {client.business_name}
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      Location: {client.address}
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      Website: {client.website}
                     </Typography>
                     <Box textAlign={"right"}>
                       <Button

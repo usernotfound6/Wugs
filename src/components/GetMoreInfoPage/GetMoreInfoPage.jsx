@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import {
@@ -27,6 +27,7 @@ function GetMoreInfoPage() {
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
   function getFormattedPhoneNum(input) {
@@ -84,16 +85,10 @@ function GetMoreInfoPage() {
       about_you: aboutClient,
       why_wugs: whyWugs,
     };
-    console.log(getMoreInfoObject);
+    console.log("getMoreInfoObject before dispatch:", getMoreInfoObject);
 
-    axios
-      .post("/api/interested", getMoreInfoObject)
-      .then((response) => {
-        console.log("success with interested party POST:", response);
-      })
-      .catch((error) => {
-        console.error("error with interested party POST:", error);
-      });
+    dispatch({ type: 'NEW_INTERESTED', payload: getMoreInfoObject })
+
     setName("");
     setEmail("");
     setPhone("");

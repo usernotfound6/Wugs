@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import MyStepper from '../MyStepper/MyStepper'
 import HelpIcon from '@mui/icons-material/Help';
 import {
@@ -68,7 +68,6 @@ function DemographicsPage() {
     
 }
 
-
   return (
     <div>
       <MyStepper step={2} />
@@ -113,19 +112,19 @@ function DemographicsPage() {
             <strong># OF PEOPLE ON SITE:</strong>
             <br />
             Your best estimation at the number of people on site.
-            <br/>
+            <br />
             <strong>DEMOGRAPHIC:</strong>
             <br />
             We'd love to hear about what the culture and diversity of your location, this helps us to best serve you and provide recomendations for a diverse selection of snacking options.
-            <br/>
+            <br />
             <strong>AGE GROUP:</strong>
             <br />
             Your general age groups to help us provide product reccomendations.
-            <br/>
+            <br />
             <strong>INDUSTRY:</strong>
             <br />
             Decribe the primary operations and business of your location.
-            <br/>
+            <br />
           </DialogContentText>
         </DialogContent>
         <DialogActions>

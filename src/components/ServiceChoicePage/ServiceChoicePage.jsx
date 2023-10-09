@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import MyStepper from '../MyStepper/MyStepper'
-import { useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from "react";
+import MyStepper from "../MyStepper/MyStepper";
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Typography,
+  Button,
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+} from "@mui/material";
+import "./ServiceChoicePage.css";
 
 function ServiceChoicePage() {
-
   const history = useHistory();
   const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
   const singleClient = useSelector((store) => store.client);
-
 
   const [micromarketChecked, setMicromarketChecked] = useState(false);
   const [smartcoolersChecked, setSmartcoolersChecked] = useState(false);
@@ -35,8 +42,8 @@ function ServiceChoicePage() {
     if (micromarketChecked) {
       servicesArray.push(1);
     }
-    
-    history.push('/clientlocationinfo')
+
+    history.push("/clientlocationinfo");
 
     if (smartcoolersChecked) {
       servicesArray.push(2);
@@ -45,56 +52,107 @@ function ServiceChoicePage() {
       servicesArray.push(3);
     }
     let servicesObj = {
-      client_id: singleClient.client_id,// client.id, <-- needs to be client ID not user ID!!
+      client_id: singleClient.client_id,
       service_id: servicesArray,
-    }
+    };
     // console.log(servicesArray);
-
-    // dispatch goes here for PUT
-    dispatch({ type: 'UPDATE_SERVICES', payload: servicesObj })
-  }
-
-  
+    // dispatch for PUT
+    dispatch({ type: "UPDATE_SERVICES", payload: servicesObj });
+  };
 
   return (
     <div>
       <MyStepper step={0} />
       <h2>Products I'm interested in...</h2>
 
-      <form>
-        <input
-          type="checkbox"
-          id="micromarket"
-          name="micromarket"
-          value="Micromarket"
-          checked={micromarketChecked}
-          onChange={handleMicromarketChange}
-        />
-        <label htmlFor="micromarket">Micro Markets</label><br />
+      <form className="checkbox-container">
+        <div>
+          <input
+            type="checkbox"
+            id="micromarket"
+            name="micromarket"
+            value="Micromarket"
+            checked={micromarketChecked}
+            onChange={handleMicromarketChange}
+          />
+          <label htmlFor="micromarket">Micro Markets</label>
+          <br />
 
-        <input
-          type="checkbox"
-          id="smartcoolers"
-          name="smartcoolers"
-          value="SmartCoolers"
-          checked={smartcoolersChecked}
-          onChange={handleSmartcoolersChange}
-        />
-        <label htmlFor="smartcoolers">Smart Coolers</label><br />
+          <Card>
+            <CardMedia
+              component="img"
+              alt="Micro Market"
+              height="200"
+              image="https://www.bernicks.com/hubfs/social-suggested-images/micro_market.png"
+            />
+            <CardContent>
+              <Typography variant="h6">Micro Market</Typography>
+              <Typography variant="body2">
+                Description: Your description here.
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
 
-        <input
-          type="checkbox"
-          id="snackboxes"
-          name="snackboxes"
-          value="SnackBoxes"
-          checked={snackboxesChecked}
-          onChange={handleSnackboxesChange}
-        />
-        <label htmlFor="snackboxes">Snack Boxes</label><br />
+        <div>
+          <input
+            type="checkbox"
+            id="smartcoolers"
+            name="smartcoolers"
+            value="SmartCoolers"
+            checked={smartcoolersChecked}
+            onChange={handleSmartcoolersChange}
+          />
+          <label htmlFor="smartcoolers">Smart Coolers</label>
+          <br />
 
-        <button type="submit" value="Submit" onClick={handleSubmit}>NEXT</button>
+          <Card>
+            <CardMedia
+              component="img"
+              alt="Smart Coolers"
+              height="200"
+              image="https://cdn-dppck.nitrocdn.com/mebfXXXDMymVFbKVdxsHUesbzFkXXUGk/assets/images/optimized/rev-434f8f1/connectvending.co.uk/wp-content/uploads/2023/04/PicoCooler-ProductScan-WebRes-sml.jpg"
+            />
+            <CardContent>
+              <Typography variant="h6">Smart Coolers</Typography>
+              <Typography variant="body2">
+                Description: Your description here.
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            id="snackboxes"
+            name="snackboxes"
+            value="SnackBoxes"
+            checked={snackboxesChecked}
+            onChange={handleSnackboxesChange}
+          />
+          <label htmlFor="snackboxes">Snack Boxes</label>
+          <br />
+          <Card>
+            <CardMedia
+              component="img"
+              alt="Snack Boxes"
+              height="200"
+              image="https://i.etsystatic.com/33431484/r/il/046fbf/5169950532/il_1588xN.5169950532_8ddb.jpg"
+            />
+            <CardContent>
+              <Typography variant="h6">Snack Boxes</Typography>
+              <Typography variant="body2">
+                Description: Your description here.
+              </Typography>
+            </CardContent>
+          </Card>
+        </div>
       </form>
 
+      <button type="submit" value="Submit" onClick={handleSubmit}>
+        NEXT
+      </button>
     </div>
   );
 }
