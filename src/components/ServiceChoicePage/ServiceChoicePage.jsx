@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MyStepper from "../MyStepper/MyStepper";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,17 +18,16 @@ function ServiceChoicePage() {
 
   const user = useSelector((store) => store.user);
   const singleClient = useSelector((store) => store.client);
-  //Do we still need this? 👆
   const client = useSelector((store) => store.client)
 
-  let defaultMicroMarketCheckedState = client.service_names.includes("Micro Markets")
-  let defaultSmartCoolerChecked = client.service_names.includes("Smart Coolers")
-  let defaultSnackBoxesChecked = client.service_names.includes("Snack Boxes")
 
+  let defaultMicroMarketCheckedState = client?.service_names?.includes("Micro Markets")
+  let defaultSmartCoolerChecked = client?.service_names?.includes("Smart Coolers")
+  let defaultSnackBoxesChecked = client?.service_names?.includes("Snack Boxes")
 
-  const [micromarketChecked, setMicromarketChecked] = useState(defaultMicroMarketCheckedState);
-  const [smartcoolersChecked, setSmartcoolersChecked] = useState(defaultSmartCoolerChecked);
-  const [snackboxesChecked, setSnackboxesChecked] = useState(defaultSnackBoxesChecked);
+  const [micromarketChecked, setMicromarketChecked] = useState(defaultMicroMarketCheckedState || false);
+  const [smartcoolersChecked, setSmartcoolersChecked] = useState(defaultSmartCoolerChecked || false);
+  const [snackboxesChecked, setSnackboxesChecked] = useState(defaultSnackBoxesChecked || false);
 
   const handleMicromarketChange = () => {
     setMicromarketChecked(!micromarketChecked);
