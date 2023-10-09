@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import TabContentOne from "./TabContentOne";
+import TabContentTwo from "./TabContentTwo";
+import TabContentThree from "./TabContentThree";
+import TabContentFour from "./TabContentFour";
+import TabContentFive from "./TabContentFive";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { useSelector, useDispatch } from "react-redux";
-import { InlineWidget, PopupWidget, PopupButton } from "react-calendly";
+import { PopupWidget } from "react-calendly";
 
 // Path: /review
 const theme = createTheme({
@@ -54,6 +59,12 @@ function ReviewPage() {
     }
   }
 
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -67,7 +78,48 @@ function ReviewPage() {
         `}
         </style>
         <CssBaseline />
+        <h1>Review and Schedule apppointment</h1>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
+          >
+            <Tab label="Products I'm interested in.." />
+            <Tab label="Foods we're interested in.." />
+            <Tab label="Who we are..." />
+            <Tab label="Additional info" />
+            <Tab label="Who we're serving.." />
+          </Tabs>
+        </div>
         <Container
+          maxWidth="lg"
+          sx={{
+            width: "100%",
+            height: "70vh",
+          }}
+        >
+          {value === 0 && <TabContentOne />}
+          {value === 1 && <TabContentTwo />}
+          {value === 2 && <TabContentThree />}
+          {value === 3 && <TabContentFour />}
+          {value === 4 && <TabContentFive />}
+          <PopupWidget
+            url="https://calendly.com/dontyellwillcry"
+            rootElement={rootElement}
+            text="Click here to schedule!"
+            textColor="#ffffff"
+            color="#00a2ff"
+            style={{
+              position: "flex",
+              top: "50px",
+              left: "20px",
+            }}
+          />
+        </Container>
+        {/* <Container
           maxWidth="lg"
           sx={{
             width: "100%",
@@ -113,6 +165,7 @@ function ReviewPage() {
                     </Typography>
                   </CardContent>
                 </Card>
+                
               </Grid>
               <Grid item xs={6} md={4}>
                 <Card
@@ -243,7 +296,7 @@ function ReviewPage() {
               }}
             />
           </Box>
-        </Container>
+        </Container> */}
       </div>
     </ThemeProvider>
   );

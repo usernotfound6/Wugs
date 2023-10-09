@@ -25,6 +25,7 @@ function* fetchUser() {
     // once user signed in, if admin it'll fetch data for all clients, if client it'll fetch only its client info
     if (response.data.admin) {
       yield put({ type: 'FETCH_ALL_CLIENTS' });
+      yield put({ type: 'ALL_INTERESTED' });
     } else {
       yield put({ type: 'FETCH_CLIENT', payload: response.data.id });
     }
