@@ -147,6 +147,56 @@ function AdminPage() {
           </Typography>
         </Box>
       </Modal>
+      {/* ..................USER Table................... */}
+      <DataGrid rows={rows} columns={columns} onRowClick={handleRowClick} />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          {/* <BasicSelect/> */}
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Status</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={status}
+                label="Status"
+                onChange={dropdown}
+              >
+                <MenuItem value={1}>Onboarding Incomplete</MenuItem>
+                <MenuItem value={2}>Pending Wugs Approval</MenuItem>
+                <MenuItem value={3}>Render In Progress</MenuItem>
+                <MenuItem value={4}>Contract Sent Awaiting Completion</MenuItem>
+                <MenuItem value={5}>Pending Contract Approval</MenuItem>
+                <MenuItem value={6}>Account Active</MenuItem>
+                <MenuItem value={7}>Account Inactive</MenuItem>
+              </Select>
+              <div style={{ marginTop: "20px" }}>
+                <TextField
+                  id="filled-multiline-static"
+                  label="Client Notes"
+                  multiline
+                  rows={4}
+                  variant="filled"
+                  onChange={inputField}
+                />
+              </div>
+              <Button onClick={editClient}>Submit</Button>
+              <Button onClick={deleteClient}>Delete</Button>
+            </FormControl>
+          </Box>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            ID: {selectedRowId}
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 }
