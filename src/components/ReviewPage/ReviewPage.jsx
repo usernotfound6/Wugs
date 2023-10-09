@@ -1,27 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import TabContentOne from "./TabContentOne";
 import TabContentTwo from "./TabContentTwo";
 import TabContentThree from "./TabContentThree";
 import TabContentFour from "./TabContentFour";
 import TabContentFive from "./TabContentFive";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import { styled } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-
-import Typography from "@mui/material/Typography";
+import { Tab, Tabs, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { useSelector, useDispatch } from "react-redux";
 import { PopupWidget } from "react-calendly";
 
 // Path: /review
+
 const theme = createTheme({
   palette: {
     mode: "dark", // or 'dark' for the dark theme
@@ -108,19 +98,19 @@ function ReviewPage() {
           {value === 2 && <TabContentThree />}
           {value === 3 && <TabContentFour />}
           {value === 4 && <TabContentFive />}
-          <PopupWidget
-            url="https://calendly.com/dontyellwillcry"
-            rootElement={rootElement}
-            text="Click here to schedule!"
-            textColor="#ffffff"
-            color="#00a2ff"
-            style={{
-              position: "flex",
-              top: "50px",
-              left: "20px",
-            }}
-          />
         </Container>
+        <PopupWidget
+          url="https://calendly.com/dontyellwillcry"
+          rootElement={rootElement}
+          text="Click here to schedule meeting!"
+          textColor="#ffffff"
+          color="#00a2ff"
+          style={{
+            position: "absolute",
+            top: "50px",
+            left: "20px",
+          }}
+        />
       </div>
     </ThemeProvider>
   );
