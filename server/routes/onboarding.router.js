@@ -1,5 +1,6 @@
 const express = require("express");
 const pool = require("../modules/pool");
+const { rejectUnauthenticated } = require("../modules/authentication-middleware");
 const router = express.Router();
 
 /**
@@ -54,8 +55,6 @@ router.get("/client/:id", (req, res) => {
       res.sendStatus(500);
     })
 })
-
-
 
 // Service Choice router ------------------------------------------------------------------------------------------------------------------
 
@@ -165,23 +164,23 @@ router.put("/demographics/:id", (req, res) => {
 });
 
 // Product Choice router ------------------------------------------------------------------------------------------------------------------
-router.put("/foodpreferences", (req, res) => {
-  const clientId = Number(req.params.id);
-  console.log("clientId:", clientId);
-  const product_id = req.body.product_id;
 
-  const deleteQuery = `DELETE FROM client_product WHERE client_id = $1`;
-  const deleteValues = clientId;
+router.post("/foodpreferences", (req, res) => {
+  const client_id = req.body.client_id;
+  const product_ids = req.body.clickedButtons;
 
+  const deleteQuery = `DELETE FROM client_product WHERE client_id = \$1 AND product_id NOT IN (${product_ids.join()})`;
+  const deleteValues = [client_id];
   pool
     .query(deleteQuery, deleteValues)
     .then(() => {
-      // Use a loop to insert multiple rows unnest($2::int[]) is used to "unnest" or expand the array of service IDs
       const insertQuery = `
         INSERT INTO client_product (client_id, product_id)
-        SELECT $1, unnest($2::int[])
+        SELECT \$1, unnest(\$2::int[])
+        ON CONFLICT (client_id, product_id) DO NOTHING
       `;
-      const insertValues = [clientId, product_id];
+
+      const insertValues = [client_id, product_ids];
 
       return pool.query(insertQuery, insertValues);
     })
@@ -194,6 +193,7 @@ router.put("/foodpreferences", (req, res) => {
       res.sendStatus(500);
     });
 });
+
 
 
 
@@ -227,6 +227,59 @@ router.put("/additionalinfo/:id", (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
+});
+
+
+/**
+ * PUT - transaction type PUT for 2 queries!
+ */
+
+router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
+  const clientId = Number(req.params.id);
+  console.log("clientId:", clientId);
+  console.log("req.body:", req.body)
+
+  const clientQueryParams = [
+    req.body.phone, //1
+    clientId //2
+  ];
+  const userQueryParams = [
+    req.body.first_name, //1
+    req.body.last_name, //2
+    req.body.username, //3
+    req.body.user_id //4
+  ];
+
+  const connection = await pool.connect();
+  try {
+    await connection.query('BEGIN');
+    const clientSqlText = `
+    UPDATE client
+    SET 
+      phone = $1
+    WHERE id = $2;
+  `;
+    const userSqlText = `
+    UPDATE "user"
+    SET 
+      first_name = $1,
+      last_name = $2,
+      username = $3
+    WHERE id = $4;
+  `;
+    // first run query to update client
+    await connection.query(clientSqlText, clientQueryParams);
+    // then run query to update user table
+    await connection.query(userSqlText, userQueryParams)
+    await connection.query('COMMIT');
+    res.sendStatus(200);
+  } catch (error) {
+    await connection.query('ROLLBACK');
+    console.log('Transaction Error - Rolling back transfer', error);
+    res.sendStatus(500);
+  } finally {
+    connection.release();
+  }
 });
 
 module.exports = router;

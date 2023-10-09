@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import TabContentOne from "./TabContentOne";
+import TabContentTwo from "./TabContentTwo";
+import TabContentThree from "./TabContentThree";
+import TabContentFour from "./TabContentFour";
+import TabContentFive from "./TabContentFive";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { useSelector, useDispatch } from "react-redux";
-import { InlineWidget, PopupWidget, PopupButton } from "react-calendly";
+import { PopupWidget } from "react-calendly";
 
 // Path: /review
 const theme = createTheme({
@@ -54,6 +59,12 @@ function ReviewPage() {
     }
   }
 
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -67,6 +78,24 @@ function ReviewPage() {
         `}
         </style>
         <CssBaseline />
+        <div style={{ textAlign: "center" }}>
+          <h1 style={{ color: "#fefefe" }}>Review and Schedule Appointment</h1>
+        </div>{" "}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
+          >
+            <Tab label="Products I'm interested in.." />
+            <Tab label="Foods we're interested in.." />
+            <Tab label="Who we are..." />
+            <Tab label="Additional info" />
+            <Tab label="Who we're serving.." />
+          </Tabs>
+        </div>
         <Container
           maxWidth="lg"
           sx={{
@@ -74,175 +103,23 @@ function ReviewPage() {
             height: "70vh",
           }}
         >
-          <header
-            className="App-header"
+          {value === 0 && <TabContentOne />}
+          {value === 1 && <TabContentTwo />}
+          {value === 2 && <TabContentThree />}
+          {value === 3 && <TabContentFour />}
+          {value === 4 && <TabContentFive />}
+          <PopupWidget
+            url="https://calendly.com/dontyellwillcry"
+            rootElement={rootElement}
+            text="Click here to schedule!"
+            textColor="#ffffff"
+            color="#00a2ff"
             style={{
-              textAlign: "center",
-              margin: "50px 0",
-              padding: "30px",
+              position: "flex",
+              top: "50px",
+              left: "20px",
             }}
-          >
-            <h1>Review and Schedule apppointment</h1>
-          </header>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={12}>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "#eaeaea",
-                    boxShadow: 5,
-                    color: "black",
-                  }}
-                >
-                  <CardContent onClick={() => handlePrevious("/servicechoice")}>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="black"
-                      gutterBottom
-                    >
-                      Products I'm interested in..
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Services:
-                      <ul>
-                        {client.service_names?.map((serviceName, index) => (
-                          <li key={index}>{serviceName}</li>
-                        ))}
-                      </ul>
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "#eaeaea",
-                    boxShadow: 5,
-                    color: "black",
-                  }}
-                >
-                  <CardContent
-                    onClick={() => handlePrevious("/foodpreferences")}
-                  >
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="black"
-                      gutterBottom
-                    >
-                      Foods we're interested in..
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Services:
-                      <ul>
-                        {client.product_types?.map((productType, index) => (
-                          <li key={index}>{productType}</li>
-                        ))}
-                      </ul>
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "#eaeaea",
-                    boxShadow: 5,
-                    color: "black",
-                  }}
-                >
-                  <CardContent
-                    onClick={() => handlePrevious("/clientlocationinfo")}
-                  >
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="black"
-                      gutterBottom
-                    >
-                      Who we are...
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      <ul>
-                        <li>{client.business_name}</li>
-                        <li>{client.address}</li>
-                        <li>{client.website}</li>
-                        <li>{client.phone}</li>
-                        <li>
-                          {client.first_name}, {client.last_name}
-                        </li>
-                      </ul>
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "#eaeaea",
-                    boxShadow: 5,
-                    color: "black",
-                  }}
-                >
-                  <CardContent
-                    onClick={() => handlePrevious("/additionalinfo")}
-                  >
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="black"
-                      gutterBottom
-                    >
-                      Additional info
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      {client.dimensions}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    backgroundColor: "#eaeaea",
-                    boxShadow: 5,
-                    color: "black",
-                  }}
-                  onClick={() => handlePrevious("/demographics")}
-                >
-                  <CardContent onClick={() => handlePrevious("/demographics")}>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="black"
-                      gutterBottom
-                    >
-                      Who we're serving..
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      <ul>
-                        <li>{client.demographics}</li>
-                      </ul>
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-
-            <PopupWidget
-              url="https://calendly.com/dontyellwillcry"
-              rootElement={rootElement}
-              text="Click here to schedule!"
-              textColor="#ffffff"
-              color="#00a2ff"
-              style={{
-                position: "flex",
-                top: "50px",
-                left: "20px",
-              }}
-            />
-          </Box>
+          />
         </Container>
       </div>
     </ThemeProvider>
