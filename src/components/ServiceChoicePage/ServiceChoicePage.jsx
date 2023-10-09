@@ -9,8 +9,9 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Grid,
 } from "@mui/material";
-import "./ServiceChoicePage.css";
+
 
 function ServiceChoicePage() {
   const history = useHistory();
@@ -67,93 +68,124 @@ function ServiceChoicePage() {
   };
 
   return (
-    <div>
+  <div>
       <MyStepper step={0} />
       <h2>Products I'm interested in...</h2>
 
       <form className="checkbox-container">
-        <div>
-          <input
-            type="checkbox"
-            id="micromarket"
-            name="micromarket"
-            value="Micromarket"
-            checked={micromarketChecked}
-            onChange={handleMicromarketChange}
-          />
-          <label htmlFor="micromarket">Micro Markets</label>
-          <br />
-
-          <Card>
-            <CardMedia
-              component="img"
-              alt="Micro Market"
-              height="200"
-              image="https://www.bernicks.com/hubfs/social-suggested-images/micro_market.png"
+        <Grid margin={'auto'} container spacing={5}>
+          {/* Micro Markets */}
+          <Grid item xs={12} sm={6} md={4}>
+            <input
+              type="checkbox"
+              id="micromarket"
+              name="micromarket"
+              value="Micromarket"
+              checked={micromarketChecked}
+              onChange={handleMicromarketChange}
             />
-            <CardContent>
-              <Typography variant="h6">Micro Market</Typography>
-              <Typography variant="body2">
-                Description: Your description here.
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+            <label htmlFor="micromarket">Micro Markets</label>
+            <br />
 
-        <div>
-          <input
-            type="checkbox"
-            id="smartcoolers"
-            name="smartcoolers"
-            value="SmartCoolers"
-            checked={smartcoolersChecked}
-            onChange={handleSmartcoolersChange}
-          />
-          <label htmlFor="smartcoolers">Smart Coolers</label>
-          <br />
+            <Card
+              sx={{
+                width: 450,
+                height: 450,
+                borderRadius: 5,
+                backgroundColor: "beige",
+                boxShadow: 24,
+              }}
+            >
+              <CardMedia
+                component="img"
+                alt="Micro Market"
+                height="320"
+                image="https://www.bernicks.com/hubfs/social-suggested-images/micro_market.png"
+              />
+              <CardContent>
+                <Typography variant="h6">Micro Market</Typography>
+                <Typography variant="body2">
+                  Description: Your description here.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
 
-          <Card>
-            <CardMedia
-              component="img"
-              alt="Smart Coolers"
-              height="200"
-              image="https://cdn-dppck.nitrocdn.com/mebfXXXDMymVFbKVdxsHUesbzFkXXUGk/assets/images/optimized/rev-434f8f1/connectvending.co.uk/wp-content/uploads/2023/04/PicoCooler-ProductScan-WebRes-sml.jpg"
+    
+         {/* Smart Coolers */}
+          <Grid item xs={12} sm={6} md={4}>
+            <input
+              type="checkbox"
+              id="smartcoolers"
+              name="smartcoolers"
+              value="SmartCoolers"
+              checked={smartcoolersChecked}
+              onChange={handleSmartcoolersChange}
             />
-            <CardContent>
-              <Typography variant="h6">Smart Coolers</Typography>
-              <Typography variant="body2">
-                Description: Your description here.
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+            <label htmlFor="smartcoolers">Smart Coolers</label>
+            <br />
 
-        <div>
-          <input
-            type="checkbox"
-            id="snackboxes"
-            name="snackboxes"
-            value="SnackBoxes"
-            checked={snackboxesChecked}
-            onChange={handleSnackboxesChange}
-          />
-          <label htmlFor="snackboxes">Snack Boxes</label>
-          <br />
-          <Card>
-            <CardMedia
-              component="img"
-              alt="Snack Boxes"
-              height="200"
-              image="https://i.etsystatic.com/33431484/r/il/046fbf/5169950532/il_1588xN.5169950532_8ddb.jpg"
+            <Card
+              sx={{
+                width: 450,
+                height: 450,
+                borderRadius: 5,
+                backgroundColor: "beige",
+                boxShadow: 24,
+              }}
+            >
+              <CardMedia
+                component="img"
+                alt="Smart Coolers"
+                height="320"
+                image="https://cdn-dppck.nitrocdn.com/mebfXXXDMymVFbKVdxsHUesbzFkXXUGk/assets/images/optimized/rev-434f8f1/connectvending.co.uk/wp-content/uploads/2023/04/PicoCooler-ProductScan-WebRes-sml.jpg"
+              />
+              <CardContent>
+                <Typography variant="h6">Smart Coolers</Typography>
+                <Typography variant="body2">
+                  Description: Your description here.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          {/* Snack Boxes */}
+          <Grid item xs={12} sm={6} md={4}>
+            <input
+              type="checkbox"
+              id="snackboxes"
+              name="snackboxes"
+              value="SnackBoxes"
+              checked={snackboxesChecked}
+              onChange={handleSnackboxesChange}
             />
-            <CardContent>
-              <Typography variant="h6">Snack Boxes</Typography>
-              <Typography variant="body2">
-                Description: Your description here.
-              </Typography>
-            </CardContent>
-          </Card>
-        </div>
+            <label htmlFor="snackboxes">Snack Boxes</label>
+            <br />
+
+            <Card
+              sx={{
+                width: 450,
+                height: 450,
+                borderRadius: 5,
+                backgroundColor: "beige",
+                boxShadow: 24,
+              }}
+            >
+              <CardMedia
+                component="img"
+                alt="Snack Boxes"
+                height="320"
+                image="https://i.etsystatic.com/33431484/r/il/046fbf/5169950532/il_1588xN.5169950532_8ddb.jpg"
+              />
+              <CardContent>
+                <Typography variant="h6">Snack Boxes</Typography>
+                <Typography variant="body2">
+                  Description: Your description here.
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </form>
 
       <button type="submit" value="Submit" onClick={handleSubmit}>
