@@ -17,19 +17,25 @@ import {
 // Path: /clientlocationmoreinfo
 
 function ClientLocationInfoPage() {
-  const [businessname, setBusinessName] = useState("");
-  const [address, setAddress] = useState("");
-  const [website, setWebsite] = useState("");
-  const [phone, setPhone] = useState("");
-  const [hours, setHours] = useState("");
-  const [micromarket, setMicroMarket] = useState("");
-
-  const [openConfirmation, setOpenConfirmation] = useState(false);
 
   const client = useSelector((store) => store.client)
 
+
+  const [businessname, setBusinessName] = useState(client.business_name);
+  const [address, setAddress] = useState(client.address);
+  const [website, setWebsite] = useState(client.website);
+  const [phone, setPhone] = useState(client.phone);
+  const [hours, setHours] = useState(client.hours_of_operation);
+  const [micromarket, setMicroMarket] = useState(client.micromarket_location);
+
+  const [openConfirmation, setOpenConfirmation] = useState(false);
+
+  
   const history = useHistory();
   const dispatch = useDispatch();
+
+  console.log("client!!!!", client
+  )
 
   // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
   function getFormattedPhoneNum(input) {
