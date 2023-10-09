@@ -119,7 +119,6 @@ function AdminPage() {
       },
     });
   }
-  // console.log("asdfasfd", admin[1].business_name)
   
 
   return (
