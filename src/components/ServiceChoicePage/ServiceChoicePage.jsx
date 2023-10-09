@@ -10,6 +10,7 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  CssBaseline
 } from "@mui/material";
 
 
@@ -68,12 +69,16 @@ function ServiceChoicePage() {
   };
 
   return (
-  <div>
+  <div className="container">
       <MyStepper step={0} />
-      <h2>Products I'm interested in...</h2>
-
+      <CssBaseline />
+        <div style={{ textAlign: "center" }}>
+          <h1 style={{ color: "beige" }}>Products I'm Interested In...</h1>
+        </div>{" "}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+        </div>
       <form className="checkbox-container">
-        <Grid margin={'auto'} container spacing={5}>
+        <Grid  container spacing={5}>
           {/* Micro Markets */}
           <Grid item xs={12} sm={6} md={4}>
             <input
@@ -188,9 +193,14 @@ function ServiceChoicePage() {
         </Grid>
       </form>
 
-      <button type="submit" value="Submit" onClick={handleSubmit}>
-        NEXT
-      </button>
+      <Button
+            onClick={handleSubmit}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Next
+          </Button>
     </div>
   );
 }
