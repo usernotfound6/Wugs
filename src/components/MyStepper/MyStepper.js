@@ -1,9 +1,10 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Check from '@mui/icons-material/Check';
+import {
+  Step,
+  StepLabel,
+  Stepper
+} from '@mui/material/'
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import PropTypes from 'prop-types';
 import LunchDiningIcon from '@mui/icons-material/LunchDining';
