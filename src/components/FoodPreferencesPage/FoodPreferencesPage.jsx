@@ -132,7 +132,7 @@ function FoodPreferencesPage() {
     <div>
       <MyStepper step={3} />
       <Typography variant="h4">SNACK OPTIONS</Typography>
-      <Typography variant="subtitle1">Select any you'd like to learn more about!</Typography>
+      <Typography variant="subtitle1">Select what you'd like to learn more about!</Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
         {products && products.length > 0 ? (
           products.map((product) => (
