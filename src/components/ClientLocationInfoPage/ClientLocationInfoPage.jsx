@@ -4,9 +4,7 @@ import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MyStepper from '../MyStepper/MyStepper';
-import {
-  Button,
-} from "@mui/material";
+import { Button } from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
@@ -24,7 +22,7 @@ function ClientLocationInfoPage() {
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
-  
+
   const history = useHistory();
   const dispatch = useDispatch();
 

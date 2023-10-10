@@ -18,7 +18,10 @@ CREATE TABLE status (
 CREATE TABLE client (
   id SERIAL PRIMARY KEY,
   business_name VARCHAR(100),
-  address VARCHAR(100),
+  address_street VARCHAR(100),
+  address_city VARCHAR(100),
+  address_state VARCHAR(20),
+  address_zip VARCHAR(10),
   website VARCHAR(255),
   manager_id INTEGER REFERENCES "user"(id),
   phone VARCHAR(20),
