@@ -15,12 +15,15 @@ function ClientLocationInfoPage() {
   const client = useSelector((store) => store.client)
 
 
-  const [businessname, setBusinessName] = useState(client.business_name);
-  const [address, setAddress] = useState(client.address);
-  const [website, setWebsite] = useState(client.website);
-  const [phone, setPhone] = useState(client.phone);
-  const [hours, setHours] = useState(client.hours_of_operation);
-  const [micromarket, setMicroMarket] = useState(client.micromarket_location);
+  const [businessname, setBusinessName] = useState(client.business_name || "");
+  const [addressStreet, setAddressStreet] = useState(client.address_street || "");
+  const [addressCity, setAddressCity] = useState(client.address_city || "");
+  const [addressState, setAddressState] = useState(client.address_state || "");
+  const [addressZip, setAddressZip] = useState(client.address_zip || "");
+  const [website, setWebsite] = useState(client.website || "");
+  const [phone, setPhone] = useState(client.phone || "");
+  const [hours, setHours] = useState(client.hours_of_operation || "");
+  const [micromarket, setMicroMarket] = useState(client.micromarket_location || "");
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
@@ -77,18 +80,20 @@ function ClientLocationInfoPage() {
 
 
   const handleSubmit = () => {
-    // console.log("inside handleSubmit");
     let clientLocationInfoObject = {
       client_id: client.client_id,
       business_name: businessname,
-      address: address,
+      address_street: addressStreet,
+      address_city: addressCity,
+      address_state: addressState,
+      address_zip: addressZip,
       website: website,
       phone: phone,
       hours_of_operation: hours,
       micromarket_location: micromarket,
     };
+    console.log("clientLocationInfoObject:", clientLocationInfoObject);
     dispatch({ type: 'UPDATE_CLIENT_LOCATION', payload: clientLocationInfoObject })
-
     history.push("/demographics");
   };
 
@@ -98,25 +103,25 @@ function ClientLocationInfoPage() {
       <div>
         <MyStepper step={1} />
       </div>
-      <CssBaseline/>
-        <div style={{ textAlign: "center" }}>
-          <h1 style={{ color: "beige" }}>Who Are We Serving?</h1>
-          </div>{" "}
+      <CssBaseline />
+      <div style={{ textAlign: "center" }}>
+        <h1 style={{ color: "beige" }}>Who Are We Serving?</h1>
+      </div>{" "}
       <Box margin={'auto'}
         component="form"
         sx={{
-          
+
           backgroundColor: '#484747',
           borderRadius: 3,
           width: 360,
           padding: 2,
-         elevation: 24,
+          elevation: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
         autoComplete="off"
       >
-        <TextField 
+        <TextField
           id="businessname"
           label="Business Name"
           variant="outlined"
@@ -145,16 +150,97 @@ function ClientLocationInfoPage() {
         <br />
 
         <TextField
-          id="address"
-          label="Address"
+          id="addressStreet"
+          label="Street Address"
           variant="outlined"
           style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="address"
           placeholder="123 Snack St N"
-          value={address}
-          onChange={(event) => setAddress(event.target.value)}
+          value={addressStreet}
+          onChange={(event) => setAddressStreet(event.target.value)}
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
+        />
+        <br />
+        <TextField
+          id="addressCity"
+          label="City"
+          variant="outlined"
+          style={{ width: 310 }}
+          inputProps={{ style: { color: "beige" } }}
+          InputLabelProps={{ style: { color: "beige" } }}
+          type="text"
+          placeholder="Minneapolis"
+          value={addressCity}
+          onChange={(event) => setAddressCity(event.target.value)}
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
+        />
+        <br />
+        <TextField
+          id="addressState"
+          label="State"
+          variant="outlined"
+          style={{ width: 310 }}
+          inputProps={{ style: { color: "beige" } }}
+          InputLabelProps={{ style: { color: "beige" } }}
+          type="text"
+          placeholder="MN"
+          value={addressState}
+          onChange={(event) => setAddressState(event.target.value)}
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
+        />
+        <br />
+        <TextField
+          id="addressZip"
+          label="Zip Code"
+          variant="outlined"
+          style={{ width: 310 }}
+          inputProps={{ style: { color: "beige" } }}
+          InputLabelProps={{ style: { color: "beige" } }}
+          type="text"
+          placeholder="55415"
+          value={addressZip}
+          onChange={(event) => setAddressZip(event.target.value)}
           required
           sx={{
             "& .MuiOutlinedInput-root": {
@@ -228,7 +314,7 @@ function ClientLocationInfoPage() {
         />
         <br />
 
-        <TextField 
+        <TextField
           id="hours"
           label="Hours Of Operation?"
           variant="outlined"
@@ -241,7 +327,7 @@ function ClientLocationInfoPage() {
           value={hours}
           onChange={(event) => setHours(event.target.value)}
           sx={{
-            
+
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "gray", // Outline color when not focused
@@ -286,7 +372,7 @@ function ClientLocationInfoPage() {
         <br />
       </Box>
 
-      <Button 
+      <Button
         onClick={handleSubmit}
         sx={{
           marginTop: 1.5,

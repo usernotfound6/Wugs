@@ -14,7 +14,10 @@ router.get("/", (req, res) => {
   SELECT
     c.id AS client_id,
     c.business_name,
-    c.address,
+    c.address_street,
+    c.address_city,
+    c.address_state,
+    c.address_zip,
     c.website,
     c.phone,
     c.hours_of_operation,
