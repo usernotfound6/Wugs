@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
-import { useDispatch, useSelector } from 'react-redux';
-import { Box, Button, Card, CardContent, Modal, TextField, Typography } from '@mui/material';
-import { useHistory } from 'react-router-dom';
-import { PopupWidget } from 'react-calendly';
+import React, { useState, useEffect, useRef } from "react";
+import LogOutButton from "../LogOutButton/LogOutButton";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Modal,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useHistory } from "react-router-dom";
+import { PopupWidget } from "react-calendly";
+import axios from "axios";
 
 function UserPage() {
-
   const rootElement = document.getElementById("popup-root");
+  const fileInputRef = useRef(null); // Needed for the googel drive post
 
   const user = useSelector((store) => store.user);
   const client = useSelector((store) => store.client);
@@ -33,10 +42,12 @@ function UserPage() {
   const [photoIndex, setPhotoIndex] = useState(0);
 
   // Array of photo URLs
-  const photos = ["https://thumb.tildacdn.com/tild3334-3861-4632-a237-663363353830/-/format/webp/Follow_Wugs_On.jpg",
+  const photos = [
+    "https://thumb.tildacdn.com/tild3334-3861-4632-a237-663363353830/-/format/webp/Follow_Wugs_On.jpg",
     "https://thumb.tildacdn.com/tild6230-3666-4663-b236-323863323562/-/format/webp/IMG_4905.jpg",
     "https://thumb.tildacdn.com/tild3636-6236-4366-a165-313136626436/-/format/webp/IMG_5099.jpg",
-    "https://thumb.tildacdn.com/tild6135-6332-4735-b064-643336306437/-/format/webp/IMG_5076.jpg",];
+    "https://thumb.tildacdn.com/tild6135-6332-4735-b064-643336306437/-/format/webp/IMG_5076.jpg",
+  ];
 
   // Function to handle photo navigation
   const goToNextPhoto = () => {
@@ -51,15 +62,14 @@ function UserPage() {
   }, [photoIndex]);
 
   const handleSave = () => {
-
     // console.log("firstName is:", firstName)
     // console.log("lastName is:", lastName)
     // console.log("phone is:", phone)
     // console.log("username is:", username)
     if (!firstName || !lastName || !phone || !username || !confirmUsername) {
-      alert("please complete all inputs")
+      alert("please complete all inputs");
     } else if (username !== confirmUsername) {
-      alert("usernames do not match")
+      alert("usernames do not match");
     } else {
       let contactInfoObj = {
         client_id: client.client_id,
@@ -67,11 +77,11 @@ function UserPage() {
         first_name: firstName,
         last_name: lastName,
         phone: phone,
-        username: username
-      }
-      dispatch({ type: 'UPDATE_CONTACT_INFO', payload: contactInfoObj })
+        username: username,
+      };
+      dispatch({ type: "UPDATE_CONTACT_INFO", payload: contactInfoObj });
     }
-  }
+  };
 
   // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
   function getFormattedPhoneNum(input) {
@@ -106,6 +116,37 @@ function UserPage() {
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
   };
+// Function to handle file upload to Google Drive
+const handleFileUpload = async () => {
+  const files = fileInputRef.current.files;
+  console.log("Selected files:", files);
+
+  // Check if there are selected files
+  if (files.length > 0) {
+      const formData = new FormData();
+
+      // Iterate over the selected files and append them to the form data
+      for (let i = 0; i < files.length; i++) {
+          formData.append("files", files[i]);
+      }
+      console.log("Uploading files:", formData);
+
+      try {
+          // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+          const response = await axios.post("/api/onboarding/upload", formData, {
+              headers: {
+                  "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+              },
+          });
+
+          const data = response.data;
+          console.log("Uploaded files: ", data.files);
+      } catch (error) {
+          console.error("Error:", error);
+      }
+  }
+};
+
 
   return (
     <div className="container">
@@ -113,7 +154,7 @@ function UserPage() {
       <h2>Onboarding Status: {client.status_name}</h2>
       {/* <p>Your ID is: {user.id}</p> */}
       <LogOutButton className="btn" />
-      <div className="container2" >
+      <div className="container2">
         <Card
           variant="outlined"
           sx={{
@@ -152,7 +193,6 @@ function UserPage() {
             >
               Edit
             </Button>
-
           </CardContent>
         </Card>
 
@@ -161,22 +201,28 @@ function UserPage() {
           <Card
             variant="outlined"
             sx={{
-              backgroundColor: 'transparent',
-              margin: 'auto',
+              backgroundColor: "transparent",
+              margin: "auto",
             }}
           >
             <CardContent>
               <div
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
                 <img
                   src={photos[photoIndex]}
                   alt={`Photo ${photoIndex + 1}`}
-                  style={{ maxWidth: '600px', maxHeight: '600px', minWidth: '600px', minHeight: '600px', borderRadius: 18 }}
+                  style={{
+                    maxWidth: "600px",
+                    maxHeight: "600px",
+                    minWidth: "600px",
+                    minHeight: "600px",
+                    borderRadius: 18,
+                  }}
                 />
               </div>
             </CardContent>
@@ -213,193 +259,194 @@ function UserPage() {
           }}
         />
       </div>
-      
-            {/* ----------- MODAL START ----------- */}
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box
-                sx={{
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: "translate(-50%, -50%)",
-                  width: 400,
-                  bgcolor: "background.paper",
-                  border: "2px solid #000",
-                  boxShadow: 24,
-                  p: 4,
-                }}
-              >
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Edit your contact info:
-                </Typography>
-                <Box
-                  component="form"
-                  sx={{
-                    "& > :not(style)": { m: 1, width: "25ch" },
-                  }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <TextField
-                    id="firstName"
-                    label="First Name"
-                    variant="outlined"
-                    // inputProps={{ style: { color: "red" } }}
-                    // InputLabelProps={{ style: { color: "red" } }}
-                    type="text"
-                    placeholder="First Name"
-                    value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
-                    required
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "gray", // Outline color when not focused
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "red", // Outline color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "red", // Outline color when focused
-                        },
-                      },
-                    }}
-                  />
-                  <br />
 
-                  <TextField
-                    id="lastName"
-                    label="Last Name"
-                    variant="outlined"
-                    // inputProps={{ style: { color: "red" } }}
-                    // InputLabelProps={{ style: { color: "red" } }}
-                    type="lastName"
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                    required
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "gray", // Outline color when not focused
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "red", // Outline color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "red", // Outline color when focused
-                        },
-                      },
-                    }}
-                  />
-                  <br />
-                  <TextField
-                    id="phone"
-                    label="Phone Number"
-                    variant="outlined"
-                    // inputProps={{ style: { color: "red" } }}
-                    // InputLabelProps={{ style: { color: "red" } }}
-                    type="phone"
-                    placeholder="Phone Number"
-                    value={phone}
-                    onChange={handleFormatPhoneNumber}
-                    required
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "gray", // Outline color when not focused
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "red", // Outline color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "red", // Outline color when focused
-                        },
-                      },
-                    }}
-                  />
-                  <br />
-                  <TextField
-                    id="username"
-                    label="Username / Email"
-                    variant="outlined"
-                    // inputProps={{ style: { color: "red" } }}
-                    // InputLabelProps={{ style: { color: "red" } }}
-                    type="email"
-                    placeholder="Email Address"
-                    value={username}
-                    onChange={(event) => setUsername(event.target.value)}
-                    required
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "gray", // Outline color when not focused
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "red", // Outline color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "red", // Outline color when focused
-                        },
-                      },
-                    }}
-                  />
-                  <TextField
-                    id="confirmusername"
-                    label="Confirm Username / Email"
-                    variant="outlined"
-                    // inputProps={{ style: { color: "red" } }}
-                    // InputLabelProps={{ style: { color: "red" } }}
-                    type="email"
-                    placeholder="Email Address"
-                    value={confirmUsername}
-                    onChange={(event) => setConfirmUsername(event.target.value)}
-                    required
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        "& fieldset": {
-                          borderColor: "gray", // Outline color when not focused
-                        },
-                        "&:hover fieldset": {
-                          borderColor: "red", // Outline color on hover
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "red", // Outline color when focused
-                        },
-                      },
-                    }}
-                  />
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+      {/* ----------- MODAL START ----------- */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            bgcolor: "background.paper",
+            border: "2px solid #000",
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Edit your contact info:
+          </Typography>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="firstName"
+              label="First Name"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              // InputLabelProps={{ style: { color: "red" } }}
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <br />
 
-                    ***Please note: your username will be changed to this new email if updated.
+            <TextField
+              id="lastName"
+              label="Last Name"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              // InputLabelProps={{ style: { color: "red" } }}
+              type="lastName"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <br />
+            <TextField
+              id="phone"
+              label="Phone Number"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              // InputLabelProps={{ style: { color: "red" } }}
+              type="phone"
+              placeholder="Phone Number"
+              value={phone}
+              onChange={handleFormatPhoneNumber}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <br />
+            <TextField
+              id="username"
+              label="Username / Email"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              // InputLabelProps={{ style: { color: "red" } }}
+              type="email"
+              placeholder="Email Address"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <TextField
+              id="confirmusername"
+              label="Confirm Username / Email"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              // InputLabelProps={{ style: { color: "red" } }}
+              type="email"
+              placeholder="Email Address"
+              value={confirmUsername}
+              onChange={(event) => setConfirmUsername(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              ***Please note: your username will be changed to this new email if
+              updated.
+            </Typography>
+          </Box>
+          <Button
+            onClick={handleSave}
+            sx={{
+              marginTop: 1.5,
+              marginLeft: 2,
+              height: 50,
+              width: 120,
+              borderRadius: 1,
+            }}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Save
+          </Button>
+        </Box>
+      </Modal>
+      <h1>Upload Multiple Files to Google Drive</h1>
+      <input type="file" multiple ref={fileInputRef}></input>
+      <Button onClick={handleFileUpload}>Upload Files</Button>
 
-                  </Typography>
-                </Box>
-                <Button
-                  onClick={handleSave}
-                  sx={{
-                    marginTop: 1.5,
-                    marginLeft: 2,
-                    height: 50,
-                    width: 120,
-                    borderRadius: 1,
-                  }}
-                  color="success"
-                  variant="contained"
-                  autoFocus
-                >
-                  Save
-                </Button>
-              </Box>
-            </Modal>
-
-            {/* ----------- MODAL END ----------- */}
-
+      {/* ----------- MODAL END ----------- */}
     </div>
   );
 }

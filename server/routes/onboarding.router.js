@@ -1,10 +1,27 @@
 const express = require("express");
 const pool = require("../modules/pool");
-const { rejectUnauthenticated } = require("../modules/authentication-middleware");
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 const router = express.Router();
+const { google } = require("googleapis");
+const multer = require("multer");
+const path = require("path");
+const cors = require("cors");
+const fs = require("fs");
+// This storage creates a upload folder that will save docs that were sent via google drive POST
+const storage = multer.diskStorage({
+  destination: "uploads",
+  filename: function (req, file, callback) {
+    const extension = file.originalname.split(".").pop();
+    callback(null, `${file.fieldname}-${Date.now()}.${extension}`);
+  },
+});
+const upload = multer({ storage: storage });
+const keyFile = require("/Users/papaporo/Prime/wugs_app/Wugs/our-chassis-401623-8599a8b4f596.json"); // This is the aboslute file path for the json credentials needed for the google drive POST request.
 
 /**
- * The single client GET 
+ * The single client GET
  */
 router.get("/client/:id", (req, res) => {
   const clientId = [Number(req.params.id)];
@@ -51,19 +68,19 @@ router.get("/client/:id", (req, res) => {
   `;
   pool
     .query(sqlQuery, clientId)
-    .then(result => {
+    .then((result) => {
       res.send(result.rows);
     })
-    .catch(error => {
-      console.log("error on single client GET", error)
+    .catch((error) => {
+      console.log("error on single client GET", error);
       res.sendStatus(500);
-    })
-})
+    });
+});
 
 // Service Choice router ------------------------------------------------------------------------------------------------------------------
 
 router.put("/servicechoice/:id", (req, res) => {
-  console.log("req.body is:", req.body)
+  console.log("req.body is:", req.body);
   const client_id = Number(req.params.id);
   const service_id = req.body.service_id; // Assuming service_id is an array
 
@@ -100,6 +117,7 @@ router.put("/clientlocationinfo/:id", (req, res) => {
 
   let queryParams = [
     req.body.business_name, //1
+
     req.body.address_street, //2
     req.body.address_city, //3
     req.body.address_state, //4
@@ -145,11 +163,11 @@ router.put("/demographics/:id", (req, res) => {
 
   let queryParams = [
     req.body.number_of_people, //1
-    req.body.demographics, //2 
-    req.body.neighborhood_info, //3 
+    req.body.demographics, //2
+    req.body.neighborhood_info, //3
     req.body.industry, //4
     req.body.age_group, //5
-    clientId //6
+    clientId, //6
   ];
   let queryText = `
   UPDATE client
@@ -205,9 +223,6 @@ router.post("/foodpreferences", (req, res) => {
     });
 });
 
-
-
-
 // addtional info router ------------------------------------------------------------------------------------------------------------------
 
 router.put("/additionalinfo/:id", (req, res) => {
@@ -218,7 +233,7 @@ router.put("/additionalinfo/:id", (req, res) => {
     req.body.dimensions, //1
     req.body.pictures, //2
     req.body.wugs_visit, //3
-    clientId //4
+    clientId, //4
   ];
   const queryText = `
   UPDATE client
@@ -240,7 +255,6 @@ router.put("/additionalinfo/:id", (req, res) => {
     });
 });
 
-
 /**
  * PUT - transaction type PUT for 2 queries!
  */
@@ -248,22 +262,22 @@ router.put("/additionalinfo/:id", (req, res) => {
 router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
   const clientId = Number(req.params.id);
   console.log("clientId:", clientId);
-  console.log("req.body:", req.body)
+  console.log("req.body:", req.body);
 
   const clientQueryParams = [
     req.body.phone, //1
-    clientId //2
+    clientId, //2
   ];
   const userQueryParams = [
     req.body.first_name, //1
     req.body.last_name, //2
     req.body.username, //3
-    req.body.user_id //4
+    req.body.user_id, //4
   ];
 
   const connection = await pool.connect();
   try {
-    await connection.query('BEGIN');
+    await connection.query("BEGIN");
     const clientSqlText = `
     UPDATE client
     SET 
@@ -281,15 +295,60 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
     // first run query to update client
     await connection.query(clientSqlText, clientQueryParams);
     // then run query to update user table
-    await connection.query(userSqlText, userQueryParams)
-    await connection.query('COMMIT');
+    await connection.query(userSqlText, userQueryParams);
+    await connection.query("COMMIT");
     res.sendStatus(200);
   } catch (error) {
-    await connection.query('ROLLBACK');
-    console.log('Transaction Error - Rolling back transfer', error);
+    await connection.query("ROLLBACK");
+    console.log("Transaction Error - Rolling back transfer", error);
     res.sendStatus(500);
   } finally {
     connection.release();
+  }
+});
+
+router.post("/upload", upload.array("files"), async (req, res) => {
+  try {
+    // Set up Google Drive authentication using service account credentials
+    const auth = new google.auth.GoogleAuth({
+      credentials: keyFile, // Use the service account key file
+      scopes: ["https://www.googleapis.com/auth/drive"], // Specify access scope for Google Drive
+    });
+
+    // Create a Google Drive client for API operations
+    const drive = google.drive({
+      version: "v3", // Use version 3 of the Google Drive API
+      auth, // Authenticate using the 'auth' object
+    });
+
+    // Initialize an array to store information about uploaded files
+    const uploadedFiles = [];
+
+    for (let i = 0; i < req.files.length; i++) {
+      const file = req.files[i];
+
+      // Use the Google Drive API to create a new file
+      const response = await drive.files.create({
+        requestBody: {
+          name: file.originalname, // Set the file's name
+          mimeType: file.mimetype, // Specify the MIME type of the file
+          parents: ["156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG"], // Destination folder ID
+        },
+        media: {
+          body: fs.createReadStream(file.path), // Read and upload the file from the server
+        },
+      });
+
+      // Add information about the uploaded file to the 'uploadedFiles' array
+      uploadedFiles.push(response.data);
+    }
+
+    // Respond to the client with a success message and information about the uploaded files
+    res.json({ message: "Files uploaded successfully", files: uploadedFiles });
+  } catch (error) {
+    // Handle and log any errors that occur during the file upload process
+    console.error(error);
+    res.status(500).json({ error: "An error occurred" });
   }
 });
 

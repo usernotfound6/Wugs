@@ -17,7 +17,7 @@ function AdminPage() {
     phone: "",
     admin_notes: "",
   });
-  const [selectedRowId, setSelectedRowId] = useState('')
+  const [selectedRowId, setSelectedRowId] = useState("");
   const admin = useSelector((store) => store.admin);
   const interested = useSelector((store) => store.interested);
 
@@ -134,16 +134,25 @@ function AdminPage() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" color={"black"}>
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            color={"black"}
+          >
             Details
             <ul>
               <li>Business: {selectedRowData.business_name}</li>
-              <li>Name: {selectedRowData.first_name}, {selectedRowData.last_name}</li>
+              <li>
+                Name: {selectedRowData.first_name}, {selectedRowData.last_name}
+              </li>
               <li>Phone #: {selectedRowData.phone}</li>
             </ul>
+
             <Typography>
               {selectedRowData.admin_notes}
             </Typography>
+
           </Typography>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
