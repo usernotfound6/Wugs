@@ -6,13 +6,7 @@ import TextField from "@mui/material/TextField";
 import MyStepper from '../MyStepper/MyStepper';
 import {
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  DialogContentText,
 } from "@mui/material";
-
 
 // Path: /clientlocationmoreinfo
 
@@ -38,6 +32,7 @@ function ClientLocationInfoPage() {
   )
 
   // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
+  // these functions are used to format a 10-digit US phone number as it's being typed: (XXX) XXX - XXXX)
   function getFormattedPhoneNum(input) {
     let output = "(";
     input.replace(
@@ -95,13 +90,6 @@ function ClientLocationInfoPage() {
     dispatch({ type: 'UPDATE_CLIENT_LOCATION', payload: clientLocationInfoObject })
 
     history.push("/demographics");
-    // are these necessary when moving to the next page?
-    // setBusinessName("");
-    // setAddress("");
-    // setWebsite("");
-    // setPhone("");
-    // setHours("");
-    // setMicroMarket("");
   };
 
 
@@ -298,41 +286,6 @@ function ClientLocationInfoPage() {
       >
         Submit
       </Button>
-
-      {/* Confirmation Dialog */}
-
-      {/* <Dialog
-        open={openConfirmation}
-        onClose={handleCloseConfirmation}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        PaperProps={{
-          style: {
-            background: "beige",
-          },
-        }}
-      >
-        <DialogTitle id="alert-dialog-title">
-          Thank You For Expressing Interest!
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            You will be emailed soon with follow-up information. Once you click
-            'Go Back' you will be redirected to the home page where you can get
-            started on the onboarding process.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleConfirmSubmit}
-            color="success"
-            variant="contained"
-            autoFocus
-          >
-            Go Back
-          </Button>
-        </DialogActions>
-      </Dialog> */}
     </div>
   );
 }

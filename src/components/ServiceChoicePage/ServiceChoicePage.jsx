@@ -62,7 +62,6 @@ function ServiceChoicePage() {
       service_id: servicesArray,
     };
     // console.log(servicesArray);
-    // dispatch for PUT
     dispatch({ type: "UPDATE_SERVICES", payload: servicesObj });
   };
 
