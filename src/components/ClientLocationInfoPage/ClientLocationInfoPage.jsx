@@ -120,6 +120,7 @@ function ClientLocationInfoPage() {
           id="businessname"
           label="Business Name"
           variant="outlined"
+          style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
@@ -147,6 +148,7 @@ function ClientLocationInfoPage() {
           id="address"
           label="Address"
           variant="outlined"
+          style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="address"
@@ -174,6 +176,7 @@ function ClientLocationInfoPage() {
           id="website"
           label="Website"
           variant="outlined"
+          style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
@@ -201,6 +204,7 @@ function ClientLocationInfoPage() {
           id="phone"
           label="Phone Number"
           variant="outlined"
+          style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="tel"
@@ -228,6 +232,7 @@ function ClientLocationInfoPage() {
           id="hours"
           label="Hours Of Operation?"
           variant="outlined"
+          style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
