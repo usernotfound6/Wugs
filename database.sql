@@ -115,7 +115,10 @@ VALUES
 
 INSERT INTO client (
   business_name,
-  address,
+  address_street,
+  address_city,
+  address_state,
+  address_zip,
   website,
   manager_id,
   phone,
@@ -133,9 +136,9 @@ INSERT INTO client (
   admin_notes,
   status_id
 ) VALUES
-('ABC School', '123 Elm Street', 'www.abcschool.com', 1, '555-123-4567', 'Mon-Fri: 8 AM - 5 PM', 'Cafeteria', 'Nearby grocery store and pharmacy', 'Mixed demographics', 500, 'Students and Staff', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '15 ft x 5 ft', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about school client', 1),
-('XYZ Nursing Home', '456 Oak Avenue', 'www.xyznursinghome.com', 2, '555-987-6543', '24/7', 'Common Area', 'Close to a convenience store', 'Elderly residents', 100, 'Seniors', 'Healthcare', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '65 inches by 32 inches', false, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about nursing home client', 2),
-('123 College', '789 Maple Road', 'www.123college.edu', 3, '555-567-8901', 'Mon-Sat: 7 AM - 10 PM', 'Student Center', 'Adjacent to a campus store', 'College students', 2000, 'Young Adults', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg'], '10ft high, 22 ft width, 4 ft out from wall', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about college client', 1);
+('ABC School', '123 Elm Street', 'YourCity', 'YourState', '12345', 'www.abcschool.com', 1, '555-123-4567', 'Mon-Fri: 8 AM - 5 PM', 'Cafeteria', 'Nearby grocery store and pharmacy', 'Mixed demographics', 500, 'Students and Staff', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '15 ft x 5 ft', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about school client', 1),
+('XYZ Nursing Home', '456 Oak Avenue', 'YourCity', 'YourState', '67890', 'www.xyznursinghome.com', 2, '555-987-6543', '24/7', 'Common Area', 'Close to a convenience store', 'Elderly residents', 100, 'Seniors', 'Healthcare', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '65 inches by 32 inches', false, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about nursing home client', 2),
+('123 College', '789 Maple Road', 'YourCity', 'YourState', '54321', 'www.123college.edu', 3, '555-567-8901', 'Mon-Sat: 7 AM - 10 PM', 'Student Center', 'Adjacent to a campus store', 'College students', 2000, 'Young Adults', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg'], '10ft high, 22 ft width, 4 ft out from wall', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about college client', 1);
 
 INSERT INTO interested (name, email, phone_number, industry, about_you, why_wugs) VALUES
     ('John Doe', 'john.doe@example.com', '555-555-5555', 'Technology', 'We are a tech startup focused on AI and machine learning.', 'We would like a vending machine to provide convenient snacks and beverages for our employees.'),
