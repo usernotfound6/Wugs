@@ -2,19 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+import { Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from '@mui/material';
 import Columns from "./Columns";
 import "./AdminPage.css";
 import InterestedColumns from "./Interestedcolumns";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import { Container } from "@mui/material";
 // Go back to here
 function AdminPage() {
   const dispatch = useDispatch();
@@ -37,7 +28,10 @@ function AdminPage() {
   const rows = admin?.map((client) => ({
     id: client.client_id,
     business_name: client.business_name,
-    address: client.address,
+    address_street: client.address_street,
+    address_city: client.address_city,
+    address_state: client.address_state,
+    address_zip: client.address_zip,
     website: client.website,
     first_name: client.first_name,
     last_name: client.last_name,
@@ -65,7 +59,7 @@ function AdminPage() {
     industry: item.industry,
     why_wugs: item.why_wugs,
     about_you: item.about_you,
-    
+
   }));
 
   const style = {
@@ -125,9 +119,9 @@ function AdminPage() {
   //   setSelectedRowData(params.id); // Set the entire row data
 
   //   console.log("delete interested", selectedRowId.id)
-    
+
   // }
-  
+
 
   return (
     <Container fixed sx={{ backgroundColor: "#fefefe" }}>
@@ -146,10 +140,10 @@ function AdminPage() {
               <li>Business: {selectedRowData.business_name}</li>
               <li>Name: {selectedRowData.first_name}, {selectedRowData.last_name}</li>
               <li>Phone #: {selectedRowData.phone}</li>
-              </ul>
-              <Typography>
-                {selectedRowData.admin_notes}
-              </Typography>
+            </ul>
+            <Typography>
+              {selectedRowData.admin_notes}
+            </Typography>
           </Typography>
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
