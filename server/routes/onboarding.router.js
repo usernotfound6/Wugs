@@ -38,7 +38,8 @@ router.get("/client/:id", (req, res) => {
     u.last_name,
     u.username,
       ARRAY(SELECT DISTINCT service.service_name FROM client_service JOIN service ON client_service.service_id = service.id WHERE client_service.client_id = c.id) AS service_names,
-      ARRAY(SELECT DISTINCT product.type FROM client_product JOIN product ON client_product.product_id = product.id WHERE client_product.client_id = c.id) AS product_types
+      ARRAY(SELECT DISTINCT product.type FROM client_product JOIN product ON client_product.product_id = product.id WHERE client_product.client_id = c.id) AS product_types,
+      ARRAY(SELECT DISTINCT client_product.product_id FROM client_product WHERE client_product.client_id = c.id) AS product_ids
     FROM
       client AS c
     JOIN
@@ -177,6 +178,7 @@ router.put("/demographics/:id", (req, res) => {
 router.post("/foodpreferences", (req, res) => {
   const client_id = req.body.client_id;
   const product_ids = req.body.clickedButtons;
+
 
   const deleteQuery = `DELETE FROM client_product WHERE client_id = \$1 AND product_id NOT IN (${product_ids.join()})`;
   const deleteValues = [client_id];
