@@ -96,16 +96,25 @@ function ClientLocationInfoPage() {
       <div>
         <MyStepper step={1} />
       </div>
-      <h3 style={{ marginLeft: "12px" }}>Who Are We Serving?</h3>
-      <Box
+      <CssBaseline />
+        <div style={{ textAlign: "center" }}>
+          <h1 style={{ color: "beige" }}>Who Are We Serving?</h1>
+          </div>{" "}
+      <Box margin={'auto'}
         component="form"
         sx={{
+          
+          backgroundColor: '#484747',
+          borderRadius: 3,
+          width: 360,
+          padding: 2,
+         elevation: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
         autoComplete="off"
       >
-        <TextField
+        <TextField 
           id="businessname"
           label="Business Name"
           variant="outlined"
@@ -213,7 +222,7 @@ function ClientLocationInfoPage() {
         />
         <br />
 
-        <TextField
+        <TextField 
           id="hours"
           label="Hours Of Operation?"
           variant="outlined"
@@ -225,6 +234,7 @@ function ClientLocationInfoPage() {
           value={hours}
           onChange={(event) => setHours(event.target.value)}
           sx={{
+            
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "gray", // Outline color when not focused
@@ -269,7 +279,7 @@ function ClientLocationInfoPage() {
         <br />
       </Box>
 
-      <Button
+      <Button 
         onClick={handleSubmit}
         sx={{
           marginTop: 1.5,
@@ -282,7 +292,7 @@ function ClientLocationInfoPage() {
         variant="contained"
         autoFocus
       >
-        Submit
+        Next
       </Button>
     </div>
   );
