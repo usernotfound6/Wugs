@@ -20,9 +20,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 const keyFile = require("/Users/papaporo/Prime/wugs_app/Wugs/our-chassis-401623-8599a8b4f596.json"); // This is the aboslute file path for the json credentials needed for the google drive POST request.
 
-
-
-
 /**
  * The single client GET
  */
@@ -298,66 +295,49 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
   }
 });
 
-// router.post('/upload', (req, res) => {
-//   // console.log("My giphy api key:", process.env.CALENDLY_API_KEY)
-//   const apiKey = process.env.CALENDLY_API_KEY
-
-//   const options = {
-//       method: 'GET',
-//       url: 'https://api.calendly.com/users/me',
-//       headers: {'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}`}
-//     };
-
-//   axios.request(options).then(function (response) {
-//       console.log("here is the Data", response.data);
-//       res.send(response.data)
-
-//     }).catch(function (error) {
-//       console.error(error);
-//     });
-// })
-
 router.post("/upload", upload.array("files"), async (req, res) => {
   try {
+    // Set up Google Drive authentication using service account credentials
     const auth = new google.auth.GoogleAuth({
-      credentials: keyFile,
-      scopes: ["https://www.googleapis.com/auth/drive"],
+      credentials: keyFile, // Use the service account key file
+      scopes: ["https://www.googleapis.com/auth/drive"], // Specify access scope for Google Drive
     });
 
-    // Use the 'auth' object for Google Drive authentication
-    console.log(auth);
-
+    // Create a Google Drive client for API operations
     const drive = google.drive({
-      version: "v3",
-      auth,
+      version: "v3", // Use version 3 of the Google Drive API
+      auth, // Authenticate using the 'auth' object
     });
 
+    // Initialize an array to store information about uploaded files
     const uploadedFiles = [];
 
     for (let i = 0; i < req.files.length; i++) {
       const file = req.files[i];
-      
-      // Replace '156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG' with the correct folder ID
+
+      // Use the Google Drive API to create a new file
       const response = await drive.files.create({
         requestBody: {
-          name: file.originalname,
-          mimeType: file.mimetype,
-          parents: ['156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG'],
+          name: file.originalname, // Set the file's name
+          mimeType: file.mimetype, // Specify the MIME type of the file
+          parents: ["156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG"], // Destination folder ID
         },
         media: {
-          body: fs.createReadStream(file.path),
+          body: fs.createReadStream(file.path), // Read and upload the file from the server
         },
       });
+
+      // Add information about the uploaded file to the 'uploadedFiles' array
       uploadedFiles.push(response.data);
     }
-    
-    // Respond to the client with a success message or other data
+
+    // Respond to the client with a success message and information about the uploaded files
     res.json({ message: "Files uploaded successfully", files: uploadedFiles });
   } catch (error) {
+    // Handle and log any errors that occur during the file upload process
     console.error(error);
     res.status(500).json({ error: "An error occurred" });
   }
 });
-
 
 module.exports = router;

@@ -116,35 +116,37 @@ function UserPage() {
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
   };
-/* Google Drive POST - take the from data (file) and sends in a post*/
-  const handleFileUpload = async () => {
-    const files = fileInputRef.current.files;
-    console.log("Selected files:", files);
+// Function to handle file upload to Google Drive
+const handleFileUpload = async () => {
+  const files = fileInputRef.current.files;
+  console.log("Selected files:", files);
 
-
-    if (files.length > 0) {
+  // Check if there are selected files
+  if (files.length > 0) {
       const formData = new FormData();
 
+      // Iterate over the selected files and append them to the form data
       for (let i = 0; i < files.length; i++) {
-        formData.append("files", files[i]);
+          formData.append("files", files[i]);
       }
-      console.log("clicking upload", formData);
-
+      console.log("Uploading files:", formData);
 
       try {
-        const response = await axios.post("/api/onboarding/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
-          },
-        });
+          // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+          const response = await axios.post("/api/onboarding/upload", formData, {
+              headers: {
+                  "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+              },
+          });
 
-        const data = response.data;
-        console.log("uploaded files: ", data.files);
+          const data = response.data;
+          console.log("Uploaded files: ", data.files);
       } catch (error) {
-        console.error("Error:", error);
+          console.error("Error:", error);
       }
-    }
-  };
+  }
+};
+
 
   return (
     <div className="container">
