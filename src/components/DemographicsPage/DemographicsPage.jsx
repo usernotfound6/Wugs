@@ -74,9 +74,10 @@ function DemographicsPage() {
       <CssBaseline/>
       <div style={{ textAlign: "center" }}>
         <h1 style={{ color: "beige" }}>
-          Who Are We Serving? <HelpIcon onMouseEnter={handleHelpIconHover} />
+          Who Are You Serving? <HelpIcon onMouseEnter={handleHelpIconHover} />
         </h1>
       </div>{" "}
+    
       <div style={{ padding: "1em" }}>
         <Box
           margin={"auto"}
