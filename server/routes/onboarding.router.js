@@ -32,13 +32,14 @@ router.get("/client/:id", (req, res) => {
     c.dimensions,
     c.wugs_visit,
     c.contract,
-    c.admin_notes,
+    c.last_active,
     s.status_name,
     u.first_name,
     u.last_name,
     u.username,
       ARRAY(SELECT DISTINCT service.service_name FROM client_service JOIN service ON client_service.service_id = service.id WHERE client_service.client_id = c.id) AS service_names,
       ARRAY(SELECT DISTINCT product.type FROM client_product JOIN product ON client_product.product_id = product.id WHERE client_product.client_id = c.id) AS product_types
+      ARRAY(SELECT DISTINCT client_product.product_id FROM client_product WHERE client_product.client_id = c.id) AS product_ids
     FROM
       client AS c
     JOIN
@@ -120,7 +121,8 @@ router.put("/clientlocationinfo/:id", (req, res) => {
     website = $6,
     phone = $7,
     hours_of_operation = $8,
-    micromarket_location = $9
+    micromarket_location = $9,
+    last_active = NOW()
   WHERE client.id = $10;
   `;
 
@@ -157,7 +159,8 @@ router.put("/demographics/:id", (req, res) => {
     demographics = $2,
     neighborhood_info = $3,
     industry = $4,
-    target_age_group = $5
+    target_age_group = $5,
+    last_active = NOW()
   WHERE client.id = $6;
   `;
   pool
@@ -223,7 +226,8 @@ router.put("/additionalinfo/:id", (req, res) => {
   SET 
     dimensions = $1,
     pictures = $2,
-    wugs_visit = $3
+    wugs_visit = $3,
+    last_active = NOW()
   WHERE client.id = $4;
   `;
   pool
@@ -266,6 +270,7 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
     UPDATE client
     SET 
       phone = $1
+      last_active = NOW()
     WHERE id = $2;
   `;
     const userSqlText = `
