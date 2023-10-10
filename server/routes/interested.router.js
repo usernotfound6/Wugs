@@ -1,6 +1,9 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware.js");
 
 /**
  * GET route template
@@ -46,6 +49,25 @@ router.post('/', (req, res) => {
             console.log("error with POST server-side:", error)
             res.sendStatus(500);
         })
+});
+
+router.delete("/:id", rejectUnauthenticated, (req, res) => {
+  const interestedId = req.params.id;
+
+  const deleteQuery1 = "DELETE FROM interested WHERE interested.id=$1";
+
+  // Execute the first DELETE query
+  pool
+    .query(deleteQuery1, [interestedId])
+    
+    .then(() => {
+      // Both DELETE operations were successful
+      res.status(200).json({ message: "Interested and related data deleted" });
+    })
+    .catch((error) => {
+      console.log("Error DELETE /api/interested", error);
+      res.sendStatus(500);
+    });
 });
 
 module.exports = router;

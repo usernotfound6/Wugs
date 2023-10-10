@@ -25,9 +25,21 @@ function* getAllInterested(action) {
     }
   }
 
+  function* deleteInterested(action) {
+    try {
+      const interestedDelete = action.payload; 
+      yield axios.delete(`/api/interested/${interestedDelete.id}`, interestedDelete);
+      yield put({ type: "ALL_INTERESTED" });
+    } catch (error) {
+      console.log("error sending put", error);
+    }
+  }
+
 function* interestedSaga() {
     yield takeLatest('NEW_INTERESTED', interestedInWugs);
     yield takeLatest('ALL_INTERESTED', getAllInterested);
+    yield takeLatest('DELETE_INTERESTED', deleteInterested);
+
 
 }
 

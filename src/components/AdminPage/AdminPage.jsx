@@ -26,6 +26,7 @@ function AdminPage() {
     phone: "",
     admin_notes: "",
   });
+  const [selectedRowId, setSelectedRowId] = useState('')
   const admin = useSelector((store) => store.admin);
   const interested = useSelector((store) => store.interested);
 
@@ -64,6 +65,7 @@ function AdminPage() {
     industry: item.industry,
     why_wugs: item.why_wugs,
     about_you: item.about_you,
+    
   }));
 
   const style = {
@@ -84,7 +86,6 @@ function AdminPage() {
     setSelectedRowData(params.row); // Set the entire row data
     handleOpen(); // Open the modal when a row is clicked
   };
-  console.log("state", selectedRowData)
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -119,6 +120,13 @@ function AdminPage() {
       },
     });
   }
+
+  // function handleButtonClick(params) {
+  //   setSelectedRowData(params.id); // Set the entire row data
+
+  //   console.log("delete interested", selectedRowId.id)
+    
+  // }
   
 
   return (
@@ -185,6 +193,7 @@ function AdminPage() {
       <DataGrid
         rows={interestedRows}
         columns={interestedColumns}
+        // onRowClick={handleButtonClick}
         // initialState={{
         //   pagination: {
         //     paginationModel: { page: 0, pageSize: 5 },
