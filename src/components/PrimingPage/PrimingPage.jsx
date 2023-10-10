@@ -15,14 +15,14 @@ function PrimingPage() {
 
   const styles = {
     cardContainer: {
-      maxWidth: "42%",
+     
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       margin: "auto",
     },
     card: {
-      maxWidth: "100%",
+    
       borderRadius: 4,
       padding: 1,
       backgroundColor: "#484747",
