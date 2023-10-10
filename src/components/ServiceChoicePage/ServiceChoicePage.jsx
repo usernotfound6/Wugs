@@ -21,6 +21,8 @@ function ServiceChoicePage() {
   const singleClient = useSelector((store) => store.client);
   const client = useSelector((store) => store.client);
 
+  console.log("client!!!", singleClient)
+
   let defaultMicroMarketCheckedState =
     client?.service_names?.includes("Micro Markets");
   let defaultSmartCoolerChecked =
