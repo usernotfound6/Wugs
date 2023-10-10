@@ -9,6 +9,7 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 const fs = require("fs");
+// This storage creates a upload folder that will save docs that were sent via google drive POST
 const storage = multer.diskStorage({
   destination: "uploads",
   filename: function (req, file, callback) {
