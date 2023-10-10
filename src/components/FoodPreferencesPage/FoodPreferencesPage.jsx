@@ -9,38 +9,7 @@ import Typography from '@mui/material/Typography';
 
 // Path: /foodpreferences
 
-const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
-  position: 'relative',
-  height: 200,
-  [theme.breakpoints.down('sm')]: {
-    width: '100% !important', // Overrides inline-style
-    height: 100,
-  },
-  '&:hover, &.Mui-focusVisible': {
-    zIndex: 1,
-    '& .MuiImageBackdrop-root': {
-      opacity: 0.15,
-    },
-    '& .MuiImageMarked-root': {
-      opacity: 0,
-    },
-    '& .MuiTypography-root': {
-      border: '4px solid currentColor',
-    },
-  },
-  // Apply hover styles to the clicked button
-  ...(isclicked && {
-    '& .MuiImageBackdrop-root': {
-      opacity: 0.15,
-    },
-    '& .MuiImageMarked-root': {
-      opacity: 0,
-    },
-    '& .MuiTypography-root': {
-      border: '4px solid currentColor',
-    },
-  }),
-}));
+
 
 const ImageSrc = styled('span')({
   position: 'absolute',
@@ -87,19 +56,21 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 function FoodPreferencesPage() {
 
-  const [clickedButtons, setClickedButtons] = useState([]);
+  const client = useSelector((store) => store.client)
 
-  // console.log("ClickedButtons", clickedButtons)
+  const [clickedButtons, setClickedButtons] = useState(client.product_ids || []);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_PRODUCTS' });
-  }, [dispatch]);
+  }, [client || dispatch]);
 
   const products = useSelector((store) => store.products.data);
-  const client = useSelector((store) => store.client)
+  
+
+  console.log("Products chosen", client.product_ids)
 
   const handleClick = (productId) => {
     // Toggle the clicked state for the clicked button
@@ -123,6 +94,39 @@ function FoodPreferencesPage() {
     history.push('/additionalinfo')
 
   };
+
+  const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
+    position: 'relative',
+    height: 200,
+    [theme.breakpoints.down('sm')]: {
+      width: '100% !important', // Overrides inline-style
+      height: 100,
+    },
+    '&:hover, &.Mui-focusVisible': {
+      zIndex: 1,
+      '& .MuiImageBackdrop-root': {
+        opacity: 0.15,
+      },
+      '& .MuiImageMarked-root': {
+        opacity: 0,
+      },
+      '& .MuiTypography-root': {
+        border: '4px solid currentColor',
+      },
+    },
+    // Apply hover styles to the clicked button
+    ...(isclicked && {
+      '& .MuiImageBackdrop-root': {
+        opacity: 0.15,
+      },
+      '& .MuiImageMarked-root': {
+        opacity: 0,
+      },
+      '& .MuiTypography-root': {
+        border: '4px solid currentColor',
+      },
+    }),
+  }));
 
   return (
     <div>

@@ -26,9 +26,39 @@ const Columns = () => {
           ),
         },
         {
-          field: "address",
+          field: "address_street",
           headerName: (
-            <div style={{ color: "black" }}>Address</div>
+            <div style={{ color: "black" }}>Street</div>
+          ),
+          width: 130,
+          renderCell: (params) => (
+            <div style={{ color: "black" }}>{params.value}</div>
+          ),
+        },
+        {
+          field: "address_city",
+          headerName: (
+            <div style={{ color: "black" }}>City</div>
+          ),
+          width: 130,
+          renderCell: (params) => (
+            <div style={{ color: "black" }}>{params.value}</div>
+          ),
+        },
+        {
+          field: "address_state",
+          headerName: (
+            <div style={{ color: "black" }}>State</div>
+          ),
+          width: 130,
+          renderCell: (params) => (
+            <div style={{ color: "black" }}>{params.value}</div>
+          ),
+        },
+        {
+          field: "address_zip",
+          headerName: (
+            <div style={{ color: "black" }}>Zip Code</div>
           ),
           width: 130,
           renderCell: (params) => (

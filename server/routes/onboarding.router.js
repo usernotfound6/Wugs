@@ -32,7 +32,10 @@ router.get("/client/:id", (req, res) => {
   SELECT
     c.id AS client_id,
     c.business_name,
-    c.address,
+    c.address_street,
+    c.address_city,
+    c.address_state,
+    c.address_zip,
     c.website,
     c.phone,
     c.hours_of_operation,
@@ -52,7 +55,8 @@ router.get("/client/:id", (req, res) => {
     u.last_name,
     u.username,
       ARRAY(SELECT DISTINCT service.service_name FROM client_service JOIN service ON client_service.service_id = service.id WHERE client_service.client_id = c.id) AS service_names,
-      ARRAY(SELECT DISTINCT product.type FROM client_product JOIN product ON client_product.product_id = product.id WHERE client_product.client_id = c.id) AS product_types
+      ARRAY(SELECT DISTINCT product.type FROM client_product JOIN product ON client_product.product_id = product.id WHERE client_product.client_id = c.id) AS product_types,
+      ARRAY(SELECT DISTINCT client_product.product_id FROM client_product WHERE client_product.client_id = c.id) AS product_ids
     FROM
       client AS c
     JOIN
@@ -113,23 +117,30 @@ router.put("/clientlocationinfo/:id", (req, res) => {
 
   let queryParams = [
     req.body.business_name, //1
-    req.body.address, //2
-    req.body.website, //3
-    req.body.phone, //4
-    req.body.hours_of_operation, //5
-    req.body.micromarket_location, //6
-    clientId, //7
+
+    req.body.address_street, //2
+    req.body.address_city, //3
+    req.body.address_state, //4
+    req.body.address_zip, //5
+    req.body.website, //6
+    req.body.phone, //7
+    req.body.hours_of_operation, //8
+    req.body.micromarket_location, //9
+    clientId //10
   ];
   let sqlText = `
   UPDATE client
   SET 
     business_name = $1,
-    address = $2,
-    website = $3,
-    phone = $4,
-    hours_of_operation = $5,
-    micromarket_location = $6
-  WHERE client.id = $7;
+    address_street = $2,
+    address_city = $3,
+    address_state = $4,
+    address_zip = $5,
+    website = $6,
+    phone = $7,
+    hours_of_operation = $8,
+    micromarket_location = $9
+  WHERE client.id = $10;
   `;
 
   pool
@@ -185,6 +196,7 @@ router.put("/demographics/:id", (req, res) => {
 router.post("/foodpreferences", (req, res) => {
   const client_id = req.body.client_id;
   const product_ids = req.body.clickedButtons;
+
 
   const deleteQuery = `DELETE FROM client_product WHERE client_id = \$1 AND product_id NOT IN (${product_ids.join()})`;
   const deleteValues = [client_id];

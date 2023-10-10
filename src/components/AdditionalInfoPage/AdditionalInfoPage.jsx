@@ -9,7 +9,8 @@ import {
   Button,
   Stack,
   Switch,
-  Typography
+  Typography,
+  CssBaseline,
 } from "@mui/material";
 
 function AdditionalInfoPage() {
@@ -82,14 +83,26 @@ function AdditionalInfoPage() {
       <MyStepper step={4} />
 
       <div className="wholebody">
-        <Typography variant="h3">Additional Information</Typography>
-        <Box
-          component="form"
-          sx={{
-            "& > :not(style)": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
+      <CssBaseline />
+      <div style={{ textAlign: "center" }}>
+        <h1 style={{ color: "beige" }}>Additional Information</h1>
+      </div>{" "}
+      
+      <Box margin={'auto'}
+      
+        component="form"
+        sx={{
+
+          backgroundColor: '#484747',
+          borderRadius: 3,
+          width: 360,
+          padding: 2,
+          elevation: 24,
+          marginTop:4,
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
         >
           <TextField
             id="dimensions"
@@ -98,7 +111,8 @@ function AdditionalInfoPage() {
             inputProps={{ style: { color: "beige" } }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="text"
-            placeholder="Dimensions"
+            style={{ width: 310 }}
+            placeholder="16 x 12"
             value={dimensions}
             onChange={(event) => setDimensions(event.target.value)}
             required
@@ -117,13 +131,13 @@ function AdditionalInfoPage() {
             }}
           />
           <br />
-          <Typography variant="h5">Request a Visit from Wugs?</Typography>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>No</Typography>
-            <AntSwitch
+          <Typography display='flex' justifyContent='center' color='beige' variant="h6">Request a Visit from Wugs?</Typography>
+          <Stack display='flex' margin={'auto'} justifyContent='center' direction="row" spacing={1} alignItems="center">
+            <Typography color='beige'>No</Typography>
+            <AntSwitch 
               checked={wugsVisit} // Add the checked prop to bind it to state
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
-            <Typography>Yes</Typography>
+            <Typography color='beige'>Yes</Typography>
           </Stack>
 
 

@@ -21,6 +21,8 @@ function ServiceChoicePage() {
   const singleClient = useSelector((store) => store.client);
   const client = useSelector((store) => store.client);
 
+  console.log("client!!!", singleClient)
+
   let defaultMicroMarketCheckedState =
     client?.service_names?.includes("Micro Markets");
   let defaultSmartCoolerChecked =
@@ -198,15 +200,22 @@ function ServiceChoicePage() {
         </form>
       </div>
        {/* Added a margin and flex-end to the services button */}
-      <div style={{ display: "flex", justifyContent: "flex-end", margin: "100px" }}>
-        <Button
-          onClick={handleSubmit}
-          color="success"
-          variant="contained"
-          autoFocus
-        >
-          Next
-        </Button>
+      <div style={{ display: "flex"}}>
+        <Button 
+        onClick={handleSubmit}
+        sx={{
+          marginTop: 1.5,
+          marginLeft: 2,
+          height: 50,
+          width: 120,
+          borderRadius: 1,
+        }}
+        color="success"
+        variant="contained"
+        autoFocus
+      >
+        Next
+      </Button>
       </div>
     </div>
   );

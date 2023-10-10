@@ -8,6 +8,7 @@ CREATE TABLE "user" (
   admin BOOLEAN DEFAULT false
 );
 
+
 -- Create the 'status' table
 CREATE TABLE status (
   id SERIAL PRIMARY KEY,
@@ -18,7 +19,10 @@ CREATE TABLE status (
 CREATE TABLE client (
   id SERIAL PRIMARY KEY,
   business_name VARCHAR(100),
-  address VARCHAR(100),
+  address_street VARCHAR(100),
+  address_city VARCHAR(100),
+  address_state VARCHAR(20),
+  address_zip VARCHAR(10),
   website VARCHAR(255),
   manager_id INTEGER REFERENCES "user"(id),
   phone VARCHAR(20),
@@ -34,7 +38,7 @@ CREATE TABLE client (
   wugs_visit BOOLEAN default false,
   contract VARCHAR(200),
   admin_notes VARCHAR(500),
-  status_id INTEGER REFERENCES status(id) default 1
+  status_id INTEGER REFERENCES status(id)
 );
 
 -- Create the 'service' table
@@ -46,7 +50,8 @@ CREATE TABLE service (
 -- Create the 'product' table
 CREATE TABLE product (
   id SERIAL PRIMARY KEY,
-  type VARCHAR(50)
+  type VARCHAR(50),
+  url VARCHAR(255)
 );
 
 -- Create a separate table for service and product relationships
@@ -75,18 +80,6 @@ CREATE TABLE interested (
   why_wugs VARCHAR(300)
 );
 
--- Remove the existing foreign key constraint named "client_product_client_id_fkey"
-ALTER TABLE client_product
-DROP CONSTRAINT client_product_client_id_fkey;
-
--- Add a new foreign key constraint to the "client_product" table
--- The new constraint ensures that the "client_id" in "client_product" references the "id" in "client"
--- ON DELETE CASCADE specifies that when a record in "client" is deleted, all related records in "client_product" will also be deleted
-ALTER TABLE client_product
-ADD CONSTRAINT client_product_client_id_fkey
-FOREIGN KEY (client_id) REFERENCES client(id)
-ON DELETE CASCADE;
-
 INSERT INTO "user" (first_name, last_name, username, password, admin)
 VALUES
 ('John', 'Doe', 'john.doe@email.com', 'hashed_password_here', false),
@@ -108,21 +101,24 @@ VALUES
   ('Account Active'),
   ('Account Inactive');
   
-  INSERT INTO product (type) 
+  INSERT INTO product (type, url) 
   VALUES
-  ('African'),
-  ('Asian'),
-  ('Gluten Free'),
-  ('Mexican'),
-  ('Perishable'),
-  ('Frozen'),
-  ('Kosher'),
-  ('Halal'),
-  ('Dairy Free');
+  ('African', 'https://erafricanonlinestore.com/cdn/shop/articles/African_snacks.jpg?v=1624804433'),
+  ('Asian', 'https://healthynibblesandbits.com/wp-content/uploads/2018/09/Pocky.jpg'),
+  ('Gluten Free', 'https://media.theeverymom.com/wp-content/uploads/2021/07/13164901/gluten-free-snacks-the-everymom-f-h.png'),
+  ('Mexican', 'https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/lwjmyeif/020d87a3-b703-4c0a-ae9c-d9d4139684ed.JPG'),
+  ('Frozen', 'https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/R62Z6RGZI4I6XDEHVVXSPEMMPA.jpg'),
+  ('Kosher', 'https://bunnyjamesboxes.com/cdn/shop/products/bunny-james-boxes-snack-boxes-premium-kosher-box-20-count-41311457902898_480x480.jpg?v=1681750682'),
+  ('Halal', 'https://i0.wp.com/wehalal.co/wp-content/uploads/2020/08/halal-munchies-candy.jpg?fit=1024%2C683&ssl=1'),
+  ('Dairy Free', 'https://jessicasglutenfreekitchen.com/wp-content/uploads/2019/04/IMG_4748.jpeg'),
+  ('Vegan', 'https://www.shopmyexchange.com/products/images/xlarge/1698365_0000.jpg');
 
 INSERT INTO client (
   business_name,
-  address,
+  address_street,
+  address_city,
+  address_state,
+  address_zip,
   website,
   manager_id,
   phone,
@@ -140,9 +136,9 @@ INSERT INTO client (
   admin_notes,
   status_id
 ) VALUES
-('ABC School', '123 Elm Street', 'www.abcschool.com', 1, '555-123-4567', 'Mon-Fri: 8 AM - 5 PM', 'Cafeteria', 'Nearby grocery store and pharmacy', 'Mixed demographics', 500, 'Students and Staff', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '15 ft x 5 ft', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about school client', 1),
-('XYZ Nursing Home', '456 Oak Avenue', 'www.xyznursinghome.com', 2, '555-987-6543', '24/7', 'Common Area', 'Close to a convenience store', 'Elderly residents', 100, 'Seniors', 'Healthcare', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '65 inches by 32 inches', false, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about nursing home client', 2),
-('123 College', '789 Maple Road', 'www.123college.edu', 3, '555-567-8901', 'Mon-Sat: 7 AM - 10 PM', 'Student Center', 'Adjacent to a campus store', 'College students', 2000, 'Young Adults', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg'], '10ft high, 22 ft width, 4 ft out from wall', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about college client', 1);
+('ABC School', '123 Elm Street', 'YourCity', 'YourState', '12345', 'www.abcschool.com', 1, '555-123-4567', 'Mon-Fri: 8 AM - 5 PM', 'Cafeteria', 'Nearby grocery store and pharmacy', 'Mixed demographics', 500, 'Students and Staff', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '15 ft x 5 ft', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about school client', 1),
+('XYZ Nursing Home', '456 Oak Avenue', 'YourCity', 'YourState', '67890', 'www.xyznursinghome.com', 2, '555-987-6543', '24/7', 'Common Area', 'Close to a convenience store', 'Elderly residents', 100, 'Seniors', 'Healthcare', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg', 'https://www.myrefreshmentsplus.com/wp-content/uploads/2018/03/slide3-1.jpg'], '65 inches by 32 inches', false, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about nursing home client', 2),
+('123 College', '789 Maple Road', 'YourCity', 'YourState', '54321', 'www.123college.edu', 3, '555-567-8901', 'Mon-Sat: 7 AM - 10 PM', 'Student Center', 'Adjacent to a campus store', 'College students', 2000, 'Young Adults', 'Education', ARRAY['https://upload.wikimedia.org/wikipedia/commons/9/9d/MicroMarket.jpg'], '10ft high, 22 ft width, 4 ft out from wall', true, 'https://images.template.net/wp-content/uploads/2015/12/29130035/Sample-Contract-Agreement-Template-PDF.jpeg', 'Notes about college client', 1);
 
 INSERT INTO interested (name, email, phone_number, industry, about_you, why_wugs) VALUES
     ('John Doe', 'john.doe@example.com', '555-555-5555', 'Technology', 'We are a tech startup focused on AI and machine learning.', 'We would like a vending machine to provide convenient snacks and beverages for our employees.'),
