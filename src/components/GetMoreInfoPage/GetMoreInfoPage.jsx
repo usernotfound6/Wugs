@@ -10,6 +10,7 @@ import {
   DialogContent,
   DialogActions,
   DialogContentText,
+  CssBaseline,
 } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -99,10 +100,19 @@ function GetMoreInfoPage() {
 
   return (
     <div className="wholebody">
-      <h3 style={{ marginLeft: "12px" }}>Get In Touch With Us</h3>
-      <Box
+       <CssBaseline />
+        <div style={{ textAlign: "center" }}>
+          <h1 style={{ color: "beige" }}>Get In Touch With Us</h1>
+          </div>{" "}
+      <Box margin={'auto'}
         component="form"
         sx={{
+          
+          backgroundColor: '#484747',
+          borderRadius: 3,
+          width: 350,
+          padding: 2,
+         elevation: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
@@ -112,6 +122,7 @@ function GetMoreInfoPage() {
           id="name"
           label="Name"
           variant="outlined"
+          style={{ width: 300 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
@@ -139,6 +150,7 @@ function GetMoreInfoPage() {
           id="email"
           label="Email Address"
           variant="outlined"
+          style={{ width: 300 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="email"
@@ -147,6 +159,7 @@ function GetMoreInfoPage() {
           onChange={(event) => setEmail(event.target.value)}
           required
           sx={{
+    
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "gray", // Outline color when not focused
@@ -166,6 +179,7 @@ function GetMoreInfoPage() {
           id="phone"
           label="Phone Number"
           variant="outlined"
+          style={{ width: 300 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="tel"
@@ -193,6 +207,7 @@ function GetMoreInfoPage() {
           id="industry"
           label="Business / Industry"
           variant="outlined"
+          style={{ width: 300 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
@@ -219,6 +234,7 @@ function GetMoreInfoPage() {
           id="aboutClient"
           label="About You"
           variant="outlined"
+          style={{ width: 300 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
@@ -246,7 +262,7 @@ function GetMoreInfoPage() {
           id="whyWugs"
           label="What Brings You To Wugs Today?"
           variant="outlined"
-          style={{ width: 370 }}
+          style={{ width: 300 }}
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
