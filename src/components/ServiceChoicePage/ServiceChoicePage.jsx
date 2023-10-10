@@ -80,6 +80,7 @@ function ServiceChoicePage() {
       <div style={{ textAlign: "center" }}>
         <h1 style={{ color: "beige" }}>Products I'm Interested In...</h1>
       </div>{" "}
+      {/* This div was not actually wrapped around anything. Change the justify to space-around */}
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <form className="checkbox-container">
           <Grid container spacing={5}>
@@ -196,6 +197,7 @@ function ServiceChoicePage() {
           </Grid>
         </form>
       </div>
+       {/* Added a margin and flex-end to the services button */}
       <div style={{ display: "flex", justifyContent: "flex-end", margin: "100px" }}>
         <Button
           onClick={handleSubmit}
