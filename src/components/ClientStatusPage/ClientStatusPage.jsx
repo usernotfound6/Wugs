@@ -11,8 +11,6 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { InlineWidget, PopupWidget, PopupButton } from "react-calendly";
 import { Button } from '@mui/material';
 
 // Path: /clientstatus
@@ -30,23 +28,11 @@ function ClientStatusPage() {
   // const [heading, setHeading] = useState('Functional Component');
   const client = useSelector((store) => store.client);
   const user = useSelector((store) => store.user);
-  const rootElement = document.getElementById("popup-root");
 
   return (
     <ThemeProvider theme={theme}>
       <div>
         <h2>Client Status Page</h2>
-
-        <style type="text/css">
-          {`
-          .calendly-badge-widget { 
-            left: 50% !important; 
-            margin-left: -100px !important; 
-            margin-bottom: 200px;
-          }
-        `}
-        </style>
-        <CssBaseline />
         <Container
           maxWidth="lg"
           sx={{
@@ -55,20 +41,13 @@ function ClientStatusPage() {
             // Add any other custom styles here
           }}
         >
-          {/* <Box
-            sx={{
-              bgcolor: "rgba(255, 225, 160, 0.4)",
-              height: "80vh",
-              width: "100%",
-            }}
-          > */}
           <header
             className="App-header"
             style={{
               fontSize: "1.75em",
               fontWeight: "bold",
-              textAlign: "center", // Center text horizontally
-              margin: "50px 0 0 0", // Add top and bottom margins
+              textAlign: "center",
+              margin: "50px 0 0 0",
               padding: "30px",
             }}
           >
@@ -274,19 +253,6 @@ function ClientStatusPage() {
               </Grid>
             </Grid>
             {/* </Box> */}
-
-            <PopupWidget
-              url="https://calendly.com/dontyellwillcry"
-              rootElement={rootElement}
-              text="Click here to schedule!"
-              textColor="#ffffff"
-              color="#00a2ff"
-              style={{
-                position: "absolute",
-                top: "50px",
-                left: "20px",
-              }}
-            />
           </Box>
         </Container>
       </div>

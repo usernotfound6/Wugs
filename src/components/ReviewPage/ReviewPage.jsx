@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import MyStepper from "../MyStepper/MyStepper";
 import TabContentOne from "./TabContentOne";
 import TabContentTwo from "./TabContentTwo";
 import TabContentThree from "./TabContentThree";
 import TabContentFour from "./TabContentFour";
 import TabContentFive from "./TabContentFive";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import { styled } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-
-import Typography from "@mui/material/Typography";
+import { Tab, Tabs, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-import { useSelector, useDispatch } from "react-redux";
 import { PopupWidget } from "react-calendly";
 
 // Path: /review
+
 const theme = createTheme({
   palette: {
     mode: "dark", // or 'dark' for the dark theme
@@ -68,6 +59,7 @@ function ReviewPage() {
   return (
     <ThemeProvider theme={theme}>
       <div>
+      <MyStepper step={5} />
         <style type="text/css">
           {`
           .calendly-badge-widget { 
@@ -108,19 +100,55 @@ function ReviewPage() {
           {value === 2 && <TabContentThree />}
           {value === 3 && <TabContentFour />}
           {value === 4 && <TabContentFive />}
-          <PopupWidget
-            url="https://calendly.com/dontyellwillcry"
-            rootElement={rootElement}
-            text="Click here to schedule!"
-            textColor="#ffffff"
-            color="#00a2ff"
-            style={{
-              position: "flex",
-              top: "50px",
-              left: "20px",
-            }}
-          />
         </Container>
+        <PopupWidget
+          url="https://calendly.com/dontyellwillcry"
+          rootElement={rootElement}
+          text="Click here to schedule meeting!"
+          textColor="#ffffff"
+          color="#00a2ff"
+          style={{
+            position: "absolute",
+            top: "50px",
+            left: "20px",
+          }}
+        />
+
+        {/* Confirmation Dialog */}
+
+        {/* <Dialog
+        open={openConfirmation}
+        onClose={handleCloseConfirmation}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          style: {
+            background: "beige",
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          Thank You For Expressing Interest!
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You will be emailed soon with follow-up information. Once you click
+            'Go Back' you will be redirected to the home page where you can get
+            started on the onboarding process.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleConfirmSubmit}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Go Back
+          </Button>
+        </DialogActions>
+      </Dialog> */}
+
       </div>
     </ThemeProvider>
   );

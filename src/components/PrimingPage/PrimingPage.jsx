@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -14,7 +13,6 @@ import FastfoodIcon from '@mui/icons-material/Fastfood';
 function PrimingPage() {
 
   const history = useHistory();
-
 
   const styles = {
     cardContainer: {
