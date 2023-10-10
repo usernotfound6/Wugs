@@ -98,7 +98,7 @@ function ClientLocationInfoPage() {
       <div>
         <MyStepper step={1} />
       </div>
-      <CssBaseline />
+      <CssBaseline/>
         <div style={{ textAlign: "center" }}>
           <h1 style={{ color: "beige" }}>Who Are We Serving?</h1>
           </div>{" "}
