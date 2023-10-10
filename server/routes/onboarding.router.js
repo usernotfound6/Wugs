@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-const keyFile = require("/Users/papaporo/Prime/wugs_app/Wugs/our-chassis-401623-8599a8b4f596.json"); // Load the key file
+const keyFile = require("/Users/papaporo/Prime/wugs_app/Wugs/our-chassis-401623-8599a8b4f596.json"); // This is the aboslute file path for the json credentials needed for the google drive POST request.
 
 
 

@@ -16,7 +16,7 @@ import axios from "axios";
 
 function UserPage() {
   const rootElement = document.getElementById("popup-root");
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef(null); // Needed for the googel drive post
 
   const user = useSelector((store) => store.user);
   const client = useSelector((store) => store.client);
@@ -116,7 +116,7 @@ function UserPage() {
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
   };
-
+/* Google Drive POST - take the from data (file) and sends in a post*/
   const handleFileUpload = async () => {
     const files = fileInputRef.current.files;
     console.log("Selected files:", files);
