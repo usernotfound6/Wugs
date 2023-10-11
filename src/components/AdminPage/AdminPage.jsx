@@ -140,7 +140,7 @@ function AdminPage() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-          
+
         <Box sx={style} style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '16px', gridTemplateAreas: '"contact business" "additional extra"' }}>
           {/* Contact Information */}
           <div style={{ gridArea: 'contact' }}>
@@ -235,7 +235,7 @@ function AdminPage() {
                   <p>No contract on file.</p>
                 )}
               </li>
-              <li>Wugs Visit Requested: {selectedRowData.wugs_visit}</li>
+              <li>Wugs Visit Requested: {selectedRowData.wugs_visit ? "Yes" : "No"}</li>
             </ul>
           </div>
           <Box sx={{ minWidth: 120 }}>
