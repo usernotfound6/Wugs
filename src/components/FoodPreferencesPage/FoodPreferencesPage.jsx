@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 
 // Path: /foodpreferences
 
+
 const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
   position: "relative",
   height: 200,
@@ -41,6 +42,7 @@ const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
     },
   }),
 }));
+
 
 const ImageSrc = styled("span")({
   position: "absolute",
@@ -86,19 +88,25 @@ const ImageMarked = styled("span")(({ theme }) => ({
 }));
 
 function FoodPreferencesPage() {
-  const [clickedButtons, setClickedButtons] = useState([]);
 
-  // console.log("ClickedButtons", clickedButtons)
+
+  const client = useSelector((store) => store.client)
+
+  const [clickedButtons, setClickedButtons] = useState(client.product_ids || []);
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    dispatch({ type: "FETCH_PRODUCTS" });
-  }, [dispatch]);
+
+    dispatch({ type: 'FETCH_PRODUCTS' });
+  }, [client || dispatch]);
 
   const products = useSelector((store) => store.products.data);
-  const client = useSelector((store) => store.client);
+  
+
+  console.log("Products chosen", client.product_ids)
+
 
   const handleClick = (productId) => {
     // Toggle the clicked state for the clicked button
@@ -122,9 +130,43 @@ function FoodPreferencesPage() {
     history.push("/additionalinfo");
   };
 
+  const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
+    position: 'relative',
+    height: 200,
+    [theme.breakpoints.down('sm')]: {
+      width: '100% !important', // Overrides inline-style
+      height: 100,
+    },
+    '&:hover, &.Mui-focusVisible': {
+      zIndex: 1,
+      '& .MuiImageBackdrop-root': {
+        opacity: 0.15,
+      },
+      '& .MuiImageMarked-root': {
+        opacity: 0,
+      },
+      '& .MuiTypography-root': {
+        border: '4px solid currentColor',
+      },
+    },
+    // Apply hover styles to the clicked button
+    ...(isclicked && {
+      '& .MuiImageBackdrop-root': {
+        opacity: 0.15,
+      },
+      '& .MuiImageMarked-root': {
+        opacity: 0,
+      },
+      '& .MuiTypography-root': {
+        border: '4px solid currentColor',
+      },
+    }),
+  }));
+
   return (
     <div className="container">
       <MyStepper step={3} />
+
       <Typography
         style={{ textAlign: "center" }}
         variant="h4"
@@ -147,6 +189,7 @@ function FoodPreferencesPage() {
       <Box
         sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
       >
+     
         {products && products.length > 0 ? (
           products.map((product) => (
             <ImageButton
