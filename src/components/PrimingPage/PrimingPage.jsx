@@ -30,7 +30,7 @@ function PrimingPage() {
   };
 
   return (
-    <>
+    <div className="container">
       <Typography
         style={{ textAlign: "center" }}
         variant="h4"
@@ -99,7 +99,7 @@ function PrimingPage() {
           </CardActions>
         </Card>
       </Box>
-    </>
+    </div>
   );
 }
 export default PrimingPage;
