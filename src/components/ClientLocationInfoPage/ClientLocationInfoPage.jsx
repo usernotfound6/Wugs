@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 // the CssBaseline was no inported?
 import CssBaseline from '@mui/material/CssBaseline';
 import MyStepper from '../MyStepper/MyStepper';
-import { Button, MenuItem, Select } from "@mui/material";
+import { Button, MenuItem, Select, Typography } from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
@@ -108,9 +108,10 @@ function ClientLocationInfoPage() {
       <div>
         <MyStepper step={1} />
       </div>
+
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ color: "beige" }}>Who Are We Serving?</h1>
+        <Typography variant= 'h4' marginTop={3} marginBottom={3} style={{ color: "beige" }}>Who Are We Serving?</Typography>
       </div>{" "}
       <Box margin={'auto'}
         component="form"
