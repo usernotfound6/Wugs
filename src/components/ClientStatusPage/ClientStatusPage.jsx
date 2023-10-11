@@ -8,7 +8,7 @@ import TabContentFour from "./TabContentFour";
 import TabContentFive from "./TabContentFive";
 import { Tab, Tabs, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { PopupWidget } from "react-calendly";
+
 
 // Path: /review
 
@@ -22,7 +22,7 @@ function ClientStatusPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const client = useSelector((store) => store.client);
-  const rootElement = document.getElementById("popup-root");
+  
 
   console.log("Here is the client", client);
 
@@ -79,11 +79,11 @@ function ClientStatusPage() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab label="Products I'm interested in.." />
-            <Tab label="Foods we're interested in.." />
+            <Tab label="Services I'm interested in..." />
             <Tab label="Who we are..." />
+            <Tab label="Foods we're interested in..." />
+            <Tab label="Who we're serving..." />
             <Tab label="Additional info" />
-            <Tab label="Who we're serving.." />
           </Tabs>
         </div>
         <Container
@@ -94,24 +94,12 @@ function ClientStatusPage() {
           }}
         >
           {value === 0 && <TabContentOne />}
-          {value === 1 && <TabContentTwo />}
-          {value === 2 && <TabContentThree />}
-          {value === 3 && <TabContentFour />}
-          {value === 4 && <TabContentFive />}
+          {value === 1 && <TabContentThree />}
+          {value === 2 && <TabContentTwo />}
+          {value === 3 && <TabContentFive />}
+          {value === 4 && <TabContentFour />}
         </Container>
-        <PopupWidget
-          url="https://calendly.com/dontyellwillcry"
-          rootElement={rootElement}
-          text="Click here to schedule meeting!"
-          textColor="beige"
-          color="#00a2ff"
-          style={{
-            position: "absolute",
-            top: "50px",
-            left: "20px",
-            
-          }}
-        />
+        
 
         {/* Confirmation Dialog */}
 
