@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import MyStepper from "../MyStepper/MyStepper";
+import { PopupWidget } from "react-calendly";
 
 // Path: /clientstatus
 
@@ -34,6 +35,8 @@ function ReviewPage() {
   const client = useSelector((store) => store.client);
   const user = useSelector((store) => store.user);
   const history = useHistory();
+
+  const rootElement = document.getElementById("popup-root");
 
   const handleSubmit1 = () => {
     history.push('/servicechoice')
@@ -291,6 +294,19 @@ function ReviewPage() {
             {/* </Box> */}
           </Box>
         </Container>
+        <PopupWidget
+          url="https://calendly.com/dontyellwillcry"
+          rootElement={rootElement}
+          text="Click here to schedule meeting!"
+          textColor="beige"
+          color="#00a2ff"
+          style={{
+            position: "absolute",
+            top: "50px",
+            left: "20px",
+            
+          }}
+        />
       </div>
     </ThemeProvider>
   );
