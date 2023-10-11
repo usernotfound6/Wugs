@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 // the CssBaseline was no inported?
 import CssBaseline from '@mui/material/CssBaseline';
 import MyStepper from '../MyStepper/MyStepper';
-import { Button } from "@mui/material";
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
@@ -14,6 +14,11 @@ function ClientLocationInfoPage() {
 
   const client = useSelector((store) => store.client)
 
+  const allStates = [
+    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
+    'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA',
+    'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+  ];  
 
   const [businessname, setBusinessName] = useState(client.business_name);
   const [address, setAddress] = useState(client.address);
@@ -65,6 +70,10 @@ function ClientLocationInfoPage() {
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
   };
+
+  const handleStateSelect = (event => {
+    setAddressState(event.target.value)
+  })
 
   const handleConfirmSubmit = () => {
     setOpenConfirmation(false);
@@ -153,8 +162,95 @@ function ClientLocationInfoPage() {
           InputLabelProps={{ style: { color: "beige" } }}
           type="address"
           placeholder="123 Snack St N"
-          value={address}
-          onChange={(event) => setAddress(event.target.value)}
+          value={addressStreet}
+          onChange={(event) => setAddressStreet(event.target.value)}
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
+        />
+        <br />
+        <TextField
+          id="addressCity"
+          label="City"
+          variant="outlined"
+          style={{ width: 310 }}
+          inputProps={{ style: { color: "beige" } }}
+          InputLabelProps={{ style: { color: "beige" } }}
+          type="text"
+          placeholder="Minneapolis"
+          value={addressCity}
+          onChange={(event) => setAddressCity(event.target.value)}
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
+        />
+        <br />
+
+        <Select
+          id="addressState"
+          value={addressState}
+          label="State"
+          onChange={handleStateSelect}
+          defaultValue={"MN"}
+          variant="outlined"
+          style={{ width: 310 }}
+          inputProps={{ style: { color: "beige" } }}
+          required
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "gray", // Outline color when not focused
+              },
+              "&:hover fieldset": {
+                borderColor: "beige", // Outline color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "beige", // Outline color when focused
+              },
+            },
+          }}
+        >
+          {allStates.map((stateAbbr) => (
+            <MenuItem key={stateAbbr} value={stateAbbr}>
+              {stateAbbr}
+            </MenuItem>
+          ))}
+        </Select>
+
+        <br />
+        <TextField
+          id="addressZip"
+          label="Zip Code"
+          variant="outlined"
+          style={{ width: 310 }}
+          inputProps={{ style: { color: "beige" } }}
+          InputLabelProps={{ style: { color: "beige" } }}
+          type="text"
+          placeholder="55415"
+          value={addressZip}
+          onChange={(event) => setAddressZip(event.target.value)}
           required
           sx={{
             "& .MuiOutlinedInput-root": {
