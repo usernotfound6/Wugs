@@ -11,6 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { PopupWidget } from "react-calendly";
 import { Typography } from "@mui/material";
 
+
 // Path: /review
 
 const theme = createTheme({
@@ -23,6 +24,7 @@ function ClientStatusPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const client = useSelector((store) => store.client);
+
 
   console.log("Here is the client", client);
 
@@ -91,11 +93,11 @@ function ClientStatusPage() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab label="Products I'm interested in.." />
-            <Tab label="Foods we're interested in.." />
+            <Tab label="Services I'm interested in..." />
             <Tab label="Who we are..." />
+            <Tab label="Foods we're interested in..." />
+            <Tab label="Who we're serving..." />
             <Tab label="Additional info" />
-            <Tab label="Who we're serving.." />
           </Tabs>
         </div>
         <Container
@@ -106,12 +108,12 @@ function ClientStatusPage() {
           }}
         >
           {value === 0 && <TabContentOne />}
-          {value === 1 && <TabContentTwo />}
-          {value === 2 && <TabContentThree />}
-          {value === 3 && <TabContentFour />}
-          {value === 4 && <TabContentFive />}
+          {value === 1 && <TabContentThree />}
+          {value === 2 && <TabContentTwo />}
+          {value === 3 && <TabContentFive />}
+          {value === 4 && <TabContentFour />}
         </Container>
-      
+
 
         {/* Confirmation Dialog */}
 
