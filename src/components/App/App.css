@@ -44,10 +44,10 @@ Button
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  border-color: #42243f;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #6a328a;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -70,7 +70,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #4a2057;
   text-decoration: none;
 }
 

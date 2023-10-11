@@ -86,9 +86,11 @@ function AdditionalInfoPage() {
 
       <div className="wholebody">
       <CssBaseline />
-      <div style={{ textAlign: "center" }}>
-        <h1 style={{ color: "beige" }}>Additional Information</h1>
-      </div>{" "}
+        <div style={{ textAlign: "center" }}>
+          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }}>Additional Information</Typography>
+          </div>{" "}
+
+    
       
       <Box margin={'auto'}
       
@@ -100,7 +102,7 @@ function AdditionalInfoPage() {
           width: 360,
           padding: 2,
           elevation: 24,
-          marginTop:4,
+          marginTop: 3,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
