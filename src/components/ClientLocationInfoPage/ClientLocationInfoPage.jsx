@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 // the CssBaseline was no inported?
 import CssBaseline from '@mui/material/CssBaseline';
 import MyStepper from '../MyStepper/MyStepper';
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
+import { Button, MenuItem, Select } from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
@@ -20,22 +20,20 @@ function ClientLocationInfoPage() {
     'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
   ];
 
-  const [businessname, setBusinessName] = useState(client.business_name);
-  const [addressStreet, setAddressStreet] = useState(client.address);
-  const [addressCity, setAddressCity] = useState(client.address);
-  const [addressState, setAddressState] = useState(client.address);
-  const [addressZip, setAddressZip] = useState(client.address);
-  const [website, setWebsite] = useState(client.website);
-  const [phone, setPhone] = useState(client.phone);
-  const [hours, setHours] = useState(client.hours_of_operation);
-  const [micromarket, setMicroMarket] = useState(client.micromarket_location);
+  const [businessname, setBusinessName] = useState(client.business_name || "");
+  const [addressStreet, setAddressStreet] = useState(client.address_street || "");
+  const [addressCity, setAddressCity] = useState(client.address_city || "");
+  const [addressState, setAddressState] = useState(client.address_state || "");
+  const [addressZip, setAddressZip] = useState(client.address_zip || "");
+  const [website, setWebsite] = useState(client.website || "");
+  const [phone, setPhone] = useState(client.phone || "");
+  const [hours, setHours] = useState(client.hours_of_operation || "");
+  const [micromarket, setMicroMarket] = useState(client.micromarket_location || "");
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
-
   const history = useHistory();
   const dispatch = useDispatch();
-
 
   // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
   // these functions are used to format a 10-digit US phone number as it's being typed: (XXX) XXX - XXXX)
@@ -91,17 +89,16 @@ function ClientLocationInfoPage() {
     let clientLocationInfoObject = {
       client_id: client.client_id,
       business_name: businessname,
-      address: addressStreet,
-      address: addressCity,
-      address: addressState,
-      address: addressZip,
+      address_street: addressStreet,
+      address_city: addressCity,
+      address_state: addressState,
+      address_zip: addressZip,
       website: website,
       phone: phone,
       hours_of_operation: hours,
       micromarket_location: micromarket,
     };
     dispatch({ type: 'UPDATE_CLIENT_LOCATION', payload: clientLocationInfoObject })
-
     history.push("/demographics");
   };
 
@@ -158,8 +155,8 @@ function ClientLocationInfoPage() {
         <br />
 
         <TextField
-          id="address"
-          label="Address"
+          id="addressStreet"
+          label="Street Address"
           variant="outlined"
           style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
