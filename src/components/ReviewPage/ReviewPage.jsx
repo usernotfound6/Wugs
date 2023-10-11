@@ -37,8 +37,6 @@ function ReviewPage() {
   const history = useHistory();
   const rootElement = document.getElementById("popup-root");
 
-  const rootElement = document.getElementById("popup-root");
-
   const handleSubmit1 = () => {
     history.push('/servicechoice')
   }
