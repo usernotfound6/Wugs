@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from '@mui/material';
+import { CssBaseline, Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from '@mui/material';
 import Columns from "./Columns";
 import "./AdminPage.css";
 import InterestedColumns from "./Interestedcolumns";
@@ -129,9 +129,14 @@ function AdminPage() {
   }
 
   return (
-    <Container fixed sx={{ backgroundColor: "#fefefe" }}>
-      <h1>Client Table</h1>
-      <DataGrid rows={rows} columns={columns} onRowClick={handleRowClick} />
+    <div className="container">
+    <CssBaseline />
+    <div style={{ textAlign: "center" }}>
+      <Typography variant= 'h4' marginTop={0} marginBottom={4} style={{ color: "beige" }}>Admin View</Typography>
+      </div>{" "}
+    <Container sx={{ padding: 3, marginBottom: 10, borderRadius: 3, backgroundColor: "#484747" }}>
+    <Typography variant= 'h4' style={{ padding: 6, color: "beige" }}>Client Table</Typography>
+      <DataGrid style={{ color: "beige" }} rows={rows} columns={columns} onRowClick={handleRowClick} />
 
       {/* -----------  MODAL START ----------- */}
 
@@ -140,8 +145,11 @@ function AdminPage() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        backgroundColor='#484747'
       >
-        <Box sx={style} style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '16px', gridTemplateAreas: '"contact business" "additional extra"' }}>
+
+        <Box sx={style} style={{ borderRadius: 30, backgroundColor:'#484747', color: "beige", display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '6px', gridTemplateAreas: '"contact business" "additional extra"' }}>
+
           {/* Contact Information */}
           <div style={{ gridArea: 'contact' }}>
             <Typography variant="h6">Contact Information</Typography>
@@ -238,7 +246,7 @@ function AdminPage() {
               <li>Wugs Visit Requested: {selectedRowData.wugs_visit ? "Yes" : "No"}</li>
             </ul>
           </div>
-          <div>
+          <Box sx={{ backgroundColor: "#484747", minWidth: 120 }}>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Update Status</InputLabel>
               <Select
@@ -247,6 +255,19 @@ function AdminPage() {
                 value={status}
                 label="Update Status"
                 onChange={dropdown}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "beige", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "beige", // Outline color when focused
+                    },
+                  },
+                }}
               >
                 <MenuItem value={1}>Onboarding Incomplete</MenuItem>
                 <MenuItem value={2}>Pending Wugs Approval</MenuItem>
@@ -265,9 +286,24 @@ function AdminPage() {
                 label="Client Notepad"
                 multiline
                 rows={4}
-                variant="filled"
+                inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+                variant="outlined"
                 value={input}
                 onChange={inputField}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "beige", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "beige", // Outline color when focused
+                    },
+                  },
+                }}
               />
               <Box>
                 <Button onClick={editClient}>Submit</Button>
@@ -286,7 +322,7 @@ function AdminPage() {
 
       {/* ..................USER Table................... */}
 
-      <h1>Interested Table</h1>
+      <Typography variant= 'h4' style={{ padding: 18, color: "beige" }}>Interested Table</Typography>
 
       <DataGrid
         rows={interestedRows}
@@ -299,7 +335,8 @@ function AdminPage() {
         // }}
         pageSizeOptions={[5, 10]}
       />
-    </Container >
+    </Container>
+    </div>
   );
 }
 

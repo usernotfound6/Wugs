@@ -35,7 +35,6 @@ function ReviewPage() {
   const client = useSelector((store) => store.client);
   const user = useSelector((store) => store.user);
   const history = useHistory();
-
   const rootElement = document.getElementById("popup-root");
 
   const handleSubmit1 = () => {
@@ -56,90 +55,35 @@ function ReviewPage() {
     <ThemeProvider theme={theme}>
       <div>
       <MyStepper step={5} />
-        <h2>Client Status Page</h2>
+         <CssBaseline />
+        <div style={{ textAlign: "center" }}>
+          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }}>Review Submission</Typography>
+          </div>{" "}
         <Container
           maxWidth="lg"
           sx={{
             width: "100%", // Custom width
-            height: "70vh", // Custom height
+            height: "60vh", // Custom height
             // Add any other custom styles here
           }}
         >
-          <header
-            className="App-header"
-            style={{
-              fontSize: "1.75em",
-              fontWeight: "bold",
-              textAlign: "center",
-              margin: "50px 0 0 0",
-              padding: "30px",
-            }}
-          >
-            Current status: {client.status_name}
-          </header>
+       
 
-          <div style={{ textAlign: "center" }}><h2>Your Info with Wugs:</h2></div>
-          <hr />
+          <div style={{ color: "beige" , textAlign: "center" }}><Typography variant= 'h6' marginTop={1} marginBottom={2} >Your Current Info With Wugs:</Typography></div>
+          <hr width={800} style={{ color: "beige" }}/>
           <br />
 
-          <Box sx={{ flexGrow: 1 }}>
+          <Box>
             <Grid container spacing={1}>
-              {/* <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      Contact Info
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Point of Contact: {user.first_name} {user.last_name}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Email: {user.username}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Phone: {client.phone}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Business: {client.business_name}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Location: {client.address}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Website: {client.website}
-                    </Typography>
-                    <Box textAlign={"right"}>
-                      <Button 
-                        sx={{
-                          marginTop: 1.5,
-                          marginLeft: 2,
-                          height: 50,
-                          width: 120,
-                          borderRadius: 1,
-                        }}
-                        color="primary"
-                        variant="contained"
-                        autoFocus
-                      >
-                        Edit
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid> */}
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
-                      color="text.secondary"
+                      color="beige"
                       gutterBottom
                     >
-                      Products I'm interested In
+                      Services:
                     </Typography>
                     {client.service_names ?
                       client.service_names.map((service, index) => (
@@ -161,7 +105,7 @@ function ReviewPage() {
                           width: 120,
                           borderRadius: 1,
                         }}
-                        color="primary"
+                        color="secondary"
                         variant="contained"
                         autoFocus
                       >
@@ -172,14 +116,92 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
-                      color="text.secondary"
+                      color="beige"
                       gutterBottom
                     >
-                      Food Preferences
+                      Client Contact and Location:
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Point of Contact: {user.first_name} {user.last_name}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Email: {user.username}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Phone: {client.phone}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Business: {client.business_name}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Location: {client.address}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Website: {client.website}
+                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button onClick={handleSubmit4}
+                        sx={{
+                         margin: 'auto',
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="secondary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="beige"
+                      gutterBottom
+                    >
+                      About Your Community:
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      a;sldjf;lakjsdf;lajs;lkdfj
+                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button onClick={handleSubmit3}
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="secondary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="beige"
+                      gutterBottom
+                    >
+                      Food Choices:
                     </Typography>
                     {client.product_types ?
                       client.product_types.map((product, index) => (
@@ -201,86 +223,7 @@ function ReviewPage() {
                           width: 120,
                           borderRadius: 1,
                         }}
-                        color="primary"
-                        variant="contained"
-                        autoFocus
-                      >
-                        Edit
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ height: 260, backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      Client Information/Location
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Point of Contact: {user.first_name} {user.last_name}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Email: {user.username}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Phone: {client.phone}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Business: {client.business_name}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Location: {client.address}
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      Website: {client.website}
-                    </Typography>
-                    <Box textAlign={"right"}>
-                      <Button onClick={handleSubmit3}
-                        sx={{
-                          marginTop: 1.5,
-                          marginLeft: 2,
-                          height: 50,
-                          width: 120,
-                          borderRadius: 1,
-                        }}
-                        color="primary"
-                        variant="contained"
-                        autoFocus
-                      >
-                        Edit
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ backgroundColor: 'rgba(243, 207, 42, 0)', boxShadow: 5 }}>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="text.secondary"
-                      gutterBottom
-                    >
-                      Who Are We Serving
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      a;sldjf;lakjsdf;lajs;lkdfj
-                    </Typography>
-                    <Box textAlign={"right"}>
-                      <Button onClick={handleSubmit4}
-                        sx={{
-                          marginTop: 1.5,
-                          marginLeft: 2,
-                          height: 50,
-                          width: 120,
-                          borderRadius: 1,
-                        }}
-                        color="primary"
+                        color="secondary"
                         variant="contained"
                         autoFocus
                       >
@@ -291,6 +234,19 @@ function ReviewPage() {
                 </Card>
               </Grid>
             </Grid>
+            <PopupWidget
+          url="https://calendly.com/dontyellwillcry"
+          rootElement={rootElement}
+          text="Click here to schedule meeting!"
+          textColor="beige"
+          color="#00a2ff"
+          style={{
+            position: "absolute",
+            top: "50px",
+            left: "20px",
+            
+          }}
+        />
             {/* </Box> */}
           </Box>
         </Container>

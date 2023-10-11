@@ -20,50 +20,50 @@ const InterestedColumns = () => {
   return [
     {
       field: "name",
-      headerName: <div style={{ color: "black" }}>Name</div>,
+      headerName: <div style={{ color: "beige" }}>Name</div>,
       width: 200,
       renderCell: (params) => (
-        <div style={{ color: "black" }}>{params.value}</div>
+        <div style={{ color: "beige" }}>{params.value}</div>
       ),
     },
     {
       field: "email",
-      headerName: <div style={{ color: "black" }}>Email</div>,
+      headerName: <div style={{ color: "beige" }}>Email</div>,
       width: 200,
       renderCell: (params) => (
-        <div style={{ color: "black" }}>{params.value}</div>
+        <div style={{ color: "beige" }}>{params.value}</div>
       ),
     },
     {
       field: "phone_number",
-      headerName: <div style={{ color: "black" }}>Phone Number</div>,
+      headerName: <div style={{ color: "beige" }}>Phone Number</div>,
       width: 200,
       renderCell: (params) => (
-        <div style={{ color: "black" }}>{params.value}</div>
+        <div style={{ color: "beige" }}>{params.value}</div>
       ),
     },
     {
       field: "industry",
-      headerName: <div style={{ color: "black" }}>Industry</div>,
+      headerName: <div style={{ color: "beige" }}>Industry</div>,
       width: 200,
       renderCell: (params) => (
-        <div style={{ color: "black" }}>{params.value}</div>
+        <div style={{ color: "beige" }}>{params.value}</div>
       ),
     },
     // {
     //     field: "why_wugs",
-    //     headerName: <div style={{ color: "black" }}>Why Wugs?</div>,
+    //     headerName: <div style={{ color: "beige" }}>Why Wugs?</div>,
     //     width: 200,
     //     renderCell: (params) => (
-    //       <div style={{ color: "black" }}>{params.value}</div>
+    //       <div style={{ color: "beige" }}>{params.value}</div>
     //     ),
     //   },
     //   {
     //     field: "about_you",
-    //     headerName: <div style={{ color: "black" }}>About you</div>,
+    //     headerName: <div style={{ color: "beige" }}>About you</div>,
     //     width: 200,
     //     renderCell: (params) => (
-    //       <div style={{ color: "black" }}>{params.value}</div>
+    //       <div style={{ color: "beige" }}>{params.value}</div>
     //     ),
     //   },
       {
