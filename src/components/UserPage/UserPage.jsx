@@ -116,37 +116,41 @@ function UserPage() {
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
   };
-// Function to handle file upload to Google Drive
-const handleFileUpload = async () => {
-  const files = fileInputRef.current.files;
-  console.log("Selected files:", files);
-  console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY)
+  // Function to handle file upload to Google Drive
+  const handleFileUpload = async () => {
+    const files = fileInputRef.current.files;
+    console.log("Selected files:", files);
+    console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY)
 
-  // Check if there are selected files
-  if (files.length > 0) {
+    // Check if there are selected files
+    if (files.length > 0) {
       const formData = new FormData();
 
       // Iterate over the selected files and append them to the form data
       for (let i = 0; i < files.length; i++) {
-          formData.append("files", files[i]);
+        formData.append("files", files[i]);
       }
       console.log("Uploading files:", formData);
+      console.log("file name:", formData.id)
+      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
+      const clientId = client.client_id;
+      console.log("clientId is:", clientId)
 
       try {
-          // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
-          const response = await axios.post("/api/onboarding/upload", formData, {
-              headers: {
-                  "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
-              },
-          });
+        // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+        const response = await axios.post(`/api/onboarding/upload/${clientId}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+          },
+        });
 
-          const data = response.data;
-          console.log("Uploaded files: ", data.files);
+        const data = response.data;
+        console.log("Uploaded files: ", data.files);
       } catch (error) {
-          console.error("Error:", error);
+        console.error("Error:", error);
       }
-  }
-};
+    }
+  };
 
 
   return (
@@ -443,11 +447,13 @@ const handleFileUpload = async () => {
           </Button>
         </Box>
       </Modal>
+
+      {/* ----------- MODAL END ----------- */}
+
       <h1>Upload Multiple Files to Google Drive</h1>
       <input type="file" multiple ref={fileInputRef}></input>
       <Button onClick={handleFileUpload}>Upload Files</Button>
 
-      {/* ----------- MODAL END ----------- */}
     </div>
   );
 }

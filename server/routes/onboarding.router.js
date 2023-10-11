@@ -24,8 +24,6 @@ const upload = multer({ storage: storage });
 const googleJsonKey = JSON.parse(process.env.REACT_APP_GOOGLE_JSON_KEY || {});
 
 
-
-
 /**
  * The single client GET
  */
@@ -123,7 +121,6 @@ router.put("/clientlocationinfo/:id", (req, res) => {
 
   let queryParams = [
     req.body.business_name, //1
-
     req.body.address_street, //2
     req.body.address_city, //3
     req.body.address_state, //4
@@ -317,7 +314,7 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
   }
 });
 
-router.post("/upload", upload.array("files"), async (req, res) => {
+router.post("/upload/:id", upload.array("files"), async (req, res) => {
   try {
     // Set up Google Drive authentication using service account credentials
     const auth = new google.auth.GoogleAuth({
@@ -352,6 +349,37 @@ router.post("/upload", upload.array("files"), async (req, res) => {
       // Add information about the uploaded file to the 'uploadedFiles' array
       uploadedFiles.push(response.data);
     }
+
+    // fileUrl = `https://drive.google.com/uc?id=${formData.id}`
+    console.log("uploadedFiles.id", uploadedFiles[0].id)
+    console.log("uploadedFiles array:", uploadedFiles)
+
+    let uploadedFileURLs = [];
+    for (let file of uploadedFiles) {
+      const fileUrl = `https://drive.google.com/uc?id=${file.id}`;
+      uploadedFileURLs.push(fileUrl);
+    }
+    console.log("uploadedFileURLs", uploadedFileURLs)
+    console.log("client ID:", req.params.id)
+    pool
+      .query(
+        `
+        UPDATE client 
+        SET pictures = array_append(pictures, $2)
+        WHERE client_id = $1
+        ON CONFLICT (client_id, pictures) DO NOTHING;
+    `,
+        [uploadedFileURLs, req.params.id]
+      )
+      .then(() => {
+        console.log("successful PUT");
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.log("Error completing PUT service query", err);
+        res.sendStatus(500);
+      });
+
 
     // Respond to the client with a success message and information about the uploaded files
     res.json({ message: "Files uploaded successfully", files: uploadedFiles });

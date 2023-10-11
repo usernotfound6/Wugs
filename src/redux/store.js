@@ -30,7 +30,6 @@ const middlewareList = process.env.NODE_ENV === 'development' ?
     persistedReducer,
     applyMiddleware(...middlewareList)
   );
-  
 
 const persistor = persistStore(store);
 
