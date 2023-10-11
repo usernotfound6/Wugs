@@ -120,6 +120,7 @@ function UserPage() {
 const handleFileUpload = async () => {
   const files = fileInputRef.current.files;
   console.log("Selected files:", files);
+  console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY)
 
   // Check if there are selected files
   if (files.length > 0) {
