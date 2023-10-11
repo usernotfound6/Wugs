@@ -29,11 +29,11 @@ function DemographicsPage() {
   const [demographic, setDemographic] = useState(client.demographics || "");
   const [ageGroup, setAgeGroup] = useState(client.target_age_group || "");
   const [industry, setIndustry] = useState(client.industry || "");
-  const [neighborhood, setNeighborhood] = useState(client.neighborhood_info || "");
+  const [neighborhood, setNeighborhood] = useState(
+    client.neighborhood_info || ""
+  );
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
-
-  
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
@@ -71,13 +71,13 @@ function DemographicsPage() {
   return (
     <div>
       <MyStepper step={2} />
-      <CssBaseline/>
+      <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ color: "beige" }}>
-          Who Are You Serving? <HelpIcon onMouseEnter={handleHelpIconHover} />
-        </h1>
+        <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>About Your Community</Typography>
+        <Typography variant="h5" marginTop={1} style={{ color: "beige" }}>
+          Who Are You Serving?</Typography>
+          <HelpIcon  style={{ marginTop: 10, color: "beige" }} onMouseEnter={handleHelpIconHover}/>
       </div>{" "}
-    
       <div style={{ padding: "1em" }}>
         <Box
           margin={"auto"}
@@ -140,23 +140,23 @@ function DemographicsPage() {
               label="Age Group"
               variant="outlined"
               inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          style={{ width: 280 }}
-          placeholder="Age Group"
+              InputLabelProps={{ style: { color: "beige" } }}
+              style={{ width: 280 }}
+              placeholder="Age Group"
               value={ageGroup}
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "beige", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "beige", // Outline color when focused
+                  },
+                },
+              }}
               onChange={(event) => setAgeGroup(event.target.value)}
             />
             <TextField
@@ -164,23 +164,23 @@ function DemographicsPage() {
               label="Industry"
               variant="outlined"
               inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          style={{ width: 280 }}
-          placeholder="Industry"
+              InputLabelProps={{ style: { color: "beige" } }}
+              style={{ width: 280 }}
+              placeholder="Industry"
               value={industry}
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "beige", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "beige", // Outline color when focused
+                  },
+                },
+              }}
               onChange={(event) => setIndustry(event.target.value)}
             />
             <TextField
@@ -188,23 +188,23 @@ function DemographicsPage() {
               label="About Your Neighborhood"
               variant="outlined"
               inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          style={{ width: 280 }}
-          placeholder="About Your Neighborhood"
+              InputLabelProps={{ style: { color: "beige" } }}
+              style={{ width: 280 }}
+              placeholder="About Your Neighborhood"
               value={neighborhood}
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "beige", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "beige", // Outline color when focused
+                  },
+                },
+              }}
               onChange={(event) => setNeighborhood(event.target.value)}
             />
           </FormControl>
@@ -248,7 +248,7 @@ function DemographicsPage() {
         </DialogContent>
         <DialogActions></DialogActions>
       </Dialog>
-      <Button 
+      <Button
         onClick={postDemographics}
         sx={{
           marginTop: 1.5,
