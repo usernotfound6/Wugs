@@ -71,7 +71,7 @@ function ReviewPage() {
         </style>
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ color: "#fefefe" }}>Review and Schedule Appointment</h1>
+          <h1 style={{ color: "beige" }}>Review and Schedule Appointment</h1>
         </div>{" "}
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Tabs
@@ -105,12 +105,13 @@ function ReviewPage() {
           url="https://calendly.com/dontyellwillcry"
           rootElement={rootElement}
           text="Click here to schedule meeting!"
-          textColor="#ffffff"
+          textColor="beige"
           color="#00a2ff"
           style={{
             position: "absolute",
             top: "50px",
             left: "20px",
+            
           }}
         />
 
