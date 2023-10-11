@@ -21,7 +21,10 @@ function ClientLocationInfoPage() {
   ];  
 
   const [businessname, setBusinessName] = useState(client.business_name);
-  const [address, setAddress] = useState(client.address);
+  const [addressStreet, setAddressStreet] = useState(client.address);
+  const [addressCity, setAddressCity] = useState(client.address);
+  const [addressState, setAddressState] = useState(client.address);
+  const [addressZip, setAddressZip] = useState(client.address);
   const [website, setWebsite] = useState(client.website);
   const [phone, setPhone] = useState(client.phone);
   const [hours, setHours] = useState(client.hours_of_operation);
