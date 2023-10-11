@@ -361,32 +361,27 @@ router.post("/upload/:id", upload.array("files"), async (req, res) => {
     }
     console.log("uploadedFileURLs", uploadedFileURLs)
     console.log("client ID:", req.params.id)
+    const sqlText = `
+    UPDATE client
+    SET pictures = pictures || $1
+    WHERE id = $2;
+    `;
+    const queryParams = [uploadedFileURLs, req.params.id];
     pool
-      .query(
-        `
-        UPDATE client 
-        SET pictures = array_append(pictures, $2)
-        WHERE client_id = $1
-        ON CONFLICT (client_id, pictures) DO NOTHING;
-    `,
-        [uploadedFileURLs, req.params.id]
-      )
+      .query(sqlText, queryParams)
       .then(() => {
         console.log("successful PUT");
-        res.sendStatus(200);
+        res.send({ files: uploadedFiles });
       })
       .catch((err) => {
         console.log("Error completing PUT service query", err);
         res.sendStatus(500);
       });
-
-
-    // Respond to the client with a success message and information about the uploaded files
-    res.json({ message: "Files uploaded successfully", files: uploadedFiles });
+    
   } catch (error) {
     // Handle and log any errors that occur during the file upload process
     console.error(error);
-    res.status(500).json({ error: "An error occurred" });
+    res.sendStatus(500);
   }
 });
 
