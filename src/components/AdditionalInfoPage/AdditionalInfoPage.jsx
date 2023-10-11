@@ -15,10 +15,12 @@ import {
 
 function AdditionalInfoPage() {
 
-  const [dimensions, setDimensions] = useState("");
-  const [wugsVisit, setWugsVisit] = useState(false);
-
   const client = useSelector((store) => store.client)
+
+  const [dimensions, setDimensions] = useState(client.dimensions || "");
+  const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
+
+  console.log("client", client)
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -106,7 +108,7 @@ function AdditionalInfoPage() {
         >
           <TextField
             id="dimensions"
-            label="Dimensions"
+            label="Market Location Dimensions"
             variant="outlined"
             inputProps={{ style: { color: "beige" } }}
             InputLabelProps={{ style: { color: "beige" } }}
