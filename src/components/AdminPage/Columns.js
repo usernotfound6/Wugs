@@ -9,7 +9,7 @@ const Columns = () => {
           headerName: (
             <div style={{ color: "black" }}>Status</div>
           ),
-          width: 130,
+          width: 180,
           renderCell: (params) => (
             <div style={{ color: "black" }}>{params.value}</div>
           ),
@@ -19,7 +19,7 @@ const Columns = () => {
           headerName: (
             <div style={{ color: "black" }}>Last Active</div>
           ),
-          width: 130,
+          width: 80,
           renderCell: (params) => (
             <div style={{ color: "black" }}>{params.value}</div>
           ),
@@ -49,7 +49,7 @@ const Columns = () => {
           headerName: (
             <div style={{ color: "black" }}>City</div>
           ),
-          width: 130,
+          width: 120,
           renderCell: (params) => (
             <div style={{ color: "black" }}>{params.value}</div>
           ),
@@ -59,7 +59,7 @@ const Columns = () => {
           headerName: (
             <div style={{ color: "black" }}>State</div>
           ),
-          width: 130,
+          width: 40,
           renderCell: (params) => (
             <div style={{ color: "black" }}>{params.value}</div>
           ),
@@ -69,7 +69,7 @@ const Columns = () => {
           headerName: (
             <div style={{ color: "black" }}>Zip Code</div>
           ),
-          width: 130,
+          width: 75,
           renderCell: (params) => (
             <div style={{ color: "black" }}>{params.value}</div>
           ),
@@ -79,7 +79,7 @@ const Columns = () => {
           headerName: (
             <div style={{ color: "black" }}>First Name</div>
           ),
-          width: 130,
+          width: 80,
           renderCell: (params) => (
             <div style={{ color: "black" }}>{params.value}</div>
           ),
@@ -89,7 +89,7 @@ const Columns = () => {
           headerName: (
             <div style={{ color: "black" }}>Last Name</div>
           ),
-          width: 130,
+          width: 80,
           renderCell: (params) => (
             <div style={{ color: "black" }}>{params.value}</div>
           ),

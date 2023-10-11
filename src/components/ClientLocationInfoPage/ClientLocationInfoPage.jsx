@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 // the CssBaseline was no inported?
 import CssBaseline from '@mui/material/CssBaseline';
 import MyStepper from '../MyStepper/MyStepper';
-import { Button } from "@mui/material";
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
@@ -14,6 +14,11 @@ function ClientLocationInfoPage() {
 
   const client = useSelector((store) => store.client)
 
+  const allStates = [
+    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
+    'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA',
+    'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+  ];  
 
   const [businessname, setBusinessName] = useState(client.business_name || "");
   const [addressStreet, setAddressStreet] = useState(client.address_street || "");
@@ -68,6 +73,10 @@ function ClientLocationInfoPage() {
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
   };
+
+  const handleStateSelect = (event => {
+    setAddressState(event.target.value)
+  })
 
   const handleConfirmSubmit = () => {
     setOpenConfirmation(false);
@@ -203,17 +212,16 @@ function ClientLocationInfoPage() {
           }}
         />
         <br />
-        <TextField
+
+        <Select
           id="addressState"
+          value={addressState}
           label="State"
+          onChange={handleStateSelect}
+          defaultValue={"MN"}
           variant="outlined"
           style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          type="text"
-          placeholder="MN"
-          value={addressState}
-          onChange={(event) => setAddressState(event.target.value)}
           required
           sx={{
             "& .MuiOutlinedInput-root": {
@@ -228,7 +236,14 @@ function ClientLocationInfoPage() {
               },
             },
           }}
-        />
+        >
+          {allStates.map((stateAbbr) => (
+            <MenuItem key={stateAbbr} value={stateAbbr}>
+              {stateAbbr}
+            </MenuItem>
+          ))}
+        </Select>
+
         <br />
         <TextField
           id="addressZip"

@@ -20,17 +20,31 @@ function* getAllClients(action) {
   try {
     const response = yield axios.get('/api/admin');
     const allClients = response.data;
-    console.log("all clients' info in saga:", allClients)
-    yield put({ type: 'SET_ALL_CLIENTS', payload: allClients })
-  }
-  catch (error) {
-    console.log("error with GET on client side", error)
+
+    // **here in case we split up onboarding and completed with onboarding**
+    // const allClientsOnboarding = [];
+    // const allClientsComplete = [];
+
+    // mapping over allClients to format last_active for each client
+    const formattedClients = allClients.map(client => {
+      const editedDate = client.last_active;
+      const formattedEditedDate = new Date(editedDate).toLocaleDateString("en-us", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+      });
+      return { ...client, last_active: formattedEditedDate };
+    });
+
+    yield put({ type: 'SET_ALL_CLIENTS', payload: formattedClients });
+  } catch (error) {
+    console.log("error with GET on client side", error);
   }
 }
 
 function* updateClient(action) {
   try {
-    const clientEdit = action.payload; 
+    const clientEdit = action.payload;
     yield axios.put(`/api/admin/${clientEdit.id}`, clientEdit);
     yield put({ type: "FETCH_ALL_CLIENTS" });
   } catch (error) {
@@ -40,7 +54,7 @@ function* updateClient(action) {
 
 function* deleteClient(action) {
   try {
-    const clientDelete = action.payload; 
+    const clientDelete = action.payload;
     yield axios.delete(`/api/admin/${clientDelete.id}`, clientDelete);
     yield put({ type: "FETCH_ALL_CLIENTS" });
   } catch (error) {
