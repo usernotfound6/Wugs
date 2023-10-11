@@ -23,7 +23,6 @@ function ClientStatusPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const client = useSelector((store) => store.client);
-  const rootElement = document.getElementById("popup-root");
 
   console.log("Here is the client", client);
 
@@ -112,19 +111,7 @@ function ClientStatusPage() {
           {value === 3 && <TabContentFour />}
           {value === 4 && <TabContentFive />}
         </Container>
-        <PopupWidget
-          url="https://calendly.com/dontyellwillcry"
-          rootElement={rootElement}
-          text="Click here to schedule meeting!"
-          textColor="beige"
-          color="#00a2ff"
-          style={{
-            position: "absolute",
-            top: "50px",
-            left: "20px",
-            
-          }}
-        />
+      
 
         {/* Confirmation Dialog */}
 

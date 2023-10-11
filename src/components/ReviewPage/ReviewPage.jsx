@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import MyStepper from "../MyStepper/MyStepper";
+import { PopupWidget } from 'react-calendly';
 
 // Path: /clientstatus
 
@@ -34,6 +35,7 @@ function ReviewPage() {
   const client = useSelector((store) => store.client);
   const user = useSelector((store) => store.user);
   const history = useHistory();
+  const rootElement = document.getElementById("popup-root");
 
   const handleSubmit1 = () => {
     history.push('/servicechoice')
@@ -167,6 +169,38 @@ function ReviewPage() {
                       color="beige"
                       gutterBottom
                     >
+                      About Your Community:
+                    </Typography>
+                    <Typography variant="h8" component="div">
+                      a;sldjf;lakjsdf;lajs;lkdfj
+                    </Typography>
+                    <Box textAlign={"right"}>
+                      <Button onClick={handleSubmit3}
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="secondary"
+                        variant="contained"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                  <CardContent>
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="beige"
+                      gutterBottom
+                    >
                       Food Choices:
                     </Typography>
                     {client.product_types ?
@@ -199,39 +233,20 @@ function ReviewPage() {
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
-                  <CardContent>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="beige"
-                      gutterBottom
-                    >
-                      About Your Community:
-                    </Typography>
-                    <Typography variant="h8" component="div">
-                      a;sldjf;lakjsdf;lajs;lkdfj
-                    </Typography>
-                    <Box textAlign={"right"}>
-                      <Button onClick={handleSubmit3}
-                        sx={{
-                          marginTop: 1.5,
-                          marginLeft: 2,
-                          height: 50,
-                          width: 120,
-                          borderRadius: 1,
-                        }}
-                        color="secondary"
-                        variant="contained"
-                        autoFocus
-                      >
-                        Edit
-                      </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
             </Grid>
+            <PopupWidget
+          url="https://calendly.com/dontyellwillcry"
+          rootElement={rootElement}
+          text="Click here to schedule meeting!"
+          textColor="beige"
+          color="#00a2ff"
+          style={{
+            position: "absolute",
+            top: "50px",
+            left: "20px",
+            
+          }}
+        />
             {/* </Box> */}
           </Box>
         </Container>
