@@ -8,6 +8,8 @@ import TabContentFour from "./TabContentFour";
 import TabContentFive from "./TabContentFive";
 import { Tab, Tabs, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { PopupWidget } from "react-calendly";
+import { Typography } from "@mui/material";
 
 
 // Path: /review
@@ -22,7 +24,7 @@ function ClientStatusPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const client = useSelector((store) => store.client);
-  
+
 
   console.log("Here is the client", client);
 
@@ -59,18 +61,30 @@ function ClientStatusPage() {
     <ThemeProvider theme={theme}>
       <div>
         <style type="text/css">
-          {`
+          {/* {`
           .calendly-badge-widget { 
             left: 50% !important; 
             margin-left: -100px !important; 
             margin-bottom: 200px;
           }
-        `}
+        `} */}
         </style>
+        <Typography 
+            variant= 'h5' 
+            style={{ 
+              textAlign: "center",
+              margin: 'auto',
+              padding: "5px",
+              color: 'beige',
+            }}
+          >
+            Current Status: {client.status_name}
+          </Typography>
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ color: "beige" }}>Review and Schedule Appointment</h1>
+          <Typography variant='h4' marginTop={3}  marginBottom={2} style={{ color: "beige" }}>Current Information</Typography>
         </div>{" "}
+        <hr width={800} style={{ color: "beige" }}/>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Tabs
             value={value}
@@ -99,7 +113,7 @@ function ClientStatusPage() {
           {value === 3 && <TabContentFive />}
           {value === 4 && <TabContentFour />}
         </Container>
-        
+
 
         {/* Confirmation Dialog */}
 
