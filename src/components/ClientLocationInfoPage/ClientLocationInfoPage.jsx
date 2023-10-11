@@ -19,7 +19,7 @@ function ClientLocationInfoPage() {
     'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
     'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA',
     'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
-  ];  
+  ];
 
   const [businessname, setBusinessName] = useState(client.business_name);
   const [addressStreet, setAddressStreet] = useState(client.address);
@@ -37,8 +37,6 @@ function ClientLocationInfoPage() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  console.log("client!!!!", client
-  )
 
   // captures characters into 3 groups, adding parentheses around first group and - between 2nd/3rd groups
   // these functions are used to format a 10-digit US phone number as it's being typed: (XXX) XXX - XXXX)
@@ -94,7 +92,10 @@ function ClientLocationInfoPage() {
     let clientLocationInfoObject = {
       client_id: client.client_id,
       business_name: businessname,
-      address: address,
+      address: addressStreet,
+      address: addressCity,
+      address: addressState,
+      address: addressZip,
       website: website,
       phone: phone,
       hours_of_operation: hours,
@@ -119,18 +120,18 @@ function ClientLocationInfoPage() {
       <Box margin={'auto'}
         component="form"
         sx={{
-          
+
           backgroundColor: '#484747',
           borderRadius: 3,
           width: 360,
           padding: 2,
-         elevation: 24,
+          elevation: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
         autoComplete="off"
       >
-        <TextField 
+        <TextField
           id="businessname"
           label="Business Name"
           variant="outlined"
@@ -329,7 +330,7 @@ function ClientLocationInfoPage() {
         />
         <br />
 
-        <TextField 
+        <TextField
           id="hours"
           label="Hours Of Operation?"
           variant="outlined"
@@ -342,7 +343,7 @@ function ClientLocationInfoPage() {
           value={hours}
           onChange={(event) => setHours(event.target.value)}
           sx={{
-            
+
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "gray", // Outline color when not focused
@@ -387,7 +388,7 @@ function ClientLocationInfoPage() {
         <br />
       </Box>
 
-      <Button 
+      <Button
         onClick={handleSubmit}
         sx={{
           marginTop: 1.5,
