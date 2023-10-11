@@ -81,12 +81,13 @@ function AdminPage() {
   };
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(selectedRowData.admin_notes || "");
 
   // Function to handle row click event
   const handleRowClick = (params) => {
-    setStatus(params.row.status_id || "1"); // Set the status to the value from the selected row or a default value
     setSelectedRowData(params.row); // Set the entire row data
+    setStatus(params.row.status_id || "1"); // Set the status to the value from the selected row or a default value
+    setInput(params.row.admin_notes); // Set the input state with admin_notes from the selected row
     handleOpen(); // Open the modal when a row is clicked
   };
 
@@ -140,7 +141,6 @@ function AdminPage() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-
         <Box sx={style} style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '16px', gridTemplateAreas: '"contact business" "additional extra"' }}>
           {/* Contact Information */}
           <div style={{ gridArea: 'contact' }}>
@@ -159,10 +159,10 @@ function AdminPage() {
             <ul>
               <li>Address: {selectedRowData.address_street}</li>
               <li>City: {selectedRowData.address_city}, {selectedRowData.address_state} {selectedRowData.address_zip}</li>
-              <li>Industry: {selectedRowData.industry}</li>
-              <li>Website: {selectedRowData.website}</li>
-              <li>Number of People: {selectedRowData.number_of_people}</li>
-              <li>Hours of Operation: {selectedRowData.hours_of_operation}</li>
+              <li>Industry: {selectedRowData.industry || "N/A"}</li>
+              <li>Website: {selectedRowData.website || "N/A"}</li>
+              <li>Number of People: {selectedRowData.number_of_people || "N/A"}</li>
+              <li>Hours of Operation: {selectedRowData.hours_of_operation || "N/A"}</li>
             </ul>
           </div>
 
@@ -170,10 +170,10 @@ function AdminPage() {
           <div style={{ gridArea: 'additional' }}>
             <Typography variant="h6">Additional Client/Building Information</Typography>
             <ul>
-              <li>Demographics: {selectedRowData.demographics}</li>
-              <li>Neighborhood Info: {selectedRowData.neighborhood_info}</li>
-              <li>Micro-Market Location in Business: {selectedRowData.micromarket_location}</li>
-              <li>Market Space Dimensions: {selectedRowData.dimensions}</li>
+              <li>Demographics: {selectedRowData.demographics || "N/A"}</li>
+              <li>Neighborhood Info: {selectedRowData.neighborhood_info || "N/A"}</li>
+              <li>Micro-Market Location in Business: {selectedRowData.micromarket_location || "N/A"}</li>
+              <li>Market Space Dimensions: {selectedRowData.dimensions || "N/A"}</li>
               <li>
                 Product Types Interested In:
                 {selectedRowData.product_types ? (
@@ -183,7 +183,7 @@ function AdminPage() {
                     ))}
                   </ul>
                 ) : (
-                  <p>No product types available.</p>
+                  <p>No product preferences chosen.</p>
                 )}
               </li>
               <li>
@@ -195,7 +195,7 @@ function AdminPage() {
                     ))}
                   </ul>
                 ) : (
-                  <p>No service names available.</p>
+                  <p>No services chosen.</p>
                 )}
               </li>
 
@@ -238,14 +238,14 @@ function AdminPage() {
               <li>Wugs Visit Requested: {selectedRowData.wugs_visit ? "Yes" : "No"}</li>
             </ul>
           </div>
-          <Box sx={{ minWidth: 120 }}>
+          <div>
             <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Status</InputLabel>
+              <InputLabel id="demo-simple-select-label">Update Status</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={status}
-                label="Status"
+                label="Update Status"
                 onChange={dropdown}
               >
                 <MenuItem value={1}>Onboarding Incomplete</MenuItem>
@@ -256,21 +256,29 @@ function AdminPage() {
                 <MenuItem value={6}>Account Active</MenuItem>
                 <MenuItem value={7}>Account Inactive</MenuItem>
               </Select>
+            </FormControl>
+          </div>
+          <div>
+            <FormControl fullWidth>
               <TextField
                 id="filled-multiline-static"
-                label="Client Notes"
+                label="Client Notepad"
                 multiline
                 rows={4}
                 variant="filled"
                 value={input}
                 onChange={inputField}
               />
-              <Button onClick={editClient}>Submit</Button>
               <Box>
-                <Button onClick={deleteClient}>Delete</Button>
+                <Button onClick={editClient}>Submit</Button>
               </Box>
+              <div>
+                <Box textAlign={"right"}>
+                  <Button onClick={deleteClient}>Delete Client File</Button>
+                </Box>
+              </div>
             </FormControl>
-          </Box>
+          </div>
         </Box>
       </Modal>
 
@@ -291,7 +299,7 @@ function AdminPage() {
         // }}
         pageSizeOptions={[5, 10]}
       />
-    </Container>
+    </Container >
   );
 }
 
