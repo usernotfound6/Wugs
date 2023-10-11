@@ -18,7 +18,12 @@ const storage = multer.diskStorage({
   },
 });
 const upload = multer({ storage: storage });
-const keyFile = require("/Users/papaporo/Prime/wugs_app/Wugs/our-chassis-401623-8599a8b4f596.json"); // This is the aboslute file path for the json credentials needed for the google drive POST request.
+
+// it's attempting to parse the JSON from the process.env.REACT_APP_GOOGLE_JSON_KEY environment variable, 
+// but if that variable is not defined or is an empty string, it will use an empty object ({}) as a default value to avoid a potential error when calling JSON.parse.
+const googleJsonKey = JSON.parse(process.env.REACT_APP_GOOGLE_JSON_KEY || {});
+
+
 
 /**
  * The single client GET
@@ -311,7 +316,7 @@ router.post("/upload", upload.array("files"), async (req, res) => {
   try {
     // Set up Google Drive authentication using service account credentials
     const auth = new google.auth.GoogleAuth({
-      credentials: keyFile, // Use the service account key file
+      credentials: googleJsonKey, // Use the service account key file
       scopes: ["https://www.googleapis.com/auth/drive"], // Specify access scope for Google Drive
     });
 
