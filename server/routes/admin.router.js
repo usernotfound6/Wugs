@@ -45,7 +45,9 @@ router.get("/", (req, res) => {
     JOIN
       "user" AS u ON c.manager_id = u.id
     LEFT JOIN
-      status AS s ON c.status_id = s.id;
+      status AS s ON c.status_id = s.id
+    ORDER BY
+      c.business_name;
   `;
   pool
     .query(sqlQuery)
