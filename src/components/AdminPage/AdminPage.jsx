@@ -18,6 +18,7 @@ function AdminPage() {
     phone: "",
     admin_notes: "",
   });
+
   const admin = useSelector((store) => store.admin);
   const interested = useSelector((store) => store.interested);
 
@@ -139,6 +140,7 @@ function AdminPage() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+          
         <Box sx={style} style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '16px', gridTemplateAreas: '"contact business" "additional extra"' }}>
           {/* Contact Information */}
           <div style={{ gridArea: 'contact' }}>

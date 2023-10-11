@@ -20,20 +20,21 @@ import {
 } from "@mui/material";
 
 function DemographicsPage() {
-  const [peopleCount, setPeopleCount] = React.useState("");
-  const [demographic, setDemographic] = React.useState("");
-  const [ageGroup, setAgeGroup] = React.useState("");
-  const [industry, setIndustry] = React.useState("");
-  const [neighborhood, setNeighborhood] = React.useState("");
-  const [openConfirmation, setOpenConfirmation] = useState(false);
-  const [position, setPosition] = useState({ top: 0, left: 0 });
-
   const client = useSelector((store) => store.client);
-
-  console.log("Client", client.client_id);
 
   const dispatch = useDispatch();
   const history = useHistory();
+  console.log("Client", client.demographics);
+
+  const [peopleCount, setPeopleCount] = useState(client.number_of_people || "");
+  const [demographic, setDemographic] = useState(client.demographics || "");
+  const [ageGroup, setAgeGroup] = useState(client.target_age_group || "");
+  const [industry, setIndustry] = useState(client.industry || "");
+  const [neighborhood, setNeighborhood] = useState(client.neighborhood_info || "");
+  const [openConfirmation, setOpenConfirmation] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
@@ -74,9 +75,10 @@ function DemographicsPage() {
       <CssBaseline/>
       <div style={{ textAlign: "center" }}>
         <h1 style={{ color: "beige" }}>
-          Who Are We Serving? <HelpIcon onMouseEnter={handleHelpIconHover} />
+          Who Are You Serving? <HelpIcon onMouseEnter={handleHelpIconHover} />
         </h1>
       </div>{" "}
+    
       <div style={{ padding: "1em" }}>
         <Box
           margin={"auto"}
@@ -117,6 +119,8 @@ function DemographicsPage() {
               inputProps={{ style: { color: "beige" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               style={{ width: 280 }}
+              placeholder="Demographic"
+              value={demographic}
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
@@ -139,6 +143,8 @@ function DemographicsPage() {
               inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           style={{ width: 280 }}
+          placeholder="Age Group"
+              value={ageGroup}
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
@@ -161,6 +167,8 @@ function DemographicsPage() {
               inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           style={{ width: 280 }}
+          placeholder="Industry"
+              value={industry}
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
@@ -183,6 +191,8 @@ function DemographicsPage() {
               inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           style={{ width: 280 }}
+          placeholder="About Your Neighborhood"
+              value={neighborhood}
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
