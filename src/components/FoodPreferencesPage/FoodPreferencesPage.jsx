@@ -1,60 +1,94 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import MyStepper from '../MyStepper/MyStepper';
-import { styled } from '@mui/material/styles';
-import { useHistory } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import {ButtonBase, Button} from '@mui/material';
-import Typography from '@mui/material/Typography';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import MyStepper from "../MyStepper/MyStepper";
+import { styled } from "@mui/material/styles";
+import { useHistory } from "react-router-dom";
+import Box from "@mui/material/Box";
+import { ButtonBase, Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 // Path: /foodpreferences
 
 
+const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
+  position: "relative",
+  height: 200,
+  [theme.breakpoints.down("sm")]: {
+    width: "100% !important", // Overrides inline-style
+    height: 100,
+  },
+  "&:hover, &.Mui-focusVisible": {
+    zIndex: 1,
+    "& .MuiImageBackdrop-root": {
+      opacity: 0.15,
+    },
+    "& .MuiImageMarked-root": {
+      opacity: 0,
+    },
+    "& .MuiTypography-root": {
+      border: "4px solid currentColor",
+    },
+  },
+  // Apply hover styles to the clicked button
+  ...(isclicked && {
+    "& .MuiImageBackdrop-root": {
+      opacity: 0.15,
+    },
+    "& .MuiImageMarked-root": {
+      opacity: 0,
+    },
+    "& .MuiTypography-root": {
+      border: "4px solid currentColor",
+    },
+  }),
+}));
 
-const ImageSrc = styled('span')({
-  position: 'absolute',
+
+const ImageSrc = styled("span")({
+  position: "absolute",
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
-  backgroundSize: 'cover',
-  backgroundPosition: 'center 40%',
+  backgroundSize: "cover",
+  backgroundPosition: "center 40%",
 });
 
-const Image = styled('span')(({ theme }) => ({
-  position: 'absolute',
+const Image = styled("span")(({ theme }) => ({
+  position: "absolute",
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   color: theme.palette.common.white,
 }));
 
-const ImageBackdrop = styled('span')(({ theme }) => ({
-  position: 'absolute',
+const ImageBackdrop = styled("span")(({ theme }) => ({
+  position: "absolute",
   left: 0,
   right: 0,
   top: 0,
   bottom: 0,
   backgroundColor: theme.palette.common.black,
   opacity: 0.4,
-  transition: theme.transitions.create('opacity'),
+  transition: theme.transitions.create("opacity"),
 }));
 
-const ImageMarked = styled('span')(({ theme }) => ({
+const ImageMarked = styled("span")(({ theme }) => ({
   height: 3,
   width: 18,
   backgroundColor: theme.palette.common.white,
-  position: 'absolute',
+  position: "absolute",
   bottom: -2,
-  left: 'calc(50% - 9px)',
-  transition: theme.transitions.create('opacity'),
+  left: "calc(50% - 9px)",
+  transition: theme.transitions.create("opacity"),
 }));
 
 function FoodPreferencesPage() {
+
 
   const client = useSelector((store) => store.client)
 
@@ -64,6 +98,7 @@ function FoodPreferencesPage() {
   const history = useHistory();
 
   useEffect(() => {
+
     dispatch({ type: 'FETCH_PRODUCTS' });
   }, [client || dispatch]);
 
@@ -71,6 +106,7 @@ function FoodPreferencesPage() {
   
 
   console.log("Products chosen", client.product_ids)
+
 
   const handleClick = (productId) => {
     // Toggle the clicked state for the clicked button
@@ -85,14 +121,13 @@ function FoodPreferencesPage() {
     // Send the clickedButtons data in a payload
     const payload = {
       clickedButtons: clickedButtons,
-      client_id: client.client_id
+      client_id: client.client_id,
     };
 
-    console.log('Clicked Buttons:', clickedButtons);
+    console.log("Clicked Buttons:", clickedButtons);
     // Dispatch an action with the payload to save the data
-    dispatch({ type: 'UPDATE_FOOD_PREFERENCES', payload });
-    history.push('/additionalinfo')
-
+    dispatch({ type: "UPDATE_FOOD_PREFERENCES", payload });
+    history.push("/additionalinfo");
   };
 
   const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
@@ -129,11 +164,32 @@ function FoodPreferencesPage() {
   }));
 
   return (
-    <div>
+    <div className="container">
       <MyStepper step={3} />
-      <Typography variant="h4">SNACK OPTIONS</Typography>
-      <Typography variant="subtitle1">Select any you'd like to learn more about!</Typography>
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
+
+      <Typography
+        style={{ textAlign: "center" }}
+        variant="h4"
+        color="beige"
+        marginTop={3}
+        gutterBottom
+      >
+        Snack Options
+      </Typography>
+      <Typography
+        style={{ textAlign: "center" }}
+        variant="subtitle1"
+        color="beige"
+        marginBottom={3}
+        gutterBottom
+      >
+        Select any you'd like to learn more about!
+      </Typography>
+
+      <Box
+        sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
+      >
+     
         {products && products.length > 0 ? (
           products.map((product) => (
             <ImageButton
@@ -141,7 +197,7 @@ function FoodPreferencesPage() {
               key={product.id}
               onClick={() => handleClick(product.id)}
               style={{
-                width: '20em',
+                width: "20em",
               }}
               isclicked={clickedButtons.includes(product.id)}
             >
@@ -153,7 +209,7 @@ function FoodPreferencesPage() {
                   variant="subtitle1"
                   color="inherit"
                   sx={{
-                    position: 'relative',
+                    position: "relative",
                     p: 4,
                     pt: 2,
                     pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
@@ -169,7 +225,9 @@ function FoodPreferencesPage() {
           <p>No products available.</p>
         )}
       </Box>
-      <Button variant="contained" onClick={handleSave}>NEXT</Button>
+      <Button variant="contained" onClick={handleSave}>
+        NEXT
+      </Button>
     </div>
   );
 }

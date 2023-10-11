@@ -19,14 +19,6 @@ const InterestedColumns = () => {
   }
   return [
     {
-      field: "id",
-      headerName: <div style={{ color: "black" }}>ID</div>,
-      width: 200,
-      renderCell: (params) => (
-        <div style={{ color: "black" }}>{params.value}</div>
-      ),
-    },
-    {
       field: "name",
       headerName: <div style={{ color: "black" }}>Name</div>,
       width: 200,
@@ -58,22 +50,22 @@ const InterestedColumns = () => {
         <div style={{ color: "black" }}>{params.value}</div>
       ),
     },
-    {
-        field: "why_wugs",
-        headerName: <div style={{ color: "black" }}>Why Wugs?</div>,
-        width: 200,
-        renderCell: (params) => (
-          <div style={{ color: "black" }}>{params.value}</div>
-        ),
-      },
-      {
-        field: "about_you",
-        headerName: <div style={{ color: "black" }}>About you</div>,
-        width: 200,
-        renderCell: (params) => (
-          <div style={{ color: "black" }}>{params.value}</div>
-        ),
-      },
+    // {
+    //     field: "why_wugs",
+    //     headerName: <div style={{ color: "black" }}>Why Wugs?</div>,
+    //     width: 200,
+    //     renderCell: (params) => (
+    //       <div style={{ color: "black" }}>{params.value}</div>
+    //     ),
+    //   },
+    //   {
+    //     field: "about_you",
+    //     headerName: <div style={{ color: "black" }}>About you</div>,
+    //     width: 200,
+    //     renderCell: (params) => (
+    //       <div style={{ color: "black" }}>{params.value}</div>
+    //     ),
+    //   },
       {
         field: 'actions',
         headerName: 'Actions',

@@ -25,6 +25,7 @@ const googleJsonKey = JSON.parse(process.env.REACT_APP_GOOGLE_JSON_KEY || {});
 
 
 
+
 /**
  * The single client GET
  */
@@ -54,7 +55,7 @@ router.get("/client/:id", (req, res) => {
     c.dimensions,
     c.wugs_visit,
     c.contract,
-    c.admin_notes,
+    c.last_active,
     s.status_name,
     u.first_name,
     u.last_name,
@@ -144,7 +145,8 @@ router.put("/clientlocationinfo/:id", (req, res) => {
     website = $6,
     phone = $7,
     hours_of_operation = $8,
-    micromarket_location = $9
+    micromarket_location = $9,
+    last_active = NOW()
   WHERE client.id = $10;
   `;
 
@@ -181,7 +183,8 @@ router.put("/demographics/:id", (req, res) => {
     demographics = $2,
     neighborhood_info = $3,
     industry = $4,
-    target_age_group = $5
+    target_age_group = $5,
+    last_active = NOW()
   WHERE client.id = $6;
   `;
   pool
@@ -245,7 +248,8 @@ router.put("/additionalinfo/:id", (req, res) => {
   SET 
     dimensions = $1,
     pictures = $2,
-    wugs_visit = $3
+    wugs_visit = $3,
+    last_active = NOW()
   WHERE client.id = $4;
   `;
   pool
@@ -287,6 +291,7 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
     UPDATE client
     SET 
       phone = $1
+      last_active = NOW()
     WHERE id = $2;
   `;
     const userSqlText = `

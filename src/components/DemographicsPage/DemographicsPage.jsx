@@ -24,7 +24,6 @@ function DemographicsPage() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  console.log("Client", client.demographics);
 
   const [peopleCount, setPeopleCount] = useState(client.number_of_people || "");
   const [demographic, setDemographic] = useState(client.demographics || "");

@@ -1,5 +1,6 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
+import { withRouter } from 'react-router-dom'; 
 import {
   Step,
   StepLabel,
@@ -104,10 +105,15 @@ ColorlibStepIcon.propTypes = {
 };
 
 const steps = ['Services', 'Location Info', 'About Your Community', 'Food Choices', 'Additional info', 'Review and Complete!']
+const stepRoutes = ['/servicechoice', '/clientlocationinfo', '/demographics', '/foodpreferences', '/additionalinfo', '/review'];
 
 function MyStepper(props) {
 
-  const { step } = props
+  const { step, history } = props;
+
+  const handleStepClick = (stepIndex) => {
+    history.push(stepRoutes[stepIndex]);
+  };
 
   return (
 
@@ -115,9 +121,9 @@ function MyStepper(props) {
     <div>
 
       <Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
-        {steps.map((label) => (
+        {steps.map((label, index) => (
           <Step key={label}>
-            <StepLabel className="custom-step-label" StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+            <StepLabel className="custom-step-label" StepIconComponent={ColorlibStepIcon}  onClick={() => handleStepClick(index)}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
@@ -125,4 +131,4 @@ function MyStepper(props) {
   );
 }
 
-export default MyStepper;
+export default withRouter(MyStepper);
