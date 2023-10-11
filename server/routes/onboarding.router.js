@@ -117,7 +117,6 @@ router.put("/clientlocationinfo/:id", (req, res) => {
 
   let queryParams = [
     req.body.business_name, //1
-
     req.body.address_street, //2
     req.body.address_city, //3
     req.body.address_state, //4

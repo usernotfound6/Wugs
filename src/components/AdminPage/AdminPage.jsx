@@ -81,12 +81,13 @@ function AdminPage() {
   };
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(selectedRowData.admin_notes || "");
 
   // Function to handle row click event
   const handleRowClick = (params) => {
-    setStatus(params.row.status_id || "1"); // Set the status to the value from the selected row or a default value
     setSelectedRowData(params.row); // Set the entire row data
+    setStatus(params.row.status_id || "1"); // Set the status to the value from the selected row or a default value
+    setInput(params.row.admin_notes); // Set the input state with admin_notes from the selected row
     handleOpen(); // Open the modal when a row is clicked
   };
 
@@ -140,7 +141,6 @@ function AdminPage() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-
         <Box sx={style} style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '16px', gridTemplateAreas: '"contact business" "additional extra"' }}>
           {/* Contact Information */}
           <div style={{ gridArea: 'contact' }}>
@@ -238,7 +238,7 @@ function AdminPage() {
               <li>Wugs Visit Requested: {selectedRowData.wugs_visit ? "Yes" : "No"}</li>
             </ul>
           </div>
-          <Box sx={{ minWidth: 120 }}>
+          <div>
             <FormControl fullWidth>
               <InputLabel id="demo-simple-select-label">Status</InputLabel>
               <Select
@@ -265,12 +265,16 @@ function AdminPage() {
                 value={input}
                 onChange={inputField}
               />
-              <Button onClick={editClient}>Submit</Button>
               <Box>
-                <Button onClick={deleteClient}>Delete</Button>
+                <Button onClick={editClient}>Submit</Button>
               </Box>
             </FormControl>
-          </Box>
+          </div>
+          <div>
+            <Box textAlign={"right"}>
+              <Button onClick={deleteClient}>Delete</Button>
+            </Box>
+          </div>
         </Box>
       </Modal>
 
@@ -291,7 +295,7 @@ function AdminPage() {
         // }}
         pageSizeOptions={[5, 10]}
       />
-    </Container>
+    </Container >
   );
 }
 
