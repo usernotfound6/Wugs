@@ -168,15 +168,14 @@ function UserPage() {
 
         const data = response.data;
         console.log("Uploaded files: ", data.files);
-        if (data){
+        if (data) {
           handleClickOpen();
-          } else {
-            handleCloseDio();
-          }
+        } else {
+          handleCloseDio();
+        }
       } catch (error) {
         console.error("Error:", error);
       }
-     
     }
   };
 
@@ -200,8 +199,8 @@ function UserPage() {
         </Button>
       </div>
       <Container maxWidth="xl">
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={4}>
             <Card
               variant="outlined"
               sx={{
@@ -209,6 +208,8 @@ function UserPage() {
                 boxShadow: 5,
                 color: "black",
                 margin: "10px",
+                width: "450px",
+                height: "250px",
               }}
             >
               <CardContent>
@@ -239,40 +240,74 @@ function UserPage() {
                 >
                   Edit
                 </Button>
+                
+                <Button
+                  onClick={handleButton}
+                  sx={{
+                    marginTop: 1.5,
+                    marginLeft: 2,
+                    height: 50,
+                    width: 120,
+                    borderRadius: 1,
+                  }}
+                  color="primary"
+                  variant="contained"
+                  autoFocus
+                >
+                  Update Selections
+                </Button>
               </CardContent>
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid item xs={4}>
+            {/* <Card
+              variant="outlined"
+              sx={{
+                borderRadius: '50%',
+                width: '500px',
+                height: '500px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent background
+
+              }}
+            >
+              <CardContent> */}
+            <img
+              src={photos[photoIndex]}
+              alt={`Photo ${photoIndex + 1}`}
+              style={{
+                // maxWidth: "80%",
+                // maxHeight: "80%",
+                // objectFit: "cover",
+                // borderRadius: "50%",
+                width: "600px", // Set a fixed width and height to maintain consistency
+                height: "600px",
+                objectFit: "cover",
+                borderRadius: "50%",
+              }}
+            />
+            {/* </CardContent>
+            </Card> */}
+          </Grid>
+          <Grid item xs={4}>
             <Card
               variant="outlined"
               sx={{
-                backgroundColor: "transparent",
+                backgroundColor: "#eaeaea",
+                boxShadow: 5,
+                color: "black",
                 margin: "10px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: 600, // Set a fixed width for the card
-                height: 400, // Set a fixed height for the card
+                width: "450px",
+                height: "250px",
               }}
             >
               <CardContent>
-                <img
-                  src={photos[photoIndex]}
-                  alt={`Photo ${photoIndex + 1}`}
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                    borderRadius: 18,
-                  }}
-                />
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <h1>Upload Multiple Pictures to Google Drive</h1>
+                <h3 style={{ color: "#f5f5dc" }}>
+                  Upload Multiple Pictures to Google Drive
+                </h3>
                 <input type="file" multiple ref={fileInputRef}></input>
                 <label htmlFor="file-input">
                   <Input
@@ -305,7 +340,7 @@ function UserPage() {
           </Grid>
         </Grid>
 
-        <Button
+        {/* <Button
           onClick={handleButton}
           sx={{
             marginTop: 10,
@@ -319,7 +354,7 @@ function UserPage() {
           autoFocus
         >
           Update Services or Preferences
-        </Button>
+        </Button> */}
 
         <PopupWidget
           url="https://calendly.com/dontyellwillcry"
