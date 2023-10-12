@@ -70,15 +70,10 @@ const InterestedColumns = () => {
         field: 'actions',
         headerName: 'Actions',
         sortable: false,
-        width: 120,
+        width: 180,
         renderCell: (params) => {
           return (
-            <button
-              onClick={() => handleButtonClick(params.row.id)} // Handle button click
-              className="btn btn-primary"
-            >
-              Delete
-            </button>
+            <div style={{ color: "beige" }}>Click for More Information</div>
           );
         },
       },
