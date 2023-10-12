@@ -11,6 +11,7 @@ import {
   DialogActions,
   DialogContentText,
   CssBaseline,
+  Typography
 } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -101,8 +102,8 @@ function GetMoreInfoPage() {
   return (
     <div className="wholebody">
        <CssBaseline />
-        <div style={{ textAlign: "center" }}>
-          <h1 style={{ color: "beige" }}>Get In Touch With Us</h1>
+       <div style={{ textAlign: "center" }}>
+          <Typography variant= 'h4' marginTop={3} marginBottom={3}  style={{ color: "beige" }}>Get In Touch With Us</Typography>
           </div>{" "}
       <Box margin={'auto'}
         component="form"

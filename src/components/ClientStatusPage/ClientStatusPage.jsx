@@ -8,7 +8,6 @@ import TabContentFour from "./TabContentFour";
 import TabContentFive from "./TabContentFive";
 import { Tab, Tabs, Container, CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { PopupWidget } from "react-calendly";
 import { Typography } from "@mui/material";
 
 
@@ -59,7 +58,7 @@ function ClientStatusPage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div className='container'>
         <style type="text/css">
           {/* {`
           .calendly-badge-widget { 
@@ -72,7 +71,7 @@ function ClientStatusPage() {
         <Typography 
             variant= 'h5' 
             style={{ 
-              textAlign: "center",
+              textAlign: "left",
               margin: 'auto',
               padding: "5px",
               color: 'beige',
@@ -102,10 +101,10 @@ function ClientStatusPage() {
         </div>
         <Container
           maxWidth="lg"
-          sx={{
-            width: "100%",
-            height: "70vh",
-          }}
+          // sx={{
+          //   width: "100%",
+          //   height: "70vh",
+          // }}
         >
           {value === 0 && <TabContentOne />}
           {value === 1 && <TabContentThree />}

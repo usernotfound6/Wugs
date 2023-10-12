@@ -80,7 +80,7 @@ function ServiceChoicePage() {
       <MyStepper step={0} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <h1 style={{ color: "beige" }}>Products I'm Interested In...</h1>
+        <Typography variant= 'h4' marginTop={3} marginBottom={3} style={{ color: "beige" }}>Products I'm Interested In...</Typography>
       </div>{" "}
       {/* This div was not actually wrapped around anything. Change the justify to space-around */}
       <div style={{ display: "flex", justifyContent: "space-around" }}>

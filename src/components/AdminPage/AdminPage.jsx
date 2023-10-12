@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import { Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from '@mui/material';
+import { CssBaseline, Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from '@mui/material';
 import Columns from "./Columns";
 import "./AdminPage.css";
 import InterestedColumns from "./Interestedcolumns";
@@ -73,6 +73,7 @@ function AdminPage() {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
+    height: 800,
     width: 1000,
     bgcolor: "background.paper",
     border: "2px solid #000",
@@ -129,177 +130,202 @@ function AdminPage() {
   }
 
   return (
-    <Container fixed sx={{ backgroundColor: "#fefefe" }}>
-      <h1>Client Table</h1>
-      <DataGrid rows={rows} columns={columns} onRowClick={handleRowClick} />
+    <div className="container">
+      <CssBaseline />
+      <div style={{ textAlign: "center" }}>
+        <Typography variant='h4' marginTop={0} marginBottom={4} style={{ color: "beige" }}>Admin View</Typography>
+      </div>{" "}
+      <Container sx={{ padding: 3, marginBottom: 10, borderRadius: 3, backgroundColor: "#484747" }}>
+        <Typography variant='h4' style={{ padding: 6, color: "beige" }}>Client Table</Typography>
+        <DataGrid style={{ color: "beige" }} rows={rows} columns={columns} onRowClick={handleRowClick} />
 
-      {/* -----------  MODAL START ----------- */}
+        {/* -----------  MODAL START ----------- */}
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style} style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '16px', gridTemplateAreas: '"contact business" "additional extra"' }}>
-          {/* Contact Information */}
-          <div style={{ gridArea: 'contact' }}>
-            <Typography variant="h6">Contact Information</Typography>
-            <ul>
-              <li>Business: {selectedRowData.business_name}</li>
-              <li>Name: {selectedRowData.first_name}, {selectedRowData.last_name}</li>
-              <li>Username/Email: {selectedRowData.username}</li>
-              <li>Phone #: {selectedRowData.phone}</li>
-            </ul>
-          </div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          backgroundColor='#484747'
+        >
 
-          {/* Business Information */}
-          <div style={{ gridArea: 'business' }}>
-            <Typography variant="h6">Business Information</Typography>
-            <ul>
-              <li>Address: {selectedRowData.address_street}</li>
-              <li>City: {selectedRowData.address_city}, {selectedRowData.address_state} {selectedRowData.address_zip}</li>
-              <li>Industry: {selectedRowData.industry || "N/A"}</li>
-              <li>Website: {selectedRowData.website || "N/A"}</li>
-              <li>Number of People: {selectedRowData.number_of_people || "N/A"}</li>
-              <li>Hours of Operation: {selectedRowData.hours_of_operation || "N/A"}</li>
-            </ul>
-          </div>
+          <Box sx={style} style={{ borderRadius: 30, backgroundColor: '#484747', color: "beige", display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '6px', gridTemplateAreas: '"contact business" "additional extra"' }}>
 
-          {/* Additional Client/Building Information */}
-          <div style={{ gridArea: 'additional' }}>
-            <Typography variant="h6">Additional Client/Building Information</Typography>
-            <ul>
-              <li>Demographics: {selectedRowData.demographics || "N/A"}</li>
-              <li>Neighborhood Info: {selectedRowData.neighborhood_info || "N/A"}</li>
-              <li>Micro-Market Location in Business: {selectedRowData.micromarket_location || "N/A"}</li>
-              <li>Market Space Dimensions: {selectedRowData.dimensions || "N/A"}</li>
-              <li>
-                Product Types Interested In:
-                {selectedRowData.product_types ? (
-                  <ul>
-                    {selectedRowData.product_types.map((type, index) => (
-                      <li key={index}>{type}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>No product preferences chosen.</p>
-                )}
-              </li>
-              <li>
-                Services Interested In:
-                {selectedRowData.service_names ? (
-                  <ul>
-                    {selectedRowData.service_names.map((name, index) => (
-                      <li key={index}>{name}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>No services chosen.</p>
-                )}
-              </li>
+            {/* Contact Information */}
+            <div style={{ gridArea: 'contact' }}>
+              <Typography variant="h6">Contact Information</Typography>
+              <ul>
+                <li>Business: {selectedRowData.business_name}</li>
+                <li>Name: {selectedRowData.first_name}, {selectedRowData.last_name}</li>
+                <li>Username/Email: {selectedRowData.username}</li>
+                <li>Phone #: {selectedRowData.phone || "N/A"}</li>
+              </ul>
+            </div>
 
-              <li>Target Age Group: {selectedRowData.target_age_group}</li>
-            </ul>
-          </div>
+            {/* Business Information */}
+            <div style={{ gridArea: 'business' }}>
+              <Typography variant="h6">Business Information</Typography>
+              <ul>
+                <li>Address: {selectedRowData.address_street}</li>
+                <li>City: {selectedRowData.address_city}, {selectedRowData.address_state} {selectedRowData.address_zip}</li>
+                <li>Industry: {selectedRowData.industry || "N/A"}</li>
+                <li>Website: {selectedRowData.website || "N/A"}</li>
+                <li>Number of People: {selectedRowData.number_of_people || "N/A"}</li>
+                <li>Hours of Operation: {selectedRowData.hours_of_operation || "N/A"}</li>
+              </ul>
+            </div>
 
-          {/* Extra Info Provided */}
-          <div style={{ gridArea: 'extra' }}>
-            <Typography variant="h6">Extra Info Provided</Typography>
-            <ul>
-              <li>
-                Pictures:
-                {selectedRowData.pictures ? (
-                  <ul>
-                    {selectedRowData.pictures.map((url, index) => (
-                      <li key={index}>
-                        <a href={url} target="_blank" rel="noopener noreferrer">
-                          Picture {index + 1}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p>No pictures provided.</p>
-                )}
-              </li>
-              <li>
-                Contract:
-                {selectedRowData.contract ? (
-                  <ul>
-                    <a href={selectedRowData.contract} target="_blank" rel="noopener noreferrer">
-                      Document
-                    </a>
-                  </ul>
-                ) : (
-                  <p>No contract on file.</p>
-                )}
-              </li>
-              <li>Wugs Visit Requested: {selectedRowData.wugs_visit ? "Yes" : "No"}</li>
-            </ul>
-          </div>
-          <div>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Update Status</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={status}
-                label="Update Status"
-                onChange={dropdown}
-              >
-                <MenuItem value={1}>Onboarding Incomplete</MenuItem>
-                <MenuItem value={2}>Pending Wugs Approval</MenuItem>
-                <MenuItem value={3}>Render In Progress</MenuItem>
-                <MenuItem value={4}>Contract Sent Awaiting Completion</MenuItem>
-                <MenuItem value={5}>Pending Contract Approval</MenuItem>
-                <MenuItem value={6}>Account Active</MenuItem>
-                <MenuItem value={7}>Account Inactive</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div>
-            <FormControl fullWidth>
-              <TextField
-                id="filled-multiline-static"
-                label="Client Notepad"
-                multiline
-                rows={4}
-                variant="filled"
-                value={input}
-                onChange={inputField}
-              />
-              <Box>
-                <Button onClick={editClient}>Submit</Button>
-              </Box>
-              <div>
-                <Box textAlign={"right"}>
-                  <Button onClick={deleteClient}>Delete Client File</Button>
+            {/* Additional Client/Building Information */}
+            <div style={{ gridArea: 'additional' }}>
+              <Typography variant="h6">Additional Client/Building Information</Typography>
+              <ul>
+                <li>Demographics: {selectedRowData.demographics || "N/A"}</li>
+                <li>Neighborhood Info: {selectedRowData.neighborhood_info || "N/A"}</li>
+                <li>Micro-Market Location in Business: {selectedRowData.micromarket_location || "N/A"}</li>
+                <li>Market Space Dimensions: {selectedRowData.dimensions || "N/A"}</li>
+                <li>
+                  Product Types Interested In:
+                  {selectedRowData.product_types ? (
+                    <ul>
+                      {selectedRowData.product_types.map((type, index) => (
+                        <li key={index}>{type}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No product preferences chosen.</p>
+                  )}
+                </li>
+                <li>
+                  Services Interested In:
+                  {selectedRowData.service_names ? (
+                    <ul>
+                      {selectedRowData.service_names.map((name, index) => (
+                        <li key={index}>{name}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No services chosen.</p>
+                  )}
+                </li>
+
+                <li>Target Age Group: {selectedRowData.target_age_group}</li>
+              </ul>
+            </div>
+
+            {/* Extra Info Provided */}
+            <div style={{ gridArea: 'extra' }}>
+              <Typography variant="h6">Extra Info Provided</Typography>
+              <ul>
+                <li>
+                  Documents:
+                  {selectedRowData.pictures ? (
+                    <ul>
+                      {selectedRowData.pictures.map((url, index) => (
+                        <li key={index}>
+                          <a href={url} target="_blank" rel="noopener noreferrer">
+                            Picture {index + 1}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No pictures provided.</p>
+                  )}
+                </li>
+                <li>Wugs Visit Requested: {selectedRowData.wugs_visit ? "Yes" : "No"}</li>
+              </ul>
+            </div>
+            <div sx={{ backgroundColor: "#484747", minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Update Status</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={status}
+                  label="Update Status"
+                  onChange={dropdown}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "gray", // Outline color when not focused
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "beige", // Outline color on hover
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "beige", // Outline color when focused
+                      },
+                    },
+                  }}
+                >
+                  <MenuItem value={1}>Onboarding Incomplete</MenuItem>
+                  <MenuItem value={2}>Pending Wugs Approval</MenuItem>
+                  <MenuItem value={3}>Render In Progress</MenuItem>
+                  <MenuItem value={4}>Contract Sent Awaiting Completion</MenuItem>
+                  <MenuItem value={5}>Pending Contract Approval</MenuItem>
+                  <MenuItem value={6}>Account Active</MenuItem>
+                  <MenuItem value={7}>Account Inactive</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <div>
+              <FormControl fullWidth>
+                <TextField
+                  id="filled-multiline-static"
+                  label="Client Notepad"
+                  multiline
+                  rows={4}
+                  inputProps={{ style: { color: "beige" } }}
+                  InputLabelProps={{ style: { color: "beige" } }}
+                  variant="outlined"
+                  value={input}
+                  onChange={inputField}
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        borderColor: "gray", // Outline color when not focused
+                      },
+                      "&:hover fieldset": {
+                        borderColor: "beige", // Outline color on hover
+                      },
+                      "&.Mui-focused fieldset": {
+                        borderColor: "beige", // Outline color when focused
+                      },
+                    },
+                  }}
+                />
+                <Box>
+                  <Button onClick={editClient}>Submit</Button>
                 </Box>
-              </div>
-            </FormControl>
-          </div>
-        </Box>
-      </Modal>
+                <div>
+                  <Box textAlign={"right"}>
+                    <Button onClick={deleteClient}>Delete Client File</Button>
+                  </Box>
+                </div>
+              </FormControl>
+            </div>
+          </Box>
+        </Modal>
 
-      {/* -----------  MODAL END ----------- */}
+        {/* -----------  MODAL END ----------- */}
 
-      {/* ..................USER Table................... */}
+        {/* ..................USER Table................... */}
 
-      <h1>Interested Table</h1>
+        <Typography variant='h4' style={{ padding: 18, color: "beige" }}>Interested Table</Typography>
 
-      <DataGrid
-        rows={interestedRows}
-        columns={interestedColumns}
-        // onRowClick={handleButtonClick}
-        // initialState={{
-        //   pagination: {
-        //     paginationModel: { page: 0, pageSize: 5 },
-        //   },
-        // }}
-        pageSizeOptions={[5, 10]}
-      />
-    </Container >
+        <DataGrid
+          rows={interestedRows}
+          columns={interestedColumns}
+          // onRowClick={handleButtonClick}
+          // initialState={{
+          //   pagination: {
+          //     paginationModel: { page: 0, pageSize: 5 },
+          //   },
+          // }}
+          pageSizeOptions={[5, 10]}
+        />
+      </Container>
+    </div>
   );
 }
 

@@ -1,7 +1,21 @@
 h1 {
-  color: black;
+  color: rgb(255, 254, 188);
 }
 
 ul li  {
-  color: black;
+  color: rgb(253, 255, 208);
+}
+.MuiTypography-root, /* Change text color for Typography components */
+.MuiDataGrid-root, /* Change text color for DataGrid components */
+.MuiButton-root, /* Change text color for Button components */
+.MuiInputBase-root, /* Change text color for Input components */
+.MuiSelect-root, /* Change text color for Select components */
+.MuiMenuItem-root, /* Change text color for MenuItem components */
+.MuiTextField-root /* Change text color for TextField components */ {
+  color: beige !important; /* Set the text color to beige */
+}
+
+/* Optionally, you can also change the background color of MUI components */
+.MuiPaper-root {
+  background-color: #646464 !important; /* Set the background color to your desired color */
 }
