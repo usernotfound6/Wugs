@@ -178,6 +178,9 @@ function UserPage() {
       }
     }
   };
+  const openCalendlyLink = () => {
+    Calendly.initPopupWidget({ url: "https://calendly.com/dontyellwillcry" });
+  };
 
   return (
     <>
@@ -190,7 +193,6 @@ function UserPage() {
           marginRight: "30px",
         }}
       >
-        {/* <LogOutButton className="btn" /> */}
         <Button
           variant="contained"
           onClick={() => dispatch({ type: "LOGOUT" })}
@@ -198,9 +200,15 @@ function UserPage() {
           Logout
         </Button>
       </div>
-      <Container maxWidth="xl">
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={4}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          width: "100%",
+          height: "60vh",
+        }}
+      >
+        <Grid container spacing={1}>
+          <Grid item xs={4} md={6}>
             <Card
               variant="outlined"
               sx={{
@@ -240,7 +248,7 @@ function UserPage() {
                 >
                   Edit
                 </Button>
-                
+
                 <Button
                   onClick={handleButton}
                   sx={{
@@ -256,11 +264,27 @@ function UserPage() {
                 >
                   Update Selections
                 </Button>
+                <Button
+                  onClick={openCalendlyLink}
+                  sx={{
+                    marginTop: 1.5,
+                    marginLeft: 2,
+                    height: 50,
+                    width: 120,
+                    borderRadius: 1,
+                  }}
+                  color="primary"
+                  variant="contained"
+                  autoFocus
+                >
+                  Schedule Meeting
+                </Button>
               </CardContent>
             </Card>
           </Grid>
 
-          <Grid item xs={4}>
+          {/* <Grid item xs={4}> */}
+          <Grid item xs={4} md={6}>
             {/* <Card
               variant="outlined"
               sx={{
@@ -279,12 +303,8 @@ function UserPage() {
               src={photos[photoIndex]}
               alt={`Photo ${photoIndex + 1}`}
               style={{
-                // maxWidth: "80%",
-                // maxHeight: "80%",
-                // objectFit: "cover",
-                // borderRadius: "50%",
-                width: "600px", // Set a fixed width and height to maintain consistency
-                height: "600px",
+                width: "400px",
+                height: "400px",
                 objectFit: "cover",
                 borderRadius: "50%",
               }}
@@ -292,7 +312,8 @@ function UserPage() {
             {/* </CardContent>
             </Card> */}
           </Grid>
-          <Grid item xs={4}>
+          
+          <Grid item xs={6} md={6}>
             <Card
               variant="outlined"
               sx={{
@@ -314,7 +335,7 @@ function UserPage() {
                     id="file-input"
                     type="file"
                     inputRef={fileInputRef}
-                    style={{ display: "none" }} // Hide the actual input element
+                    style={{ display: "none" }}
                     multiple
                   />
                   <Button
@@ -329,7 +350,7 @@ function UserPage() {
                   variant="contained"
                   onClick={handleFileUpload}
                   style={{
-                    marginLeft: "10px", // Add left margin
+                    marginLeft: "10px",
                   }}
                   autoFocus
                 >
@@ -339,30 +360,6 @@ function UserPage() {
             </Card>
           </Grid>
         </Grid>
-
-        {/* <Button
-          onClick={handleButton}
-          sx={{
-            marginTop: 10,
-            marginLeft: 2,
-            height: 50,
-            width: "100%",
-            borderRadius: 1,
-          }}
-          color="success"
-          variant="contained"
-          autoFocus
-        >
-          Update Services or Preferences
-        </Button> */}
-
-        <PopupWidget
-          url="https://calendly.com/dontyellwillcry"
-          rootElement={rootElement}
-          text="Click here to schedule a meeting with Wugs!"
-          textColor="#ffffff"
-          color="#00a2ff"
-        />
       </Container>
 
       {/* ----------- MODAL START ----------- */}
