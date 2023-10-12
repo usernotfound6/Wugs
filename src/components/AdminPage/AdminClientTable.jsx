@@ -230,7 +230,7 @@ function AdminClientTable() {
 
                         <div sx={{ backgroundColor: "#484747", minWidth: 120 }}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Update Status</InputLabel>
+                                <InputLabel style={{ color: "beige" }} id="demo-simple-select-label">Update Status</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
@@ -238,9 +238,15 @@ function AdminClientTable() {
                                     label="Update Status"
                                     onChange={dropdown}
                                     sx={{
+                                        "& .MuiOutlinedInput-notchedOutline": {
+                                            borderColor: "gray",
+                                          },
+                                          "&:hover .MuiOutlinedInput-notchedOutline": {
+                                            borderColor: "beige", 
+                                          },
                                         "& .MuiOutlinedInput-root": {
                                             "& fieldset": {
-                                                borderColor: "gray", // Outline color when not focused
+                                                borderColor: "beige", // Outline color when not focused
                                             },
                                             "&:hover fieldset": {
                                                 borderColor: "beige", // Outline color on hover
