@@ -247,18 +247,12 @@ function ClientLocationInfoPage() {
           placeholder="55415"
           style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
-          required
           sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "beige", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "gray",
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "white", // Change this to your desired hover outline color
             },
           }}
         >
