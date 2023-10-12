@@ -4,7 +4,7 @@ import MyStepper from "../MyStepper/MyStepper";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { ButtonBase, Button } from "@mui/material";
+import { ButtonBase, Button, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 // Path: /foodpreferences
@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 
 const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
   position: "relative",
+  
   height: 200,
   [theme.breakpoints.down("sm")]: {
     width: "100% !important", // Overrides inline-style
@@ -50,6 +51,7 @@ const ImageSrc = styled("span")({
   right: 0,
   top: 0,
   bottom: 0,
+  margin: 4,
   backgroundSize: "cover",
   backgroundPosition: "center 40%",
 });
@@ -174,7 +176,7 @@ function FoodPreferencesPage() {
         marginTop={3}
         gutterBottom
       >
-        Snack Options
+        Food Choices
       </Typography>
       <Typography
         style={{ textAlign: "center" }}
@@ -185,7 +187,9 @@ function FoodPreferencesPage() {
       >
         Select any you'd like to learn more about!
       </Typography>
-
+      <Grid sx={{display: 'flex', margin: 'auto'}}
+        
+        container xs={7} spacing={2} columnGap={6} rowGap={0}>
       <Box
         sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
       >
@@ -198,11 +202,13 @@ function FoodPreferencesPage() {
               onClick={() => handleClick(product.id)}
               style={{
                 width: "20em",
+               
               }}
               isclicked={clickedButtons.includes(product.id)}
             >
-              <ImageSrc style={{ backgroundImage: `url(${product.url})` }} />
-              <ImageBackdrop className="MuiImageBackdrop-root" />
+              <ImageSrc style={{  borderRadius: 16, borderWidth: "5px",  backgroundImage: `url(${product.url})` }} />
+              <ImageBackdrop  style={{
+                borderRadius: 22}}className="MuiImageBackdrop-root" />
               <Image>
                 <Typography
                   component="span"
@@ -225,8 +231,21 @@ function FoodPreferencesPage() {
           <p>No products available.</p>
         )}
       </Box>
-      <Button variant="contained" onClick={handleSave}>
-        NEXT
+      </Grid>
+      <Button
+        onClick={handleSave}
+        sx={{
+          marginTop: 1.5,
+          marginLeft: 2,
+          height: 50,
+          width: 120,
+          borderRadius: 1,
+        }}
+        color="success"
+        variant="contained"
+        autoFocus
+      >
+        Next
       </Button>
     </div>
   );
