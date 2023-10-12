@@ -9,7 +9,12 @@ import {
   Modal,
   TextField,
   Typography,
+  Container,
+  Grid,
+  Input,
+  Paper,
 } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useHistory } from "react-router-dom";
 import { PopupWidget } from "react-calendly";
 import axios from "axios";
@@ -120,7 +125,7 @@ function UserPage() {
   const handleFileUpload = async () => {
     const files = fileInputRef.current.files;
     console.log("Selected files:", files);
-    console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY)
+    console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
 
     // Check if there are selected files
     if (files.length > 0) {
@@ -131,18 +136,22 @@ function UserPage() {
         formData.append("files", files[i]);
       }
       console.log("Uploading files:", formData);
-      console.log("file name:", formData.id)
+      console.log("file name:", formData.id);
       // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
       const clientId = client.client_id;
-      console.log("clientId is:", clientId)
+      console.log("clientId is:", clientId);
 
       try {
         // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
-        const response = await axios.post(`/api/onboarding/upload/${clientId}`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
-          },
-        });
+        const response = await axios.post(
+          `/api/onboarding/upload/${clientId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+            },
+          }
+        );
 
         const data = response.data;
         console.log("Uploaded files: ", data.files);
@@ -152,97 +161,120 @@ function UserPage() {
     }
   };
 
-
   return (
-    <div className="container">
-      <h2>Welcome, {user.first_name || user.username}!</h2>
-      <h2>Onboarding Status: {client.status_name}</h2>
-      {/* <p>Your ID is: {user.id}</p> */}
-      <LogOutButton className="btn" />
-      <div className="container2">
-        <Card
-          variant="outlined"
-          sx={{
-            backgroundColor: "#eaeaea",
-            boxShadow: 5,
-            color: "black",
-            marginTop: 2,
-            width: 350,
-          }}
-        >
-          <CardContent>
-            <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
-              Your Contact Info:
-            </Typography>
-            <Typography variant="h8" component="div">
-              <ul>
-                <li>Username (email): {user.username}</li>
-                <li>
-                  Primary Contact: {user.first_name} {user.last_name}
-                </li>
-                <li>Phone: {client.phone || "Phone number required"}</li>
-              </ul>
-            </Typography>
-            <Button
-              onClick={handleOpen}
-              sx={{
-                marginTop: 1.5,
-                marginLeft: 2,
-                height: 50,
-                width: 120,
-                borderRadius: 1,
-              }}
-              color="primary"
-              variant="contained"
-              autoFocus
-            >
-              Edit
-            </Button>
-          </CardContent>
-        </Card>
+    <>
+      <Container maxWidth="xl">
+        <h2>Welcome, {user.first_name || user.username}!</h2>
+        <h2>Onboarding Status: {client.status_name}</h2>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <LogOutButton className="btn" />
+        </div>
 
-        {/* ---- Photo slider ---- */}
-        <div className="photo-slider">
-          <Card
-            variant="outlined"
-            sx={{
-              backgroundColor: "transparent",
-              margin: "auto",
-            }}
-          >
-            <CardContent>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Card
+              variant="outlined"
+              sx={{
+                backgroundColor: "#eaeaea",
+                boxShadow: 5,
+                color: "black",
+                margin: "10px",
+              }}
+            >
+              <CardContent>
+                <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
+                  Your Contact Info:
+                </Typography>
+                <Typography variant="h8" component="div">
+                  <ul>
+                    <li>Username (email): {user.username}</li>
+                    <li>
+                      Primary Contact: {user.first_name} {user.last_name}
+                    </li>
+                    <li>Phone: {client.phone || "Phone number required"}</li>
+                  </ul>
+                </Typography>
+                <Button
+                  onClick={handleOpen}
+                  sx={{
+                    marginTop: 1.5,
+                    marginLeft: 2,
+                    height: 50,
+                    width: 120,
+                    borderRadius: 1,
+                  }}
+                  color="primary"
+                  variant="contained"
+                  autoFocus
+                >
+                  Edit
+                </Button>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Card
+              variant="outlined"
+              sx={{
+                backgroundColor: "transparent",
+                margin: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: 600, // Set a fixed width for the card
+                height: 400, // Set a fixed height for the card
+              }}
+            >
+              <CardContent>
                 <img
                   src={photos[photoIndex]}
                   alt={`Photo ${photoIndex + 1}`}
                   style={{
-                    maxWidth: "600px",
-                    maxHeight: "600px",
-                    minWidth: "600px",
-                    minHeight: "600px",
+                    maxWidth: "100%",
+                    height: "auto",
                     borderRadius: 18,
                   }}
                 />
-              </div>
+              </CardContent>
+            </Card>
+          </Grid>
+        <Grid item xs={12} md={6}>
+          <Card
+          
+          >
+            <CardContent>
+              <h1>Upload Multiple Pictures to Google Drive</h1>
+              <input type="file" multiple ref={fileInputRef}></input>
+              <label htmlFor="file-input">
+                <Input
+                  id="file-input"
+                  type="file"
+                  inputRef={fileInputRef}
+                  style={{ display: "none" }} // Hide the actual input element
+                  multiple
+                />
+                <Button
+                  variant="contained"
+                  component="span"
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Select Files
+                </Button>
+              </label>
+              <Button onClick={handleFileUpload}>Upload Files</Button>
             </CardContent>
           </Card>
-        </div>
-      </div>
+        </Grid>
+        </Grid>
 
-      <div className="button-container">
         <Button
           onClick={handleButton}
           sx={{
-            marginTop: 1.5,
+            marginTop: 10,
             marginLeft: 2,
             height: 50,
-            width: 350,
+            width: "100%",
             borderRadius: 1,
           }}
           color="success"
@@ -251,210 +283,217 @@ function UserPage() {
         >
           Update Services or Preferences
         </Button>
+
         <PopupWidget
           url="https://calendly.com/dontyellwillcry"
           rootElement={rootElement}
           text="Click here to schedule a meeting with Wugs!"
           textColor="#ffffff"
           color="#00a2ff"
-          style={{
-            position: "flex",
-            top: "50px",
-            left: "20px",
-          }}
         />
-      </div>
 
-      {/* ----------- MODAL START ----------- */}
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
-            p: 4,
-          }}
+        {/* ----------- MODAL START ----------- */}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Edit your contact info:
-          </Typography>
           <Box
-            component="form"
             sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 270,
+              bgcolor: "#484747",
+              boxShadow: 24,
+              borderRadius: 4,
+              p: 4,
             }}
-            noValidate
-            autoComplete="off"
           >
-            <TextField
-              id="firstName"
-              label="First Name"
-              variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
-              // InputLabelProps={{ style: { color: "red" } }}
-              type="text"
-              placeholder="First Name"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
-              required
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
-                  },
-                },
-              }}
-            />
-            <br />
-
-            <TextField
-              id="lastName"
-              label="Last Name"
-              variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
-              // InputLabelProps={{ style: { color: "red" } }}
-              type="lastName"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
-              required
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
-                  },
-                },
-              }}
-            />
-            <br />
-            <TextField
-              id="phone"
-              label="Phone Number"
-              variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
-              // InputLabelProps={{ style: { color: "red" } }}
-              type="phone"
-              placeholder="Phone Number"
-              value={phone}
-              onChange={handleFormatPhoneNumber}
-              required
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
-                  },
-                },
-              }}
-            />
-            <br />
-            <TextField
-              id="username"
-              label="Username / Email"
-              variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
-              // InputLabelProps={{ style: { color: "red" } }}
-              type="email"
-              placeholder="Email Address"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-              required
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
-                  },
-                },
-              }}
-            />
-            <TextField
-              id="confirmusername"
-              label="Confirm Username / Email"
-              variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
-              // InputLabelProps={{ style: { color: "red" } }}
-              type="email"
-              placeholder="Email Address"
-              value={confirmUsername}
-              onChange={(event) => setConfirmUsername(event.target.value)}
-              required
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
-                  },
-                },
-              }}
-            />
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              ***Please note: your username will be changed to this new email if
-              updated.
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Edit your contact info:
             </Typography>
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                id="firstName"
+                label="First Name"
+                variant="outlined"
+                // inputProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                type="text"
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
+                required
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "red", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "red", // Outline color when focused
+                    },
+                  },
+                }}
+              />
+              <br />
+              <TextField
+                id="lastName"
+                label="Last Name"
+                variant="outlined"
+                // inputProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                type="lastName"
+                value={lastName}
+                onChange={(event) => setLastName(event.target.value)}
+                required
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "red", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "red", // Outline color when focused
+                    },
+                  },
+                }}
+              />
+              <br />
+              <TextField
+                id="phone"
+                label="Phone Number"
+                variant="outlined"
+                // inputProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                type="phone"
+                value={phone}
+                onChange={handleFormatPhoneNumber}
+                required
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "red", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "red", // Outline color when focused
+                    },
+                  },
+                }}
+              />
+              <br />
+              <TextField
+                id="username"
+                label="Username / Email"
+                variant="outlined"
+                // inputProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                type="email"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                required
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "red", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "red", // Outline color when focused
+                    },
+                  },
+                }}
+              />
+              <TextField
+                id="confirmusername"
+                label="Confirm Username / Email"
+                variant="outlined"
+                // inputProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                type="email"
+                value={confirmUsername}
+                onChange={(event) => setConfirmUsername(event.target.value)}
+                required
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "red", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "red", // Outline color when focused
+                    },
+                  },
+                }}
+              />
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                *** Please Note: Your username will be changed to this new email
+                if updated.
+              </Typography>
+            </Box>
+            <Button
+              onClick={handleSave}
+              sx={{
+                marginTop: 1.5,
+                marginLeft: 2,
+                height: 50,
+                width: 120,
+                borderRadius: 1,
+              }}
+              color="success"
+              variant="contained"
+              autoFocus
+            >
+              Save
+            </Button>
           </Box>
-          <Button
-            onClick={handleSave}
-            sx={{
-              marginTop: 1.5,
-              marginLeft: 2,
-              height: 50,
-              width: 120,
-              borderRadius: 1,
-            }}
-            color="success"
-            variant="contained"
-            autoFocus
-          >
-            Save
-          </Button>
-        </Box>
-      </Modal>
-
-      {/* ----------- MODAL END ----------- */}
-
-      <h1>Upload Multiple Files to Google Drive</h1>
-      <input type="file" multiple ref={fileInputRef}></input>
-      <Button onClick={handleFileUpload}>Upload Files</Button>
-
-    </div>
+        </Modal>
+        {/* ----------- MODAL END ----------- */}
+        {/* <Card>
+          <CardContent>
+            <h1>Upload Multiple Pictures to Google Drive</h1>
+            <input type="file" multiple ref={fileInputRef}></input>
+            <label htmlFor="file-input">
+              <Input
+                id="file-input"
+                type="file"
+                inputRef={fileInputRef}
+                style={{ display: "none" }} // Hide the actual input element
+                multiple
+              />
+              <Button
+                variant="contained"
+                component="span"
+                startIcon={<CloudUploadIcon />}
+              >
+                Select Files
+              </Button>
+            </label>
+            <Button onClick={handleFileUpload}>Upload Files</Button>
+          </CardContent>
+        </Card> */}
+      </Container>
+    </>
   );
 }
 

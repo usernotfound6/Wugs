@@ -213,7 +213,7 @@ function ClientLocationInfoPage() {
         />
         <br />
         <FormControl variant="outlined" style={{ width: 310 }}>
-      <InputLabel htmlFor="addressState">State</InputLabel>
+      <InputLabel style={{ color: "beige" }} htmlFor="addressState">State</InputLabel>
       <Select
         id="addressState"
         value={addressState}
@@ -225,7 +225,7 @@ function ClientLocationInfoPage() {
             borderColor: "gray",
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "your-hover-color", // Change this to your desired hover outline color
+            borderColor: "beige", // Change this to your desired hover outline color
           },
           "& .MuiOutlinedInput-root": {
             borderColor: "beige", // Outline color when not focused
