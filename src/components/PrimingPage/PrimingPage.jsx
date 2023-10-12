@@ -86,7 +86,10 @@ function PrimingPage() {
             </Typography>
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-            <Button
+          </CardActions>
+        </Card>
+      </Box>
+      <Button sx={{ display: "flex", margin: 'auto',  padding: 3, borderRadius: 2, boxShadow: 12, marginBottom: 3  }}
               size="large"
               variant="contained"
               color="success"
@@ -94,11 +97,8 @@ function PrimingPage() {
                 history.push("/servicechoice");
               }}
             >
-              <FastfoodIcon style={{ padding: 6 }} /> GET SNACKING!
+              <FastfoodIcon size="large" style={{ padding: 6 }} /> GET SNACKING!
             </Button>
-          </CardActions>
-        </Card>
-      </Box>
     </div>
   );
 }
