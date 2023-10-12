@@ -6,7 +6,7 @@ import TextField from "@mui/material/TextField";
 // the CssBaseline was no inported?
 import CssBaseline from '@mui/material/CssBaseline';
 import MyStepper from '../MyStepper/MyStepper';
-import { Button, MenuItem, Select, Typography } from "@mui/material";
+import { Button, MenuItem, Select, Typography, FormControl, InputLabel, Grid } from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
@@ -113,6 +113,7 @@ function ClientLocationInfoPage() {
       <div style={{ textAlign: "center" }}>
         <Typography variant= 'h4' marginTop={3} marginBottom={3} style={{ color: "beige" }}>Who Are We Serving?</Typography>
       </div>{" "}
+      <Grid  margin={'auto'} container spacing={-48}>
       <Box margin={'auto'}
         component="form"
         sx={{
@@ -209,21 +210,48 @@ function ClientLocationInfoPage() {
           }}
         />
         <br />
-
-        <Select
+        <FormControl variant="outlined" style={{ width: 310 }}>
+      <InputLabel htmlFor="addressState">State</InputLabel>
+      <Select
+        id="addressState"
+        value={addressState}
+        onChange={handleStateSelect}
+        defaultValue="MN"
+        required
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            borderColor: "beige", // Outline color when not focused
+            "&:hover fieldset": {
+              borderColor: "beige", // Outline color on hover
+            },
+            "&.Mui-focused fieldset": {
+              borderColor: "beige", // Outline color when focused
+            },
+          },
+        }}
+      >
+        {allStates.map((stateAbbr) => (
+          <MenuItem key={stateAbbr} value={stateAbbr}>
+            {stateAbbr}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+        {/* <Select
           id="addressState"
           value={addressState}
           label="State"
           onChange={handleStateSelect}
           defaultValue={"MN"}
           variant="outlined"
+          placeholder="55415"
           style={{ width: 310 }}
           inputProps={{ style: { color: "beige" } }}
           required
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+                borderColor: "beige", // Outline color when not focused
               },
               "&:hover fieldset": {
                 borderColor: "beige", // Outline color on hover
@@ -239,7 +267,7 @@ function ClientLocationInfoPage() {
               {stateAbbr}
             </MenuItem>
           ))}
-        </Select>
+        </Select> */}
 
         <br />
         <TextField
@@ -269,7 +297,21 @@ function ClientLocationInfoPage() {
           }}
         />
         <br />
+        </Box>
+        <Box margin={'auto'}
+        component="form"
+        sx={{
 
+          backgroundColor: '#484747',
+          borderRadius: 3,
+          width: 360,
+          padding: 2,
+          elevation: 24,
+          "& > :not(style)": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
         <TextField
           id="website"
           label="Website"
@@ -383,6 +425,7 @@ function ClientLocationInfoPage() {
         />
         <br />
       </Box>
+      </Grid>
 
       <Button
         onClick={handleSubmit}
