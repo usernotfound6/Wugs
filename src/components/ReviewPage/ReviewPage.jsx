@@ -14,6 +14,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Button } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import MyStepper from "../MyStepper/MyStepper";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  DialogContentText,
+} from "@mui/material";
 import { PopupWidget } from "react-calendly";
 
 // Path: /clientstatus
@@ -27,6 +34,7 @@ const theme = createTheme({
 function ReviewPage() {
   const client = useSelector((store) => store.client);
   const user = useSelector((store) => store.user);
+  const [openConfirmation, setOpenConfirmation] = useState(false);
   const history = useHistory();
   const rootElement = document.getElementById("popup-root");
 
@@ -46,6 +54,20 @@ function ReviewPage() {
   const openCalendlyLink = () => {
     Calendly.initPopupWidget({ url: "https://calendly.com/dontyellwillcry" });
   };
+
+  const handleConfirmSubmit = () => {
+    setOpenConfirmation(false);
+    history.push("/home");
+  };
+
+  const handleCloseConfirmation = () => {
+    setOpenConfirmation(false);
+  };
+
+  const handleOpenConfirmation = () => {
+    setOpenConfirmation(true);
+    event.preventDefault();
+  }
 
   console.log("client", client)
 
@@ -295,11 +317,68 @@ function ReviewPage() {
                   </CardContent>
                 </Card>
               </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                  <CardContent>
+                    <Box textAlign={"center"}>
+                      <Button onClick={handleOpenConfirmation}
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 200,
+                          borderRadius: 1,
+                        }}
+                        color="secondary"
+                        variant="contained"
+                        autoFocus
+                      >
+                       CONFIRM AND SUBMIT
+                      </Button>
+
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Grid>
             </Grid>
           </Box>
+          
+          
         </Container>
-        <Card>
-        </Card>
+        
+        <Dialog
+        open={openConfirmation}
+        onClose={handleCloseConfirmation}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          style: {
+            background: "beige",
+          },
+        }}
+      >
+        
+        <DialogTitle id="alert-dialog-title">
+          Thank You For Expressing Interest!
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            We are so excited to bring diverse snacking options into your community and space!
+            You will be contacted by Wugs soon with follow-up information. Once you click
+            'Go Back' you will be redirected to the home page where you can view your current onboarding status and edit your profile.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleConfirmSubmit}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Go Back
+          </Button>
+        </DialogActions>
+      </Dialog>
       </div>
     </ThemeProvider>
   );
