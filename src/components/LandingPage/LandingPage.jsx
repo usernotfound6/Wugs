@@ -49,8 +49,9 @@ function LandingPage() {
               margin: "auto",
               marginTop: -7,
               marginBottom: 6,
-              maxWidth: 340,
+              maxWidth: 440,
               minWidth: 280,
+              height:550,
               backgroundColor: "beige",
               borderRadius: 3,
             }}
@@ -61,7 +62,7 @@ function LandingPage() {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="240"
+                height="360"
                 src="https://thumb.tildacdn.com/tild3139-3131-4538-b831-613333356461/-/format/webp/pic4.jpeg"
                 alt="Wugs Services"
               />
@@ -85,8 +86,9 @@ function LandingPage() {
             sx={{
               margin: "auto",
               marginTop: -7,
-              maxWidth: 340,
+              maxWidth: 440,
               minWidth: 280,
+              height:550,
               backgroundColor: "beige",
               borderRadius: 3,
             }}
@@ -97,7 +99,7 @@ function LandingPage() {
             <CardActionArea>
               <CardMedia
                 component="img"
-                height="240"
+                height="360"
                 src="https://thumb.tildacdn.com/tild6665-3033-4534-b666-316131636265/-/resize/576x/-/format/webp/Screen_Shot_2023-02-.png"
                 alt="Wugs On-Boarding Portal"
               />
