@@ -50,35 +50,14 @@ const InterestedColumns = () => {
         <div style={{ color: "beige" }}>{params.value}</div>
       ),
     },
-    // {
-    //     field: "why_wugs",
-    //     headerName: <div style={{ color: "beige" }}>Why Wugs?</div>,
-    //     width: 200,
-    //     renderCell: (params) => (
-    //       <div style={{ color: "beige" }}>{params.value}</div>
-    //     ),
-    //   },
-    //   {
-    //     field: "about_you",
-    //     headerName: <div style={{ color: "beige" }}>About you</div>,
-    //     width: 200,
-    //     renderCell: (params) => (
-    //       <div style={{ color: "beige" }}>{params.value}</div>
-    //     ),
-    //   },
       {
         field: 'actions',
         headerName: 'Actions',
         sortable: false,
-        width: 120,
+        width: 180,
         renderCell: (params) => {
           return (
-            <button
-              onClick={() => handleButtonClick(params.row.id)} // Handle button click
-              className="btn btn-primary"
-            >
-              Delete
-            </button>
+            <div style={{ color: "beige" }}>Click for More Information</div>
           );
         },
       },

@@ -54,11 +54,11 @@ function ReviewPage() {
   return (
     <ThemeProvider theme={theme}>
       <div>
-      <MyStepper step={5} />
-         <CssBaseline />
+        <MyStepper step={5} />
+        <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }}>Review Submission</Typography>
-          </div>{" "}
+          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Review Submission</Typography>
+        </div>{" "}
         <Container
           maxWidth="lg"
           sx={{
@@ -67,16 +67,16 @@ function ReviewPage() {
             // Add any other custom styles here
           }}
         >
-       
 
-          <div style={{ color: "beige" , textAlign: "center" }}><Typography variant= 'h6' marginTop={1} marginBottom={2} >Your Current Info With Wugs:</Typography></div>
-          <hr width={800} style={{ color: "beige" }}/>
+
+          <div style={{ color: "beige", textAlign: "center" }}><Typography variant='h6' marginTop={1} marginBottom={2} >Your Current Info With Wugs:</Typography></div>
+          <hr width={800} style={{ color: "beige" }} />
           <br />
 
           <Box>
             <Grid container spacing={1}>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -146,7 +146,7 @@ function ReviewPage() {
                     <Box textAlign={"right"}>
                       <Button onClick={handleSubmit4}
                         sx={{
-                         margin: 'auto',
+                          margin: 'auto',
                           height: 50,
                           width: 120,
                           borderRadius: 1,
@@ -162,7 +162,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -194,7 +194,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{  borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -235,18 +235,18 @@ function ReviewPage() {
               </Grid>
             </Grid>
             <PopupWidget
-          url="https://calendly.com/dontyellwillcry"
-          rootElement={rootElement}
-          text="Click here to schedule meeting!"
-          textColor="beige"
-          color="#00a2ff"
-          style={{
-            position: "absolute",
-            top: "50px",
-            left: "20px",
-            
-          }}
-        />
+              url="https://calendly.com/dontyellwillcry"
+              rootElement={rootElement}
+              text="Click here to schedule meeting!"
+              textColor="beige"
+              color="#00a2ff"
+              style={{
+                position: "absolute",
+                top: "50px",
+                left: "20px",
+
+              }}
+            />
             {/* </Box> */}
           </Box>
         </Container>
@@ -260,10 +260,46 @@ function ReviewPage() {
             position: "absolute",
             top: "50px",
             left: "20px",
-            
+
           }}
         />
       </div>
+
+      {/* Confirmation Dialog */}
+
+      {/* <Dialog
+        open={openConfirmation}
+        onClose={handleCloseConfirmation}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          style: {
+            background: "beige",
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          Thank You For Expressing Interest!
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You will be emailed soon with follow-up information. Once you click
+            'Go Back' you will be redirected to the home page where you can get
+            started on the onboarding process.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleConfirmSubmit}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Go Back
+          </Button>
+        </DialogActions>
+      </Dialog> */}
+
     </ThemeProvider>
   );
 }
