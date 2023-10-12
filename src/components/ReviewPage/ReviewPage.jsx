@@ -47,6 +47,8 @@ function ReviewPage() {
     Calendly.initPopupWidget({ url: "https://calendly.com/dontyellwillcry" });
   };
 
+  console.log("client", client)
+
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -71,7 +73,7 @@ function ReviewPage() {
           <Box>
             <Grid container spacing={1}>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -111,7 +113,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -133,10 +135,22 @@ function ReviewPage() {
                       Business: {client.business_name}
                     </Typography>
                     <Typography variant="body2" component="div">
-                      Location: {client.address}
+                      Street Address: {client.address_street}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      State: {client.address_state}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      State: {client.address_zip}
                     </Typography>
                     <Typography variant="body2" component="div">
                       Website: {client.website}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Hours of Operation: {client.hours_of_operation}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Micro Market Location: {client.micromarket_location}
                     </Typography>
                     <Box textAlign={"right"}>
                       <Button onClick={handleSubmit4}
@@ -157,7 +171,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -166,8 +180,20 @@ function ReviewPage() {
                     >
                       About Your Community:
                     </Typography>
-                    <Typography variant="h8" component="div">
-                      a;sldjf;lakjsdf;lajs;lkdfj
+                    <Typography>
+                      # of People on Site: {client.number_of_people}
+                    </Typography>
+                    <Typography>
+                      Demographics: {client.demographics}
+                    </Typography>
+                    <Typography>
+                      Age Group: {client.target_age_group}
+                    </Typography>
+                    <Typography>
+                      Industry: {client.industry}
+                    </Typography>
+                    <Typography>
+                      Neighborhood Info: {client.neighborhood_info}
                     </Typography>
                     <Box textAlign={"right"}>
                       <Button onClick={handleSubmit3}
@@ -189,7 +215,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -224,32 +250,31 @@ function ReviewPage() {
                       >
                         Edit
                       </Button>
-                     
+
                     </Box>
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 270, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
                       gutterBottom
                     >
-                      Food Choices:
+                      Additional Information:
                     </Typography>
-                    {client.product_types ?
-                      client.product_types.map((product, index) => (
-                        <Typography variant="h8" component="div" key={index}>
-                          {product}
-                        </Typography>
-                      ))
-                      :
-                      <Typography variant="h8" component="div">
-                        None Indicated
-                      </Typography>
-                    }
+                    <Typography>
+                      Space dimensions: {client.dimensions}
+                    </Typography>
+                    <Typography>
+                      Visit Requested: {client.wugs_visit ? "Yes" : "No"}
+                    </Typography>
+                    <Typography variant='subtitle2'>
+                      If yes please schedule a meeting with Wugs
+                    </Typography>
+
                     <Box textAlign={"right"}>
                       <Button onClick={openCalendlyLink}
                         sx={{
@@ -265,7 +290,7 @@ function ReviewPage() {
                       >
                         Schedule Meeting
                       </Button>
-                     
+
                     </Box>
                   </CardContent>
                 </Card>
