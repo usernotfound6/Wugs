@@ -9,7 +9,7 @@ const {
  * GET route template
  */
 router.get("/", (req, res) => {
-  const query = `SELECT * FROM interested`;
+  const query = `SELECT * FROM interested ORDER BY id DESC`;
   pool
     .query(query)
     .then((result) => {
