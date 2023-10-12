@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import TabContentOne from "./TabContentOne";
 import TabContentTwo from "./TabContentTwo";
 import TabContentThree from "./TabContentThree";
@@ -68,22 +68,22 @@ function ClientStatusPage() {
           }
         `} */}
         </style>
-        <Typography 
-            variant= 'h5' 
-            style={{ 
-              textAlign: "left",
-              margin: 'auto',
-              padding: "5px",
-              color: 'beige',
-            }}
-          >
-            Current Status: {client.status_name}
-          </Typography>
+        <Typography
+          variant='h5'
+          style={{
+            textAlign: "left",
+            margin: 'auto',
+            padding: "5px",
+            color: 'beige',
+          }}
+        >
+          Current Status: {client.status_name}
+        </Typography>
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant='h4' marginTop={3}  marginBottom={2} style={{ color: "beige" }}>Current Information</Typography>
+          <Typography variant='h4' marginTop={3} marginBottom={2} style={{ color: "beige" }}>Current Information</Typography>
         </div>{" "}
-        <hr width={800} style={{ color: "beige" }}/>
+        <hr width={800} style={{ color: "beige" }} />
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Tabs
             value={value}
@@ -101,10 +101,10 @@ function ClientStatusPage() {
         </div>
         <Container
           maxWidth="lg"
-          // sx={{
-          //   width: "100%",
-          //   height: "70vh",
-          // }}
+        // sx={{
+        //   width: "100%",
+        //   height: "70vh",
+        // }}
         >
           {value === 0 && <TabContentOne />}
           {value === 1 && <TabContentThree />}
