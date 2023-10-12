@@ -81,7 +81,7 @@ function AdditionalInfoPage() {
   }));
 
   return (
-    <div>
+    <div className="container">
       <MyStepper step={4} />
 
       <div className="wholebody">
@@ -101,8 +101,9 @@ function AdditionalInfoPage() {
           borderRadius: 3,
           width: 360,
           padding: 2,
-          elevation: 24,
+          boxShadow: 24,
           marginTop: 3,
+          marginBottom: 9,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate

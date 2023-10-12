@@ -100,10 +100,10 @@ function GetMoreInfoPage() {
   };
 
   return (
-    <div className="wholebody">
+    <div className="container">
        <CssBaseline />
        <div style={{ textAlign: "center" }}>
-          <Typography variant= 'h4' marginTop={3} marginBottom={3}  style={{ color: "beige" }}>Get In Touch With Us</Typography>
+          <Typography variant= 'h4' marginTop={0} marginBottom={3}  style={{ color: "beige" }}>Get In Touch With Us</Typography>
           </div>{" "}
       <Box margin={'auto'}
         component="form"
@@ -113,7 +113,7 @@ function GetMoreInfoPage() {
           borderRadius: 3,
           width: 350,
           padding: 2,
-         elevation: 24,
+         boxShadow: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
@@ -239,7 +239,7 @@ function GetMoreInfoPage() {
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
-          rows={4}
+          rows={3}
           placeholder="Example: We operate a university library serving students and faculty."
           value={aboutClient}
           onChange={(event) => setAboutClient(event.target.value)}
@@ -267,7 +267,7 @@ function GetMoreInfoPage() {
           inputProps={{ style: { color: "beige" } }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
-          rows={6}
+          rows={5}
           placeholder="Example: Having a mini-market on-site would be a great convenience for our students and staff."
           value={whyWugs}
           onChange={(event) => setWhyWugs(event.target.value)}

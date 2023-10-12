@@ -312,7 +312,6 @@ function ReviewPage() {
                       >
                         Schedule Meeting
                       </Button>
-
                     </Box>
                   </CardContent>
                 </Card>
@@ -380,6 +379,42 @@ function ReviewPage() {
         </DialogActions>
       </Dialog>
       </div>
+
+      {/* Confirmation Dialog */}
+
+      {/* <Dialog
+        open={openConfirmation}
+        onClose={handleCloseConfirmation}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          style: {
+            background: "beige",
+          },
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          Thank You For Expressing Interest!
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You will be emailed soon with follow-up information. Once you click
+            'Go Back' you will be redirected to the home page where you can get
+            started on the onboarding process.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleConfirmSubmit}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Go Back
+          </Button>
+        </DialogActions>
+      </Dialog> */}
+
     </ThemeProvider>
   );
 }

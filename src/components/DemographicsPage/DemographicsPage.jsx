@@ -71,12 +71,13 @@ function DemographicsPage() {
   };
 
   return (
-    <div className="wholebody">
+
+    <div className="container">
       <MyStepper step={2} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
         <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>About Your Community</Typography>
-        <Typography variant="h5" marginTop={1} style={{ color: "beige" }}>
+        <Typography variant="h6" marginTop={1} style={{ color: "beige" }}>
           Who Are You Serving?</Typography>
           <HelpIcon  style={{ marginTop: 10, color: "beige" }} onMouseEnter={handleHelpIconHover}/>
       </div>{" "}
@@ -90,7 +91,7 @@ function DemographicsPage() {
             borderRadius: 3,
             width: 330,
             padding: 2,
-            elevation: 24,
+            boxShadow: 24,
             "& > :not(style)": { m: 1, width: "25ch" },
           }}
           noValidate

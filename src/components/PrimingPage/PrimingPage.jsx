@@ -26,6 +26,7 @@ function PrimingPage() {
       borderRadius: 4,
       padding: 1,
       backgroundColor: "#484747",
+      marginBottom: 5
     },
   };
 
@@ -35,12 +36,12 @@ function PrimingPage() {
         style={{ textAlign: "center" }}
         variant="h4"
         color="beige"
-        gutterBottom
+        marginBottom={3}
       >
         WELCOME!
       </Typography>
       <Box sx={styles.cardContainer}>
-        <Card sx={styles.card}>
+        <Card elevation={15} sx={styles.card}>
           <CardContent>
             {/* <Typography style={{ textAlign: "center" }} variant="h2" color="beige" gutterBottom>
                   WELCOME SNACKER!
@@ -53,7 +54,7 @@ function PrimingPage() {
               component="div"
               marginBottom={2}
             >
-              WE'RE HERE TO HELP  <br /> YOUR ONBOARDING EXPERIENCE
+              We're here to help <br /> your onboarding experience
             </Typography>
             <hr color="beige" />
             <Typography
@@ -62,8 +63,7 @@ function PrimingPage() {
               sx={{ mb: 1.5 }}
               color="beige"
             >
-              Here are some things to have ready to complete the process with
-              ease:
+              Here's some things to have ready to complete the process:
             </Typography>
             <hr color="beige" />
             <Typography
@@ -86,7 +86,10 @@ function PrimingPage() {
             </Typography>
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "center" }}>
-            <Button
+          </CardActions>
+        </Card>
+      </Box>
+      <Button sx={{ display: "flex", margin: 'auto',  padding: 3, borderRadius: 2, boxShadow: 12, marginBottom: 3  }}
               size="large"
               variant="contained"
               color="success"
@@ -94,11 +97,8 @@ function PrimingPage() {
                 history.push("/servicechoice");
               }}
             >
-              <FastfoodIcon style={{ padding: 6 }} /> GET SNACKING!
+              <FastfoodIcon size="large" style={{ padding: 6 }} /> GET SNACKING!
             </Button>
-          </CardActions>
-        </Card>
-      </Box>
     </div>
   );
 }
