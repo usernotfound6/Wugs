@@ -116,7 +116,7 @@ function AdminClientTable() {
     return (
         <div className="container">
             <CssBaseline />
-            <Container sx={{ padding: 3, marginBottom: 10, borderRadius: 3, backgroundColor: "#484747" }}>
+            <Container sx={{ boxShadow: 24, padding: 3, marginBottom: 16, borderRadius: 3, backgroundColor: "#484747" }}>
                 <Typography variant='h4' style={{ padding: 18, color: "beige" }}>Client List</Typography>
 
                 <DataGrid

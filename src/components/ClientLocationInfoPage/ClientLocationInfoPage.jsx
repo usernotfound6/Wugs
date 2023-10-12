@@ -112,7 +112,7 @@ function ClientLocationInfoPage() {
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
       <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>Location Information</Typography>
-        <Typography variant="h6" marginTop={1} style={{ color: "beige" }}>
+        <Typography variant="h6" marginTop={1} marginBottom={2} style={{ color: "beige" }}>
           Who Are We Serving?</Typography>
       </div>{" "}
       <Grid  margin={'auto'} container spacing={-48}>
@@ -124,7 +124,7 @@ function ClientLocationInfoPage() {
           borderRadius: 3,
           width: 360,
           padding: 2,
-          elevation: 24,
+          boxShadow: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
@@ -308,7 +308,7 @@ function ClientLocationInfoPage() {
           borderRadius: 3,
           width: 360,
           padding: 2,
-          elevation: 24,
+          boxShadow: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate

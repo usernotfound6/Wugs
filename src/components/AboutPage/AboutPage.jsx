@@ -19,7 +19,8 @@ function AboutPage() {
             borderColor: '#484747',
             width: 430,
             padding: 1,
-            marginBottom:5
+            marginBottom:8,
+            boxShadow: 24
            
           }}
           noValidate

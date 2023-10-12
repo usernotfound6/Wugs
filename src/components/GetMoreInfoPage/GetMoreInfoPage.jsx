@@ -113,7 +113,7 @@ function GetMoreInfoPage() {
           borderRadius: 3,
           width: 350,
           padding: 2,
-         elevation: 24,
+         boxShadow: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
