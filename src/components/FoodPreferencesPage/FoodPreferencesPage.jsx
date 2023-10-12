@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 
 const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
   position: "relative",
-  
+
   height: 200,
   [theme.breakpoints.down("sm")]: {
     width: "100% !important", // Overrides inline-style
@@ -105,7 +105,7 @@ function FoodPreferencesPage() {
   }, [client || dispatch]);
 
   const products = useSelector((store) => store.products.data);
-  
+
 
   console.log("Products chosen", client.product_ids)
 
@@ -187,13 +187,12 @@ function FoodPreferencesPage() {
       >
         Select any you'd like to learn more about!
       </Typography>
-      <Grid sx={{display: 'flex', margin: 'auto'}}
-        
-        container xs={7} spacing={2} columnGap={6} rowGap={0}>
-      <Box
+      <Grid sx={{ display: 'flex', margin: 'auto' }}
+        container xs={9} spacing={2} columnGap={2} rowGap={2}>
+        {/* <Box
         sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
-      >
-     
+      > */}
+
         {products && products.length > 0 ? (
           products.map((product) => (
             <ImageButton
@@ -202,13 +201,14 @@ function FoodPreferencesPage() {
               onClick={() => handleClick(product.id)}
               style={{
                 width: "20em",
-               
+
               }}
               isclicked={clickedButtons.includes(product.id)}
             >
-              <ImageSrc style={{  borderRadius: 16, borderWidth: "5px",  backgroundImage: `url(${product.url})` }} />
-              <ImageBackdrop  style={{
-                borderRadius: 22}}className="MuiImageBackdrop-root" />
+              <ImageSrc style={{ borderRadius: 16, borderWidth: "5px", backgroundImage: `url(${product.url})` }} />
+              <ImageBackdrop style={{
+                borderRadius: 22
+              }} className="MuiImageBackdrop-root" />
               <Image>
                 <Typography
                   component="span"
@@ -230,7 +230,7 @@ function FoodPreferencesPage() {
         ) : (
           <p>No products available.</p>
         )}
-      </Box>
+        {/* </Box> */}
       </Grid>
       <Button
         onClick={handleSave}
