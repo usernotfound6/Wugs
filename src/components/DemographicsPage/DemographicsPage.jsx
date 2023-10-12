@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MyStepper from "../MyStepper/MyStepper";
 import HelpIcon from "@mui/icons-material/Help";
+
 import {
   Button,
   Dialog,
@@ -16,6 +17,7 @@ import {
   TextField,
   Typography,
   Box,
+  Grid,
   CssBaseline,
 } from "@mui/material";
 
@@ -69,7 +71,7 @@ function DemographicsPage() {
   };
 
   return (
-    <div>
+    <div className="wholebody">
       <MyStepper step={2} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
@@ -79,6 +81,7 @@ function DemographicsPage() {
           <HelpIcon  style={{ marginTop: 10, color: "beige" }} onMouseEnter={handleHelpIconHover}/>
       </div>{" "}
       <div style={{ padding: "1em" }}>
+      <Grid  margin={'auto'} >
         <Box
           margin={"auto"}
           component="form"
@@ -93,8 +96,9 @@ function DemographicsPage() {
           noValidate
           autoComplete="off"
         >
-          <FormControl>
-            <InputLabel id="age-select-label"># of people on site</InputLabel>
+          <FormControl >
+            
+            <InputLabel  style={{ color: "beige" }} id="age-select-label"># of people on site</InputLabel>
             <Select
               labelId="age-select-label"
               id="age-select"
@@ -104,12 +108,30 @@ function DemographicsPage() {
               InputLabelProps={{ style: { color: "beige" } }}
               style={{ width: 280 }}
               onChange={handleChange}
+              sx={{
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "gray",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "beige", 
+                },
+                "& .MuiOutlinedInput-root": {
+                  borderColor: "beige", 
+                  "&:hover fieldset": {
+                    borderColor: "beige", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "beige", // Outline color when focused
+                  },
+                },
+              }}
             >
               <MenuItem value={"Less than 10"}>Less than 10</MenuItem>
               <MenuItem value={"10-25"}>10-25</MenuItem>
               <MenuItem value={"26-100"}>26-100</MenuItem>
               <MenuItem value={"100+"}>100+</MenuItem>
             </Select>
+            <br/>
 
             <TextField
               id="demographic"
@@ -135,6 +157,7 @@ function DemographicsPage() {
               }}
               onChange={(event) => setDemographic(event.target.value)}
             />
+            <br/>
             <TextField
               id="ageGroup"
               label="Age Group"
@@ -159,6 +182,7 @@ function DemographicsPage() {
               }}
               onChange={(event) => setAgeGroup(event.target.value)}
             />
+            <br/>
             <TextField
               id="industry"
               label="Industry"
@@ -183,6 +207,7 @@ function DemographicsPage() {
               }}
               onChange={(event) => setIndustry(event.target.value)}
             />
+            <br/>
             <TextField
               id="neighborhood"
               label="About Your Neighborhood"
@@ -209,6 +234,7 @@ function DemographicsPage() {
             />
           </FormControl>
         </Box>
+        </Grid>
       </div>
       <Dialog
         open={openConfirmation}
