@@ -103,17 +103,21 @@ VALUES
   ('Account Active'),
   ('Account Inactive');
   
-  INSERT INTO product (type, url) 
-  VALUES
-  ('African', 'https://erafricanonlinestore.com/cdn/shop/articles/African_snacks.jpg?v=1624804433'),
-  ('Asian', 'https://healthynibblesandbits.com/wp-content/uploads/2018/09/Pocky.jpg'),
-  ('Gluten Free', 'https://media.theeverymom.com/wp-content/uploads/2021/07/13164901/gluten-free-snacks-the-everymom-f-h.png'),
-  ('Mexican', 'https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/lwjmyeif/020d87a3-b703-4c0a-ae9c-d9d4139684ed.JPG'),
-  ('Frozen', 'https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/R62Z6RGZI4I6XDEHVVXSPEMMPA.jpg'),
-  ('Kosher', 'https://bunnyjamesboxes.com/cdn/shop/products/bunny-james-boxes-snack-boxes-premium-kosher-box-20-count-41311457902898_480x480.jpg?v=1681750682'),
-  ('Halal', 'https://i0.wp.com/wehalal.co/wp-content/uploads/2020/08/halal-munchies-candy.jpg?fit=1024%2C683&ssl=1'),
-  ('Dairy Free', 'https://jessicasglutenfreekitchen.com/wp-content/uploads/2019/04/IMG_4748.jpeg'),
-  ('Vegan', 'https://www.shopmyexchange.com/products/images/xlarge/1698365_0000.jpg');
+INSERT INTO product (type, url) 
+VALUES
+('African', 'https://erafricanonlinestore.com/cdn/shop/articles/African_snacks.jpg?v=1624804433'),
+('Asian', 'https://healthynibblesandbits.com/wp-content/uploads/2018/09/Pocky.jpg'),
+('Gluten Free', 'https://media.theeverymom.com/wp-content/uploads/2021/07/13164901/gluten-free-snacks-the-everymom-f-h.png'),
+('Mexican', 'https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/lwjmyeif/020d87a3-b703-4c0a-ae9c-d9d4139684ed.JPG'),
+('Frozen', 'https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/R62Z6RGZI4I6XDEHVVXSPEMMPA.jpg'),
+('Kosher', 'https://bunnyjamesboxes.com/cdn/shop/products/bunny-james-boxes-snack-boxes-premium-kosher-box-20-count-41311457902898_480x480.jpg?v=1681750682'),
+('Halal', 'https://offloadmedia.feverup.com/secretldn.com/wp-content/uploads/2022/04/25142606/shutterstock_563091901-2.jpg'),
+('Dairy Free', 'https://jessicasglutenfreekitchen.com/wp-content/uploads/2019/04/IMG_4748.jpeg'),
+('Vegan', 'https://www.shopmyexchange.com/products/images/xlarge/1698365_0000.jpg'),
+('Sweets', 'https://www.nampakincs.com/wp-content/uploads/2019/07/candy.jpeg'),
+('Quick Meals', 'https://insiderguides.com.au/wp-content/uploads/2020/05/SG_002_01_X1_0014-1024x576.jpg'),
+('Microwavable', 'https://www.readyseteat.com/sites/g/files/qyyrlu501/files/uploadedImages/img_10013_07668.jpg');
+
 
 INSERT INTO client (
   business_name,

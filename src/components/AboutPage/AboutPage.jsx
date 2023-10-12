@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -9,6 +9,22 @@ import { Typography } from "@mui/material";
 function AboutPage() {
   return (
     <div className="container">
+           <Box
+          margin={"auto"}
+          component="form"
+          sx={{
+            backgroundColor: "transparent",
+            borderRadius: 9,
+            border: 'solid',
+            borderColor: '#484747',
+            width: 430,
+            padding: 1,
+            marginBottom:5
+           
+          }}
+          noValidate
+          autoComplete="off"
+        >
         <div style={{ textAlign: "center" }}>
         <Typography variant= 'h4' marginTop={3} marginBottom={3} style={{ color: "beige" }}>About Us</Typography>
       </div>{" "}
@@ -29,6 +45,7 @@ function AboutPage() {
         </p>
         </div>
       </div>
+      </Box>
     </div>
   );
 }
