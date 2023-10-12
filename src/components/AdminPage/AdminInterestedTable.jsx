@@ -66,7 +66,7 @@ function AdminInterestedTable() {
         <div className="container">
             <CssBaseline />
             <Container sx={{ padding: 3, marginBottom: 10, borderRadius: 3, backgroundColor: "#484747" }}>
-                <Typography variant='h4' style={{ padding: 18, color: "beige" }}>Interested Table</Typography>
+                <Typography variant='h4' style={{ padding: 18, color: "beige" }}>Interested Clients to Contact</Typography>
 
                 <DataGrid
                     rows={interestedRows}
