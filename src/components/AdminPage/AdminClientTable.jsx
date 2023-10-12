@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import { CssBaseline, Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, CssBaseline, Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from '@mui/material';
 import Columns from "./Columns";
 import "./AdminPage.css";
 
@@ -10,6 +10,11 @@ function AdminClientTable() {
     const dispatch = useDispatch();
     const admin = useSelector((store) => store.admin);
     const columns = Columns(); // The actual Column is saved in Columns.js as its own component
+    
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+    const handleDeleteConfirmationOpen = () => setDeleteConfirmationOpen(true);
+    const handleDeleteConfirmationClose = () => setDeleteConfirmationOpen(false);
 
     const [selectedRowData, setSelectedRowData] = useState({
         id: "",
@@ -102,6 +107,7 @@ function AdminClientTable() {
     }
 
     function deleteClient() {
+        setDeleteConfirmationOpen(false);
         dispatch({
             type: "DELETE_CLIENT",
             payload: {
@@ -135,7 +141,7 @@ function AdminClientTable() {
                     backgroundColor='#484747'
                 >
 
-                    <Box sx={style} style={{ borderRadius: 30, backgroundColor: '#484747', color: "beige", display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '6px', gridTemplateAreas: '"contact business" "additional extra"' }}>
+                    <Box sx={style} style={{ borderRadius: 18, backgroundColor: '#484747', color: "beige", display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gridTemplateRows: 'repeat(2, 1fr)', gap: '6px', gridTemplateAreas: '"contact business" "additional extra"' }}>
 
                         {/* Contact Information */}
                         <div style={{ gridArea: 'contact' }}>
@@ -221,6 +227,7 @@ function AdminClientTable() {
                                 <li>Wugs Visit Requested: {selectedRowData.wugs_visit ? "Yes" : "No"}</li>
                             </ul>
                         </div>
+
                         <div sx={{ backgroundColor: "#484747", minWidth: 120 }}>
                             <FormControl fullWidth>
                                 <InputLabel id="demo-simple-select-label">Update Status</InputLabel>
@@ -281,15 +288,40 @@ function AdminClientTable() {
                                     }}
                                 />
                                 <Box>
-                                    <Button onClick={editClient}>Submit</Button>
+                                    <Button onClick={editClient} variant="contained" color="secondary" style={{ borderRadius: 4, marginTop: 18, marginBottom: -15}}>Submit</Button>
                                 </Box>
                                 <div>
                                     <Box textAlign={"right"}>
-                                        <Button onClick={deleteClient}>Delete Client File</Button>
+                                        <Button onClick={handleDeleteConfirmationOpen} style={{ borderRadius: 4, marginTop: -28, color: 'white', backgroundColor: 'red' }}>
+                                            Delete Client File
+                                        </Button>
                                     </Box>
                                 </div>
                             </FormControl>
                         </div>
+
+                        {/* Delete Confirmation Dialog */}
+                        <Dialog
+                            open={deleteConfirmationOpen}
+                            onClose={handleDeleteConfirmationClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                            <DialogTitle id="alert-dialog-title">{"Confirmation"}</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText id="alert-dialog-description">
+                                    Are you sure you want to delete this client's information?
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleDeleteConfirmationClose} color="primary">
+                                    Cancel
+                                </Button>
+                                <Button onClick={deleteClient}  style={{ color: 'white', backgroundColor: 'red' }}>
+                                    Confirm
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                     </Box>
                 </Modal>
 
