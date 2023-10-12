@@ -53,11 +53,13 @@ function ReviewPage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div className="container">
       <MyStepper step={5} />
          <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }}>Review Submission</Typography>
+        <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>Review And Complete</Typography>
+        <Typography variant="h6" marginTop={1} style={{ color: "beige" }}>
+        Your Current Info With Wugs:</Typography>
           </div>{" "}
         <Container
           maxWidth="lg"
@@ -69,8 +71,8 @@ function ReviewPage() {
         >
        
 
-          <div style={{ color: "beige" , textAlign: "center" }}><Typography variant= 'h6' marginTop={1} marginBottom={2} >Your Current Info With Wugs:</Typography></div>
-          <hr width={800} style={{ color: "beige" }}/>
+          
+         
           <br />
 
           <Box>

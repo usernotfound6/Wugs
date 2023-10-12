@@ -104,14 +104,16 @@ function ClientLocationInfoPage() {
 
 
   return (
-    <div className="wholebody">
+    <div className="container">
       <div>
         <MyStepper step={1} />
       </div>
 
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <Typography variant= 'h4' marginTop={3} marginBottom={3} style={{ color: "beige" }}>Who Are We Serving?</Typography>
+      <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>Location Information</Typography>
+        <Typography variant="h6" marginTop={1} style={{ color: "beige" }}>
+          Who Are We Serving?</Typography>
       </div>{" "}
       <Grid  margin={'auto'} container spacing={-48}>
       <Box margin={'auto'}
