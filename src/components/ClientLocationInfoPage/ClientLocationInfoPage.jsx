@@ -219,6 +219,12 @@ function ClientLocationInfoPage() {
         defaultValue="MN"
         required
         sx={{
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: "gray",
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "your-hover-color", // Change this to your desired hover outline color
+          },
           "& .MuiOutlinedInput-root": {
             borderColor: "beige", // Outline color when not focused
             "&:hover fieldset": {
