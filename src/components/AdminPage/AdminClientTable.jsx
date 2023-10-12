@@ -43,12 +43,12 @@ function AdminClientTable() {
         number_of_people: client.number_of_people,
         industry: client.industry,
         hours_of_operation: client.hours_of_operation,
-        contract: client.contract,
         demographics: client.demographics,
         dimensions: client.dimensions,
         micromarket_location: client.micromarket_location,
         neighborhood_info: client.neighborhood_info,
         pictures: client.pictures,
+        contract: client.contract,
         product_types: client.product_types,
         service_names: client.service_names,
         target_age_group: client.target_age_group,
@@ -209,13 +209,29 @@ function AdminClientTable() {
                             <Typography variant="h6">Extra Info Provided</Typography>
                             <ul>
                                 <li>
-                                    Documents:
+                                    Pictures:
                                     {selectedRowData.pictures ? (
                                         <ul>
                                             {selectedRowData.pictures.map((url, index) => (
                                                 <li key={index}>
                                                     <a href={url} target="_blank" rel="noopener noreferrer">
-                                                        Picture {index + 1}
+                                                        Image {index + 1}
+                                                    </a>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        <p>No pictures provided.</p>
+                                    )}
+                                </li>
+                                <li>
+                                    Contract:
+                                    {selectedRowData.contract ? (
+                                        <ul>
+                                            {selectedRowData.contract.map((url, index) => (
+                                                <li key={index}>
+                                                    <a href={url} target="_blank" rel="noopener noreferrer">
+                                                        Document {index + 1}
                                                     </a>
                                                 </li>
                                             ))}
