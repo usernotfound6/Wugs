@@ -60,6 +60,7 @@ function AdminInterestedTable() {
                 id: selectedRowData.id,
             },
         });
+        handleClose();
     }
 
     return (

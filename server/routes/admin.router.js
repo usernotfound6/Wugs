@@ -96,30 +96,37 @@ router.put("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", rejectUnauthenticated, (req, res) => {
+router.delete("/:id", rejectUnauthenticated, async (req, res) => {
   const clientId = req.params.id;
 
-  const deleteQuery1 = "DELETE FROM client_service WHERE client_id = $1;";
-  const deleteQuery2 = "DELETE FROM client WHERE id = $1;";
-  const deleteQuery4 = "DELETE FROM client_product WHERE client_id = $1;"; // New query
+  // transaction to delete without foreign key constraints
+  try {
+    await pool.query('BEGIN');
 
-  // Execute the first DELETE query
-  pool
-    .query(deleteQuery1, [clientId])
-    .then(() => {
-      // Execute the second DELETE query
-      return pool.query(deleteQuery2, [clientId]);
-    })
-    .then(() => {
-      return pool.query(deleteQuery4, [clientId]);
-    })
-    .then(() => {
-      res.status(200).json({ message: "Data deleted successfully" });
-    })
-    .catch((error) => {
-      console.log("Error DELETE /api/recipe", error);
-      res.sendStatus(500);
-    });
+    // Deleting records from client_service table
+    const deleteQuery1 = "DELETE FROM client_service WHERE client_id = $1;";
+    await pool.query(deleteQuery1, [clientId]);
+
+    // Deleting records from client_product table
+    const deleteQuery2 = "DELETE FROM client_product WHERE client_id = $1;";
+    await pool.query(deleteQuery2, [clientId]);
+
+    // Deleting the client from the client table
+    const deleteQuery3 = "DELETE FROM client WHERE id = $1;";
+    await pool.query(deleteQuery3, [clientId]);
+
+    // Committing the transaction
+    await pool.query('COMMIT');
+
+    console.log("Delete successful!");
+    res.sendStatus(200);
+  }
+  catch (error) {
+    // Rollback the transaction in case of an error
+    await pool.query('ROLLBACK');
+    console.log("Error DELETE /api/recipe", error);
+    res.sendStatus(500);
+  }
 });
 
 module.exports = router;
