@@ -9,10 +9,12 @@ import {
   Modal,
   TextField,
   Typography,
-  CssBaseline,
   Container,
   Grid,
+  Input,
+  Paper,
 } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useHistory } from "react-router-dom";
 import { PopupWidget } from "react-calendly";
 import axios from "axios";
@@ -161,21 +163,15 @@ function UserPage() {
 
   return (
     <>
-      {/* <CssBaseline /> */}
-      <Container maxWidth="lg" sx={{ width: "100%" }}>
+      <Container maxWidth="xl">
         <h2>Welcome, {user.first_name || user.username}!</h2>
         <h2>Onboarding Status: {client.status_name}</h2>
-        <LogOutButton className="btn" />
-        {/* <div className="container2"> */}
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-        >
-          <Grid item xs={12} md={4}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <LogOutButton className="btn" />
+        </div>
+
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
             <Card
               variant="outlined"
               sx={{
@@ -216,52 +212,69 @@ function UserPage() {
               </CardContent>
             </Card>
           </Grid>
+
           <Grid item xs={12} md={6}>
-            {/* <div className="photo-slider"> */}
             <Card
               variant="outlined"
               sx={{
                 backgroundColor: "transparent",
                 margin: "10px",
-                width: 630, // Set the desired width
-                height: 630, // Set the desired height
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: 600, // Set a fixed width for the card
+                height: 400, // Set a fixed height for the card
               }}
             >
               <CardContent>
-                {/* <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  > */}
                 <img
                   src={photos[photoIndex]}
                   alt={`Photo ${photoIndex + 1}`}
                   style={{
-                    maxWidth: "600px",
-                    maxHeight: "600px",
-                    minWidth: "600px",
-                    minHeight: "600px",
+                    maxWidth: "100%",
+                    height: "auto",
                     borderRadius: 18,
                   }}
                 />
-                {/* </div> */}
               </CardContent>
             </Card>
-            {/* </div> */}
           </Grid>
+        <Grid item xs={12} md={6}>
+          <Card
+          
+          >
+            <CardContent>
+              <h1>Upload Multiple Pictures to Google Drive</h1>
+              <input type="file" multiple ref={fileInputRef}></input>
+              <label htmlFor="file-input">
+                <Input
+                  id="file-input"
+                  type="file"
+                  inputRef={fileInputRef}
+                  style={{ display: "none" }} // Hide the actual input element
+                  multiple
+                />
+                <Button
+                  variant="contained"
+                  component="span"
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Select Files
+                </Button>
+              </label>
+              <Button onClick={handleFileUpload}>Upload Files</Button>
+            </CardContent>
+          </Card>
         </Grid>
-        {/* </div> */}
+        </Grid>
 
-        {/* <div className="button-container"> */}
         <Button
           onClick={handleButton}
           sx={{
-            marginTop: 1.5,
+            marginTop: 10,
             marginLeft: 2,
             height: 50,
-            width: 350,
+            width: "100%",
             borderRadius: 1,
           }}
           color="success"
@@ -270,19 +283,14 @@ function UserPage() {
         >
           Update Services or Preferences
         </Button>
+
         <PopupWidget
           url="https://calendly.com/dontyellwillcry"
           rootElement={rootElement}
           text="Click here to schedule a meeting with Wugs!"
           textColor="#ffffff"
           color="#00a2ff"
-          style={{
-            position: "flex",
-            top: "50px",
-            left: "20px",
-          }}
         />
-        {/* </div> */}
 
         {/* ----------- MODAL START ----------- */}
         <Modal
@@ -297,19 +305,14 @@ function UserPage() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: 400,
-              bgcolor: "background.paper",
-              border: "2px solid #000",
+              width: 270,
+              bgcolor: "#484747",
               boxShadow: 24,
+              borderRadius: 4,
               p: 4,
             }}
           >
-            <Typography
-              id="modal-modal-title"
-              variant="h6"
-              component="h2"
-              sx={{ color: "black !important" }}
-            >
+            <Typography id="modal-modal-title" variant="h6" component="h2">
               Edit your contact info:
             </Typography>
             <Box
@@ -325,10 +328,9 @@ function UserPage() {
                 label="First Name"
                 variant="outlined"
                 // inputProps={{ style: { color: "red" } }}
-                // InputLabelProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
                 type="text"
-                placeholder="First Name"
-                // value={firstName}
+                value={firstName}
                 onChange={(event) => setFirstName(event.target.value)}
                 required
                 sx={{
@@ -346,16 +348,14 @@ function UserPage() {
                 }}
               />
               <br />
-
               <TextField
                 id="lastName"
                 label="Last Name"
                 variant="outlined"
                 // inputProps={{ style: { color: "red" } }}
-                // InputLabelProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
                 type="lastName"
-                placeholder="Last Name"
-                // value={lastName}
+                value={lastName}
                 onChange={(event) => setLastName(event.target.value)}
                 required
                 sx={{
@@ -378,10 +378,9 @@ function UserPage() {
                 label="Phone Number"
                 variant="outlined"
                 // inputProps={{ style: { color: "red" } }}
-                // InputLabelProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
                 type="phone"
-                placeholder="Phone Number"
-                // value={phone}
+                value={phone}
                 onChange={handleFormatPhoneNumber}
                 required
                 sx={{
@@ -404,10 +403,9 @@ function UserPage() {
                 label="Username / Email"
                 variant="outlined"
                 // inputProps={{ style: { color: "red" } }}
-                // InputLabelProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
                 type="email"
-                placeholder="Email Address"
-                // value={username}
+                value={username}
                 onChange={(event) => setUsername(event.target.value)}
                 required
                 sx={{
@@ -429,10 +427,9 @@ function UserPage() {
                 label="Confirm Username / Email"
                 variant="outlined"
                 // inputProps={{ style: { color: "red" } }}
-                // InputLabelProps={{ style: { color: "red" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
                 type="email"
-                placeholder="Email Address"
-                // value={confirmUsername}
+                value={confirmUsername}
                 onChange={(event) => setConfirmUsername(event.target.value)}
                 required
                 sx={{
@@ -449,11 +446,8 @@ function UserPage() {
                   },
                 }}
               />
-              <Typography
-                id="modal-modal-description"
-                sx={{ mt: 2, color: "black !important" }}
-              >
-                ***Please note: your username will be changed to this new email
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                *** Please Note: Your username will be changed to this new email
                 if updated.
               </Typography>
             </Box>
@@ -475,10 +469,29 @@ function UserPage() {
           </Box>
         </Modal>
         {/* ----------- MODAL END ----------- */}
-
-        <h1>Upload Multiple Files to Google Drive</h1>
-        <input type="file" multiple ref={fileInputRef}></input>
-        <Button onClick={handleFileUpload}>Upload Files</Button>
+        {/* <Card>
+          <CardContent>
+            <h1>Upload Multiple Pictures to Google Drive</h1>
+            <input type="file" multiple ref={fileInputRef}></input>
+            <label htmlFor="file-input">
+              <Input
+                id="file-input"
+                type="file"
+                inputRef={fileInputRef}
+                style={{ display: "none" }} // Hide the actual input element
+                multiple
+              />
+              <Button
+                variant="contained"
+                component="span"
+                startIcon={<CloudUploadIcon />}
+              >
+                Select Files
+              </Button>
+            </label>
+            <Button onClick={handleFileUpload}>Upload Files</Button>
+          </CardContent>
+        </Card> */}
       </Container>
     </>
   );
