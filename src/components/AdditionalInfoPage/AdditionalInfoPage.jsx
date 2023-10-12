@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
@@ -11,16 +11,79 @@ import {
   Switch,
   Typography,
   CssBaseline,
+  Grid,
+  Input,
+  Card,
+  CardContent,
 } from "@mui/material";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import axios from "axios";
 
 function AdditionalInfoPage() {
+
+  const rootElement = document.getElementById("popup-root");
+  const fileInputRef = useRef(null); // Needed for the googel drive post
 
   const client = useSelector((store) => store.client)
 
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
+  const [dioOpen, dioSetOpen] = React.useState(false);
 
   console.log("client", client)
+
+  const handleClickOpen = () => {
+    dioSetOpen(true);
+  };
+
+  const handleCloseDio = () => {
+    dioSetOpen(false);
+  };
+
+  // Function to handle file upload to Google Drive
+  const handleFileUpload = async () => {
+    const files = fileInputRef.current.files;
+    console.log("Selected files:", files);
+    console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
+
+    // Check if there are selected files
+    if (files.length > 0) {
+      const formData = new FormData();
+
+      // Iterate over the selected files and append them to the form data
+      for (let i = 0; i < files.length; i++) {
+        formData.append("files", files[i]);
+      }
+      console.log("Uploading files:", formData);
+      console.log("file name:", formData.id);
+      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
+      const clientId = client.client_id;
+      console.log("clientId is:", clientId);
+
+      try {
+        // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+        const response = await axios.post(
+          `/api/onboarding/upload/${clientId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+            },
+          }
+        );
+
+        const data = response.data;
+        console.log("Uploaded files: ", data.files);
+        if (data) {
+          handleClickOpen();
+        } else {
+          handleCloseDio();
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -144,15 +207,34 @@ function AdditionalInfoPage() {
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
             <Typography color='beige'>Yes</Typography>
           </Stack>
-
-
-          <br />
-
-          <br />
-
-
-          <br />
-
+                <Typography>Upload Photos:</Typography>
+                <input type="file" multiple ref={fileInputRef}></input>
+                <label htmlFor="file-input">
+                  <Input
+                    id="file-input"
+                    type="file"
+                    inputRef={fileInputRef}
+                    style={{ display: "none" }} // Hide the actual input element
+                    multiple
+                  />
+                  <Button
+                    variant="contained"
+                    component="span"
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Select Files
+                  </Button>
+                </label>
+                <Button
+                  variant="contained"
+                  onClick={handleFileUpload}
+                  style={{
+                    marginLeft: "10px", // Add left margin
+                  }}
+                  autoFocus
+                >
+                  Upload Files
+                </Button>
         </Box>
 
         <Button
