@@ -18,6 +18,11 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useHistory } from "react-router-dom";
 import { PopupWidget } from "react-calendly";
 import axios from "axios";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function UserPage() {
   const rootElement = document.getElementById("popup-root");
@@ -36,7 +41,15 @@ function UserPage() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [dioOpen, dioSetOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    dioSetOpen(true);
+  };
+
+  const handleCloseDio = () => {
+    dioSetOpen(false);
+  };
   const [firstName, setFirstName] = useState(user.first_name || "");
   const [lastName, setLastName] = useState(user.last_name || "");
   const [phone, setPhone] = useState(client.phone || "");
@@ -155,21 +168,38 @@ function UserPage() {
 
         const data = response.data;
         console.log("Uploaded files: ", data.files);
+        if (data){
+          handleClickOpen();
+          } else {
+            handleCloseDio();
+          }
       } catch (error) {
         console.error("Error:", error);
       }
+     
     }
   };
 
   return (
     <>
+      <h2>Welcome, {user.first_name || user.username}!</h2>
+      <h2>Onboarding Status: {client.status_name}</h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "30px",
+        }}
+      >
+        {/* <LogOutButton className="btn" /> */}
+        <Button
+          variant="contained"
+          onClick={() => dispatch({ type: "LOGOUT" })}
+        >
+          Logout
+        </Button>
+      </div>
       <Container maxWidth="xl">
-        <h2>Welcome, {user.first_name || user.username}!</h2>
-        <h2>Onboarding Status: {client.status_name}</h2>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <LogOutButton className="btn" />
-        </div>
-
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <Card
@@ -239,33 +269,40 @@ function UserPage() {
               </CardContent>
             </Card>
           </Grid>
-        <Grid item xs={12} md={6}>
-          <Card
-          
-          >
-            <CardContent>
-              <h1>Upload Multiple Pictures to Google Drive</h1>
-              <input type="file" multiple ref={fileInputRef}></input>
-              <label htmlFor="file-input">
-                <Input
-                  id="file-input"
-                  type="file"
-                  inputRef={fileInputRef}
-                  style={{ display: "none" }} // Hide the actual input element
-                  multiple
-                />
+          <Grid item xs={12} md={4}>
+            <Card>
+              <CardContent>
+                <h1>Upload Multiple Pictures to Google Drive</h1>
+                <input type="file" multiple ref={fileInputRef}></input>
+                <label htmlFor="file-input">
+                  <Input
+                    id="file-input"
+                    type="file"
+                    inputRef={fileInputRef}
+                    style={{ display: "none" }} // Hide the actual input element
+                    multiple
+                  />
+                  <Button
+                    variant="contained"
+                    component="span"
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Select Files
+                  </Button>
+                </label>
                 <Button
                   variant="contained"
-                  component="span"
-                  startIcon={<CloudUploadIcon />}
+                  onClick={handleFileUpload}
+                  style={{
+                    marginLeft: "10px", // Add left margin
+                  }}
+                  autoFocus
                 >
-                  Select Files
+                  Upload Files
                 </Button>
-              </label>
-              <Button onClick={handleFileUpload}>Upload Files</Button>
-            </CardContent>
-          </Card>
-        </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
         </Grid>
 
         <Button
@@ -291,208 +328,207 @@ function UserPage() {
           textColor="#ffffff"
           color="#00a2ff"
         />
-
-        {/* ----------- MODAL START ----------- */}
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 270,
-              bgcolor: "#484747",
-              boxShadow: 24,
-              borderRadius: 4,
-              p: 4,
-            }}
-          >
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Edit your contact info:
-            </Typography>
-            <Box
-              component="form"
-              sx={{
-                "& > :not(style)": { m: 1, width: "25ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <TextField
-                id="firstName"
-                label="First Name"
-                variant="outlined"
-                // inputProps={{ style: { color: "red" } }}
-                InputLabelProps={{ style: { color: "beige" } }}
-                type="text"
-                value={firstName}
-                onChange={(event) => setFirstName(event.target.value)}
-                required
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "red", // Outline color on hover
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "red", // Outline color when focused
-                    },
-                  },
-                }}
-              />
-              <br />
-              <TextField
-                id="lastName"
-                label="Last Name"
-                variant="outlined"
-                // inputProps={{ style: { color: "red" } }}
-                InputLabelProps={{ style: { color: "beige" } }}
-                type="lastName"
-                value={lastName}
-                onChange={(event) => setLastName(event.target.value)}
-                required
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "red", // Outline color on hover
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "red", // Outline color when focused
-                    },
-                  },
-                }}
-              />
-              <br />
-              <TextField
-                id="phone"
-                label="Phone Number"
-                variant="outlined"
-                // inputProps={{ style: { color: "red" } }}
-                InputLabelProps={{ style: { color: "beige" } }}
-                type="phone"
-                value={phone}
-                onChange={handleFormatPhoneNumber}
-                required
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "red", // Outline color on hover
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "red", // Outline color when focused
-                    },
-                  },
-                }}
-              />
-              <br />
-              <TextField
-                id="username"
-                label="Username / Email"
-                variant="outlined"
-                // inputProps={{ style: { color: "red" } }}
-                InputLabelProps={{ style: { color: "beige" } }}
-                type="email"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                required
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "red", // Outline color on hover
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "red", // Outline color when focused
-                    },
-                  },
-                }}
-              />
-              <TextField
-                id="confirmusername"
-                label="Confirm Username / Email"
-                variant="outlined"
-                // inputProps={{ style: { color: "red" } }}
-                InputLabelProps={{ style: { color: "beige" } }}
-                type="email"
-                value={confirmUsername}
-                onChange={(event) => setConfirmUsername(event.target.value)}
-                required
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
-                    },
-                    "&:hover fieldset": {
-                      borderColor: "red", // Outline color on hover
-                    },
-                    "&.Mui-focused fieldset": {
-                      borderColor: "red", // Outline color when focused
-                    },
-                  },
-                }}
-              />
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                *** Please Note: Your username will be changed to this new email
-                if updated.
-              </Typography>
-            </Box>
-            <Button
-              onClick={handleSave}
-              sx={{
-                marginTop: 1.5,
-                marginLeft: 2,
-                height: 50,
-                width: 120,
-                borderRadius: 1,
-              }}
-              color="success"
-              variant="contained"
-              autoFocus
-            >
-              Save
-            </Button>
-          </Box>
-        </Modal>
-        {/* ----------- MODAL END ----------- */}
-        {/* <Card>
-          <CardContent>
-            <h1>Upload Multiple Pictures to Google Drive</h1>
-            <input type="file" multiple ref={fileInputRef}></input>
-            <label htmlFor="file-input">
-              <Input
-                id="file-input"
-                type="file"
-                inputRef={fileInputRef}
-                style={{ display: "none" }} // Hide the actual input element
-                multiple
-              />
-              <Button
-                variant="contained"
-                component="span"
-                startIcon={<CloudUploadIcon />}
-              >
-                Select Files
-              </Button>
-            </label>
-            <Button onClick={handleFileUpload}>Upload Files</Button>
-          </CardContent>
-        </Card> */}
       </Container>
+
+      {/* ----------- MODAL START ----------- */}
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 270,
+            bgcolor: "#484747",
+            boxShadow: 24,
+            borderRadius: 4,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Edit your contact info:
+          </Typography>
+          <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="firstName"
+              label="First Name"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              InputLabelProps={{ style: { color: "beige" } }}
+              type="text"
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <br />
+            <TextField
+              id="lastName"
+              label="Last Name"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              InputLabelProps={{ style: { color: "beige" } }}
+              type="lastName"
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <br />
+            <TextField
+              id="phone"
+              label="Phone Number"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              InputLabelProps={{ style: { color: "beige" } }}
+              type="phone"
+              value={phone}
+              onChange={handleFormatPhoneNumber}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <br />
+            <TextField
+              id="username"
+              label="Username / Email"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              InputLabelProps={{ style: { color: "beige" } }}
+              type="email"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <TextField
+              id="confirmusername"
+              label="Confirm Username / Email"
+              variant="outlined"
+              // inputProps={{ style: { color: "red" } }}
+              InputLabelProps={{ style: { color: "beige" } }}
+              type="email"
+              value={confirmUsername}
+              onChange={(event) => setConfirmUsername(event.target.value)}
+              required
+              sx={{
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "gray", // Outline color when not focused
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "red", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "red", // Outline color when focused
+                  },
+                },
+              }}
+            />
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              *** Please Note: Your username will be changed to this new email
+              if updated.
+            </Typography>
+          </Box>
+          <Button
+            onClick={handleSave}
+            sx={{
+              marginTop: 1.5,
+              marginLeft: 2,
+              height: 50,
+              width: 120,
+              borderRadius: 1,
+            }}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Save
+          </Button>
+        </Box>
+      </Modal>
+      {/* ----------- MODAL END ----------- */}
+
+      <Dialog
+        open={dioOpen}
+        onClose={handleCloseDio}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Your're files were uploaded succsessfuly"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Thank you for your submission. Please feel free to upload more as
+            needed.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDio} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
