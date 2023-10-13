@@ -4,31 +4,100 @@ import { useHistory } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 // the CssBaseline was no inported?
-import CssBaseline from '@mui/material/CssBaseline';
-import MyStepper from '../MyStepper/MyStepper';
-import { Button, MenuItem, Select, Typography, FormControl, InputLabel, Grid } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import MyStepper from "../MyStepper/MyStepper";
+import {
+  Button,
+  MenuItem,
+  Select,
+  Typography,
+  FormControl,
+  InputLabel,
+  Grid,
+} from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
 function ClientLocationInfoPage() {
-
-  const client = useSelector((store) => store.client)
+  const client = useSelector((store) => store.client);
+  const [formData, setFormData] = useState({
+    business_name: "",
+    address_street: "",
+    address_city: "",
+    address_state: "MN",
+    address_zip: 0,
+    website: "",
+    phone: 0,
+    hours_of_operation: "",
+    micromarket_location: "",
+  });
 
   const allStates = [
-    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA',
-    'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA',
-    'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY",
   ];
 
   const [businessname, setBusinessName] = useState(client.business_name || "");
-  const [addressStreet, setAddressStreet] = useState(client.address_street || "");
+  const [addressStreet, setAddressStreet] = useState(
+    client.address_street || ""
+  );
   const [addressCity, setAddressCity] = useState(client.address_city || "");
   const [addressState, setAddressState] = useState(client.address_state || "");
   const [addressZip, setAddressZip] = useState(client.address_zip || "");
   const [website, setWebsite] = useState(client.website || "");
   const [phone, setPhone] = useState(client.phone || "");
   const [hours, setHours] = useState(client.hours_of_operation || "");
-  const [micromarket, setMicroMarket] = useState(client.micromarket_location || "");
+  const [micromarket, setMicroMarket] = useState(
+    client.micromarket_location || ""
+  );
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
@@ -70,9 +139,9 @@ function ClientLocationInfoPage() {
     setPhone(formattedValue);
   };
 
-  const handleStateSelect = (event => {
-    setAddressState(event.target.value)
-  })
+  const handleStateSelect = (event) => {
+    setAddressState(event.target.value);
+  };
 
   const handleConfirmSubmit = () => {
     setOpenConfirmation(false);
@@ -82,7 +151,6 @@ function ClientLocationInfoPage() {
   const handleCloseConfirmation = () => {
     setOpenConfirmation(false);
   };
-
 
   const handleSubmit = () => {
     // console.log("inside handleSubmit");
@@ -98,352 +166,375 @@ function ClientLocationInfoPage() {
       hours_of_operation: hours,
       micromarket_location: micromarket,
     };
-    dispatch({ type: 'UPDATE_CLIENT_LOCATION', payload: clientLocationInfoObject })
+    dispatch({
+      type: "UPDATE_CLIENT_LOCATION",
+      payload: clientLocationInfoObject,
+    });
     history.push("/demographics");
   };
 
+  function dummyData() {
+    const presetData = {
+      business_name: "John Marshall Highschool",
+      address_street: "123 Cool St",
+      address_city: "Minneapolis",
+      address_state: "",
+      address_zip: 90210,
+      website: "you&meequilsUs@AodOutlined.com",
+      phone: 6518675309,
+      hours_of_operation: "9am - 5pm",
+      micromarket_location: "Quad",
+    };
+  
+    // Update formData state
+    setFormData((prevData) => ({
+      ...prevData,
+      ...presetData,
+    }));
+  
+    // Update separate state variables (optional)
+    setBusinessName(presetData.business_name);
+    setAddressStreet(presetData.address_street);
+    setAddressCity(presetData.address_city);
+    setAddressState(presetData.address_state);
+    setAddressZip(presetData.address_zip);
+    setWebsite(presetData.website);
+    setPhone(presetData.phone);
+    setHours(presetData.hours_of_operation);
+    setMicroMarket(presetData.micromarket_location);
+  }
 
   return (
     <div className="container">
       <div>
         <MyStepper step={1} />
       </div>
-
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-      <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>Location Information</Typography>
-        <Typography variant="h6" marginTop={1} marginBottom={2} style={{ color: "beige" }}>
-          Who Are We Serving?</Typography>
-      </div>{" "}
-      <Grid  margin={'auto'} container spacing={-48}>
-      <Box margin={'auto'}
-        component="form"
-        sx={{
-
-          backgroundColor: '#484747',
-          borderRadius: 3,
-          width: 360,
-          padding: 2,
-          boxShadow: 24,
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          id="businessname"
-          label="Business Name"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          type="text"
-          placeholder="Business Name"
-          value={businessname}
-          onChange={(event) => setBusinessName(event.target.value)}
-          required
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
-        />
-        <br />
-
-        <TextField
-          id="addressStreet"
-          label="Street Address"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          type="address"
-          placeholder="123 Snack St N"
-          value={addressStreet}
-          onChange={(event) => setAddressStreet(event.target.value)}
-          required
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
-        />
-        <br />
-        <TextField
-          id="addressCity"
-          label="City"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          type="text"
-          placeholder="Minneapolis"
-          value={addressCity}
-          onChange={(event) => setAddressCity(event.target.value)}
-          required
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
-        />
-        <br />
-        <FormControl variant="outlined" style={{ width: 310 }}>
-      <InputLabel style={{ color: "beige" }} htmlFor="addressState">State</InputLabel>
-      <Select
-        id="addressState"
-        value={addressState}
-        onChange={handleStateSelect}
-        defaultValue="MN"
-        required
-        sx={{
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "gray",
-          },
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "beige", // Change this to your desired hover outline color
-          },
-          "& .MuiOutlinedInput-root": {
-            borderColor: "beige", // Outline color when not focused
-            "&:hover fieldset": {
-              borderColor: "beige", // Outline color on hover
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "beige", // Outline color when focused
-            },
-          },
-        }}
-      >
-        {allStates.map((stateAbbr) => (
-          <MenuItem key={stateAbbr} value={stateAbbr}>
-            {stateAbbr}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
-        {/* <Select
-          id="addressState"
-          value={addressState}
-          label="State"
-          onChange={handleStateSelect}
-          defaultValue={"MN"}
-          variant="outlined"
-          placeholder="55415"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          sx={{
-            "& .MuiOutlinedInput-notchedOutline": {
-              borderColor: "gray",
-            },
-            "&:hover .MuiOutlinedInput-notchedOutline": {
-              borderColor: "white", // Change this to your desired hover outline color
-            },
-          }}
+        <Typography variant="h4" marginTop={3} style={{ color: "beige" }} onClick={dummyData}>
+          Location Information
+        </Typography>
+        <Typography
+          variant="h6"
+          marginTop={1}
+          marginBottom={2}
+          style={{ color: "beige" }}
         >
-          {allStates.map((stateAbbr) => (
-            <MenuItem key={stateAbbr} value={stateAbbr}>
-              {stateAbbr}
-            </MenuItem>
-          ))}
-        </Select> */}
-
-        <br />
-        <TextField
-          id="addressZip"
-          label="Zip Code"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          type="text"
-          placeholder="55415"
-          value={addressZip}
-          onChange={(event) => setAddressZip(event.target.value)}
-          required
+          Who Are We Serving?
+        </Typography>
+      </div>{" "}
+      <Grid margin={"auto"} container spacing={-48}>
+        <Box
+          margin={"auto"}
+          component="form"
           sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
+            backgroundColor: "#484747",
+            borderRadius: 3,
+            width: 360,
+            padding: 2,
+            boxShadow: 24,
+            "& > :not(style)": { m: 1, width: "25ch" },
           }}
-        />
-        <br />
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="businessname"
+            label="Business Name"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            type="text"
+            placeholder="Business Name"
+            value={businessname}
+            onChange={(event) => setBusinessName(event.target.value)}
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
+              },
+            }}
+          />
+          <br />
+
+          <TextField
+            id="addressStreet"
+            label="Street Address"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            type="address"
+            placeholder="123 Snack St N"
+            value={addressStreet}
+            onChange={(event) => setAddressStreet(event.target.value)}
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
+              },
+            }}
+          />
+          <br />
+          <TextField
+            id="addressCity"
+            label="City"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            type="text"
+            placeholder="Minneapolis"
+            value={addressCity}
+            onChange={(event) => setAddressCity(event.target.value)}
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
+              },
+            }}
+          />
+          <br />
+          <FormControl variant="outlined" style={{ width: 310 }}>
+            <InputLabel style={{ color: "beige" }} htmlFor="addressState">
+              State
+            </InputLabel>
+            <Select
+              id="addressState"
+              value={addressState}
+              onChange={handleStateSelect}
+              defaultValue="MN"
+              required
+              sx={{
+                "& .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "gray",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "beige", // Change this to your desired hover outline color
+                },
+                "& .MuiOutlinedInput-root": {
+                  borderColor: "beige", // Outline color when not focused
+                  "&:hover fieldset": {
+                    borderColor: "beige", // Outline color on hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "beige", // Outline color when focused
+                  },
+                },
+              }}
+            >
+              {allStates.map((stateAbbr) => (
+                <MenuItem key={stateAbbr} value={stateAbbr}>
+                  {stateAbbr}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <br />
+          <TextField
+            id="addressZip"
+            label="Zip Code"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            type="text"
+            placeholder="55415"
+            value={addressZip}
+            onChange={(event) => setAddressZip(event.target.value)}
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
+              },
+            }}
+          />
+          <br />
         </Box>
-        <Box margin={'auto'}
-        component="form"
-        sx={{
-
-          backgroundColor: '#484747',
-          borderRadius: 3,
-          width: 360,
-          padding: 2,
-          boxShadow: 24,
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField
-          id="website"
-          label="Website"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          type="text"
-          placeholder="munch.com"
-          value={website}
-          onChange={(event) => setWebsite(event.target.value)}
-          required
+        <Box
+          margin={"auto"}
+          component="form"
           sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
+            backgroundColor: "#484747",
+            borderRadius: 3,
+            width: 360,
+            padding: 2,
+            boxShadow: 24,
+            "& > :not(style)": { m: 1, width: "25ch" },
           }}
-        />
-        <br />
+          noValidate
+          autoComplete="off"
+        >
+          <TextField
+            id="website"
+            label="Website"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            type="text"
+            placeholder="munch.com"
+            value={website}
+            onChange={(event) => setWebsite(event.target.value)}
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
+              },
+            }}
+          />
+          <br />
 
-        <TextField
-          id="phone"
-          label="Phone Number"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          type="tel"
-          placeholder="(123) 456-7890"
-          value={phone}
-          onChange={handleFormatPhoneNumber}
-          required
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+          <TextField
+            id="phone"
+            label="Phone Number"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            type="tel"
+            placeholder="(123) 456-7890"
+            value={phone}
+            onChange={handleFormatPhoneNumber}
+            required
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
               },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
-        />
-        <br />
+            }}
+          />
+          <br />
 
-        <TextField
-          id="hours"
-          label="Hours Of Operation?"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          multiline
-          rows={1}
-          placeholder="9am-5pm"
-          value={hours}
-          onChange={(event) => setHours(event.target.value)}
-          sx={{
+          <TextField
+            id="hours"
+            label="Hours Of Operation?"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            multiline
+            rows={1}
+            placeholder="9am-5pm"
+            value={hours}
+            onChange={(event) => setHours(event.target.value)}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
+              },
+            }}
+          />
+          <br />
 
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+          <TextField
+            id="micromarket"
+            label="Micro-Market Location Inside Building"
+            variant="outlined"
+            style={{ width: 310 }}
+            inputProps={{ style: { color: "beige" } }}
+            InputLabelProps={{ style: { color: "beige" } }}
+            multiline
+            rows={1}
+            placeholder="Ex: Lobby, Cafeteria"
+            value={micromarket}
+            onChange={(event) => setMicroMarket(event.target.value)}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "gray", // Outline color when not focused
+                },
+                "&:hover fieldset": {
+                  borderColor: "beige", // Outline color on hover
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "beige", // Outline color when focused
+                },
               },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
-        />
-        <br />
-
-        <TextField
-          id="micromarket"
-          label="Micro-Market Location Inside Building"
-          variant="outlined"
-          style={{ width: 310 }}
-          inputProps={{ style: { color: "beige" } }}
-          InputLabelProps={{ style: { color: "beige" } }}
-          multiline
-          rows={1}
-          placeholder="Ex: Lobby, Cafeteria"
-          value={micromarket}
-          onChange={(event) => setMicroMarket(event.target.value)}
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
-              },
-              "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
-              },
-            },
-          }}
-        />
-        <br />
-      </Box>
+            }}
+          />
+          <br />
+        </Box>
       </Grid>
-
-      <Button
-        onClick={handleSubmit}
-        sx={{
-          marginTop: 1.5,
-          marginLeft: 2,
-          height: 50,
-          width: 120,
-          borderRadius: 1,
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "30px",
         }}
-        color="success"
-        variant="contained"
-        autoFocus
       >
-        Next
-      </Button>
+        <Button
+          onClick={handleSubmit}
+          sx={{
+            marginTop: 1.5,
+            marginLeft: 2,
+            height: 50,
+            width: 120,
+            borderRadius: 1,
+          }}
+          color="success"
+          variant="contained"
+          autoFocus
+        >
+          Next
+        </Button>
+      </div>
     </div>
   );
 }

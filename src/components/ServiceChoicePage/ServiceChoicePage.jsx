@@ -21,7 +21,7 @@ function ServiceChoicePage() {
   const singleClient = useSelector((store) => store.client);
   const client = useSelector((store) => store.client);
 
-  console.log("client!!!", singleClient)
+  console.log("client!!!", singleClient);
 
   let defaultMicroMarketCheckedState =
     client?.service_names?.includes("Micro Markets");
@@ -75,14 +75,35 @@ function ServiceChoicePage() {
     dispatch({ type: "UPDATE_SERVICES", payload: servicesObj });
   };
 
+  function dummyData() {
+    const presetData = {
+      micromarketChecked: true,
+      smartcoolersChecked: true,
+      snackboxesChecked: true,
+    };
+
+    setMicromarketChecked(presetData.micromarketChecked);
+    setSmartcoolersChecked(presetData.smartcoolersChecked);
+    setSnackboxesChecked(presetData.snackboxesChecked);
+  }
+
   return (
     <div className="container">
       <MyStepper step={0} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-      <Typography variant="h4" marginTop={3} marginBottom={1} style={{ color: "beige" }}>Services</Typography>
+        <Typography
+          variant="h4"
+          marginTop={3}
+          marginBottom={1}
+          style={{ color: "beige" }}
+          onClick={dummyData}
+        >
+          Services
+        </Typography>
         <Typography variant="h6" marginBottom={4} style={{ color: "beige" }}>
-          Products I'm Interested In...</Typography>
+          Products I'm Interested In...
+        </Typography>
       </div>{" "}
       {/* This div was not actually wrapped around anything. Change the justify to space-around */}
       <div style={{ display: "flex", justifyContent: "space-around" }}>
@@ -201,23 +222,29 @@ function ServiceChoicePage() {
           </Grid>
         </form>
       </div>
-       {/* Added a margin and flex-end to the services button */}
-      <div style={{ display: "flex"}}>
-        <Button 
-        onClick={handleSubmit}
-        sx={{
-          marginTop: 1.5,
-          marginLeft: 2,
-          height: 50,
-          width: 120,
-          borderRadius: 1,
+      {/* Added a margin and flex-end to the services button */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "30px",
         }}
-        color="success"
-        variant="contained"
-        autoFocus
       >
-        Next
-      </Button>
+        <Button
+          onClick={handleSubmit}
+          sx={{
+            marginTop: 1.5,
+            marginLeft: 2,
+            height: 50,
+            width: 120,
+            borderRadius: 1,
+          }}
+          color="success"
+          variant="contained"
+          autoFocus
+        >
+          Next
+        </Button>
       </div>
     </div>
   );
