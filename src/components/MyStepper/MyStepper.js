@@ -120,13 +120,32 @@ function MyStepper(props) {
 
     <div>
 
-      <Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel className="custom-step-label" StepIconComponent={ColorlibStepIcon}  onClick={() => handleStepClick(index)}>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+<Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
+  {steps.map((label, index) => (
+    <Step key={label}>
+      <StepLabel
+        className="custom-step-label"
+        StepIconComponent={ColorlibStepIcon}
+        onClick={() => handleStepClick(index)}
+        sx={{ 
+          "& .MuiStepLabel-label.MuiStepLabel-alternativeLabel":{
+            color: "white"
+          },
+          "& .MuiStepLabel-label.Mui-completed":{
+          color: "green"
+        },
+        
+                "& .MuiStepLabel-label.Mui-active": {
+                    color: "#f3cf2a", // Outline color when not focused
+                  },
+                  
+                 }}
+      >
+        {label}
+      </StepLabel>
+    </Step>
+  ))}
+</Stepper>
     </div>
   );
 }
