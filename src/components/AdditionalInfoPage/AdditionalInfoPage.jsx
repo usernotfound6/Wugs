@@ -34,6 +34,9 @@ function AdditionalInfoPage() {
 
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
+  const [formData, setFormData] = useState({
+    dimensions: "",
+  });
 
   const [dioOpen, dioSetOpen] = React.useState(false);
 
@@ -63,10 +66,7 @@ function AdditionalInfoPage() {
   // Function to handle file upload to Google Drive
   const handleFileUpload = async () => {
     const files = fileInputRef.current.files;
-    console.log("Selected files:", files);
-    console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
 
-    // Check if there are selected files
     if (files.length > 0) {
       const formData = new FormData();
 
@@ -74,16 +74,12 @@ function AdditionalInfoPage() {
       for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
       }
-      console.log("Uploading files:", formData);
-      console.log("file name:", formData.id);
-      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
       const clientId = client.client_id;
-      console.log("clientId is:", clientId);
 
       try {
         // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
         const response = await axios.post(
-          `/api/onboarding/upload/${clientId}`,
+          `/api/onboarding/upload/pictures/${clientId}`,
           formData,
           {
             headers: {
@@ -173,6 +169,9 @@ function AdditionalInfoPage() {
       boxSizing: 'border-box',
     },
   }));
+  
+
+
   return (
     <div className="container">
       <MyStepper step={4} />
@@ -180,7 +179,7 @@ function AdditionalInfoPage() {
       <div className="wholebody">
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Additional Information</Typography>
+          <Typography variant='h4' marginTop={3} style={{ color: "beige" }} onClick={dummyData}>Additional Information</Typography>
         </div>{" "}
         <Box margin={'auto'}
           component="form"
@@ -272,13 +271,20 @@ function AdditionalInfoPage() {
             </div>
           )}
       </Box>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "300px",
+        }}
+      >
       <Button
         onClick={handleSubmit}
         sx={{
           marginTop: 1.5,
           marginLeft: 2,
           height: 50,
-          width: 120,
+          width: 180,
           borderRadius: 1,
         }}
         color="success"
@@ -287,6 +293,7 @@ function AdditionalInfoPage() {
       >
         Submit
       </Button>
+      </div>
     </div>
     <Dialog
         open={dioOpen}
