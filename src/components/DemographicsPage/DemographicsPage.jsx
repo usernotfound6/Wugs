@@ -296,9 +296,9 @@ function DemographicsPage() {
             <br />
             <strong>DEMOGRAPHIC:</strong>
             <br />
-            We'd love to hear about what the culture and diversity of your
-            location, this helps us to best serve you and provide recomendations
-            for a diverse selection of snacking options.
+            We'd love to hear about the culture and diversity of your
+            location. This helps us to best serve you and provide recommendations
+            for a unique selection of snacking options.
             <br />
             <strong>AGE GROUP:</strong>
             <br />

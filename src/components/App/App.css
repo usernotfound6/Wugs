@@ -9,7 +9,7 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
-  color: #ccc8ad;
+  color: #f2ecc2;
 }
 
 
@@ -84,13 +84,13 @@ Button
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: #efe6c4;
 }
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #a57fc7;
+  color: #b48bdd;
 }
 
 /* --------------------------------------------------------------------------------

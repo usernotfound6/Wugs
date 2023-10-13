@@ -73,7 +73,7 @@ function ReviewPage() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <div className='container'>
         <MyStepper step={5} />
         <CssBaseline />
         <div style={{ textAlign: "center" }}>

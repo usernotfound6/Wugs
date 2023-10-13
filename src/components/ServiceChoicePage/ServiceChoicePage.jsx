@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MyStepper from "../MyStepper/MyStepper";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Typography,
   Button,
@@ -11,6 +11,7 @@ import {
   CardMedia,
   Grid,
   CssBaseline,
+  Checkbox,
 } from "@mui/material";
 
 function ServiceChoicePage() {
@@ -51,16 +52,10 @@ function ServiceChoicePage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("micromarket checked?", micromarketChecked);
-    // console.log("smartcoolers checked?", smartcoolersChecked);
-    // console.log("snackboxes checked?", snackboxesChecked);
     let servicesArray = [];
     if (micromarketChecked) {
       servicesArray.push(1);
     }
-
-    history.push("/clientlocationinfo");
-
     if (smartcoolersChecked) {
       servicesArray.push(2);
     }
@@ -71,8 +66,8 @@ function ServiceChoicePage() {
       client_id: singleClient.client_id,
       service_id: servicesArray,
     };
-    // console.log(servicesArray);
     dispatch({ type: "UPDATE_SERVICES", payload: servicesObj });
+    history.push("/clientlocationinfo");
   };
 
   function dummyData() {
@@ -92,40 +87,36 @@ function ServiceChoicePage() {
       <MyStepper step={0} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <Typography
-          variant="h4"
-          marginTop={3}
-          marginBottom={1}
-          style={{ color: "beige" }}
-          onClick={dummyData}
-        >
+
+        <Typography variant="h4" marginTop={3} marginBottom={1} style={{ color: "beige" }} onClick={dummyData}>
           Services
         </Typography>
         <Typography variant="h6" marginBottom={4} style={{ color: "beige" }}>
-          Products I'm Interested In...
+          Select Products You're Interested In
         </Typography>
-      </div>{" "}
-      {/* This div was not actually wrapped around anything. Change the justify to space-around */}
+      </div>
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <form className="checkbox-container">
           <Grid container spacing={5}>
             {/* Micro Markets */}
             <Grid item xs={12} sm={6} md={4}>
-              <input
-                type="checkbox"
+              <Checkbox
                 id="micromarket"
                 name="micromarket"
                 value="Micromarket"
                 checked={micromarketChecked}
                 onChange={handleMicromarketChange}
+                sx={{ fontSize: 18, color: "beige" }}
               />
-              <label htmlFor="micromarket">Micro Markets</label>
+              <label htmlFor="micromarket" style={{ fontSize: 18, color: "beige" }}>
+                Micro Markets
+              </label>
               <br />
 
               <Card
                 sx={{
                   width: 450,
-                  height: 450,
+                  height: 480,
                   borderRadius: 5,
                   backgroundColor: "beige",
                   boxShadow: 24,
@@ -138,31 +129,33 @@ function ServiceChoicePage() {
                   image="https://www.bernicks.com/hubfs/social-suggested-images/micro_market.png"
                 />
                 <CardContent>
-                  <Typography variant="h6">Micro Market</Typography>
-                  <Typography variant="body2">
-                    Description: Your description here.
+                  <Typography variant="h5">Micro Market</Typography>
+                  <Typography variant="body1">
+                    Self-service store equipped with open shelves, coolers, and self-checkout kiosks that offer a diverse range of food and drinks. They are an excellent addition to any break room.
                   </Typography>
                 </CardContent>
               </Card>
             </Grid>
 
             {/* Smart Coolers */}
-            <Grid item xs={12} sm={6} md={4}>
-              <input
-                type="checkbox"
+            <Grid item xs={12} sm={6} md={4} >
+              <Checkbox 
                 id="smartcoolers"
                 name="smartcoolers"
                 value="SmartCoolers"
                 checked={smartcoolersChecked}
                 onChange={handleSmartcoolersChange}
+                sx={{ fontSize: 18, color: "beige" }}
               />
-              <label htmlFor="smartcoolers">Smart Coolers</label>
+              <label htmlFor="smartcoolers" style={{ fontSize: 18, color: "beige" }}>
+                Smart Coolers
+              </label>
               <br />
 
               <Card
                 sx={{
                   width: 450,
-                  height: 450,
+                  height: 480,
                   borderRadius: 5,
                   backgroundColor: "beige",
                   boxShadow: 24,
@@ -175,9 +168,9 @@ function ServiceChoicePage() {
                   image="https://cdn-dppck.nitrocdn.com/mebfXXXDMymVFbKVdxsHUesbzFkXXUGk/assets/images/optimized/rev-434f8f1/connectvending.co.uk/wp-content/uploads/2023/04/PicoCooler-ProductScan-WebRes-sml.jpg"
                 />
                 <CardContent>
-                  <Typography variant="h6">Smart Coolers</Typography>
-                  <Typography variant="body2">
-                    Description: Your description here.
+                  <Typography variant="h5">Smart Coolers</Typography>
+                  <Typography variant="body1">
+                    Modern vending fridge with a grab-and-go experience. Just open the door, take and scan the product, swipe or tap to pay and go.
                   </Typography>
                 </CardContent>
               </Card>
@@ -185,21 +178,23 @@ function ServiceChoicePage() {
 
             {/* Snack Boxes */}
             <Grid item xs={12} sm={6} md={4}>
-              <input
-                type="checkbox"
+              <Checkbox
                 id="snackboxes"
                 name="snackboxes"
                 value="SnackBoxes"
                 checked={snackboxesChecked}
                 onChange={handleSnackboxesChange}
+                sx={{ fontSize: 18, color: "beige" }}
               />
-              <label htmlFor="snackboxes">Snack Boxes</label>
+              <label htmlFor="snackboxes" style={{ fontSize: 18, color: "beige" }}>
+                Snack Boxes
+              </label>
               <br />
 
               <Card
                 sx={{
                   width: 450,
-                  height: 450,
+                  height: 480,
                   borderRadius: 5,
                   backgroundColor: "beige",
                   boxShadow: 24,
@@ -212,9 +207,9 @@ function ServiceChoicePage() {
                   image="https://i.etsystatic.com/33431484/r/il/046fbf/5169950532/il_1588xN.5169950532_8ddb.jpg"
                 />
                 <CardContent>
-                  <Typography variant="h6">Snack Boxes</Typography>
-                  <Typography variant="body2">
-                    Description: Your description here.
+                  <Typography variant="h5">Snack Boxes</Typography>
+                  <Typography variant="body1">
+                    A box of international treats and snacks. Choose between medium or large and have it delivered bi-weekly or monthly. Great for smaller spaces.
                   </Typography>
                 </CardContent>
               </Card>
