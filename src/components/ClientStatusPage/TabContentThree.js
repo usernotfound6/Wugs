@@ -8,6 +8,7 @@ import "./TabContent.css";
 
 const TabContentThree= () => {
   const client = useSelector((store) => store.client);
+  const user= useSelector((store) => store.user)
   const history = useHistory();
 
   function handlePrevious(path) {
@@ -58,16 +59,35 @@ const TabContentThree= () => {
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
               Foods we're interested in...
             </Typography>
-            <Typography variant="h8" component="div">
-                      <ul>
-                        <li>{client.business_name}</li>
-                        <li>{client.address}</li>
-                        <li>{client.website}</li>
-                        <li>{client.phone}</li>
-                        <li>
-                          {client.first_name}, {client.last_name}
-                        </li>
-                      </ul>
+            <Typography variant="body2" component="div">
+                      Point of Contact: {user.first_name} {user.last_name}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Email: {user.username}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Phone: {client.phone}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Business: {client.business_name}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Street Address: {client.address_street}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      State: {client.address_state}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      State: {client.address_zip}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Website: {client.website}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Hours of Operation: {client.hours_of_operation}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Micro Market Location: {client.micromarket_location}
                     </Typography>
           </CardContent>
         </Card>

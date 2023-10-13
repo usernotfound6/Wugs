@@ -58,14 +58,17 @@ const TabContentOne = () => {
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
               Products I'm interested in...
             </Typography>
-            <Typography variant="h8" component="div">
-              Services:
-              <ul>
-                {client.service_names?.map((serviceName, index) => (
-                  <li key={index}>{serviceName}</li>
-                ))}
-              </ul>
-            </Typography>
+            {client.service_names ?
+                      client.service_names.map((service, index) => (
+                        <Typography variant="body2" component="div" key={index}>
+                          {service}
+                        </Typography>
+                      ))
+                      :
+                      <Typography variant="body2" component="div">
+                        None Indicated
+                      </Typography>
+                    }
           </CardContent>
         </Card>
       </div>

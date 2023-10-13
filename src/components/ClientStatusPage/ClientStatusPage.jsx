@@ -98,8 +98,8 @@ function ClientStatusPage() {
           >
             <Tab label="Services I'm interested in..." />
             <Tab label="Who we are..." />
-            <Tab label="Foods we're interested in..." />
             <Tab label="Who we're serving..." />
+            <Tab label="Foods we're interested in..." />
             <Tab label="Additional info" />
           </Tabs>
         </div>
@@ -112,9 +112,9 @@ function ClientStatusPage() {
         >
           {value === 0 && <TabContentOne />}
           {value === 1 && <TabContentThree />}
-          {value === 2 && <TabContentTwo />}
-          {value === 3 && <TabContentFive />}
+          {value === 3 && <TabContentTwo />}
           {value === 4 && <TabContentFour />}
+          {value === 2 && <TabContentFive />}
         </Container>
 
       </div>

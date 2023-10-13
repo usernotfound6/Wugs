@@ -59,13 +59,11 @@ const TabContentTwo = () => {
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
               Foods we're interested in...
             </Typography>
-            <Typography variant="h8" component="div">
-              Services:
-              <ul>
+            <Typography variant="body2" component="div">
                 {client.product_types?.map((productType, index) => (
                   <li key={index}>{productType}</li>
                 ))}
-              </ul>
+             
             </Typography>
           </CardContent>
         </Card>

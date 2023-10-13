@@ -58,11 +58,21 @@ const TabContentFive = () => {
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
               Who we're serving...
             </Typography>
-            <Typography variant="h8" component="div">
-              <ul>
-                <li>{client.demographics}</li>
-              </ul>
-            </Typography>
+            <Typography variant="body2">
+                      # of People on Site: {client.number_of_people}
+                    </Typography>
+                    <Typography variant="body2">
+                      Demographics: {client.demographics}
+                    </Typography>
+                    <Typography variant="body2">
+                      Age Group: {client.target_age_group}
+                    </Typography>
+                    <Typography variant="body2">
+                      Industry: {client.industry}
+                    </Typography>
+                    <Typography variant="body2">
+                      Neighborhood Info: {client.neighborhood_info}
+                    </Typography>
           </CardContent>
         </Card>
       </div>
