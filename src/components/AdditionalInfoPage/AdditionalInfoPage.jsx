@@ -271,13 +271,20 @@ function AdditionalInfoPage() {
             </div>
           )}
       </Box>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "300px",
+        }}
+      >
       <Button
         onClick={handleSubmit}
         sx={{
           marginTop: 1.5,
           marginLeft: 2,
           height: 50,
-          width: 120,
+          width: 180,
           borderRadius: 1,
         }}
         color="success"
@@ -286,6 +293,7 @@ function AdditionalInfoPage() {
       >
         Submit
       </Button>
+      </div>
     </div>
     <Dialog
         open={dioOpen}
