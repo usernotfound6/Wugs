@@ -34,6 +34,9 @@ function AdditionalInfoPage() {
 
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
+  const [formData, setFormData] = useState({
+    dimensions: "",
+  });
 
   const [dioOpen, dioSetOpen] = React.useState(false);
 
@@ -180,7 +183,7 @@ function AdditionalInfoPage() {
       <div className="wholebody">
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Additional Information</Typography>
+          <Typography variant='h4' marginTop={3} style={{ color: "beige" }} onClick={dummyData}>Additional Information</Typography>
         </div>{" "}
         <Box margin={'auto'}
           component="form"
