@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, createRef } from "react";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardContent, Modal, TextField, Typography, Container, Grid, Input } from "@mui/material";
@@ -14,13 +14,29 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 function UserPage() {
   const rootElement = document.getElementById("popup-root");
-  const fileInputRef = useRef(null); // Needed for the googel drive post
 
   const user = useSelector((store) => store.user);
   const client = useSelector((store) => store.client);
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const pictureFileInputRef = useRef(null); // Needed for the google drive post
+  const contractFileInputRef = useRef(null); // Needed for the google drive post
+
+  const [pictureSelected, setPictureSelected] = useState(false);
+  const [contractSelected, setContractSelected] = useState(false);
+  // const handleFileSelect = () => {
+  //   fileInputRef.current.click();
+  // };
+  const handlePictureSelected = (event) => {
+    const selectedFiles = event.target.files;
+    setPictureSelected(selectedFiles.length > 0);
+  };
+  const handleContractSelected = (event) => {
+    const selectedFiles = event.target.files;
+    setContractSelected(selectedFiles.length > 0);
+  };
 
   const handleButton = () => {
     history.push("/clientstatus");
@@ -122,11 +138,12 @@ function UserPage() {
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
   };
+
   // Function to handle file upload to Google Drive
-  const handleFileUpload = async () => {
-    const files = fileInputRef.current.files;
+  const handlePictureUpload = async () => {
+    const files = pictureFileInputRef.current.files;
     console.log("Selected files:", files);
-    console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
+    // console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
 
     // Check if there are selected files
     if (files.length > 0) {
@@ -137,7 +154,6 @@ function UserPage() {
         formData.append("files", files[i]);
       }
       console.log("Uploading files:", formData);
-      console.log("file name:", formData.id);
       // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
       const clientId = client.client_id;
       console.log("clientId is:", clientId);
@@ -145,7 +161,7 @@ function UserPage() {
       try {
         // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
         const response = await axios.post(
-          `/api/onboarding/upload/${clientId}`,
+          `/api/onboarding/upload/pictures/${clientId}`,
           formData,
           {
             headers: {
@@ -158,6 +174,7 @@ function UserPage() {
         console.log("Uploaded files: ", data.files);
         if (data) {
           handleClickOpen();
+          setPictureSelected(false);
         } else {
           handleCloseDio();
         }
@@ -166,9 +183,55 @@ function UserPage() {
       }
     }
   };
+
+  const handleContractUpload = async () => {
+    const files = contractFileInputRef.current.files;
+    console.log("Selected files:", files);
+    // console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
+
+    // // Check if there are selected files
+    if (files.length > 0) {
+      const formData = new FormData();
+
+      // Iterate over the selected files and append them to the form data
+      for (let i = 0; i < files.length; i++) {
+        formData.append("files", files[i]);
+      }
+      console.log("Uploading files:", formData);
+      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
+      const clientId = client.client_id;
+      console.log("clientId is:", clientId);
+
+      try {
+        // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+        const response = await axios.post(
+          `/api/onboarding/upload/contract/${clientId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+            },
+          }
+        );
+
+        const data = response.data;
+        console.log("Uploaded files: ", data.files);
+        if (data) {
+          handleClickOpen();
+          setContractSelected(false);
+        } else {
+          handleCloseDio();
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+
   const openCalendlyLink = () => {
     Calendly.initPopupWidget({ url: "https://calendly.com/dontyellwillcry" });
   };
+
 
   return (
     <div className="container">
@@ -314,36 +377,78 @@ function UserPage() {
               }}
             >
               <CardContent>
-                <h3 style={{ color: "#f5f5dc" }}>
-                  Upload Multiple Pictures to Google Drive
-                </h3>
-                <input type="file" multiple ref={fileInputRef} style={{ color: "white" }}></input>
-                <label htmlFor="file-input">
-                  <Input
-                    id="file-input"
-                    type="file"
-                    inputRef={fileInputRef}
-                    style={{ display: "none" }}
-                    multiple
-                  />
+                <h4 style={{ color: "#f5f5dc" }}>
+                  Upload Image of Vending Space to WUGS
+                </h4>
+                {/* <input type="file" multiple ref={fileInputRef} style={{ color: "white" }}></input> */}
+
+                <div className="custom-upload-button">
+                  <label htmlFor="picture-input">
+                    <input
+                      id="picture-input"
+                      type="file"
+                      ref={pictureFileInputRef}
+                      style={{ display: "none" }}
+                      multiple
+                      onChange={handlePictureSelected}
+                    />
+                    <Button
+                      variant="contained"
+                      component="span"
+                    >
+                      {pictureSelected ? "Files Selected" : "Choose Files"}
+                    </Button>
+                  </label>
                   <Button
                     variant="contained"
-                    component="span"
+                    onClick={handlePictureUpload}
+                    style={{
+                      marginLeft: "10px",
+                    }}
+                    autoFocus
+                    disabled={!pictureSelected}
                     startIcon={<CloudUploadIcon />}
                   >
-                    Select Files
+                    Upload Files
                   </Button>
-                </label>
-                <Button
-                  variant="contained"
-                  onClick={handleFileUpload}
-                  style={{
-                    marginLeft: "10px",
-                  }}
-                  autoFocus
-                >
-                  Upload Files
-                </Button>
+                </div>
+                
+                <hr />
+
+                <div className="custom-upload-button">
+                <h4 style={{ color: "#f5f5dc" }}>
+                  Upload Signed Contract to WUGS
+                </h4>
+                  <label htmlFor="contract-input">
+                    <input
+                      id="contract-input"
+                      type="file"
+                      ref={contractFileInputRef}
+                      style={{ display: "none" }}
+                      multiple
+                      onChange={handleContractSelected}
+                    />
+                    <Button
+                      variant="contained"
+                      component="span"
+                    >
+                      {contractSelected ? "Files Selected" : "Choose Files"}
+                    </Button>
+                  </label>
+                  <Button
+                    variant="contained"
+                    onClick={handleContractUpload}
+                    style={{
+                      marginLeft: "10px",
+                    }}
+                    autoFocus
+                    disabled={!contractSelected}
+                    startIcon={<CloudUploadIcon />}
+                  >
+                    Upload Files
+                  </Button>
+                </div>
+
               </CardContent>
             </Card>
           </Grid>
