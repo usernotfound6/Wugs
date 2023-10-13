@@ -143,8 +143,6 @@ function UserPage() {
   // Function to handle file upload to Google Drive
   const handlePictureUpload = async () => {
     const files = pictureFileInputRef.current.files;
-    console.log("Selected files:", files);
-    // console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
 
     // Check if there are selected files
     if (files.length > 0) {
@@ -154,10 +152,7 @@ function UserPage() {
       for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
       }
-      console.log("Uploading files:", formData);
-      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
       const clientId = client.client_id;
-      console.log("clientId is:", clientId);
 
       try {
         // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
