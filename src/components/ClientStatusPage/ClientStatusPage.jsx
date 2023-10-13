@@ -96,11 +96,11 @@ function ClientStatusPage() {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab label="Services I'm interested in..." />
-            <Tab label="Who we are..." />
-            <Tab label="Foods we're interested in..." />
-            <Tab label="Who we're serving..." />
-            <Tab label="Additional info" />
+            <Tab label="Services I'm interested in..." sx={{ color: "beige" }} />
+            <Tab label="Who we are..." sx={{ color: "beige" }}/>
+            <Tab label="Foods we're interested in..." sx={{ color: "beige" }} />
+            <Tab label="Who we're serving..." sx={{ color: "beige" }}/>
+            <Tab label="Additional info" sx={{ color: "beige" }}/>
           </Tabs>
         </div>
         <Container

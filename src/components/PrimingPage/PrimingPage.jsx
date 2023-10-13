@@ -38,7 +38,7 @@ function PrimingPage() {
         color="beige"
         marginBottom={3}
       >
-        WELCOME!
+        WELCOME
       </Typography>
       <Box sx={styles.cardContainer}>
         <Card elevation={15} sx={styles.card}>
@@ -69,20 +69,20 @@ function PrimingPage() {
             <Typography
               style={{ textAlign: "center" }}
               color="beige"
-              variant="body2"
+              variant="body1"
             >
+              Details about your location
+              <br/>
               Pictures of your space
               <br />
               Dimensions of you space
-              <br />
-              Details about you location
-              <br />
+              {/* <br />
               ????
               <br />
               ????
               <br />
               ???????
-              <br />
+              <br /> */}
             </Typography>
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "center" }}>

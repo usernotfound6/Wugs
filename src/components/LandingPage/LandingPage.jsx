@@ -22,14 +22,24 @@ function LandingPage() {
 
   return (
     <div className="container">
+         <Card
+            elevation={14}
+            sx={{
+              margin: "auto",
+            width: 250,
+              backgroundColor: "blue",
+              borderRadius: 100,
+              marginBottom: 10,
+            }}
+          >
       <img
         src="https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"
         height={250}
         style={{ display: "flex", marginLeft: "auto", marginRight: "auto" }}
       ></img>
-
+</Card>
       <div style={{ position: "absolute", right: 40, top: 120 }}>
-        <h4>Already a Member?</h4>
+      <Typography variant="h6" marginTop={-4} marginBottom={2}>Already a Member?</Typography>
         <Button
           style={{ position: "absolute", right: 10 }}
           color="success"
@@ -41,7 +51,7 @@ function LandingPage() {
         </Button>
       </div>
       <h2></h2>
-      <Grid container spacing={8}>
+      <Grid container spacing={6}>
         <Grid item xs={12} sm={6}>
           <Card
             elevation={24}
@@ -68,9 +78,9 @@ function LandingPage() {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                  Learn More
+                  Contact Us
                 </Typography>
-                <Typography variant="body1" color="text.secondary">
+                <Typography gutterBottom variant="body1" color="text.secondary">
                   See which Wugs service is right for your space. Whether it's
                   Micro-Markets, Smart Coolers, or Snack Boxes, Wugs could be
                   the perfect upgrade to your food and beverage needs. Click
@@ -107,7 +117,7 @@ function LandingPage() {
                 <Typography gutterBottom variant="h5" component="div">
                   Get Snacking
                 </Typography>
-                <Typography variant="body1" color="text.secondary">
+                <Typography gutterBottom variant="body1" color="text.secondary">
                   With our new streamlined on-boarding process, adding Wugs to
                   your space has never been easier. With this all-in-one
                   process, you can now revolutionize your snacking space in less
