@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MyStepper from '../MyStepper/MyStepper'
@@ -16,12 +16,14 @@ import {
   Card,
   CardContent,
 } from "@mui/material";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from "axios";
 
 function AdditionalInfoPage() {
 
   const rootElement = document.getElementById("popup-root");
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null); // Needed for the googel drive post
 
   const client = useSelector((store) => store.client)
@@ -29,6 +31,19 @@ function AdditionalInfoPage() {
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
   const [dioOpen, dioSetOpen] = React.useState(false);
+
+  console.log("selectedFiles", selectedFiles)
+
+  const handleFileSelect = (event) => {
+    const files = event.target.files;
+    const fileNames = [];
+  
+    for (let i = 0; i < files.length; i++) {
+      fileNames.push(files[i].name);
+    }
+  
+    setSelectedFiles([...selectedFiles, ...fileNames]); 
+  };
 
   console.log("client", client)
 
@@ -148,29 +163,29 @@ function AdditionalInfoPage() {
       <MyStepper step={4} />
 
       <div className="wholebody">
-      <CssBaseline />
+        <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }}>Additional Information</Typography>
-          </div>{" "}
+          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Additional Information</Typography>
+        </div>{" "}
 
-    
-      
-      <Box margin={'auto'}
-      
-        component="form"
-        sx={{
 
-          backgroundColor: '#484747',
-          borderRadius: 3,
-          width: 360,
-          padding: 2,
-          boxShadow: 24,
-          marginTop: 3,
-          marginBottom: 9,
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
+
+        <Box margin={'auto'}
+
+          component="form"
+          sx={{
+
+            backgroundColor: '#484747',
+            borderRadius: 3,
+            width: 360,
+            padding: 2,
+            boxShadow: 24,
+            marginTop: 3,
+            marginBottom: 9,
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
         >
           <TextField
             id="dimensions"
@@ -207,54 +222,66 @@ function AdditionalInfoPage() {
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
             <Typography color='beige'>Yes</Typography>
           </Stack>
-                <Typography>Upload Photos:</Typography>
-                <input type="file" multiple ref={fileInputRef}></input>
-                <label htmlFor="file-input">
-                  <Input
-                    id="file-input"
-                    type="file"
-                    inputRef={fileInputRef}
-                    style={{ display: "none" }} // Hide the actual input element
-                    multiple
-                  />
-                  <Button
-                    variant="contained"
-                    component="span"
-                    startIcon={<CloudUploadIcon />}
-                  >
-                    Select Files
-                  </Button>
-                </label>
-                <Button
-                  variant="contained"
-                  onClick={handleFileUpload}
-                  style={{
-                    marginLeft: "10px", // Add left margin
-                  }}
-                  autoFocus
-                >
-                  Upload Files
-                </Button>
-        </Box>
-
+          <Typography>Upload Photos:</Typography>
+          <Typography variant="subtitle2">Provide a photo of your space</Typography>
+          <Input
+            type="file"
+            multiple
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            id="file-input"
+            onChange={handleFileSelect}
+          />
+          <label htmlFor="file-input">
+            <Button
+              variant="contained"
+              component="span"
+              startIcon={<AddAPhotoIcon />}
+              onClick={() => fileInputRef.current.click()}
+            >
+              Select Files
+            </Button>
+            </label>
+          {selectedFiles.length > 0 && (
+            <div>
         <Button
-          onClick={handleSubmit}
-          sx={{
-            marginTop: 1.5,
-            marginLeft: 2,
-            height: 50,
-            width: 120,
-            borderRadius: 1,
-          }}
-          color="success"
           variant="contained"
+          onClick={handleFileUpload}
+          style={{
+            justifyContent: "left",
+            marginLeft: "7px", // Add left margin
+          }}
           autoFocus
-        >
-          Submit
+        ><CloudUploadIcon />Upload Files
         </Button>
+        <Typography>Selected files:</Typography>
+              <ul>
+                {selectedFiles.map((fileName, index) => (
+                  <li key={index}>{fileName}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+      </Box>
 
-      </div>
+      <Button
+        onClick={handleSubmit}
+        sx={{
+          marginTop: 1.5,
+          marginLeft: 2,
+          height: 50,
+          width: 120,
+          borderRadius: 1,
+        }}
+        color="success"
+        variant="contained"
+        autoFocus
+      >
+        Submit
+      </Button>
+
     </div>
+    </div >
   );
 }
 
