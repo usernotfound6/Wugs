@@ -180,12 +180,12 @@ function FoodPreferencesPage() {
       </Typography>
       <Typography
         style={{ textAlign: "center" }}
-        variant="subtitle1"
+        variant="h6"
         color="beige"
         marginBottom={3}
         gutterBottom
       >
-        Select any you'd like to learn more about!
+        Select Any You'd Like To Learn More About
       </Typography>
       <Grid sx={{ display: 'flex', margin: 'auto' }}
         container xs={9} spacing={2} columnGap={2} rowGap={2}>
@@ -212,7 +212,7 @@ function FoodPreferencesPage() {
               <Image>
                 <Typography
                   component="span"
-                  variant="subtitle1"
+                  variant="h6"
                   color="inherit"
                   sx={{
                     position: "relative",

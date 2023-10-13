@@ -171,9 +171,9 @@ function UserPage() {
   };
 
   return (
-    <>
-      <h2>Welcome, {user.first_name || user.username}!</h2>
-      <h2>Onboarding Status: {client.status_name}</h2>
+    <div className="container">
+      <Typography variant="h4">Welcome, {user.first_name || user.username}!</Typography>
+      <Typography variant="h6">Onboarding Status: {client.status_name}</Typography>
       <div
         style={{
           display: "flex",
@@ -549,7 +549,7 @@ function UserPage() {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </div>
   );
 }
 
