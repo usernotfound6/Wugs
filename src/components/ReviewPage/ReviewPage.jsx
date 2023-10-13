@@ -358,11 +358,11 @@ function ReviewPage() {
       >
         
         <DialogTitle id="alert-dialog-title">
-          Thank You For Expressing Interest!
+          Thank You For Completing The Onboarding Process!
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            We are so excited to bring diverse snacking options into your community and space!
+            We are excited to bring diverse snacking options into your community and space!
             You will be contacted by Wugs soon with follow-up information. Once you click
             'Go Back' you will be redirected to the home page where you can view your current onboarding status and edit your profile.
           </DialogContentText>
