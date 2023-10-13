@@ -219,6 +219,7 @@ function FoodPreferencesPage() {
                     p: 4,
                     pt: 2,
                     pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                    color: "black",
                   }}
                 >
                   {product.type}
@@ -232,6 +233,13 @@ function FoodPreferencesPage() {
         )}
         {/* </Box> */}
       </Grid>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "30px",
+        }}
+      >
       <Button
         onClick={handleSave}
         sx={{
@@ -247,6 +255,7 @@ function FoodPreferencesPage() {
       >
         Next
       </Button>
+      </div>
     </div>
   );
 }

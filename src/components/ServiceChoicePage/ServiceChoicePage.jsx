@@ -70,12 +70,25 @@ function ServiceChoicePage() {
     history.push("/clientlocationinfo");
   };
 
+  function dummyData() {
+    const presetData = {
+      micromarketChecked: true,
+      smartcoolersChecked: true,
+      snackboxesChecked: true,
+    };
+
+    setMicromarketChecked(presetData.micromarketChecked);
+    setSmartcoolersChecked(presetData.smartcoolersChecked);
+    setSnackboxesChecked(presetData.snackboxesChecked);
+  }
+
   return (
     <div className="container">
       <MyStepper step={0} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h4" marginTop={3} marginBottom={1} style={{ color: "beige" }}>
+
+        <Typography variant="h4" marginTop={3} marginBottom={1} style={{ color: "beige" }} onClick={dummyData}>
           Services
         </Typography>
         <Typography variant="h6" marginBottom={4} style={{ color: "beige" }}>
@@ -204,7 +217,14 @@ function ServiceChoicePage() {
           </Grid>
         </form>
       </div>
-      <div style={{ display: "flex" }}>
+      {/* Added a margin and flex-end to the services button */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "30px",
+        }}
+      >
         <Button
           onClick={handleSubmit}
           sx={{
