@@ -58,9 +58,12 @@ const TabContentFour = () => {
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
               Additional info
             </Typography>
-            <Typography variant="h8" component="div">
-              {client.dimensions}
+            <Typography variant="body2" component="div">
+              Dimensions:{client.dimensions}
             </Typography>
+            <Typography variant="body2">
+                      Visit Requested: {client.wugs_visit ? "Yes" : "No"}
+                    </Typography>
           </CardContent>
         </Card>
       </div>
