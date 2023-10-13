@@ -312,6 +312,13 @@ function DemographicsPage() {
         </DialogContent>
         <DialogActions></DialogActions>
       </Dialog>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginRight: "30px",
+        }}
+      >
       <Button
         onClick={postDemographics}
         sx={{
@@ -327,6 +334,7 @@ function DemographicsPage() {
       >
         Next
       </Button>
+      </div>
     </div>
   );
 }

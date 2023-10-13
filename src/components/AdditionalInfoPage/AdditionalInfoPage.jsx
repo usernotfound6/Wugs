@@ -19,8 +19,13 @@ function AdditionalInfoPage() {
 
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
-
-  console.log("client", client)
+  const [formData, setFormData] = useState({
+    number_of_people: "",
+    age_group: "",
+    demographics: "",
+    industry: "",
+    neighborhood_info: "",
+  });
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,6 +40,24 @@ function AdditionalInfoPage() {
       }
     })
     history.push('/review')
+  }
+
+  function dummyData() {
+    const presetData = {
+      dimensions: "10 x 15 x 20",
+      
+    };
+
+    // Update formData state
+    setFormData((prevData) => ({
+      ...prevData,
+      ...presetData,
+    }));
+
+    // Update separate state variables (optional)
+    setDimensions(presetData.dimensions);
+    
+    
   }
 
 
@@ -87,7 +110,7 @@ function AdditionalInfoPage() {
       <div className="wholebody">
       <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }}>Additional Information</Typography>
+          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }} onClick={dummyData}>Additional Information</Typography>
           </div>{" "}
 
     
