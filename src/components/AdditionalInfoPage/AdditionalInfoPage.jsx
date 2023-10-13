@@ -19,10 +19,14 @@ import {
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import axios from "axios";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function AdditionalInfoPage() {
 
-  const rootElement = document.getElementById("popup-root");
   const [selectedFiles, setSelectedFiles] = useState([]);
   const fileInputRef = useRef(null); // Needed for the googel drive post
 
@@ -109,7 +113,7 @@ function AdditionalInfoPage() {
         client_id: client.client_id,
         dimensions: dimensions,
         wugs_visit: wugsVisit,
-        pictures: ["PICTURES HERE"]
+        pictures: selectedFiles
       }
     })
     history.push('/review')
@@ -227,7 +231,7 @@ function AdditionalInfoPage() {
           <Input
             type="file"
             multiple
-            ref={fileInputRef}
+            inputRef={fileInputRef}
             style={{ display: 'none' }}
             id="file-input"
             onChange={handleFileSelect}
@@ -237,7 +241,6 @@ function AdditionalInfoPage() {
               variant="contained"
               component="span"
               startIcon={<AddAPhotoIcon />}
-              onClick={() => fileInputRef.current.click()}
             >
               Select Files
             </Button>
@@ -281,6 +284,27 @@ function AdditionalInfoPage() {
       </Button>
 
     </div>
+    <Dialog
+        open={dioOpen}
+        onClose={handleCloseDio}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Your're files were uploaded succsessfuly"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Thank you for your submission. Please feel free to upload more as
+            needed.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDio} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div >
   );
 }
