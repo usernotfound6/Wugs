@@ -13,6 +13,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 function UserPage() {
+  
   const rootElement = document.getElementById("popup-root");
 
   const user = useSelector((store) => store.user);
