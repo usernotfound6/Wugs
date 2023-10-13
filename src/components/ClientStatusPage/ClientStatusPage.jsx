@@ -20,12 +20,15 @@ const theme = createTheme({
 });
 
 function ClientStatusPage() {
+
+
   const dispatch = useDispatch();
   const history = useHistory();
   const client = useSelector((store) => store.client);
 
 
   console.log("Here is the client", client);
+  
 
   function handlePrevious(path) {
     console.log("inside handlePrevious");
@@ -82,6 +85,7 @@ function ClientStatusPage() {
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
           <Typography variant='h4' marginTop={3} marginBottom={2} style={{ color: "beige" }}>Current Information</Typography>
+          <Typography variant="subtitle2">Click to Edit</Typography>
         </div>{" "}
         <hr width={800} style={{ color: "beige" }} />
         <div style={{ display: "flex", justifyContent: "center" }}>
