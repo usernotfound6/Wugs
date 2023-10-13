@@ -20,7 +20,6 @@ function ServiceChoicePage() {
   const user = useSelector((store) => store.user);
   const singleClient = useSelector((store) => store.client);
   const client = useSelector((store) => store.client);
-  const [formData, setFormData] = useState({});
 
   console.log("client!!!", singleClient);
 
