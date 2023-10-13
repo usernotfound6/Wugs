@@ -36,6 +36,13 @@ function DemographicsPage() {
   );
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [formData, setFormData] = useState({
+    number_of_people: "",
+    age_group: "",
+    demographics: "",
+    industry: "",
+    neighborhood_info: "",
+  });
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
@@ -70,171 +77,201 @@ function DemographicsPage() {
     history.push("/foodpreferences");
   };
 
-  return (
+  function dummyData() {
+    const presetData = {
+      number_of_people: "100+",
+      age_group: "Yound Adults",
+      demographics: "Students",
+      industry: "Education",
+      neighborhood_info: "Large Campus, Mostly gas stations and Laundry mats",
+    };
 
+    // Update formData state
+    setFormData((prevData) => ({
+      ...prevData,
+      ...presetData,
+    }));
+
+    // Update separate state variables (optional)
+    setPeopleCount(presetData.number_of_people);
+    setAgeGroup(presetData.age_group);
+    setDemographic(presetData.demographics);
+    setIndustry(presetData.industry);
+    setNeighborhood(presetData.neighborhood_info);
+    
+  }
+
+  return (
     <div className="container">
       <MyStepper step={2} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>About Your Community</Typography>
+        <Typography variant="h4" marginTop={3} style={{ color: "beige" }} onClick={dummyData}>
+          About Your Community
+        </Typography>
         <Typography variant="h6" marginTop={1} style={{ color: "beige" }}>
-          Who Are You Serving?</Typography>
-          <HelpIcon  style={{ marginTop: 10, color: "beige" }} onMouseEnter={handleHelpIconHover}/>
+          Who Are You Serving?
+        </Typography>
+        <HelpIcon
+          style={{ marginTop: 10, color: "beige" }}
+          onMouseEnter={handleHelpIconHover}
+        />
       </div>{" "}
       <div style={{ padding: "1em" }}>
-      <Grid  margin={'auto'} >
-        <Box
-          margin={"auto"}
-          component="form"
-          sx={{
-            backgroundColor: "#484747",
-            borderRadius: 3,
-            width: 330,
-            padding: 2,
-            boxShadow: 24,
-            "& > :not(style)": { m: 1, width: "25ch" },
-          }}
-          noValidate
-          autoComplete="off"
-        >
-          <FormControl >
-            
-            <InputLabel  style={{ color: "beige" }} id="age-select-label"># of people on site</InputLabel>
-            <Select
-              labelId="age-select-label"
-              id="age-select"
-              value={peopleCount}
-              label="# of people on Site"
-              inputProps={{ style: { color: "beige" } }}
-              InputLabelProps={{ style: { color: "beige" } }}
-              style={{ width: 280 }}
-              onChange={handleChange}
-              sx={{
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "gray",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "beige", 
-                },
-                "& .MuiOutlinedInput-root": {
-                  borderColor: "beige", 
-                  "&:hover fieldset": {
-                    borderColor: "beige", // Outline color on hover
+        <Grid margin={"auto"}>
+          <Box
+            margin={"auto"}
+            component="form"
+            sx={{
+              backgroundColor: "#484747",
+              borderRadius: 3,
+              width: 330,
+              padding: 2,
+              boxShadow: 24,
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <FormControl>
+              <InputLabel style={{ color: "beige" }} id="age-select-label">
+                # of people on site
+              </InputLabel>
+              <Select
+                labelId="age-select-label"
+                id="age-select"
+                value={peopleCount}
+                label="# of people on Site"
+                inputProps={{ style: { color: "beige" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                style={{ width: 280 }}
+                onChange={handleChange}
+                sx={{
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "gray",
                   },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "beige", // Outline color when focused
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "beige",
                   },
-                },
-              }}
-            >
-              <MenuItem value={"Less than 10"}>Less than 10</MenuItem>
-              <MenuItem value={"10-25"}>10-25</MenuItem>
-              <MenuItem value={"26-100"}>26-100</MenuItem>
-              <MenuItem value={"100+"}>100+</MenuItem>
-            </Select>
-            <br/>
+                  "& .MuiOutlinedInput-root": {
+                    borderColor: "beige",
+                    "&:hover fieldset": {
+                      borderColor: "beige", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "beige", // Outline color when focused
+                    },
+                  },
+                }}
+              >
+                <MenuItem value={"Less than 10"}>Less than 10</MenuItem>
+                <MenuItem value={"10-25"}>10-25</MenuItem>
+                <MenuItem value={"26-100"}>26-100</MenuItem>
+                <MenuItem value={"100+"}>100+</MenuItem>
+              </Select>
+              <br />
 
-            <TextField
-              id="demographic"
-              label="Demographic"
-              variant="outlined"
-              inputProps={{ style: { color: "beige" } }}
-              InputLabelProps={{ style: { color: "beige" } }}
-              style={{ width: 280 }}
-              placeholder="Demographic"
-              value={demographic}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
+              <TextField
+                id="demographic"
+                label="Demographic"
+                variant="outlined"
+                inputProps={{ style: { color: "beige" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                style={{ width: 280 }}
+                placeholder="Demographic"
+                value={demographic}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "beige", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "beige", // Outline color when focused
+                    },
                   },
-                  "&:hover fieldset": {
-                    borderColor: "beige", // Outline color on hover
+                }}
+                onChange={(event) => setDemographic(event.target.value)}
+              />
+              <br />
+              <TextField
+                id="ageGroup"
+                label="Age Group"
+                variant="outlined"
+                inputProps={{ style: { color: "beige" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                style={{ width: 280 }}
+                placeholder="Age Group"
+                value={ageGroup}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "beige", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "beige", // Outline color when focused
+                    },
                   },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "beige", // Outline color when focused
+                }}
+                onChange={(event) => setAgeGroup(event.target.value)}
+              />
+              <br />
+              <TextField
+                id="industry"
+                label="Industry"
+                variant="outlined"
+                inputProps={{ style: { color: "beige" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                style={{ width: 280 }}
+                placeholder="Industry"
+                value={industry}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "beige", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "beige", // Outline color when focused
+                    },
                   },
-                },
-              }}
-              onChange={(event) => setDemographic(event.target.value)}
-            />
-            <br/>
-            <TextField
-              id="ageGroup"
-              label="Age Group"
-              variant="outlined"
-              inputProps={{ style: { color: "beige" } }}
-              InputLabelProps={{ style: { color: "beige" } }}
-              style={{ width: 280 }}
-              placeholder="Age Group"
-              value={ageGroup}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
+                }}
+                onChange={(event) => setIndustry(event.target.value)}
+              />
+              <br />
+              <TextField
+                id="neighborhood"
+                label="About Your Neighborhood"
+                variant="outlined"
+                inputProps={{ style: { color: "beige" } }}
+                InputLabelProps={{ style: { color: "beige" } }}
+                style={{ width: 280 }}
+                placeholder="About Your Neighborhood"
+                value={neighborhood}
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      borderColor: "gray", // Outline color when not focused
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "beige", // Outline color on hover
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "beige", // Outline color when focused
+                    },
                   },
-                  "&:hover fieldset": {
-                    borderColor: "beige", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "beige", // Outline color when focused
-                  },
-                },
-              }}
-              onChange={(event) => setAgeGroup(event.target.value)}
-            />
-            <br/>
-            <TextField
-              id="industry"
-              label="Industry"
-              variant="outlined"
-              inputProps={{ style: { color: "beige" } }}
-              InputLabelProps={{ style: { color: "beige" } }}
-              style={{ width: 280 }}
-              placeholder="Industry"
-              value={industry}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "beige", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "beige", // Outline color when focused
-                  },
-                },
-              }}
-              onChange={(event) => setIndustry(event.target.value)}
-            />
-            <br/>
-            <TextField
-              id="neighborhood"
-              label="About Your Neighborhood"
-              variant="outlined"
-              inputProps={{ style: { color: "beige" } }}
-              InputLabelProps={{ style: { color: "beige" } }}
-              style={{ width: 280 }}
-              placeholder="About Your Neighborhood"
-              value={neighborhood}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "beige", // Outline color on hover
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "beige", // Outline color when focused
-                  },
-                },
-              }}
-              onChange={(event) => setNeighborhood(event.target.value)}
-            />
-          </FormControl>
-        </Box>
+                }}
+                onChange={(event) => setNeighborhood(event.target.value)}
+              />
+            </FormControl>
+          </Box>
         </Grid>
       </div>
       <Dialog
