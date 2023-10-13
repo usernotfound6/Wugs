@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MyStepper from '../MyStepper/MyStepper'
@@ -11,21 +11,99 @@ import {
   Switch,
   Typography,
   CssBaseline,
+  Grid,
+  Input,
+  Card,
+  CardContent,
 } from "@mui/material";
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import axios from "axios";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 function AdditionalInfoPage() {
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const fileInputRef = useRef(null); // Needed for the googel drive post
 
   const client = useSelector((store) => store.client)
 
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
-  const [formData, setFormData] = useState({
-    number_of_people: "",
-    age_group: "",
-    demographics: "",
-    industry: "",
-    neighborhood_info: "",
-  });
+
+  const [dioOpen, dioSetOpen] = React.useState(false);
+
+  console.log("selectedFiles", selectedFiles)
+
+  const handleFileSelect = (event) => {
+    const files = event.target.files;
+    const fileNames = [];
+  
+    for (let i = 0; i < files.length; i++) {
+      fileNames.push(files[i].name);
+    }
+  
+    setSelectedFiles([...selectedFiles, ...fileNames]); 
+  };
+
+  console.log("client", client)
+
+  const handleClickOpen = () => {
+    dioSetOpen(true);
+  };
+
+  const handleCloseDio = () => {
+    dioSetOpen(false);
+  };
+
+  // Function to handle file upload to Google Drive
+  const handleFileUpload = async () => {
+    const files = fileInputRef.current.files;
+    console.log("Selected files:", files);
+    console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
+
+    // Check if there are selected files
+    if (files.length > 0) {
+      const formData = new FormData();
+
+      // Iterate over the selected files and append them to the form data
+      for (let i = 0; i < files.length; i++) {
+        formData.append("files", files[i]);
+      }
+      console.log("Uploading files:", formData);
+      console.log("file name:", formData.id);
+      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
+      const clientId = client.client_id;
+      console.log("clientId is:", clientId);
+
+      try {
+        // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+        const response = await axios.post(
+          `/api/onboarding/upload/${clientId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+            },
+          }
+        );
+
+        const data = response.data;
+        console.log("Uploaded files: ", data.files);
+        if (data) {
+          handleClickOpen();
+        } else {
+          handleCloseDio();
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -36,7 +114,7 @@ function AdditionalInfoPage() {
         client_id: client.client_id,
         dimensions: dimensions,
         wugs_visit: wugsVisit,
-        pictures: ["PICTURES HERE"]
+        pictures: selectedFiles
       }
     })
     history.push('/review')
@@ -45,22 +123,15 @@ function AdditionalInfoPage() {
   function dummyData() {
     const presetData = {
       dimensions: "10 x 15 x 20",
-      
     };
-
     // Update formData state
     setFormData((prevData) => ({
       ...prevData,
       ...presetData,
     }));
-
     // Update separate state variables (optional)
-    setDimensions(presetData.dimensions);
-    
-    
+    setDimensions(presetData.dimensions); 
   }
-
-
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
@@ -102,35 +173,29 @@ function AdditionalInfoPage() {
       boxSizing: 'border-box',
     },
   }));
-
   return (
     <div className="container">
       <MyStepper step={4} />
 
       <div className="wholebody">
-      <CssBaseline />
+        <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant= 'h4' marginTop={3}  style={{ color: "beige" }} onClick={dummyData}>Additional Information</Typography>
-          </div>{" "}
-
-    
-      
-      <Box margin={'auto'}
-      
-        component="form"
-        sx={{
-
-          backgroundColor: '#484747',
-          borderRadius: 3,
-          width: 360,
-          padding: 2,
-          boxShadow: 24,
-          marginTop: 3,
-          marginBottom: 9,
-          "& > :not(style)": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
+          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Additional Information</Typography>
+        </div>{" "}
+        <Box margin={'auto'}
+          component="form"
+          sx={{
+            backgroundColor: '#484747',
+            borderRadius: 3,
+            width: 360,
+            padding: 2,
+            boxShadow: 24,
+            marginTop: 3,
+            marginBottom: 9,
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
         >
           <TextField
             id="dimensions"
@@ -167,35 +232,84 @@ function AdditionalInfoPage() {
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
             <Typography color='beige'>Yes</Typography>
           </Stack>
-
-
-          <br />
-
-          <br />
-
-
-          <br />
-
-        </Box>
-
+          <Typography>Upload Photos:</Typography>
+          <Typography variant="subtitle2">Provide a photo of your space</Typography>
+          <Input
+            type="file"
+            multiple
+            inputRef={fileInputRef}
+            style={{ display: 'none' }}
+            id="file-input"
+            onChange={handleFileSelect}
+          />
+          <label htmlFor="file-input">
+            <Button
+              variant="contained"
+              component="span"
+              startIcon={<AddAPhotoIcon />}
+            >
+              Select Files
+            </Button>
+            </label>
+          {selectedFiles.length > 0 && (
+            <div>
         <Button
-          onClick={handleSubmit}
-          sx={{
-            marginTop: 1.5,
-            marginLeft: 2,
-            height: 50,
-            width: 120,
-            borderRadius: 1,
-          }}
-          color="success"
           variant="contained"
+          onClick={handleFileUpload}
+          style={{
+            justifyContent: "left",
+            marginLeft: "7px", // Add left margin
+          }}
           autoFocus
-        >
-          Submit
+        ><CloudUploadIcon />Upload Files
         </Button>
-
-      </div>
+        <Typography>Selected files:</Typography>
+              <ul>
+                {selectedFiles.map((fileName, index) => (
+                  <li key={index}>{fileName}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+      </Box>
+      <Button
+        onClick={handleSubmit}
+        sx={{
+          marginTop: 1.5,
+          marginLeft: 2,
+          height: 50,
+          width: 120,
+          borderRadius: 1,
+        }}
+        color="success"
+        variant="contained"
+        autoFocus
+      >
+        Submit
+      </Button>
     </div>
+    <Dialog
+        open={dioOpen}
+        onClose={handleCloseDio}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Your're files were uploaded succsessfuly"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Thank you for your submission. Please feel free to upload more as
+            needed.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDio} autoFocus>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div >
   );
 }
 
