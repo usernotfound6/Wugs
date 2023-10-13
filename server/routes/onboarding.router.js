@@ -314,7 +314,8 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
   }
 });
 
-router.post("/upload/:id", upload.array("files"), async (req, res) => {
+// post for pictures
+router.post("/upload/pictures/:id", upload.array("files"), async (req, res) => {
   try {
     // Set up Google Drive authentication using service account credentials
     const auth = new google.auth.GoogleAuth({
@@ -370,14 +371,86 @@ router.post("/upload/:id", upload.array("files"), async (req, res) => {
     pool
       .query(sqlText, queryParams)
       .then(() => {
-        console.log("successful PUT");
+        console.log("successful PUT for pictures");
         res.send({ files: uploadedFiles });
       })
       .catch((err) => {
         console.log("Error completing PUT service query", err);
         res.sendStatus(500);
       });
-    
+
+  } catch (error) {
+    // Handle and log any errors that occur during the file upload process
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+// post for contract
+router.post("/upload/contract/:id", upload.array("files"), async (req, res) => {
+  try {
+    // Set up Google Drive authentication using service account credentials
+    const auth = new google.auth.GoogleAuth({
+      credentials: googleJsonKey, // Use the service account key file
+      scopes: ["https://www.googleapis.com/auth/drive"], // Specify access scope for Google Drive
+    });
+
+    // Create a Google Drive client for API operations
+    const drive = google.drive({
+      version: "v3", // Use version 3 of the Google Drive API
+      auth, // Authenticate using the 'auth' object
+    });
+
+    // Initialize an array to store information about uploaded files
+    const uploadedFiles = [];
+
+    for (let i = 0; i < req.files.length; i++) {
+      const file = req.files[i];
+
+      // Use the Google Drive API to create a new file
+      const response = await drive.files.create({
+        requestBody: {
+          name: file.originalname, // Set the file's name
+          mimeType: file.mimetype, // Specify the MIME type of the file
+          parents: ["156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG"], // Destination folder ID
+        },
+        media: {
+          body: fs.createReadStream(file.path), // Read and upload the file from the server
+        },
+      });
+
+      // Add information about the uploaded file to the 'uploadedFiles' array
+      uploadedFiles.push(response.data);
+    }
+
+    // fileUrl = `https://drive.google.com/uc?id=${formData.id}`
+    console.log("uploadedFiles.id", uploadedFiles[0].id)
+    console.log("uploadedFiles array:", uploadedFiles)
+
+    let uploadedFileURLs = [];
+    for (let file of uploadedFiles) {
+      const fileUrl = `https://drive.google.com/uc?id=${file.id}`;
+      uploadedFileURLs.push(fileUrl);
+    }
+    console.log("uploadedFileURLs", uploadedFileURLs)
+    console.log("client ID:", req.params.id)
+    const sqlText = `
+    UPDATE client
+    SET contract = contract || $1
+    WHERE id = $2;
+    `;
+    const queryParams = [uploadedFileURLs, req.params.id];
+    pool
+      .query(sqlText, queryParams)
+      .then(() => {
+        console.log("successful PUT for contract");
+        res.send({ files: uploadedFiles });
+      })
+      .catch((err) => {
+        console.log("Error completing PUT service query", err);
+        res.sendStatus(500);
+      });
+
   } catch (error) {
     // Handle and log any errors that occur during the file upload process
     console.error(error);
