@@ -86,14 +86,27 @@ function ClientLocationInfoPage() {
   ];
 
   const [businessname, setBusinessName] = useState(client.business_name || "");
+  const [businessnameError, setBusinessNameError] = useState("");
+
   const [addressStreet, setAddressStreet] = useState(
     client.address_street || ""
   );
+  const [addressStreetError, setAddressStreetError] = useState(
+    client.address_street || ""
+  );
   const [addressCity, setAddressCity] = useState(client.address_city || "");
+  const [addressCityError, setAddressCityError] = useState(
+    client.address_city || ""
+  );
+
   const [addressState, setAddressState] = useState(client.address_state || "");
   const [addressZip, setAddressZip] = useState(client.address_zip || "");
+  const [addressZipError, setAddressZipError] = useState(client.address_zip || "");
+
   const [website, setWebsite] = useState(client.website || "");
   const [phone, setPhone] = useState(client.phone || "");
+  const [phoneError, setPhoneError] = useState(client.phone || "");
+
   const [hours, setHours] = useState(client.hours_of_operation || "");
   const [micromarket, setMicroMarket] = useState(
     client.micromarket_location || ""
@@ -153,7 +166,28 @@ function ClientLocationInfoPage() {
   };
 
   const handleSubmit = () => {
-    // console.log("inside handleSubmit");
+    // .trim removes any unnecessary spaces from the text field.
+    if (!businessname.trim()) {
+      setBusinessNameError("Business Name is required");
+      return;
+    }
+    if (!addressStreet.trim()) {
+      setAddressStreetError("Street Name is required");
+      return;
+    }
+    if (!addressCity.trim()) {
+      setAddressCityError("City Name is required");
+      return;
+    }
+    if (!addressZip.trim()) {
+      setAddressZipError("Zipcode is required");
+      return;
+    }
+    if (!phone.trim()) {
+      setPhoneError("Phone Number is required");
+      return;
+    } 
+    
     let clientLocationInfoObject = {
       client_id: client.client_id,
       business_name: businessname,
@@ -179,19 +213,19 @@ function ClientLocationInfoPage() {
       address_street: "123 Cool St",
       address_city: "Minneapolis",
       address_state: "",
-      address_zip: 90210,
+      address_zip: "90210",
       website: "you&meequilsUs@AodOutlined.com",
-      phone: 6518675309,
+      phone: "6518675309",
       hours_of_operation: "9am - 5pm",
       micromarket_location: "Quad",
-    };
-  
+    };  
+
     // Update formData state
     setFormData((prevData) => ({
       ...prevData,
       ...presetData,
     }));
-  
+
     // Update separate state variables (optional)
     setBusinessName(presetData.business_name);
     setAddressStreet(presetData.address_street);
@@ -211,7 +245,12 @@ function ClientLocationInfoPage() {
       </div>
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h4" marginTop={3} style={{ color: "beige" }} onClick={dummyData}>
+        <Typography
+          variant="h4"
+          marginTop={3}
+          style={{ color: "beige" }}
+          onClick={dummyData}
+        >
           Location Information
         </Typography>
         <Typography
@@ -249,21 +288,24 @@ function ClientLocationInfoPage() {
             placeholder="Business Name"
             value={businessname}
             onChange={(event) => setBusinessName(event.target.value)}
+            error={!!businessnameError}
+            helperText={businessnameError}
             required
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
           />
+
           <br />
 
           <TextField
@@ -277,6 +319,8 @@ function ClientLocationInfoPage() {
             placeholder="123 Snack St N"
             value={addressStreet}
             onChange={(event) => setAddressStreet(event.target.value)}
+            error={!!addressStreetError}
+            helperText={addressStreetError}
             required
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -304,6 +348,8 @@ function ClientLocationInfoPage() {
             placeholder="Minneapolis"
             value={addressCity}
             onChange={(event) => setAddressCity(event.target.value)}
+            error={!!addressCityError}
+            helperText={addressCityError}
             required
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -368,6 +414,8 @@ function ClientLocationInfoPage() {
             placeholder="55415"
             value={addressZip}
             onChange={(event) => setAddressZip(event.target.value)}
+            error={!!addressZipError}
+            helperText={addressZipError}
             required
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -438,6 +486,8 @@ function ClientLocationInfoPage() {
             placeholder="(123) 456-7890"
             value={phone}
             onChange={handleFormatPhoneNumber}
+            error={!!phoneError}
+            helperText={phoneError}
             required
             sx={{
               "& .MuiOutlinedInput-root": {
