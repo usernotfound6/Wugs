@@ -1,19 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Modal,
-  TextField,
-  Typography,
-  Container,
-  Grid,
-  Input,
-  Paper,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Modal, TextField, Typography, Container, Grid, Input } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useHistory } from "react-router-dom";
 import { PopupWidget } from "react-calendly";
@@ -312,7 +300,7 @@ function UserPage() {
             {/* </CardContent>
             </Card> */}
           </Grid>
-          
+
           <Grid item xs={6} md={6}>
             <Card
               variant="outlined"
@@ -329,7 +317,7 @@ function UserPage() {
                 <h3 style={{ color: "#f5f5dc" }}>
                   Upload Multiple Pictures to Google Drive
                 </h3>
-                <input type="file" multiple ref={fileInputRef}></input>
+                <input type="file" multiple ref={fileInputRef} style={{ color: "white" }}></input>
                 <label htmlFor="file-input">
                   <Input
                     id="file-input"
