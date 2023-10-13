@@ -34,6 +34,7 @@ function AdditionalInfoPage() {
 
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
+
   const [dioOpen, dioSetOpen] = React.useState(false);
 
   console.log("selectedFiles", selectedFiles)
@@ -119,7 +120,18 @@ function AdditionalInfoPage() {
     history.push('/review')
   }
 
-
+  function dummyData() {
+    const presetData = {
+      dimensions: "10 x 15 x 20",
+    };
+    // Update formData state
+    setFormData((prevData) => ({
+      ...prevData,
+      ...presetData,
+    }));
+    // Update separate state variables (optional)
+    setDimensions(presetData.dimensions); 
+  }
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
@@ -161,7 +173,6 @@ function AdditionalInfoPage() {
       boxSizing: 'border-box',
     },
   }));
-
   return (
     <div className="container">
       <MyStepper step={4} />
@@ -171,14 +182,9 @@ function AdditionalInfoPage() {
         <div style={{ textAlign: "center" }}>
           <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Additional Information</Typography>
         </div>{" "}
-
-
-
         <Box margin={'auto'}
-
           component="form"
           sx={{
-
             backgroundColor: '#484747',
             borderRadius: 3,
             width: 360,
@@ -266,7 +272,6 @@ function AdditionalInfoPage() {
             </div>
           )}
       </Box>
-
       <Button
         onClick={handleSubmit}
         sx={{
@@ -282,7 +287,6 @@ function AdditionalInfoPage() {
       >
         Submit
       </Button>
-
     </div>
     <Dialog
         open={dioOpen}
