@@ -63,13 +63,6 @@ function ClientStatusPage() {
     <ThemeProvider theme={theme}>
       <div className='container'>
         <style type="text/css">
-          {/* {`
-          .calendly-badge-widget { 
-            left: 50% !important; 
-            margin-left: -100px !important; 
-            margin-bottom: 200px;
-          }
-        `} */}
         </style>
         <Typography
           variant='h5'
@@ -85,7 +78,7 @@ function ClientStatusPage() {
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
           <Typography variant='h4' marginTop={3} marginBottom={2} style={{ color: "beige" }}>Current Information</Typography>
-          <Typography variant="subtitle2">Click to Edit</Typography>
+          <Typography variant="subtitle2">If any edits are needed, click on one of the boxes below to go to that onboarding step</Typography>
         </div>{" "}
         <hr width={800} style={{ color: "beige" }} />
         <div style={{ display: "flex", justifyContent: "center" }}>
