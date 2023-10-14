@@ -1,20 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-// the CssBaseline was no inported?
-import CssBaseline from "@mui/material/CssBaseline";
+import { Button, MenuItem, Select, Typography, FormControl, InputLabel, Grid, Box, TextField, CssBaseline } from "@mui/material";
 import MyStepper from "../MyStepper/MyStepper";
-import {
-  Button,
-  MenuItem,
-  Select,
-  Typography,
-  FormControl,
-  InputLabel,
-  Grid,
-} from "@mui/material";
 
 // Path: /clientlocationmoreinfo
 
@@ -91,21 +79,17 @@ function ClientLocationInfoPage() {
   const [addressStreet, setAddressStreet] = useState(
     client.address_street || ""
   );
-  const [addressStreetError, setAddressStreetError] = useState(
-    client.address_street || ""
-  );
+  const [addressStreetError, setAddressStreetError] = useState("");
   const [addressCity, setAddressCity] = useState(client.address_city || "");
-  const [addressCityError, setAddressCityError] = useState(
-    client.address_city || ""
-  );
+  const [addressCityError, setAddressCityError] = useState("");
 
   const [addressState, setAddressState] = useState(client.address_state || "");
   const [addressZip, setAddressZip] = useState(client.address_zip || "");
-  const [addressZipError, setAddressZipError] = useState(client.address_zip || "");
+  const [addressZipError, setAddressZipError] = useState("");
 
   const [website, setWebsite] = useState(client.website || "");
   const [phone, setPhone] = useState(client.phone || "");
-  const [phoneError, setPhoneError] = useState(client.phone || "");
+  const [phoneError, setPhoneError] = useState("");
 
   const [hours, setHours] = useState(client.hours_of_operation || "");
   const [micromarket, setMicroMarket] = useState(
@@ -146,10 +130,18 @@ function ClientLocationInfoPage() {
 
   // Function to format the phone number as you type
   const handleFormatPhoneNumber = (event) => {
-    const inputValue = event.target.value.replace(/\D/g, "");
+    const inputValue = event.target.value;
     // Remove non-digit characters
     let formattedValue = getFormattedPhoneNum(inputValue);
     setPhone(formattedValue);
+
+    setPhoneError(validatePhoneNumber(formattedValue));
+  };
+
+  const validatePhoneNumber = (input) => {
+    // Remove non-digit characters to check if it's empty
+    const cleanValue = input.replace(/\D/g, "");
+    return cleanValue.length === 0 ? "Phone Number is required" : "";
   };
 
   const handleStateSelect = (event) => {
@@ -180,14 +172,14 @@ function ClientLocationInfoPage() {
       return;
     }
     if (!addressZip.trim()) {
-      setAddressZipError("Zipcode is required");
+      setAddressZipError("Zip Code is required");
       return;
     }
     if (!phone.trim()) {
       setPhoneError("Phone Number is required");
       return;
-    } 
-    
+    }
+
     let clientLocationInfoObject = {
       client_id: client.client_id,
       business_name: businessname,
@@ -209,16 +201,16 @@ function ClientLocationInfoPage() {
 
   function dummyData() {
     const presetData = {
-      business_name: "John Marshall Highschool",
+      business_name: "John Marshall High School",
       address_street: "123 Cool St",
       address_city: "Minneapolis",
-      address_state: "",
+      address_state: "MN",
       address_zip: "90210",
-      website: "you&meequilsUs@AodOutlined.com",
-      phone: "6518675309",
+      website: "you&meequalsUs@AodOutlined.com",
+      phone: "(651) 867 - 5309",
       hours_of_operation: "9am - 5pm",
       micromarket_location: "Quad",
-    };  
+    };
 
     // Update formData state
     setFormData((prevData) => ({
@@ -287,7 +279,10 @@ function ClientLocationInfoPage() {
             type="text"
             placeholder="Business Name"
             value={businessname}
-            onChange={(event) => setBusinessName(event.target.value)}
+            onChange={(event) => {
+              setBusinessName(event.target.value);
+              setBusinessNameError(event.target.value.trim() === "" ? "Business Name is required" : "");
+            }}
             error={!!businessnameError}
             helperText={businessnameError}
             required
@@ -318,7 +313,10 @@ function ClientLocationInfoPage() {
             type="address"
             placeholder="123 Snack St N"
             value={addressStreet}
-            onChange={(event) => setAddressStreet(event.target.value)}
+            onChange={(event) => {
+              setAddressStreet(event.target.value);
+              setAddressStreetError(event.target.value.trim() === "" ? "Street Address is required" : "");
+            }}
             error={!!addressStreetError}
             helperText={addressStreetError}
             required
@@ -347,7 +345,10 @@ function ClientLocationInfoPage() {
             type="text"
             placeholder="Minneapolis"
             value={addressCity}
-            onChange={(event) => setAddressCity(event.target.value)}
+            onChange={(event) => {
+              setAddressCity(event.target.value);
+              setAddressCityError(event.target.value.trim() === "" ? "City is required" : "");
+            }}
             error={!!addressCityError}
             helperText={addressCityError}
             required
@@ -413,7 +414,10 @@ function ClientLocationInfoPage() {
             type="text"
             placeholder="55415"
             value={addressZip}
-            onChange={(event) => setAddressZip(event.target.value)}
+            onChange={(event) => {
+              setAddressZip(event.target.value);
+              setAddressZipError(event.target.value.trim() === "" ? "Zip is required" : "");
+            }}
             error={!!addressZipError}
             helperText={addressZipError}
             required
