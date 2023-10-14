@@ -374,7 +374,7 @@ function UserPage() {
               }}
             >
               <CardContent>
-                <h4 style={{ color: "#f5f5dc" }}>
+                <h4 style={{ marginTop: "15px", color: "#f5f5dc" }}>
                   Upload Image of Vending Space to WUGS
                 </h4>
                 <div className="custom-upload-button">
