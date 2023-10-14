@@ -44,7 +44,7 @@ function ReviewPage() {
     dispatch({
       type: "UPDATE_CLIENT",
       payload: {
-        admin_notes: "",
+        admin_notes: null,
         status_id: 2,
         id: client.client_id,
       },
