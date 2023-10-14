@@ -5,31 +5,11 @@ const Columns = () => {
 
   return [
     {
-      field: "status_name",
-      headerName: (
-        <div style={{ color: "beige" }}>Status</div>
-      ),
-      width: 180,
-      renderCell: (params) => (
-        <div style={{ color: "beige" }}>{params.value}</div>
-      ),
-    },
-    {
       field: "business_name",
       headerName: (
         <div style={{ color: "beige" }}>Business Name</div>
       ),
-      width: 150,
-      renderCell: (params) => (
-        <div style={{ color: "beige" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "address_street",
-      headerName: (
-        <div style={{ color: "beige" }}>Street Address</div>
-      ),
-      width: 150,
+      width: 170,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),
@@ -49,7 +29,7 @@ const Columns = () => {
       headerName: (
         <div style={{ color: "beige" }}>State</div>
       ),
-      width: 60,
+      width: 80,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),
@@ -59,7 +39,7 @@ const Columns = () => {
       headerName: (
         <div style={{ color: "beige" }}>Zip Code</div>
       ),
-      width: 80,
+      width: 100,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),
@@ -69,7 +49,7 @@ const Columns = () => {
       headerName: (
         <div style={{ color: "beige" }}>First Name</div>
       ),
-      width: 80,
+      width: 110,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),
@@ -79,37 +59,17 @@ const Columns = () => {
       headerName: (
         <div style={{ color: "beige" }}>Last Name</div>
       ),
-      width: 80,
-      renderCell: (params) => (
-        <div style={{ color: "beige" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "phone",
-      headerName: (
-        <div style={{ color: "beige" }}>Phone #</div>
-      ),
       width: 110,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),
     },
     {
-      field: "number_of_people",
+      field: "status_name",
       headerName: (
-        <div style={{ color: "beige" }}># of people</div>
+        <div style={{ color: "beige" }}>Status</div>
       ),
-      width: 90,
-      renderCell: (params) => (
-        <div style={{ color: "beige" }}>{params.value}</div>
-      ),
-    },
-    {
-      field: "industry",
-      headerName: (
-        <div style={{ color: "beige" }}>Industry</div>
-      ),
-      width: 130,
+      width: 180,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),

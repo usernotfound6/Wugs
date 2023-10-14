@@ -147,7 +147,7 @@ function UserPage() {
     // Check if there are selected files
     if (files.length > 0) {
       const formData = new FormData();
-
+      
       // Iterate over the selected files and append them to the form data
       for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
@@ -184,6 +184,7 @@ function UserPage() {
     const files = contractFileInputRef.current.files;
     console.log("Selected files:", files);
     // console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
+
 
     // // Check if there are selected files
     if (files.length > 0) {

@@ -49,7 +49,6 @@ function AdditionalInfoPage() {
     for (let i = 0; i < files.length; i++) {
       fileNames.push(files[i].name);
     }
-  
     setSelectedFiles([...selectedFiles, ...fileNames]); 
   };
 
