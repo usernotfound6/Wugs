@@ -274,7 +274,7 @@ function UserPage() {
                 </Typography>
                 <Typography variant="h8" component="div">
                   <ul>
-                    <li>Username (email): {user.username}</li>
+                    <li>Email: {user.username}</li>
                     <li>
                       Primary Contact: {user.first_name} {user.last_name}
                     </li>
