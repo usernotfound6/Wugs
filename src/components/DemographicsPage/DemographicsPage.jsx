@@ -3,23 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MyStepper from "../MyStepper/MyStepper";
 import HelpIcon from "@mui/icons-material/Help";
-
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-  Box,
-  Grid,
-  CssBaseline,
-} from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Box, Grid, CssBaseline, } from "@mui/material";
 
 function DemographicsPage() {
   const client = useSelector((store) => store.client);
@@ -80,10 +64,10 @@ function DemographicsPage() {
   function dummyData() {
     const presetData = {
       number_of_people: "100+",
-      age_group: "Yound Adults",
+      age_group: "Young Adults",
       demographics: "Students",
       industry: "Education",
-      neighborhood_info: "Large Campus, Mostly gas stations and Laundry mats",
+      neighborhood_info: "Large campus, mostly gas stations and laundromats",
     };
 
     // Update formData state
@@ -98,7 +82,7 @@ function DemographicsPage() {
     setDemographic(presetData.demographics);
     setIndustry(presetData.industry);
     setNeighborhood(presetData.neighborhood_info);
-    
+
   }
 
   return (
@@ -141,7 +125,7 @@ function DemographicsPage() {
                 labelId="age-select-label"
                 id="age-select"
                 value={peopleCount}
-                label="# of people on Site"
+                label="# of people on site"
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 280 }}
@@ -178,7 +162,7 @@ function DemographicsPage() {
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 280 }}
-                placeholder="Demographic"
+                placeholder="Demographics"
                 value={demographic}
                 sx={{
                   "& .MuiOutlinedInput-root": {
@@ -294,7 +278,7 @@ function DemographicsPage() {
             <br />
             Your best estimation at the number of people on site.
             <br />
-            <strong>DEMOGRAPHIC:</strong>
+            <strong>DEMOGRAPHICS:</strong>
             <br />
             We'd love to hear about the culture and diversity of your
             location. This helps us to best serve you and provide recommendations
@@ -302,7 +286,7 @@ function DemographicsPage() {
             <br />
             <strong>AGE GROUP:</strong>
             <br />
-            Your general age groups to help us provide product reccomendations.
+            The general age groups of people who will use the services to help us provide product recommendations.
             <br />
             <strong>INDUSTRY:</strong>
             <br />
@@ -319,21 +303,21 @@ function DemographicsPage() {
           marginRight: "30px",
         }}
       >
-      <Button
-        onClick={postDemographics}
-        sx={{
-          marginTop: 1.5,
-          marginLeft: 2,
-          height: 50,
-          width: 120,
-          borderRadius: 1,
-        }}
-        color="success"
-        variant="contained"
-        autoFocus
-      >
-        Next
-      </Button>
+        <Button
+          onClick={postDemographics}
+          sx={{
+            marginTop: 1.5,
+            marginLeft: 2,
+            height: 50,
+            width: 120,
+            borderRadius: 1,
+          }}
+          color="success"
+          variant="contained"
+          autoFocus
+        >
+          Next
+        </Button>
       </div>
     </div>
   );

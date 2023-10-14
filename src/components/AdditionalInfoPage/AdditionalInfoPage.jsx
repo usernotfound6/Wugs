@@ -1,29 +1,14 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from "axios";
 import { useHistory } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MyStepper from '../MyStepper/MyStepper'
 import {
-  Box,
-  TextField,
-  Button,
-  Stack,
-  Switch,
-  Typography,
-  CssBaseline,
-  Grid,
-  Input,
-  Card,
-  CardContent,
+  Box, TextField, Button, Stack, Switch, Typography, CssBaseline, Input, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
 } from "@mui/material";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import axios from "axios";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 
 function AdditionalInfoPage() {
 
@@ -45,11 +30,11 @@ function AdditionalInfoPage() {
   const handleFileSelect = (event) => {
     const files = event.target.files;
     const fileNames = [];
-  
+
     for (let i = 0; i < files.length; i++) {
       fileNames.push(files[i].name);
     }
-    setSelectedFiles([...selectedFiles, ...fileNames]); 
+    setSelectedFiles([...selectedFiles, ...fileNames]);
   };
 
   console.log("client", client)
@@ -117,7 +102,7 @@ function AdditionalInfoPage() {
 
   function dummyData() {
     const presetData = {
-      dimensions: "10 x 15 x 20",
+      dimensions: "10ft x 15ft x 20ft",
     };
     // Update formData state
     setFormData((prevData) => ({
@@ -125,7 +110,7 @@ function AdditionalInfoPage() {
       ...presetData,
     }));
     // Update separate state variables (optional)
-    setDimensions(presetData.dimensions); 
+    setDimensions(presetData.dimensions);
   }
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
@@ -168,7 +153,7 @@ function AdditionalInfoPage() {
       boxSizing: 'border-box',
     },
   }));
-  
+
 
 
   return (
@@ -225,7 +210,7 @@ function AdditionalInfoPage() {
           <Typography display='flex' justifyContent='center' color='beige' variant="h6">Request a Visit from Wugs?</Typography>
           <Stack display='flex' margin={'auto'} justifyContent='center' direction="row" spacing={1} alignItems="center">
             <Typography color='beige'>No</Typography>
-            <AntSwitch 
+            <AntSwitch
               checked={wugsVisit} // Add the checked prop to bind it to state
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
             <Typography color='beige'>Yes</Typography>
@@ -248,20 +233,20 @@ function AdditionalInfoPage() {
             >
               Select Files
             </Button>
-            </label>
+          </label>
           {selectedFiles.length > 0 && (
             <div>
-        <Button
-          variant="contained"
-          onClick={handleFileUpload}
-          style={{
-            justifyContent: "left",
-            marginLeft: "7px", // Add left margin
-          }}
-          autoFocus
-        ><CloudUploadIcon />Upload Files
-        </Button>
-        <Typography>Selected files:</Typography>
+              <Button
+                variant="contained"
+                onClick={handleFileUpload}
+                style={{
+                  justifyContent: "left",
+                  marginLeft: "7px", // Add left margin
+                }}
+                autoFocus
+              ><CloudUploadIcon />Upload Files
+              </Button>
+              <Typography>Selected files:</Typography>
               <ul>
                 {selectedFiles.map((fileName, index) => (
                   <li key={index}>{fileName}</li>
@@ -269,32 +254,32 @@ function AdditionalInfoPage() {
               </ul>
             </div>
           )}
-      </Box>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginRight: "300px",
-        }}
-      >
-      <Button
-        onClick={handleSubmit}
-        sx={{
-          marginTop: 1.5,
-          marginLeft: 2,
-          height: 50,
-          width: 180,
-          borderRadius: 1,
-        }}
-        color="success"
-        variant="contained"
-        autoFocus
-      >
-        Submit
-      </Button>
+        </Box>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginRight: "300px",
+          }}
+        >
+          <Button
+            onClick={handleSubmit}
+            sx={{
+              marginTop: 1.5,
+              marginLeft: 2,
+              height: 50,
+              width: 180,
+              borderRadius: 1,
+            }}
+            color="success"
+            variant="contained"
+            autoFocus
+          >
+            Submit
+          </Button>
+        </div>
       </div>
-    </div>
-    <Dialog
+      <Dialog
         open={dioOpen}
         onClose={handleCloseDio}
         aria-labelledby="alert-dialog-title"
