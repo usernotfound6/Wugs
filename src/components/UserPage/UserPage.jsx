@@ -232,18 +232,25 @@ function UserPage() {
 
   return (
     <div className="container">
-      <Typography variant="h4">Welcome, {user.first_name || user.username}!</Typography>
-      <Typography variant="h6">Onboarding Status: {client.status_name}</Typography>
+      <Typography marginLeft={40} variant="h4">Welcome, {user.first_name || user.username}!</Typography>
+      <Typography marginLeft={40} variant="h6">Onboarding Status: {client.status_name}</Typography>
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-end",
-          marginRight: "30px",
+          justifyContent: 'right',
+          marginRight: "40px",
         }}
       >
         <Button
           variant="contained"
           onClick={() => dispatch({ type: "LOGOUT" })}
+          style={{
+            
+            
+            marginRight: "300px",
+            marginTop: -50,
+            marginBottom: 120,
+          }}
         >
           Logout
         </Button>
@@ -265,7 +272,7 @@ function UserPage() {
                 color: "black",
                 margin: "10px",
                 width: "450px",
-                height: "250px",
+                height: "230px",
               }}
             >
               <CardContent>
@@ -351,10 +358,10 @@ function UserPage() {
               src={photos[photoIndex]}
               alt={`Photo ${photoIndex + 1}`}
               style={{
-                width: "400px",
-                height: "400px",
+                width: "600px",
+                height: "600px",
                 objectFit: "cover",
-                borderRadius: "50%",
+                borderRadius: "2%",
               }}
             />
             {/* </CardContent>
@@ -371,12 +378,13 @@ function UserPage() {
                 margin: "10px",
                 width: "450px",
                 height: "250px",
+                marginTop: -34,
               }}
             >
               <CardContent>
-                <h4 style={{ marginTop: "15px", color: "#f5f5dc" }}>
+                <Typography variant="h6" style={{ marginBottom: "15px", color: "#f5f5dc" }}>
                   Upload Image of Vending Space to WUGS
-                </h4>
+                </Typography>
                 <div className="custom-upload-button">
                   <label htmlFor="picture-input">
                     <input
@@ -408,12 +416,15 @@ function UserPage() {
                   </Button>
                 </div>
 
-                <hr />
+                <hr    style={{
+                      marginBottom: "20px",
+                      marginTop: "25px",
+                    }}/>
 
                 <div className="custom-upload-button">
-                  <h4 style={{ color: "#f5f5dc" }}>
+                <Typography variant="h6" style={{ marginBottom: "15px", color: "#f5f5dc" }}>
                     Upload Signed Contract to WUGS
-                  </h4>
+                  </Typography>
                   <label htmlFor="contract-input">
                     <input
                       id="contract-input"
