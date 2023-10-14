@@ -13,7 +13,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 function UserPage() {
-  
+
   const rootElement = document.getElementById("popup-root");
 
   const user = useSelector((store) => store.user);
@@ -25,18 +25,16 @@ function UserPage() {
   const pictureFileInputRef = useRef(null); // Needed for the google drive post
   const contractFileInputRef = useRef(null); // Needed for the google drive post
 
-  const [pictureSelected, setPictureSelected] = useState(false);
-  const [contractSelected, setContractSelected] = useState(false);
-  // const handleFileSelect = () => {
-  //   fileInputRef.current.click();
-  // };
+  const [pictureFileLength, setPictureFileLength] = useState(0);
+  const [contractFileLength, setContractFileLength] = useState(0);
+
   const handlePictureSelected = (event) => {
     const selectedFiles = event.target.files;
-    setPictureSelected(selectedFiles.length > 0);
+    setPictureFileLength(selectedFiles.length);
   };
   const handleContractSelected = (event) => {
     const selectedFiles = event.target.files;
-    setContractSelected(selectedFiles.length > 0);
+    setContractFileLength(selectedFiles.length);
   };
 
   const handleButton = () => {
@@ -46,7 +44,7 @@ function UserPage() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [dioOpen, dioSetOpen] = React.useState(false);
+  const [dioOpen, dioSetOpen] = useState(false);
 
   const handleClickOpen = () => {
     dioSetOpen(true);
@@ -140,14 +138,16 @@ function UserPage() {
     setPhone(formattedValue);
   };
 
+
+
   // Function to handle file upload to Google Drive
   const handlePictureUpload = async () => {
     const files = pictureFileInputRef.current.files;
-
+    console.log("files length:", files.length)
     // Check if there are selected files
     if (files.length > 0) {
       const formData = new FormData();
-      
+
       // Iterate over the selected files and append them to the form data
       for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
@@ -170,7 +170,7 @@ function UserPage() {
         console.log("Uploaded files: ", data.files);
         if (data) {
           handleClickOpen();
-          setPictureSelected(false);
+          setPictureFileLength(0);
         } else {
           handleCloseDio();
         }
@@ -215,7 +215,7 @@ function UserPage() {
         console.log("Uploaded files: ", data.files);
         if (data) {
           handleClickOpen();
-          setContractSelected(false);
+          setContractFileLength(0);
         } else {
           handleCloseDio();
         }
@@ -377,8 +377,6 @@ function UserPage() {
                 <h4 style={{ color: "#f5f5dc" }}>
                   Upload Image of Vending Space to WUGS
                 </h4>
-                {/* <input type="file" multiple ref={fileInputRef} style={{ color: "white" }}></input> */}
-
                 <div className="custom-upload-button">
                   <label htmlFor="picture-input">
                     <input
@@ -393,7 +391,7 @@ function UserPage() {
                       variant="contained"
                       component="span"
                     >
-                      {pictureSelected ? "Files Selected" : "Choose Files"}
+                      {pictureFileLength > 1 ? `${pictureFileLength} Files Selected` : pictureFileLength > 0 ? `${pictureFileLength} File Selected` : "Choose Files"}
                     </Button>
                   </label>
                   <Button
@@ -403,19 +401,19 @@ function UserPage() {
                       marginLeft: "10px",
                     }}
                     autoFocus
-                    disabled={!pictureSelected}
+                    disabled={pictureFileLength == 0}
                     startIcon={<CloudUploadIcon />}
                   >
                     Upload Files
                   </Button>
                 </div>
-                
+
                 <hr />
 
                 <div className="custom-upload-button">
-                <h4 style={{ color: "#f5f5dc" }}>
-                  Upload Signed Contract to WUGS
-                </h4>
+                  <h4 style={{ color: "#f5f5dc" }}>
+                    Upload Signed Contract to WUGS
+                  </h4>
                   <label htmlFor="contract-input">
                     <input
                       id="contract-input"
@@ -429,7 +427,7 @@ function UserPage() {
                       variant="contained"
                       component="span"
                     >
-                      {contractSelected ? "Files Selected" : "Choose Files"}
+                      {contractFileLength > 1 ? `${contractFileLength} Files Selected` : contractFileLength > 0 ? `${contractFileLength} File Selected` : "Choose Files"}
                     </Button>
                   </label>
                   <Button
@@ -439,7 +437,7 @@ function UserPage() {
                       marginLeft: "10px",
                     }}
                     autoFocus
-                    disabled={!contractSelected}
+                    disabled={contractFileLength == 0}
                     startIcon={<CloudUploadIcon />}
                   >
                     Upload Files
