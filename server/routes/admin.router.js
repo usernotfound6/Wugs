@@ -76,18 +76,20 @@ router.get("/user", (req, res) => {
 
 
 router.put("/:id", (req, res) => {
-  // POST route code here
   console.log("router.put for Admin", req.body);
+
+  // using COALESCE to keep existing value if $1 is null (so admin notes aren't wiped out if client happens to click submit again on the review page)
   let queryText = `
     UPDATE client
     SET 
-      admin_notes = $1,
+    admin_notes = COALESCE($1, admin_notes),
       status_id = $2,
       last_active = NOW()
     WHERE client.id = $3;`;
   pool
     .query(queryText, [req.body.admin_notes, req.body.status_id, req.params.id])
     .then((result) => {
+      console.log("PUT successful for status!")
       res.sendStatus(200);
     })
     .catch((err) => {
