@@ -260,6 +260,7 @@ function UserPage() {
         sx={{
           width: "100%",
           height: "60vh",
+          marginBottom: "100px"
         }}
       >
         <Grid container spacing={1}>

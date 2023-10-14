@@ -57,7 +57,7 @@ const TabContentThree= () => {
         >
           <CardContent >
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
-              Foods we're interested in...
+              Who we are...
             </Typography>
             <Typography variant="body2" component="div">
                       Point of Contact: {user.first_name} {user.last_name}
@@ -78,7 +78,7 @@ const TabContentThree= () => {
                       State: {client.address_state}
                     </Typography>
                     <Typography variant="body2" component="div">
-                      State: {client.address_zip}
+                      Zip Code: {client.address_zip}
                     </Typography>
                     <Typography variant="body2" component="div">
                       Website: {client.website}

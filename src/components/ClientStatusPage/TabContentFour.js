@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { useSelector, useDispatch } from "react-redux";
-import "./TabContent.css"; 
+import "./TabContent.css";
 
 const TabContentFour = () => {
   const client = useSelector((store) => store.client);
@@ -52,18 +52,18 @@ const TabContentFour = () => {
             color: "black",
             margin: "50px", // Adjust the margin as needed
           }}
-          className="hover-card" 
+          className="hover-card"
         >
           <CardContent>
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
               Additional info
             </Typography>
             <Typography variant="body2" component="div">
-              Dimensions:{client.dimensions}
+              Micro-market Area Dimensions:{client.dimensions}
             </Typography>
             <Typography variant="body2">
-                      Visit Requested: {client.wugs_visit ? "Yes" : "No"}
-                    </Typography>
+              Wugs Visit Requested: {client.wugs_visit ? "Yes" : "No"}
+            </Typography>
           </CardContent>
         </Card>
       </div>
