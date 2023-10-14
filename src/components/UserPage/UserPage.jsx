@@ -145,45 +145,46 @@ function UserPage() {
     const files = pictureFileInputRef.current.files;
 
     // Check if there are selected files
-    // if (files.length > 0) {
-    //   const formData = new FormData();
-
+    if (files.length > 0) {
+      const formData = new FormData();
+      
       // Iterate over the selected files and append them to the form data
       for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
       }
       const clientId = client.client_id;
 
-    //   try {
-    //     // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
-    //     const response = await axios.post(
-    //       `/api/onboarding/upload/pictures/${clientId}`,
-    //       formData,
-    //       {
-    //         headers: {
-    //           "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
-    //         },
-    //       }
-    //     );
+      try {
+        // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+        const response = await axios.post(
+          `/api/onboarding/upload/pictures/${clientId}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data", // Set the content type to multipart/form-data for file uploads
+            },
+          }
+        );
 
-    //     const data = response.data;
-    //     console.log("Uploaded files: ", data.files);
-    //     if (data) {
-    //       handleClickOpen();
-    //       setPictureSelected(false);
-    //     } else {
-    //       handleCloseDio();
-    //     }
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // }
+        const data = response.data;
+        console.log("Uploaded files: ", data.files);
+        if (data) {
+          handleClickOpen();
+          setPictureSelected(false);
+        } else {
+          handleCloseDio();
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   };
 
   const handleContractUpload = async () => {
     const files = contractFileInputRef.current.files;
     console.log("Selected files:", files);
     // console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
+
 
     // // Check if there are selected files
     if (files.length > 0) {

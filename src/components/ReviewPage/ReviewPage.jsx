@@ -79,11 +79,12 @@ function ReviewPage() {
         <div style={{ textAlign: "center" }}>
           <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Review Submission</Typography>
         </div>
-        <Container
+        <Container 
           maxWidth="lg"
           sx={{
             width: "100%", // Custom width
             height: "60vh", // Custom height
+            marginBottom: "200px"
             // Add any other custom styles here
           }}
         >
