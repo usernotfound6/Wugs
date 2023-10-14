@@ -10,7 +10,7 @@ function AdminClientTable() {
     const dispatch = useDispatch();
     const admin = useSelector((store) => store.admin);
     const columns = Columns(); // The actual Column is saved in Columns.js as its own component
-    
+
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
     const handleDeleteConfirmationOpen = () => setDeleteConfirmationOpen(true);
@@ -176,13 +176,10 @@ function AdminClientTable() {
                                 <li>Micro-Market Location in Business: {selectedRowData.micromarket_location || "N/A"}</li>
                                 <li>Market Space Dimensions: {selectedRowData.dimensions || "N/A"}</li>
                                 <li>
-                                    Product Types Interested In:
-                                    {selectedRowData.product_types ? (
-                                        <ul>
-                                            {selectedRowData.product_types.map((type, index) => (
-                                                <li key={index}>{type}</li>
-                                            ))}
-                                        </ul>
+                                    Product Types Interested In: {selectedRowData.product_types ? (
+                                        <ul><li><span>
+                                            {selectedRowData.product_types.join(', ')}
+                                        </span></li></ul>
                                     ) : (
                                         <p>No product preferences chosen.</p>
                                     )}
@@ -190,11 +187,9 @@ function AdminClientTable() {
                                 <li>
                                     Services Interested In:
                                     {selectedRowData.service_names ? (
-                                        <ul>
-                                            {selectedRowData.service_names.map((name, index) => (
-                                                <li key={index}>{name}</li>
-                                            ))}
-                                        </ul>
+                                        <ul><li><span>
+                                            {selectedRowData.service_names.join(', ')}
+                                        </span></li></ul>
                                     ) : (
                                         <p>No services chosen.</p>
                                     )}
@@ -256,10 +251,10 @@ function AdminClientTable() {
                                     sx={{
                                         "& .MuiOutlinedInput-notchedOutline": {
                                             borderColor: "gray",
-                                          },
-                                          "&:hover .MuiOutlinedInput-notchedOutline": {
-                                            borderColor: "beige", 
-                                          },
+                                        },
+                                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                                            borderColor: "beige",
+                                        },
                                         "& .MuiOutlinedInput-root": {
                                             "& fieldset": {
                                                 borderColor: "beige", // Outline color when not focused
@@ -310,7 +305,7 @@ function AdminClientTable() {
                                     }}
                                 />
                                 <Box>
-                                    <Button onClick={editClient} variant="contained" color="secondary" style={{ borderRadius: 4, marginTop: 18, marginBottom: -15}}>Submit</Button>
+                                    <Button onClick={editClient} variant="contained" color="secondary" style={{ borderRadius: 4, marginTop: 18, marginBottom: -15 }}>Submit</Button>
                                 </Box>
                                 <div>
                                     <Box textAlign={"right"}>
@@ -339,7 +334,7 @@ function AdminClientTable() {
                                 <Button onClick={handleDeleteConfirmationClose} color="primary">
                                     Cancel
                                 </Button>
-                                <Button onClick={deleteClient}  style={{ color: 'white', backgroundColor: 'red' }}>
+                                <Button onClick={deleteClient} style={{ color: 'white', backgroundColor: 'red' }}>
                                     Confirm
                                 </Button>
                             </DialogActions>
