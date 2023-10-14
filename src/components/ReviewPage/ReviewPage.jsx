@@ -1,26 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
+import { useDispatch, useSelector } from 'react-redux';
+import { CssBaseline, Box, Container, Grid, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, } from '@mui/material';
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Button } from '@mui/material';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
 import MyStepper from "../MyStepper/MyStepper";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  DialogContentText,
-} from "@mui/material";
 import { PopupWidget } from "react-calendly";
 
 // Path: /clientstatus
@@ -37,6 +20,7 @@ function ReviewPage() {
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const history = useHistory();
   const rootElement = document.getElementById("popup-root");
+  const dispatch = useDispatch();
 
   const handleSubmit1 = () => {
     history.push('/servicechoice');
@@ -57,6 +41,17 @@ function ReviewPage() {
 
   const handleConfirmSubmit = () => {
     setOpenConfirmation(false);
+    dispatch({
+      type: "UPDATE_CLIENT",
+      payload: {
+        admin_notes: "",
+        status_id: 2,
+        id: client.client_id,
+      },
+    });
+    dispatch({
+      type: "FETCH_USER"
+    });
     history.push("/home");
   };
 
@@ -79,7 +74,7 @@ function ReviewPage() {
         <div style={{ textAlign: "center" }}>
           <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Review Submission</Typography>
         </div>
-        <Container 
+        <Container
           maxWidth="lg"
           sx={{
             width: "100%", // Custom width
@@ -333,7 +328,7 @@ function ReviewPage() {
                         variant="contained"
                         autoFocus
                       >
-                       CONFIRM AND SUBMIT
+                        CONFIRM AND SUBMIT
                       </Button>
 
                     </Box>
@@ -342,43 +337,43 @@ function ReviewPage() {
               </Grid>
             </Grid>
           </Box>
-          
-          
+
+
         </Container>
-        
+
         <Dialog
-        open={openConfirmation}
-        onClose={handleCloseConfirmation}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-        PaperProps={{
-          style: {
-            background: "beige",
-          },
-        }}
-      >
-        
-        <DialogTitle id="alert-dialog-title">
-          Thank You For Completing The Onboarding Process!
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            We are excited to bring diverse snacking options into your community and space!
-            You will be contacted by Wugs soon with follow-up information. Once you click
-            'Go Back' you will be redirected to the home page where you can view your current onboarding status and edit your profile.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleConfirmSubmit}
-            color="success"
-            variant="contained"
-            autoFocus
-          >
-            Go Back
-          </Button>
-        </DialogActions>
-      </Dialog>
+          open={openConfirmation}
+          onClose={handleCloseConfirmation}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+          PaperProps={{
+            style: {
+              background: "beige",
+            },
+          }}
+        >
+
+          <DialogTitle id="alert-dialog-title">
+            Thank You For Completing The Onboarding Process!
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              We are excited to bring diverse snacking options into your community and space!
+              You will be contacted by Wugs soon with follow-up information. Once you click
+              'Go Back' you will be redirected to the home page where you can view your current onboarding status and edit your profile.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={handleConfirmSubmit}
+              color="success"
+              variant="contained"
+              autoFocus
+            >
+              Go Back
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
 
       {/* Confirmation Dialog */}
