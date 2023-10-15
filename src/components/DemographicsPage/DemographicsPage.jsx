@@ -93,7 +93,7 @@ function DemographicsPage() {
         <Typography variant="h4" marginTop={3} style={{ color: "beige" }} onClick={dummyData}>
           About Your Community
         </Typography>
-        <Typography variant="h6" marginTop={1} style={{ color: "beige" }}>
+        <Typography variant="h6" marginTop={1} marginBottom={1} style={{ color: "beige" }}>
           Who Are You Serving?
         </Typography>
         <HelpIcon
@@ -278,7 +278,7 @@ function DemographicsPage() {
           <DialogContentText id="alert-dialog-description">
             <strong># OF PEOPLE ON SITE:</strong>
             <br />
-            Your best estimation at the number of people on site.
+            Your best estimation of the number of people on site in any given day.
             <br />
             <strong>DEMOGRAPHICS:</strong>
             <br />
@@ -292,11 +292,10 @@ function DemographicsPage() {
             <br />
             <strong>INDUSTRY:</strong>
             <br />
-            Decribe the primary operations and business of your location.
+            Describe the primary operations and business of your location.
             <br />
           </DialogContentText>
         </DialogContent>
-        <DialogActions></DialogActions>
       </Dialog>
       <div
         style={{

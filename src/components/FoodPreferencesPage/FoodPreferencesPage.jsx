@@ -3,12 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import MyStepper from "../MyStepper/MyStepper";
 import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
-import Box from "@mui/material/Box";
 import { ButtonBase, Button, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 // Path: /foodpreferences
-
 
 const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
   position: "relative",
@@ -43,7 +41,6 @@ const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
     },
   }),
 }));
-
 
 const ImageSrc = styled("span")({
   position: "absolute",
@@ -91,7 +88,6 @@ const ImageMarked = styled("span")(({ theme }) => ({
 
 function FoodPreferencesPage() {
 
-
   const client = useSelector((store) => store.client)
 
   const [clickedButtons, setClickedButtons] = useState(client.product_ids || []);
@@ -108,7 +104,6 @@ function FoodPreferencesPage() {
 
 
   console.log("Products chosen", client.product_ids)
-
 
   const handleClick = (productId) => {
     // Toggle the clicked state for the clicked button
