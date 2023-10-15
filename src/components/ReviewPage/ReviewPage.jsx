@@ -91,7 +91,7 @@ function ReviewPage() {
           <Box>
             <Grid container spacing={1}>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -131,7 +131,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -189,7 +189,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -233,7 +233,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -274,7 +274,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -313,7 +313,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Box textAlign={"center"}>
                       <Button onClick={handleOpenConfirmation}
