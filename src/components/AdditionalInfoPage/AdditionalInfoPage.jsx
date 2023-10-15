@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import HelpIcon from "@mui/icons-material/Help";
 
 function AdditionalInfoPage() {
 
@@ -25,7 +26,23 @@ function AdditionalInfoPage() {
 
   const [dioOpen, dioSetOpen] = React.useState(false);
 
+  const [openConfirmation, setOpenConfirmation] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
   console.log("selectedFiles", selectedFiles)
+
+  const handleHelpIconHover = (event) => {
+    const rect = event.target.getBoundingClientRect();
+    setPosition({
+      top: rect.top - 200, // Adjust this value to control the vertical position
+      left: rect.left + rect.width, // Adjust this value to control the horizontal position
+    });
+    setOpenConfirmation(true);
+  };
+
+  const handleHelpIconLeave = () => {
+    setOpenConfirmation(false);
+  };
 
   const handleFileSelect = (event) => {
     const files = event.target.files;
@@ -102,7 +119,7 @@ function AdditionalInfoPage() {
 
   function dummyData() {
     const presetData = {
-      dimensions: "10ft x 15ft x 20ft",
+      dimensions: "12ft wide x 4ft deep x 10ft high",
     };
     // Update formData state
     setFormData((prevData) => ({
@@ -163,7 +180,25 @@ function AdditionalInfoPage() {
       <div className="wholebody">
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant='h4' marginTop={3} style={{ color: "beige" }} onClick={dummyData}>Additional Information</Typography>
+          <Typography
+            variant='h4'
+            marginTop={3}
+            style={{ color: "beige" }}
+            onClick={dummyData}
+          >Additional Information
+          </Typography>
+          <Typography
+            variant="h6"
+            marginTop={1}
+            marginBottom={1}
+            style={{ color: "beige" }}
+          >
+            Any other helpful details on your vending space?
+          </Typography>
+          <HelpIcon
+            style={{ marginTop: 10, color: "beige" }}
+            onMouseEnter={handleHelpIconHover}
+          />
         </div>{" "}
         <Box margin={'auto'}
           component="form"
@@ -188,7 +223,7 @@ function AdditionalInfoPage() {
             InputLabelProps={{ style: { color: "beige" } }}
             type="text"
             style={{ width: 310 }}
-            placeholder="16 x 12"
+            placeholder="16ft wide x 6ft depth"
             value={dimensions}
             onChange={(event) => setDimensions(event.target.value)}
             required
@@ -299,6 +334,49 @@ function AdditionalInfoPage() {
             Close
           </Button>
         </DialogActions>
+      </Dialog>
+
+      {/* Tool Tip for Dimensions/Wugs visit/Photos */}
+      <Dialog
+        open={openConfirmation}
+        onClose={() => setOpenConfirmation(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        PaperProps={{
+          style: {
+            background: "beige",
+            position: "absolute",
+            top: `${position.top}px`,
+            left: `${position.left}px`,
+          },
+        }}
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            <strong>MARKET LOCATION DIMENSIONS:</strong>
+            <br />
+            If you know the dimensions of the space you are looking to fill with our vending services, please provide the dimensions in feet and inches.  For example, 8ft width x 3ft 6in depth, 8ft height.
+            <ul>
+              <li>
+                Width: left to right when looking at the vending space,
+              </li>
+              <li>
+                Depth: front to back (usually measured out from the wall)
+              </li>
+              <li>
+                Height: available space from the floor to the ceiling, only important if height is limited in the space.
+              </li>
+            </ul>
+            <strong>REQUEST A VISIT FROM WUGS:</strong>
+            <br />
+            If you would prefer for Wugs to take a better look at the space and get a good idea of the space for a micro-market.
+            <br />
+            <strong>UPLOAD PHOTOS:</strong>
+            <br />
+            Photos of the space along with the dimensions can help Wugs in getting a good idea of how the micro-market can look prior to a meeting to discuss available options.
+            <br />
+          </DialogContentText>
+        </DialogContent>
       </Dialog>
     </div >
   );
