@@ -109,7 +109,7 @@ function DemographicsPage() {
             sx={{
               backgroundColor: "#484747",
               borderRadius: 3,
-              width: 330,
+              width: 730,
               padding: 2,
               boxShadow: 24,
               "& > :not(style)": { m: 1, width: "25ch" },
@@ -118,7 +118,7 @@ function DemographicsPage() {
             autoComplete="off"
           >
             <FormControl>
-              <InputLabel style={{ color: "beige" }} id="age-select-label">
+              <InputLabel style={{ color: "beige", marginLeft: 100 }} id="age-select-label">
                 # of people on site
               </InputLabel>
               <Select
@@ -128,7 +128,7 @@ function DemographicsPage() {
                 label="# of people on site"
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-                style={{ width: 280 }}
+                style={{ width: 480, marginLeft: 100 }}
                 onChange={handleChange}
                 sx={{
                   "& .MuiOutlinedInput-notchedOutline": {
@@ -161,7 +161,7 @@ function DemographicsPage() {
                 variant="outlined"
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-                style={{ width: 280 }}
+                style={{ width: 480, marginLeft: 100 }}
                 placeholder="Demographics"
                 value={demographic}
                 sx={{
@@ -186,7 +186,7 @@ function DemographicsPage() {
                 variant="outlined"
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-                style={{ width: 280 }}
+                style={{ width: 480, marginLeft: 100 }}
                 placeholder="Age Group"
                 value={ageGroup}
                 sx={{
@@ -211,7 +211,7 @@ function DemographicsPage() {
                 variant="outlined"
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-                style={{ width: 280 }}
+                style={{ width: 480, marginLeft: 100 }}
                 placeholder="Industry"
                 value={industry}
                 sx={{
@@ -236,7 +236,7 @@ function DemographicsPage() {
                 variant="outlined"
                 multiline
                 rows={4}
-                style={{ width: 280 }}
+                style={{ width: 480, marginLeft: 100 }}
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 
