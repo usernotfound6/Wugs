@@ -132,7 +132,7 @@ function MyStepper(props) {
             color: "white"
           },
           "& .MuiStepLabel-label.Mui-completed":{
-          color: "green"
+          color: "#5F69B5"
         },
         
                 "& .MuiStepLabel-label.Mui-active": {
