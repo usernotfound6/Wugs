@@ -31,6 +31,7 @@ function LandingPage() {
               borderRadius: 100,
               marginBottom: 10,
             }}
+            
           >
       <img
         src="https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"
@@ -46,6 +47,7 @@ function LandingPage() {
           variant="contained"
           autoFocus
           onClick={onLogin}
+          
         >
           Login
         </Button>
@@ -64,7 +66,9 @@ function LandingPage() {
               height:550,
               backgroundColor: "beige",
               borderRadius: 3,
+              
             }}
+            className="hover-card"
             onClick={() => {
               history.push("/getmoreinfo");
             }}
@@ -105,6 +109,7 @@ function LandingPage() {
             onClick={() => {
               history.push("/priming");
             }}
+            className="hover-card"
           >
             <CardActionArea>
               <CardMedia
