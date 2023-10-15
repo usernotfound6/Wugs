@@ -179,6 +179,7 @@ function AdminClientTable() {
               gap: "6px",
               gridTemplateAreas: '"contact business" "additional extra"',
               overflowY: "auto", // Enable vertical scrolling when needed
+              height: 1000,
             }}
           >
             {/* Contact Information */}
