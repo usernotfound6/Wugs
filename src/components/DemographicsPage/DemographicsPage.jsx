@@ -234,11 +234,14 @@ function DemographicsPage() {
                 id="neighborhood"
                 label="About Your Neighborhood"
                 variant="outlined"
+                multiline
+                rows={4}
+                style={{ width: 280 }}
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-                style={{ width: 280 }}
-                placeholder="About Your Neighborhood"
+                
                 value={neighborhood}
+                onChange={(event) => setNeighborhood(event.target.value)}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -252,7 +255,6 @@ function DemographicsPage() {
                     },
                   },
                 }}
-                onChange={(event) => setNeighborhood(event.target.value)}
               />
             </FormControl>
           </Box>
