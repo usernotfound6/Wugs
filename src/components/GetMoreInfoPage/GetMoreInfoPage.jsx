@@ -11,7 +11,7 @@ import {
   DialogActions,
   DialogContentText,
   CssBaseline,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -89,7 +89,7 @@ function GetMoreInfoPage() {
     };
     console.log("getMoreInfoObject before dispatch:", getMoreInfoObject);
 
-    dispatch({ type: 'NEW_INTERESTED', payload: getMoreInfoObject })
+    dispatch({ type: "NEW_INTERESTED", payload: getMoreInfoObject });
 
     setName("");
     setEmail("");
@@ -98,20 +98,48 @@ function GetMoreInfoPage() {
     setAboutClient("");
     setWhyWugs("");
   };
+  
+
+  const dummyData = () => {
+    const presetData = {
+      name: "John Doe",
+      email: "john.doe@gmail.com",
+      phone_number: "(123) 456-7890",
+      industry: "School",
+      about_you: "We operate a university library serving students and faculty.",
+      why_wugs: "Having a mini-market on-site would be a great convenience for our students and staff.",
+    };
+
+    // Update the state variables with predefined data
+    setName(presetData.name);
+    setEmail(presetData.email);
+    setPhone(presetData.phone_number);
+    setIndustry(presetData.industry);
+    setAboutClient(presetData.about_you);
+    setWhyWugs(presetData.why_wugs);
+  }
 
   return (
     <div className="container">
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div style={{ textAlign: "center" }}>
-        <Typography variant='h4' marginTop={0} marginBottom={3} style={{ color: "beige" }}>Get In Touch With Us</Typography>
+        <Typography
+          variant="h4"
+          marginTop={0}
+          marginBottom={3}
+          style={{ color: "beige" }}
+          onClick={dummyData}
+        >
+          Get In Touch With Us
+        </Typography>
       </div>{" "}
-      <Box margin={'auto'}
+      <Box
+        margin={"auto"}
         component="form"
         sx={{
-
-          backgroundColor: '#484747',
+          backgroundColor: "#484747",
           borderRadius: 3,
-          width: 350,
+          width: 850,
           padding: 2,
           boxShadow: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
@@ -122,8 +150,8 @@ function GetMoreInfoPage() {
         <TextField
           id="name"
           label="Name"
-          variant="outlined"
-          style={{ width: 300 }}
+          variant="standard"
+          style={{ width: 800 }}
           inputProps={{ style: { color: "beige" }, maxLength: 45 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
@@ -150,8 +178,8 @@ function GetMoreInfoPage() {
         <TextField
           id="email"
           label="Email Address"
-          variant="outlined"
-          style={{ width: 300 }}
+          variant="standard"
+          style={{ width: 800 }}
           inputProps={{ style: { color: "beige" }, maxLength: 45 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="email"
@@ -160,7 +188,6 @@ function GetMoreInfoPage() {
           onChange={(event) => setEmail(event.target.value)}
           required
           sx={{
-
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "gray", // Outline color when not focused
@@ -179,8 +206,8 @@ function GetMoreInfoPage() {
         <TextField
           id="phone"
           label="Phone Number"
-          variant="outlined"
-          style={{ width: 300 }}
+          variant="standard"
+          style={{ width: 800 }}
           inputProps={{ style: { color: "beige" }, maxLength: 18 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="tel"
@@ -207,8 +234,8 @@ function GetMoreInfoPage() {
         <TextField
           id="industry"
           label="Business / Industry"
-          variant="outlined"
-          style={{ width: 300 }}
+          variant="standard"
+          style={{ width: 800 }}
           inputProps={{ style: { color: "beige" }, maxLength: 80 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
@@ -234,8 +261,8 @@ function GetMoreInfoPage() {
         <TextField
           id="aboutClient"
           label="About You"
-          variant="outlined"
-          style={{ width: 300 }}
+          variant="standard"
+          style={{ width: 800 }}
           inputProps={{ style: { color: "beige" }, maxLength: 280 }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
@@ -262,8 +289,8 @@ function GetMoreInfoPage() {
         <TextField
           id="whyWugs"
           label="What Brings You To Wugs Today?"
-          variant="outlined"
-          style={{ width: 300 }}
+          variant="standard"
+          style={{ width: 800 }}
           inputProps={{ style: { color: "beige" }, maxLength: 280 }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
@@ -298,7 +325,8 @@ function GetMoreInfoPage() {
           onClick={handleSubmit}
           sx={{
             marginTop: 1.5,
-            marginLeft: 2,
+            marginLeft: 100,
+            marginBottom: 30,
             height: 50,
             width: 120,
             borderRadius: 1,
@@ -310,9 +338,7 @@ function GetMoreInfoPage() {
           Submit
         </Button>
       </div>
-
       {/* Confirmation Dialog */}
-
       <Dialog
         open={openConfirmation}
         onClose={handleCloseConfirmation}

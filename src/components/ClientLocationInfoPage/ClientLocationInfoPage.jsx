@@ -250,7 +250,7 @@ function ClientLocationInfoPage() {
       <div>
         <MyStepper step={1} />
       </div>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div style={{ textAlign: "center" }}>
         <Typography
           variant="h4"

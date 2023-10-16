@@ -88,7 +88,7 @@ function DemographicsPage() {
   return (
     <div className="container">
       <MyStepper step={2} />
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div style={{ textAlign: "center" }}>
         <Typography variant="h4" marginTop={3} style={{ color: "beige" }} onClick={dummyData}>
           About Your Community
