@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MyStepper from "../MyStepper/MyStepper";
 import HelpIcon from "@mui/icons-material/Help";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Box, Grid, CssBaseline, } from "@mui/material";
+import { Button, Dialog, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Box, Grid, CssBaseline, } from "@mui/material";
 
 function DemographicsPage() {
   const client = useSelector((store) => store.client);
@@ -12,7 +12,7 @@ function DemographicsPage() {
   const history = useHistory();
 
   const [peopleCount, setPeopleCount] = useState(client.number_of_people || "");
-  const [demographic, setDemographic] = useState(client.demographics || "");
+  const [demographics, setDemographics] = useState(client.demographics || "");
   const [ageGroup, setAgeGroup] = useState(client.target_age_group || "");
   const [industry, setIndustry] = useState(client.industry || "");
   const [neighborhood, setNeighborhood] = useState(
@@ -53,7 +53,7 @@ function DemographicsPage() {
         client_id: client.client_id,
         number_of_people: peopleCount,
         age_group: ageGroup,
-        demographics: demographic,
+        demographics: demographics,
         industry: industry,
         neighborhood_info: neighborhood,
       },
@@ -79,7 +79,7 @@ function DemographicsPage() {
     // Update separate state variables (optional)
     setPeopleCount(presetData.number_of_people);
     setAgeGroup(presetData.age_group);
-    setDemographic(presetData.demographics);
+    setDemographics(presetData.demographics);
     setIndustry(presetData.industry);
     setNeighborhood(presetData.neighborhood_info);
 
@@ -156,14 +156,14 @@ function DemographicsPage() {
               <br />
 
               <TextField
-                id="demographic"
-                label="Demographic"
+                id="demographics"
+                label="Demographics"
                 variant="outlined"
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 280 }}
                 placeholder="Demographics"
-                value={demographic}
+                value={demographics}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
@@ -177,7 +177,7 @@ function DemographicsPage() {
                     },
                   },
                 }}
-                onChange={(event) => setDemographic(event.target.value)}
+                onChange={(event) => setDemographics(event.target.value)}
               />
               <br />
               <TextField
@@ -239,7 +239,7 @@ function DemographicsPage() {
                 style={{ width: 280 }}
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-                
+
                 value={neighborhood}
                 onChange={(event) => setNeighborhood(event.target.value)}
                 sx={{
@@ -280,15 +280,18 @@ function DemographicsPage() {
             <br />
             Your best estimation of the number of people on site in any given day.
             <br />
+            <br />
             <strong>DEMOGRAPHICS:</strong>
             <br />
             We'd love to hear about the culture and diversity of your
             location. This helps us to best serve you and provide recommendations
             for a unique selection of snacking options.
             <br />
+            <br />
             <strong>AGE GROUP:</strong>
             <br />
             The general age groups of people who will use the services to help us provide product recommendations.
+            <br />
             <br />
             <strong>INDUSTRY:</strong>
             <br />

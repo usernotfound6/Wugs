@@ -119,7 +119,7 @@ function AdditionalInfoPage() {
 
   function dummyData() {
     const presetData = {
-      dimensions: "12ft wide x 4ft deep x 10ft high",
+      dimensions: "12 ft width x 4 ft depth x 10 ft high",
     };
     // Update formData state
     setFormData((prevData) => ({
@@ -268,7 +268,7 @@ function AdditionalInfoPage() {
             >
               Select Files
             </Button>
-          </label>
+          </label>          
           {selectedFiles.length > 0 && (
             <div>
               <Button
@@ -355,21 +355,22 @@ function AdditionalInfoPage() {
           <DialogContentText id="alert-dialog-description">
             <strong>MARKET LOCATION DIMENSIONS:</strong>
             <br />
-            If you know the dimensions of the space you are looking to fill with our vending services, please provide the dimensions in feet and inches.  For example, 8ft width x 3ft 6in depth, 8ft height.
+            If you know the dimensions of the space you are looking to fill with our vending services, please provide the dimensions in feet and inches.  For example, 8 ft width x 3 ft 6 in depth, 8 ft height.
             <ul>
               <li>
-                Width: left to right when looking at the vending space,
+                Width: left to right when looking at the vending space
               </li>
               <li>
-                Depth: front to back (usually measured out from the wall)
+                Depth: front to back, usually measured out from the wall
               </li>
               <li>
-                Height: available space from the floor to the ceiling, only important if height is limited in the space.
+                Height: available space from the floor to the ceiling, only important if height is limited in the space
               </li>
             </ul>
             <strong>REQUEST A VISIT FROM WUGS:</strong>
             <br />
-            If you would prefer for Wugs to take a better look at the space and get a good idea of the space for a micro-market.
+            Indicate Yes if you would prefer for Wugs to take a look at the vending area to assess and measure the space for a micro-market.
+            <br />
             <br />
             <strong>UPLOAD PHOTOS:</strong>
             <br />
