@@ -89,7 +89,7 @@ function ReviewPage() {
           }}
         >
           <div style={{ color: "beige", textAlign: "center" }}>
-            <Typography variant='h6' marginTop={1} marginBottom={2}>Your Current Info With Wugs:</Typography>
+            <Typography variant='h6' marginTop={1} marginBottom={2}>Your Current Info With Wugs</Typography>
           </div>
           <hr width={800} style={{ color: "beige" }} />
           <br />
