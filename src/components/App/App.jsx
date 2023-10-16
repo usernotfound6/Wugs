@@ -73,7 +73,7 @@ function App() {
           {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
           {/* PROTECTED */}
-          
+
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -158,7 +158,7 @@ function App() {
           >
             <AdminPage />
           </ProtectedRoute> */}
-          
+
 
           <ProtectedRoute
             // logged in shows ClientStatusPage else shows LoginPage
@@ -181,9 +181,14 @@ function App() {
 
           <Route exact path="/login">
             {user.id ? (
-              // If the user is already logged in,
-              // redirect to the /user page
-              <Redirect to="/user" />
+              user.admin ? (
+                // If the user is an admin, redirect to /admin page
+                <Redirect to="/admin" />
+              ) : (
+                // If the user is already logged in,
+                // redirect to the /user page
+                <Redirect to="/user" />
+              )
             ) : (
               // Otherwise, show the login page
               <LoginPage />
@@ -192,9 +197,14 @@ function App() {
 
           <Route exact path="/registration">
             {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
+              user.admin ? (
+                // If the user is an admin, redirect to /admin page
+                <Redirect to="/admin" />
+              ) : (
+                // If the user is already logged in,
+                // redirect to the /user page
+                <Redirect to="/user" />
+              )
             ) : (
               // Otherwise, show the registration page
               <RegisterPage />
@@ -203,9 +213,14 @@ function App() {
 
           <Route exact path="/home">
             {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
+              user.admin ? (
+                // If the user is an admin, redirect to /admin page
+                <Redirect to="/admin" />
+              ) : (
+                // If the user is already logged in,
+                // redirect to the /user page
+                <Redirect to="/user" />
+              )
             ) : (
               // Otherwise, show the Landing page
               <LandingPage />
