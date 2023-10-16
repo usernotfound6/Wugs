@@ -129,10 +129,10 @@ function MyStepper(props) {
         onClick={() => handleStepClick(index)}
         sx={{ 
           "& .MuiStepLabel-label.MuiStepLabel-alternativeLabel":{
-            color: "white"
+            color: "beige"
           },
           "& .MuiStepLabel-label.Mui-completed":{
-          color: "#5F69B5"
+          color: "#beige"
         },
         
                 "& .MuiStepLabel-label.Mui-active": {
