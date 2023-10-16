@@ -308,7 +308,7 @@ function AdminClientTable() {
                                             ))}
                                         </ul>
                                     ) : (
-                                        <p>No pictures provided.</p>
+                                        <p>No contract on file.</p>
                                     )}
                                 </li>
                                 <li>
