@@ -209,7 +209,7 @@ function GetMoreInfoPage() {
           label="Business / Industry"
           variant="outlined"
           style={{ width: 300 }}
-          inputProps={{ style: { color: "beige" }, maxLength: 250 }}
+          inputProps={{ style: { color: "beige" }, maxLength: 80 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
           placeholder="School, Office, Warehouse, etc"

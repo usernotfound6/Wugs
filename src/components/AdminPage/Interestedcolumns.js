@@ -20,7 +20,7 @@ const InterestedColumns = () => {
     {
       field: "phone_number",
       headerName: <div style={textStyle}>Phone Number</div>,
-      width: 150,
+      width: 180,
       renderCell: (params) => <div style={textStyle}>{params.value}</div>,
     },
     {

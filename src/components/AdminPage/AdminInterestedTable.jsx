@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { CssBaseline, Box, Button, Modal, Container, Typography } from '@mui/material';
+import { CssBaseline, Box, Button, Modal, Container, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import InterestedColumns from "./Interestedcolumns";
 import "./AdminPage.css";
 import { DataGrid } from "@mui/x-data-grid";
@@ -9,6 +9,10 @@ function AdminInterestedTable() {
 
     const dispatch = useDispatch();
     const interested = useSelector((store) => store.interested);
+
+    const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+    const handleDeleteConfirmationOpen = () => setDeleteConfirmationOpen(true);
+    const handleDeleteConfirmationClose = () => setDeleteConfirmationOpen(false);
 
     const interestedColumns = InterestedColumns(); // The actual Column is saved in Columns.js as its own component
     const interestedRows = interested?.map((item) => ({
@@ -26,7 +30,7 @@ function AdminInterestedTable() {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        height: 500,
+        height: 600,
         width: 500,
         bgcolor: "background.paper",
         border: "2px solid #000",
@@ -60,6 +64,10 @@ function AdminInterestedTable() {
                 id: selectedRowData.id,
             },
         });
+        // dispatch({
+        //     type: "FETCH_USER",
+        // });
+        setDeleteConfirmationOpen(false);
         handleClose();
     }
 
@@ -73,7 +81,11 @@ function AdminInterestedTable() {
                     rows={interestedRows}
                     columns={interestedColumns}
                     onRowClick={handleRowClick}
+                    getRowClassName={(params) =>
+                        params.indexRelativeToCurrentPage % 2 === 0 ? 'Mui-even' : 'Mui-odd'
+                    }
                 />
+
 
                 {/* -----------  MODAL START ----------- */}
 
@@ -85,7 +97,17 @@ function AdminInterestedTable() {
                     backgroundColor='#484747'
                 >
 
-                    <Box sx={style} style={{ borderRadius: 30, backgroundColor: '#484747', color: "beige", display: 'grid', gridTemplateColumns: '1fr', gridTemplateAreas: '"contact" "business"' }}>
+                    <Box
+                        sx={style}
+                        style={{
+                            borderRadius: 30,
+                            backgroundColor: '#484747',
+                            color: "beige",
+                            display: 'grid',
+                            gridTemplateColumns: '1fr',
+                            gridTemplateAreas: '"contact" "business"',
+                            overflowY: "auto"
+                        }}>
 
 
 
@@ -110,8 +132,19 @@ function AdminInterestedTable() {
                             </ul>
                         </div>
                         <div>
-                            <Box textAlign={"right"}>
-                                <Button onClick={deleteClient}>Delete Client From Table</Button>
+                            <Box textAlign={"center"}>
+                                <Button
+                                    onClick={handleDeleteConfirmationOpen}
+                                    style={{
+                                        borderRadius: 4,
+                                        marginTop: 90,
+                                        color: "white",
+                                        backgroundColor: "red",
+
+                                    }}
+                                >
+                                    Delete Client From Table
+                                </Button>
                             </Box>
                         </div>
                     </Box>
@@ -120,6 +153,34 @@ function AdminInterestedTable() {
                 {/* -----------  MODAL END ----------- */}
 
             </Container>
+
+            {/* Delete Confirmation Dialog */}
+            <Dialog
+                open={deleteConfirmationOpen}
+                onClose={handleDeleteConfirmationClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Confirmation"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Are you sure you want to delete this client's information?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleDeleteConfirmationClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={deleteClient}
+                        style={{ color: "white", backgroundColor: "red" }}
+                    >
+                        Confirm Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div >
     );
 }

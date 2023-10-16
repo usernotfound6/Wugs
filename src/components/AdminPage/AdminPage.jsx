@@ -15,7 +15,7 @@ function AdminPage() {
     <div className="container">
       <Box style={{ textAlign: "center" }}>
         <Typography variant="h4" marginTop={0} marginBottom={4} sx={{ color: "beige" }}>
-          Admin View
+          WUGS Admin Page
         </Typography>
       </Box>
       <hr width={800} style={{ color: "beige" }} />
