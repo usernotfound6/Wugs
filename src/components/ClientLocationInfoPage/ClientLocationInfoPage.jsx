@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Button, MenuItem, Select, Typography, FormControl, InputLabel, Grid, Box, TextField, CssBaseline } from "@mui/material";
+import {
+  Button,
+  MenuItem,
+  Select,
+  Typography,
+  FormControl,
+  InputLabel,
+  Grid,
+  Box,
+  TextField,
+  CssBaseline,
+} from "@mui/material";
 import MyStepper from "../MyStepper/MyStepper";
 
 // Path: /clientlocationmoreinfo
@@ -125,6 +136,10 @@ function ClientLocationInfoPage() {
         }
       }
     );
+    const errorMessageStyle = {
+      color: "orange", // Change the color to your desired color
+    };
+
     return output;
   }
 
@@ -281,10 +296,16 @@ function ClientLocationInfoPage() {
             value={businessname}
             onChange={(event) => {
               setBusinessName(event.target.value);
-              setBusinessNameError(event.target.value.trim() === "" ? "Business Name is required" : "");
+              setBusinessNameError(
+                event.target.value.trim() === ""
+                  ? "Business Name is required"
+                  : ""
+              );
             }}
             error={!!businessnameError}
-            helperText={businessnameError}
+            helperText={
+              <span style={{ color: "yellow" }}>{businessnameError}</span>
+            }
             required
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -315,10 +336,16 @@ function ClientLocationInfoPage() {
             value={addressStreet}
             onChange={(event) => {
               setAddressStreet(event.target.value);
-              setAddressStreetError(event.target.value.trim() === "" ? "Street Address is required" : "");
+              setAddressStreetError(
+                event.target.value.trim() === ""
+                  ? "Street Address is required"
+                  : ""
+              );
             }}
             error={!!addressStreetError}
-            helperText={addressStreetError}
+            helperText={
+              <span style={{ color: "yellow" }}>{addressStreetError}</span>
+            }
             required
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -347,10 +374,14 @@ function ClientLocationInfoPage() {
             value={addressCity}
             onChange={(event) => {
               setAddressCity(event.target.value);
-              setAddressCityError(event.target.value.trim() === "" ? "City is required" : "");
+              setAddressCityError(
+                event.target.value.trim() === "" ? "City is required" : ""
+              );
             }}
             error={!!addressCityError}
-            helperText={addressCityError}
+            helperText={
+              <span style={{ color: "yellow" }}>{addressCityError}</span>
+            }
             required
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -416,10 +447,14 @@ function ClientLocationInfoPage() {
             value={addressZip}
             onChange={(event) => {
               setAddressZip(event.target.value);
-              setAddressZipError(event.target.value.trim() === "" ? "Zip is required" : "");
+              setAddressZipError(
+                event.target.value.trim() === "" ? "Zip is required" : ""
+              );
             }}
             error={!!addressZipError}
-            helperText={addressZipError}
+            helperText={
+              <span style={{ color: "yellow" }}>{addressZipError}</span>
+            }
             required
             sx={{
               "& .MuiOutlinedInput-root": {
@@ -576,8 +611,11 @@ function ClientLocationInfoPage() {
         <Button
           onClick={handleSubmit}
           sx={{
-            marginTop: 1.5,
+            marginTop: 20,
             marginLeft: 2,
+            marginRight: 30,
+            marginBottom: 15,
+
             height: 50,
             width: 150,
             borderRadius: 1,
