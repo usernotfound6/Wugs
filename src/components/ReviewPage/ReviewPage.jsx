@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { CssBaseline, Box, Container, Grid, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, } from '@mui/material';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  CssBaseline,
+  Box,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  DialogContentText,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import MyStepper from "../MyStepper/MyStepper";
 import { PopupWidget } from "react-calendly";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 // Path: /clientstatus
 
@@ -24,21 +38,21 @@ function ReviewPage() {
   const dispatch = useDispatch();
 
   const handleSubmit1 = () => {
-    history.push('/servicechoice');
-  }
+    history.push("/servicechoice");
+  };
   const handleSubmit2 = () => {
-    history.push('/foodpreferences');
-  }
+    history.push("/foodpreferences");
+  };
   const handleSubmit3 = () => {
-    history.push('/demographics');
-  }
+    history.push("/demographics");
+  };
   const handleSubmit4 = () => {
-    history.push('/clientlocationinfo');
-  }
+    history.push("/clientlocationinfo");
+  };
 
   const handleSubmit5 = () => {
-    history.push('/additionalinfo');
-  }
+    history.push("/additionalinfo");
+  };
 
   const openCalendlyLink = () => {
     Calendly.initPopupWidget({ url: "https://calendly.com/dontyellwillcry" });
@@ -55,7 +69,7 @@ function ReviewPage() {
       },
     });
     dispatch({
-      type: "FETCH_USER"
+      type: "FETCH_USER",
     });
     history.push("/home");
   };
@@ -67,36 +81,48 @@ function ReviewPage() {
   const handleOpenConfirmation = () => {
     setOpenConfirmation(true);
     event.preventDefault();
-  }
+  };
 
-  console.log("client", client)
+  console.log("client", client);
 
   return (
     <ThemeProvider theme={theme}>
-      <div className='container'>
+      <div className="container">
         <MyStepper step={5} />
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Review and Complete</Typography>
+          <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>
+            Review and Complete
+          </Typography>
         </div>
         <Container
           maxWidth="lg"
           sx={{
             width: "100%", // Custom width
             height: "60vh", // Custom height
-            marginBottom: "200px"
+            marginBottom: "200px",
             // Add any other custom styles here
           }}
         >
           <div style={{ color: "beige", textAlign: "center" }}>
-            <Typography variant='h6' marginTop={1} marginBottom={2}>Your Current Info With Wugs</Typography>
+            <Typography variant="h6" marginTop={1} marginBottom={2}>
+              Your Current Info With Wugs
+            </Typography>
           </div>
           <hr width={800} style={{ color: "beige" }} />
           <br />
           <Box>
             <Grid container spacing={1}>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 3,
+                    height: 325,
+                    backgroundColor: "#484747",
+                    boxShadow: 5,
+                  }}
+                >
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -105,25 +131,28 @@ function ReviewPage() {
                     >
                       Services:
                     </Typography>
-                    {client.service_names ?
+                    {client.service_names ? (
                       client.service_names.map((service, index) => (
                         <Typography variant="h8" component="div" key={index}>
                           {service}
                         </Typography>
                       ))
-                      :
+                    ) : (
                       <Typography variant="h8" component="div">
                         None Indicated
                       </Typography>
-                    }
-                    <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
-                      flexDirection: "row"
-                    }}>
-                      <Button onClick={handleSubmit1}
+                    )}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Button
+                        onClick={handleSubmit1}
                         sx={{
-
-                          marginTop: 1.5,
+                          marginTop: 15,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -140,7 +169,15 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 3,
+                    height: 325,
+                    backgroundColor: "#484747",
+                    boxShadow: 5,
+                  }}
+                >
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -176,13 +213,17 @@ function ReviewPage() {
                     <Typography variant="body2" component="div">
                       Micro Market Location: {client.micromarket_location}
                     </Typography>
-                    <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
-                      flexDirection: "row"
-                    }}>
-                      <Button onClick={handleSubmit4}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Button
+                        onClick={handleSubmit4}
                         sx={{
-                          margin: 'auto',
+                          margin: "auto",
                           height: 50,
                           width: 120,
                           borderRadius: 1,
@@ -198,7 +239,15 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 3,
+                    height: 325,
+                    backgroundColor: "#484747",
+                    boxShadow: 5,
+                  }}
+                >
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -210,25 +259,25 @@ function ReviewPage() {
                     <Typography>
                       # of People on Site: {client.number_of_people}
                     </Typography>
-                    <Typography>
-                      Demographics: {client.demographics}
-                    </Typography>
+                    <Typography>Demographics: {client.demographics}</Typography>
                     <Typography>
                       Age Group: {client.target_age_group}
                     </Typography>
-                    <Typography>
-                      Industry: {client.industry}
-                    </Typography>
+                    <Typography>Industry: {client.industry}</Typography>
                     <Typography>
                       Neighborhood Info: {client.neighborhood_info}
                     </Typography>
-                    <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
-                      flexDirection: "row"
-                    }}>
-                      <Button onClick={handleSubmit3}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Button
+                        onClick={handleSubmit3}
                         sx={{
-                          marginTop: 1.5,
+                          marginTop: 5,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -245,7 +294,15 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 3,
+                    height: 325,
+                    backgroundColor: "#484747",
+                    boxShadow: 5,
+                  }}
+                >
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -254,24 +311,28 @@ function ReviewPage() {
                     >
                       Food Choices:
                     </Typography>
-                    {client.product_types ?
+                    {client.product_types ? (
                       client.product_types.map((product, index) => (
                         <Typography variant="h8" component="div" key={index}>
                           {product}
                         </Typography>
                       ))
-                      :
+                    ) : (
                       <Typography variant="h8" component="div">
                         None Indicated
                       </Typography>
-                    }
-                    <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
-                      flexDirection: "row"
-                    }}>
-                      <Button onClick={handleSubmit2}
+                    )}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <Button
+                        onClick={handleSubmit2}
                         sx={{
-                          marginTop: 1.5,
+                          marginTop: 15,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -283,13 +344,20 @@ function ReviewPage() {
                       >
                         Edit
                       </Button>
-
                     </Box>
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 3,
+                    height: 325,
+                    backgroundColor: "#484747",
+                    boxShadow: 5,
+                  }}
+                >
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -304,15 +372,20 @@ function ReviewPage() {
                     <Typography>
                       Visit Requested: {client.wugs_visit ? "Yes" : "No"}
                     </Typography>
-                    <Typography variant='subtitle2'>
+                    <Typography variant="subtitle2">
                       If yes please schedule a meeting with Wugs
                     </Typography>
 
-                    <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
-                      flexDirection: "column", alignItems: "center"
-                    }}>
-                      <Button onClick={openCalendlyLink}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        onClick={openCalendlyLink}
                         sx={{
                           marginTop: 1.5,
                           marginLeft: 2,
@@ -327,10 +400,10 @@ function ReviewPage() {
                         Schedule Meeting
                       </Button>
 
-                      <Button onClick={handleSubmit5}
-
+                      <Button
+                        onClick={handleSubmit5}
                         sx={{
-                          marginTop: 1.5,
+                          marginTop: 4,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -346,28 +419,35 @@ function ReviewPage() {
                   </CardContent>
                 </Card>
               </Grid>
-
-              <Box textAlign={"right"}>
-                <Button onClick={handleOpenConfirmation}
-                  sx={{
-                    marginTop: 1.5,
-                    marginLeft: 2,
-                    height: 50,
-                    width: 200,
-                    borderRadius: 1,
-                  }}
-                  color="success"
-                  variant="contained"
-                  autoFocus
-                >
-                  CONFIRM AND SUBMIT
-                </Button>
-              </Box>
-
+              <Grid
+                item
+                xs={6}
+                md={4}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Box textAlign={"right"}>
+                  <Button
+                    onClick={handleOpenConfirmation}
+                    sx={{
+                      marginTop: 1.5,
+                      height: 50,
+                      width: 200,
+                      borderRadius: 1,
+                    }}
+                    color="success"
+                    variant="contained"
+                    autoFocus
+                  >
+                    CONFIRM AND SUBMIT
+                  </Button>
+                </Box>
+              </Grid>
             </Grid>
           </Box>
-
-
         </Container>
 
         <Dialog
@@ -381,15 +461,16 @@ function ReviewPage() {
             },
           }}
         >
-
           <DialogTitle id="alert-dialog-title">
             Thank You For Completing The Onboarding Process!
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              We are excited to bring diverse snacking options into your community and space!
-              You will be contacted by Wugs soon with follow-up information. Once you click
-              'Go Back' you will be redirected to the home page where you can view your current onboarding status and edit your profile.
+              We are excited to bring diverse snacking options into your
+              community and space! You will be contacted by Wugs soon with
+              follow-up information. Once you click 'Go Back' you will be
+              redirected to the home page where you can view your current
+              onboarding status and edit your profile.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -439,7 +520,6 @@ function ReviewPage() {
           </Button>
         </DialogActions>
       </Dialog> */}
-
     </ThemeProvider>
   );
 }
