@@ -254,7 +254,7 @@ function ClientLocationInfoPage() {
           Who Are We Serving?
         </Typography>
       </div>{" "}
-      <Grid margin={"auto"} container spacing={-48}>
+      <Grid margin={"auto"} container spacing={-75}>
         <Box
           margin={"auto"}
           component="form"

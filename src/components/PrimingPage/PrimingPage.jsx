@@ -54,9 +54,10 @@ function PrimingPage() {
               style={{ textAlign: "center" }}
               variant="body1"
               sx={{ mb: 1.5 }}
+              padding={1}
               color="beige"
             >
-              Here's some things to have ready to complete the process:
+              Here are some things that will help to complete the onboarding process:
             </Typography>
             <hr color="beige" />
             <Typography
@@ -64,18 +65,17 @@ function PrimingPage() {
               color="beige"
               variant="body1"
             >
-              Details about your location
               <br />
-              Pictures of your space
+              Details about your business location
               <br />
-              Dimensions of you space
-              {/* <br />
-              ????
               <br />
-              ????
+              Hours of operation and idea of who may frequent the vending areas
               <br />
-              ???????
-              <br /> */}
+              <br />
+              Pictures of your space (optional)
+              <br />
+              <br />
+              Dimensions of your space (optional)
             </Typography>
           </CardContent>
           <CardActions sx={{ display: "flex", justifyContent: "center" }}>
