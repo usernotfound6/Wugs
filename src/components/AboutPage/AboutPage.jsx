@@ -18,6 +18,7 @@ function AboutPage() {
             border: 'solid',
             borderColor: '#484747',
             width: 430,
+            height: 830,
             padding: 1,
             marginBottom:8,
             boxShadow: 24

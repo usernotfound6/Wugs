@@ -102,12 +102,12 @@ function GetMoreInfoPage() {
 
   const dummyData = () => {
     const presetData = {
-      name: "John Doe",
-      email: "john.doe@gmail.com",
-      phone_number: "(123) 456-7890",
-      industry: "School",
-      about_you: "We operate a university library serving students and faculty.",
-      why_wugs: "Having a mini-market on-site would be a great convenience for our students and staff.",
+      name: "Andrew Cannon",
+      email: "i<3Wugs@gmail.com",
+      phone_number: "(210)867-5309",
+      industry: "Healthcare",
+      about_you: "We operate a exclusive retirement/nursing home.",
+      why_wugs: "We have a diverse community and having a mini-market on-site would be a great convenience for our guests and staff.",
     };
 
     // Update the state variables with predefined data
