@@ -159,7 +159,7 @@ function DemographicsPage() {
                 id="demographics"
                 label="Demographics"
                 variant="outlined"
-                inputProps={{ style: { color: "beige" } }}
+                inputProps={{ style: { color: "beige" }, maxLength: 200 }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 280 }}
                 placeholder="Demographics"
@@ -184,7 +184,7 @@ function DemographicsPage() {
                 id="ageGroup"
                 label="Age Group"
                 variant="outlined"
-                inputProps={{ style: { color: "beige" } }}
+                inputProps={{ style: { color: "beige" }, maxLength: 150 }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 280 }}
                 placeholder="Age Group"
@@ -209,7 +209,7 @@ function DemographicsPage() {
                 id="industry"
                 label="Industry"
                 variant="outlined"
-                inputProps={{ style: { color: "beige" } }}
+                inputProps={{ style: { color: "beige" }, maxLength: 200 }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 280 }}
                 placeholder="Industry"

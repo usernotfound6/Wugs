@@ -219,7 +219,7 @@ function AdditionalInfoPage() {
             id="dimensions"
             label="Market Location Dimensions"
             variant="outlined"
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 80 }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="text"
             style={{ width: 310 }}
