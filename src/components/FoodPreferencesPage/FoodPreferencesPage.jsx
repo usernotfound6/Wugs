@@ -5,42 +5,10 @@ import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import { ButtonBase, Button, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import "./FoodPreferences.css"
 
 // Path: /foodpreferences
 
-const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
-  position: "relative",
-
-  height: 200,
-  [theme.breakpoints.down("sm")]: {
-    width: "100% !important", // Overrides inline-style
-    height: 100,
-  },
-  "&:hover, &.Mui-focusVisible": {
-    zIndex: 1,
-    "& .MuiImageBackdrop-root": {
-      opacity: 0.15,
-    },
-    "& .MuiImageMarked-root": {
-      opacity: 0,
-    },
-    "& .MuiTypography-root": {
-      border: "4px solid currentColor",
-    },
-  },
-  // Apply hover styles to the clicked button
-  ...(isclicked && {
-    "& .MuiImageBackdrop-root": {
-      opacity: 0.15,
-    },
-    "& .MuiImageMarked-root": {
-      opacity: 0,
-    },
-    "& .MuiTypography-root": {
-      border: "4px solid currentColor",
-    },
-  }),
-}));
 
 const ImageSrc = styled("span")({
   position: "absolute",
@@ -128,6 +96,18 @@ function FoodPreferencesPage() {
   };
 
   const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
+    // Apply hover styles to the clicked button
+    ...(isclicked && {
+      '& .MuiImageBackdrop-root': {
+        opacity: 0.15,
+      },
+      '& .MuiImageMarked-root': {
+        opacity: 0,
+      },
+      '& .MuiTypography-root': {
+        border: '4px solid #f3cf2a',
+      },
+    }),
     position: 'relative',
     height: 200,
     [theme.breakpoints.down('sm')]: {
@@ -143,22 +123,12 @@ function FoodPreferencesPage() {
         opacity: 0,
       },
       '& .MuiTypography-root': {
-        border: '4px solid currentColor',
+        border: '4px solid inheret',
       },
     },
-    // Apply hover styles to the clicked button
-    ...(isclicked && {
-      '& .MuiImageBackdrop-root': {
-        opacity: 0.15,
-      },
-      '& .MuiImageMarked-root': {
-        opacity: 0,
-      },
-      '& .MuiTypography-root': {
-        border: '4px solid currentColor',
-      },
-    }),
   }));
+
+
 
   return (
     <div className="container">

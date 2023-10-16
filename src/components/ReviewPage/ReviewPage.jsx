@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useHistory } from 'react-router-dom';
 import MyStepper from "../MyStepper/MyStepper";
 import { PopupWidget } from "react-calendly";
+import { withRouter } from 'react-router-dom';
 
 // Path: /clientstatus
 
@@ -33,6 +34,10 @@ function ReviewPage() {
   }
   const handleSubmit4 = () => {
     history.push('/clientlocationinfo');
+  }
+
+  const handleSubmit5 = () => {
+    history.push('/additionalinfo');
   }
 
   const openCalendlyLink = () => {
@@ -111,17 +116,21 @@ function ReviewPage() {
                         None Indicated
                       </Typography>
                     }
-                    <Box textAlign={"right"}>
+                    <Box sx={{
+                      display: "flex", justifyContent: "space-evenly",
+                      flexDirection: "row"
+                    }}>
                       <Button onClick={handleSubmit1}
                         sx={{
+
                           marginTop: 1.5,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
                           borderRadius: 1,
                         }}
-                        color="secondary"
-                        variant="contained"
+                        color="success"
+                        variant="outlined"
                         autoFocus
                       >
                         Edit
@@ -167,7 +176,10 @@ function ReviewPage() {
                     <Typography variant="body2" component="div">
                       Micro Market Location: {client.micromarket_location}
                     </Typography>
-                    <Box textAlign={"right"}>
+                    <Box sx={{
+                      display: "flex", justifyContent: "space-evenly",
+                      flexDirection: "row"
+                    }}>
                       <Button onClick={handleSubmit4}
                         sx={{
                           margin: 'auto',
@@ -175,8 +187,8 @@ function ReviewPage() {
                           width: 120,
                           borderRadius: 1,
                         }}
-                        color="secondary"
-                        variant="contained"
+                        color="success"
+                        variant="outlined"
                         autoFocus
                       >
                         Edit
@@ -210,7 +222,10 @@ function ReviewPage() {
                     <Typography>
                       Neighborhood Info: {client.neighborhood_info}
                     </Typography>
-                    <Box textAlign={"right"}>
+                    <Box sx={{
+                      display: "flex", justifyContent: "space-evenly",
+                      flexDirection: "row"
+                    }}>
                       <Button onClick={handleSubmit3}
                         sx={{
                           marginTop: 1.5,
@@ -219,8 +234,8 @@ function ReviewPage() {
                           width: 120,
                           borderRadius: 1,
                         }}
-                        color="secondary"
-                        variant="contained"
+                        color="success"
+                        variant="outlined"
                         autoFocus
                       >
                         Edit
@@ -250,7 +265,10 @@ function ReviewPage() {
                         None Indicated
                       </Typography>
                     }
-                    <Box textAlign={"right"}>
+                    <Box sx={{
+                      display: "flex", justifyContent: "space-evenly",
+                      flexDirection: "row"
+                    }}>
                       <Button onClick={handleSubmit2}
                         sx={{
                           marginTop: 1.5,
@@ -259,8 +277,8 @@ function ReviewPage() {
                           width: 120,
                           borderRadius: 1,
                         }}
-                        color="secondary"
-                        variant="contained"
+                        color="success"
+                        variant="outlined"
                         autoFocus
                       >
                         Edit
@@ -290,7 +308,10 @@ function ReviewPage() {
                       If yes please schedule a meeting with Wugs
                     </Typography>
 
-                    <Box textAlign={"right"}>
+                    <Box sx={{
+                      display: "flex", justifyContent: "space-evenly",
+                      flexDirection: "column", alignItems: "center"
+                    }}>
                       <Button onClick={openCalendlyLink}
                         sx={{
                           marginTop: 1.5,
@@ -299,39 +320,50 @@ function ReviewPage() {
                           width: 120,
                           borderRadius: 1,
                         }}
-                        color="secondary"
+                        color="inherit"
                         variant="contained"
                         autoFocus
                       >
                         Schedule Meeting
                       </Button>
-                    </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
-                  <CardContent>
-                    <Box textAlign={"center"}>
-                      <Button onClick={handleOpenConfirmation}
+
+                      <Button onClick={handleSubmit5}
+
                         sx={{
                           marginTop: 1.5,
                           marginLeft: 2,
                           height: 50,
-                          width: 200,
+                          width: 120,
                           borderRadius: 1,
                         }}
-                        color="secondary"
-                        variant="contained"
+                        color="success"
+                        variant="outlined"
                         autoFocus
                       >
-                        CONFIRM AND SUBMIT
+                        Edit
                       </Button>
-
                     </Box>
                   </CardContent>
                 </Card>
               </Grid>
+
+              <Box textAlign={"right"}>
+                <Button onClick={handleOpenConfirmation}
+                  sx={{
+                    marginTop: 1.5,
+                    marginLeft: 2,
+                    height: 50,
+                    width: 200,
+                    borderRadius: 1,
+                  }}
+                  color="success"
+                  variant="contained"
+                  autoFocus
+                >
+                  CONFIRM AND SUBMIT
+                </Button>
+              </Box>
+
             </Grid>
           </Box>
 
