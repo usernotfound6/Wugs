@@ -9,7 +9,7 @@ const Columns = () => {
       headerName: (
         <div style={{ color: "beige" }}>Business Name</div>
       ),
-      width: 170,
+      width: 200,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),
@@ -79,7 +79,7 @@ const Columns = () => {
       headerName: (
         <div style={{ color: "beige" }}>Last Active</div>
       ),
-      width: 160,
+      width: 200,
       renderCell: (params) => (
         <div style={{ color: "beige" }}>{params.value}</div>
       ),

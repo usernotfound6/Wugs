@@ -274,7 +274,7 @@ function ClientLocationInfoPage() {
             label="Business Name"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 90 }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="text"
             placeholder="Business Name"
@@ -308,7 +308,7 @@ function ClientLocationInfoPage() {
             label="Street Address"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 90 }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="address"
             placeholder="123 Snack St N"
@@ -340,7 +340,7 @@ function ClientLocationInfoPage() {
             label="City"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 90 }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="text"
             placeholder="Minneapolis"
@@ -409,7 +409,7 @@ function ClientLocationInfoPage() {
             label="Zip Code"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 10 }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="text"
             placeholder="55415"
@@ -456,7 +456,7 @@ function ClientLocationInfoPage() {
             label="Website"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 230 }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="text"
             placeholder="munch.com"
@@ -484,7 +484,7 @@ function ClientLocationInfoPage() {
             label="Phone Number"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 17 }}
             InputLabelProps={{ style: { color: "beige" } }}
             type="tel"
             placeholder="(123) 456-7890"
@@ -514,7 +514,7 @@ function ClientLocationInfoPage() {
             label="Hours Of Operation?"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 150 }}
             InputLabelProps={{ style: { color: "beige" } }}
             multiline
             rows={1}
@@ -542,7 +542,7 @@ function ClientLocationInfoPage() {
             label="Micro-Market Location Inside Building"
             variant="outlined"
             style={{ width: 310 }}
-            inputProps={{ style: { color: "beige" } }}
+            inputProps={{ style: { color: "beige" }, maxLength: 150 }}
             InputLabelProps={{ style: { color: "beige" } }}
             multiline
             rows={1}
