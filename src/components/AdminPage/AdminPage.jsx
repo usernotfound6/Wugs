@@ -4,6 +4,8 @@ import AdminInterestedTable from "./AdminInterestedTable";
 import "./AdminPage.css";
 import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
 
+//Path: /admin
+
 function AdminPage() {
   const [value, setValue] = useState(0);
 
