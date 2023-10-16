@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { Box, Card, CardActions, CardContent, Button, Typography } from "@mui/material"
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 
 // Path: /priming
@@ -15,14 +10,12 @@ function PrimingPage() {
 
   const styles = {
     cardContainer: {
-     
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       margin: "auto",
     },
     card: {
-    
       borderRadius: 4,
       padding: 1,
       backgroundColor: "#484747",
@@ -72,7 +65,7 @@ function PrimingPage() {
               variant="body1"
             >
               Details about your location
-              <br/>
+              <br />
               Pictures of your space
               <br />
               Dimensions of you space
@@ -89,16 +82,16 @@ function PrimingPage() {
           </CardActions>
         </Card>
       </Box>
-      <Button sx={{ display: "flex", margin: 'auto',  padding: 3, borderRadius: 2, boxShadow: 12, marginBottom: 3  }}
-              size="large"
-              variant="contained"
-              color="success"
-              onClick={() => {
-                history.push("/servicechoice");
-              }}
-            >
-              <FastfoodIcon size="large" style={{ padding: 6 }} /> GET SNACKING!
-            </Button>
+      <Button sx={{ display: "flex", margin: 'auto', padding: 3, borderRadius: 2, boxShadow: 12, marginBottom: 3 }}
+        size="large"
+        variant="contained"
+        color="success"
+        onClick={() => {
+          history.push("/servicechoice");
+        }}
+      >
+        <FastfoodIcon size="large" style={{ padding: 6 }} /> GET SNACKING!
+      </Button>
     </div>
   );
 }
