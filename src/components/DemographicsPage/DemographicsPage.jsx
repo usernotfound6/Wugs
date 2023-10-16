@@ -158,12 +158,12 @@ function DemographicsPage() {
 
               <TextField
                 id="demographics"
-                label="Demographics"
+                label="Demographics (optional)"
                 variant="outlined"
                 inputProps={{ style: { color: "beige" }, maxLength: 200 }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 400, marginLeft: 85 }}
-                placeholder="Demographics"
+                placeholder="Ex: Professional, International, Health Enthusiasts, Students, Senior Community, Eco-conscious, Tourist-heavy, Religious, Trendy, Urban, Rural..."
                 value={demographics}
                 multiline
                 rows={4}
@@ -185,12 +185,12 @@ function DemographicsPage() {
               <br />
               <TextField
                 id="ageGroup"
-                label="Age Group"
+                label="Age Group (optional)"
                 variant="outlined"
                 inputProps={{ style: { color: "beige" }, maxLength: 150 }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 400, marginLeft: 85 }}
-                placeholder="Age Group"
+                placeholder="Ex: Adults, Teens, Children (0-5 years), All Ages..."
                 value={ageGroup}
                 sx={{
                   "& .MuiOutlinedInput-root": {
@@ -215,7 +215,7 @@ function DemographicsPage() {
                 inputProps={{ style: { color: "beige" }, maxLength: 200 }}
                 InputLabelProps={{ style: { color: "beige" } }}
                 style={{ width: 400, marginLeft: 85 }}
-                placeholder="Industry"
+                placeholder="Ex: Office, School, Healthcare, Factory, Gym..."
                 value={industry}
                 sx={{
                   "& .MuiOutlinedInput-root": {
@@ -235,14 +235,14 @@ function DemographicsPage() {
               <br />
               <TextField
                 id="neighborhood"
-                label="About Your Neighborhood"
+                label="About Your Neighborhood (optional)"
                 variant="outlined"
                 multiline
                 rows={4}
                 style={{ width: 400, marginLeft: 85 }}
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-
+                placeholder="Ex: In the area, there's a vending machine that offers a conventional selection of snacks like classic potato chips, standard chocolate bars, and popular soda brands."
                 value={neighborhood}
                 onChange={(event) => setNeighborhood(event.target.value)}
                 sx={{
@@ -287,8 +287,7 @@ function DemographicsPage() {
             <strong>DEMOGRAPHICS:</strong>
             <br />
             We'd love to hear about the culture and diversity of your
-            location. This helps us to best serve you and provide recommendations
-            for a unique selection of snacking options.
+            location. This helps us to best serve you and provide recommendations for a unique selection of snacking options.
             <br />
             <br />
             <strong>AGE GROUP:</strong>
@@ -299,6 +298,11 @@ function DemographicsPage() {
             <strong>INDUSTRY:</strong>
             <br />
             Describe the primary operations and business of your location.
+            <br />
+            <br />
+            <strong>YOUR NEIGHBORHOOD:</strong>
+            <br />
+            If there are any neighboring vending or snack alternatives, kindly share any specifics about these options that customers might have access to. This information will assist us in offering distinctive products for this micro-market.
             <br />
           </DialogContentText>
         </DialogContent>

@@ -488,7 +488,7 @@ function ClientLocationInfoPage() {
         >
           <TextField
             id="website"
-            label="Website"
+            label="Website (optional)"
             variant="outlined"
             style={{ width: 310 }}
             inputProps={{ style: { color: "beige" }, maxLength: 230 }}
