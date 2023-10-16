@@ -235,14 +235,14 @@ function DemographicsPage() {
               <br />
               <TextField
                 id="neighborhood"
-                label="About Your Neighborhood"
+                label="About Your Neighborhood (optional)"
                 variant="outlined"
                 multiline
                 rows={4}
                 style={{ width: 400, marginLeft: 85 }}
                 inputProps={{ style: { color: "beige" } }}
                 InputLabelProps={{ style: { color: "beige" } }}
-                placeholder="Ex: There's a small convenience store just around the corner that sells a variety of snacks, including fresh sandwiches, fruit, and has a coffee machine."
+                placeholder="Ex: In the area, there's a vending machine that offers a conventional selection of snacks like classic potato chips, standard chocolate bars, and popular soda brands."
                 value={neighborhood}
                 onChange={(event) => setNeighborhood(event.target.value)}
                 sx={{

@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 import MyStepper from "../MyStepper/MyStepper";
 import { PopupWidget } from "react-calendly";
 import { withRouter } from 'react-router-dom';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Path: /clientstatus
 
@@ -96,28 +98,10 @@ function ReviewPage() {
           <Box>
             <Grid container spacing={1}>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
                   <CardContent>
-                    <Typography
-                      sx={{ fontSize: 24 }}
-                      color="beige"
-                      gutterBottom
-                    >
-                      Services:
-                    </Typography>
-                    {client.service_names ?
-                      client.service_names.map((service, index) => (
-                        <Typography variant="h8" component="div" key={index}>
-                          {service}
-                        </Typography>
-                      ))
-                      :
-                      <Typography variant="h8" component="div">
-                        None Indicated
-                      </Typography>
-                    }
                     <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
+                      display: "flex", justifyContent: "right",
                       flexDirection: "row"
                     }}>
                       <Button onClick={handleSubmit1}
@@ -136,12 +120,49 @@ function ReviewPage() {
                         Edit
                       </Button>
                     </Box>
+                    <Typography
+                      sx={{ fontSize: 24 }}
+                      color="beige"
+                      gutterBottom
+                    >
+                      Services:
+                    </Typography>
+                    {client.service_names ?
+                      client.service_names.map((service, index) => (
+                        <Typography variant="h8" component="div" key={index}>
+                          {service}
+                        </Typography>
+                      ))
+                      :
+                      <Typography variant="h8" component="div">
+                        None Indicated
+                      </Typography>
+                    }
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
                   <CardContent>
+                    <Box sx={{
+                      display: "flex", justifyContent: "right",
+                      flexDirection: "row"
+                    }}>
+                      <Button onClick={handleSubmit4}
+                        sx={{
+                          marginTop: 1.5,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="success"
+                        variant="outlined"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -176,13 +197,21 @@ function ReviewPage() {
                     <Typography variant="body2" component="div">
                       Micro Market Location: {client.micromarket_location}
                     </Typography>
+
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
+                  <CardContent>
                     <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
+                      display: "flex", justifyContent: "right",
                       flexDirection: "row"
                     }}>
-                      <Button onClick={handleSubmit4}
+                      <Button onClick={handleSubmit3}
                         sx={{
-                          margin: 'auto',
+                          marginTop: 1.5,
+                          marginLeft: 2,
                           height: 50,
                           width: 120,
                           borderRadius: 1,
@@ -194,12 +223,6 @@ function ReviewPage() {
                         Edit
                       </Button>
                     </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
-                  <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -222,11 +245,17 @@ function ReviewPage() {
                     <Typography>
                       Neighborhood Info: {client.neighborhood_info}
                     </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
+                  <CardContent>
                     <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
+                      display: "flex", justifyContent: "right",
                       flexDirection: "row"
                     }}>
-                      <Button onClick={handleSubmit3}
+                      <Button onClick={handleSubmit2}
                         sx={{
                           marginTop: 1.5,
                           marginLeft: 2,
@@ -241,12 +270,6 @@ function ReviewPage() {
                         Edit
                       </Button>
                     </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
-                  <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -265,11 +288,17 @@ function ReviewPage() {
                         None Indicated
                       </Typography>
                     }
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
+                  <CardContent>
                     <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
+                      display: "flex", justifyContent: "right",
                       flexDirection: "row"
                     }}>
-                      <Button onClick={handleSubmit2}
+                      <Button onClick={handleSubmit5}
                         sx={{
                           marginTop: 1.5,
                           marginLeft: 2,
@@ -283,14 +312,7 @@ function ReviewPage() {
                       >
                         Edit
                       </Button>
-
                     </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
-                  <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -305,65 +327,54 @@ function ReviewPage() {
                       Visit Requested: {client.wugs_visit ? "Yes" : "No"}
                     </Typography>
                     <Typography variant='subtitle2'>
-                      If yes please schedule a meeting with Wugs
+                      Feel free to schedule a meeting with Wugs here:
                     </Typography>
-
                     <Box sx={{
-                      display: "flex", justifyContent: "space-evenly",
-                      flexDirection: "column", alignItems: "center"
+                      display: "flex", justifyContent: "center",
+                      flexDirection: "row"
                     }}>
                       <Button onClick={openCalendlyLink}
                         sx={{
                           marginTop: 1.5,
                           marginLeft: 2,
                           height: 50,
-                          width: 120,
+                          width: 150,
                           borderRadius: 1,
                         }}
-                        color="inherit"
+                        color="success"
                         variant="contained"
                         autoFocus
                       >
                         Schedule Meeting
-                      </Button>
-
-                      <Button onClick={handleSubmit5}
-
-                        sx={{
-                          marginTop: 1.5,
-                          marginLeft: 2,
-                          height: 50,
-                          width: 120,
-                          borderRadius: 1,
-                        }}
-                        color="success"
-                        variant="outlined"
-                        autoFocus
-                      >
-                        Edit
+                        <ScheduleIcon sx={{ marginLeft: 1 }} />
                       </Button>
                     </Box>
+
                   </CardContent>
                 </Card>
               </Grid>
 
-              <Box textAlign={"right"}>
-                <Button onClick={handleOpenConfirmation}
-                  sx={{
-                    marginTop: 1.5,
-                    marginLeft: 2,
-                    height: 50,
-                    width: 200,
-                    borderRadius: 1,
-                  }}
-                  color="success"
-                  variant="contained"
-                  autoFocus
-                >
-                  CONFIRM AND SUBMIT
-                </Button>
-              </Box>
-
+              <Grid item xs={6} md={4} container justifyContent="center" alignItems="center">
+                <Box textAlign={"right"} >
+                  <Button
+                    onClick={handleOpenConfirmation}
+                    sx={{
+                      marginTop: 1.5,
+                      marginLeft: 2,
+                      height: 120,
+                      width: 250,
+                      borderRadius: 1,
+                    }}
+                    color="success"
+                    variant="contained"
+                    autoFocus
+                    style={{ fontSize: "18px" }}
+                  >
+                    CONFIRM AND SUBMIT
+                    <CheckCircleIcon sx={{ marginLeft: 1, fontSize: "35px" }} />
+                  </Button>
+                </Box>
+              </Grid>
             </Grid>
           </Box>
 

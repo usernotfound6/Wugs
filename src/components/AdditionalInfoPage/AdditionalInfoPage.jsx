@@ -119,7 +119,7 @@ function AdditionalInfoPage() {
 
   function dummyData() {
     const presetData = {
-      dimensions: "12 ft width x 4 ft depth x 10 ft high",
+      dimensions: "12 ft wide x 4 ft depth x 10 ft high",
     };
     // Update formData state
     setFormData((prevData) => ({
@@ -217,7 +217,7 @@ function AdditionalInfoPage() {
         >
           <TextField
             id="dimensions"
-            label="Market Location Dimensions"
+            label="Market Location Dimensions (optional)"
             variant="outlined"
             inputProps={{ style: { color: "beige" }, maxLength: 80 }}
             InputLabelProps={{ style: { color: "beige" } }}
@@ -242,7 +242,7 @@ function AdditionalInfoPage() {
             }}
           />
           <br />
-          <Typography display='flex' justifyContent='center' color='beige' variant="h6">Request a Visit from Wugs?</Typography>
+          <Typography display='flex' justifyContent='center' color='beige' variant="h6">Request a visit from Wugs?</Typography>
           <Stack display='flex' margin={'auto'} justifyContent='center' direction="row" spacing={1} alignItems="center">
             <Typography color='beige'>No</Typography>
             <AntSwitch
@@ -250,7 +250,7 @@ function AdditionalInfoPage() {
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
             <Typography color='beige'>Yes</Typography>
           </Stack>
-          <Typography>Upload Photos:</Typography>
+          <Typography>Upload Photos (optional):</Typography>
           <Typography variant="subtitle2">Provide a photo of your space</Typography>
           <Input
             type="file"
