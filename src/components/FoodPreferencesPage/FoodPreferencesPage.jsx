@@ -152,7 +152,7 @@ function FoodPreferencesPage() {
       >
         Select Any You'd Like To Learn More About
       </Typography>
-      <Grid sx={{ display: 'flex', margin: 'auto' }}
+      <Grid sx={{ display: 'flex', marginLeft: '375px' }}
         container xs={9} spacing={2} columnGap={2} rowGap={2}>
         {/* <Box
         sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}

@@ -56,7 +56,7 @@ const TabContentOne = () => {
         >
           <CardContent>
             <Typography sx={{ fontSize: 24 }} color="black" gutterBottom>
-              Products I'm interested in...
+              Services I'm interested in...
             </Typography>
             {client.service_names ?
                       client.service_names.map((service, index) => (

@@ -104,7 +104,7 @@ ColorlibStepIcon.propTypes = {
   icon: PropTypes.node,
 };
 
-const steps = ['Services', 'Location Info', 'About Your Community', 'Food Choices', 'Additional info', 'Review and Complete!']
+const steps = ['Services', 'Location Info', 'About Your Community', 'Food Choices', 'Additional Info', 'Review and Complete!']
 const stepRoutes = ['/servicechoice', '/clientlocationinfo', '/demographics', '/foodpreferences', '/additionalinfo', '/review'];
 
 function MyStepper(props) {

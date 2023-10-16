@@ -378,7 +378,7 @@ function UserPage() {
                 color: "black",
                 margin: "10px",
                 width: "450px",
-                height: "250px",
+                height: "300px",
                 marginTop: -34,
               }}
             >

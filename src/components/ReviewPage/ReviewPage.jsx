@@ -77,7 +77,7 @@ function ReviewPage() {
         <MyStepper step={5} />
         <CssBaseline />
         <div style={{ textAlign: "center" }}>
-          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Review Submission</Typography>
+          <Typography variant='h4' marginTop={3} style={{ color: "beige" }}>Review and Complete</Typography>
         </div>
         <Container
           maxWidth="lg"
@@ -96,7 +96,7 @@ function ReviewPage() {
           <Box>
             <Grid container spacing={1}>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -140,38 +140,35 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
                       gutterBottom
                     >
-                      Client Contact and Location:
+                      Location Info:
                     </Typography>
                     <Typography variant="body2" component="div">
-                      Point of Contact: {user.first_name} {user.last_name}
-                    </Typography>
-                    <Typography variant="body2" component="div">
-                      Email: {user.username}
-                    </Typography>
-                    <Typography variant="body2" component="div">
-                      Phone: {client.phone}
-                    </Typography>
-                    <Typography variant="body2" component="div">
-                      Business: {client.business_name}
+                      Business Name: {client.business_name}
                     </Typography>
                     <Typography variant="body2" component="div">
                       Street Address: {client.address_street}
                     </Typography>
                     <Typography variant="body2" component="div">
+                      City: {client.address_city}
+                    </Typography>
+                    <Typography variant="body2" component="div">
                       State: {client.address_state}
                     </Typography>
                     <Typography variant="body2" component="div">
-                      State: {client.address_zip}
+                      Zip Code: {client.address_zip}
                     </Typography>
                     <Typography variant="body2" component="div">
                       Website: {client.website}
+                    </Typography>
+                    <Typography variant="body2" component="div">
+                      Phone Number: {client.phone}
                     </Typography>
                     <Typography variant="body2" component="div">
                       Hours of Operation: {client.hours_of_operation}
@@ -201,7 +198,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -248,7 +245,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -292,7 +289,7 @@ function ReviewPage() {
                 </Card>
               </Grid>
               <Grid item xs={6} md={4}>
-                <Card variant="outlined" sx={{ borderRadius: 3, height: 300, backgroundColor: '#484747', boxShadow: 5 }}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5 }}>
                   <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
@@ -329,7 +326,9 @@ function ReviewPage() {
                       >
                         Schedule Meeting
                       </Button>
+
                       <Button onClick={handleSubmit5}
+
                         sx={{
                           marginTop: 1.5,
                           marginLeft: 2,

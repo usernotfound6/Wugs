@@ -101,19 +101,19 @@ function GetMoreInfoPage() {
 
   return (
     <div className="container">
-       <CssBaseline />
-       <div style={{ textAlign: "center" }}>
-          <Typography variant= 'h4' marginTop={0} marginBottom={3}  style={{ color: "beige" }}>Get In Touch With Us</Typography>
-          </div>{" "}
+      <CssBaseline />
+      <div style={{ textAlign: "center" }}>
+        <Typography variant='h4' marginTop={0} marginBottom={3} style={{ color: "beige" }}>Get In Touch With Us</Typography>
+      </div>{" "}
       <Box margin={'auto'}
         component="form"
         sx={{
-          
+
           backgroundColor: '#484747',
           borderRadius: 3,
           width: 350,
           padding: 2,
-         boxShadow: 24,
+          boxShadow: 24,
           "& > :not(style)": { m: 1, width: "25ch" },
         }}
         noValidate
@@ -124,7 +124,7 @@ function GetMoreInfoPage() {
           label="Name"
           variant="outlined"
           style={{ width: 300 }}
-          inputProps={{ style: { color: "beige" } }}
+          inputProps={{ style: { color: "beige" }, maxLength: 45 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
           placeholder="John Doe"
@@ -152,7 +152,7 @@ function GetMoreInfoPage() {
           label="Email Address"
           variant="outlined"
           style={{ width: 300 }}
-          inputProps={{ style: { color: "beige" } }}
+          inputProps={{ style: { color: "beige" }, maxLength: 45 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="email"
           placeholder="john.doe@gmail.com"
@@ -160,7 +160,7 @@ function GetMoreInfoPage() {
           onChange={(event) => setEmail(event.target.value)}
           required
           sx={{
-    
+
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
                 borderColor: "gray", // Outline color when not focused
@@ -181,7 +181,7 @@ function GetMoreInfoPage() {
           label="Phone Number"
           variant="outlined"
           style={{ width: 300 }}
-          inputProps={{ style: { color: "beige" } }}
+          inputProps={{ style: { color: "beige" }, maxLength: 18 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="tel"
           placeholder="(123) 456-7890"
@@ -209,7 +209,7 @@ function GetMoreInfoPage() {
           label="Business / Industry"
           variant="outlined"
           style={{ width: 300 }}
-          inputProps={{ style: { color: "beige" } }}
+          inputProps={{ style: { color: "beige" }, maxLength: 250 }}
           InputLabelProps={{ style: { color: "beige" } }}
           type="text"
           placeholder="School, Office, Warehouse, etc"
@@ -236,7 +236,7 @@ function GetMoreInfoPage() {
           label="About You"
           variant="outlined"
           style={{ width: 300 }}
-          inputProps={{ style: { color: "beige" } }}
+          inputProps={{ style: { color: "beige" }, maxLength: 280 }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
           rows={3}
@@ -264,7 +264,7 @@ function GetMoreInfoPage() {
           label="What Brings You To Wugs Today?"
           variant="outlined"
           style={{ width: 300 }}
-          inputProps={{ style: { color: "beige" } }}
+          inputProps={{ style: { color: "beige" }, maxLength: 280 }}
           InputLabelProps={{ style: { color: "beige" } }}
           multiline
           rows={5}
