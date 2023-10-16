@@ -250,7 +250,7 @@ function ClientLocationInfoPage() {
       <div>
         <MyStepper step={1} />
       </div>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <div style={{ textAlign: "center" }}>
         <Typography
           variant="h4"
@@ -611,11 +611,8 @@ function ClientLocationInfoPage() {
         <Button
           onClick={handleSubmit}
           sx={{
-            marginTop: 20,
+            marginTop: 17,
             marginLeft: 2,
-            marginRight: 30,
-            marginBottom: 15,
-
             height: 50,
             width: 150,
             borderRadius: 1,
