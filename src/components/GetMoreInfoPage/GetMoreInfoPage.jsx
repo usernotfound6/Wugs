@@ -287,22 +287,29 @@ function GetMoreInfoPage() {
         />
         <br />
       </Box>
-
-      <Button
-        onClick={handleSubmit}
-        sx={{
-          marginTop: 1.5,
-          marginLeft: 2,
-          height: 50,
-          width: 120,
-          borderRadius: 1,
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginRight: "200px",
         }}
-        color="success"
-        variant="contained"
-        autoFocus
       >
-        Submit
-      </Button>
+        <Button
+          onClick={handleSubmit}
+          sx={{
+            marginTop: 1.5,
+            marginLeft: 2,
+            height: 50,
+            width: 120,
+            borderRadius: 1,
+          }}
+          color="success"
+          variant="contained"
+          autoFocus
+        >
+          Submit
+        </Button>
+      </div>
 
       {/* Confirmation Dialog */}
 

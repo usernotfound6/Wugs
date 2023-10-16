@@ -2,17 +2,9 @@ import React, { useState } from "react";
 import MyStepper from "../MyStepper/MyStepper";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Typography,
-  Button,
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  CssBaseline,
-  Checkbox,
-} from "@mui/material";
+import { Typography, Button, Box, Card, CardContent, CardMedia, Grid, CssBaseline, Checkbox, } from "@mui/material";
+
+// Path: /servicechoice
 
 function ServiceChoicePage() {
   const history = useHistory();
@@ -87,7 +79,6 @@ function ServiceChoicePage() {
       <MyStepper step={0} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-
         <Typography variant="h4" marginTop={3} marginBottom={1} style={{ color: "beige" }} onClick={dummyData}>
           Services
         </Typography>
@@ -139,7 +130,7 @@ function ServiceChoicePage() {
 
             {/* Smart Coolers */}
             <Grid item xs={12} sm={6} md={4} >
-              <Checkbox 
+              <Checkbox
                 id="smartcoolers"
                 name="smartcoolers"
                 value="SmartCoolers"
@@ -231,8 +222,9 @@ function ServiceChoicePage() {
             marginTop: 1.5,
             marginLeft: 2,
             height: 50,
-            width: 120,
+            width: 150,
             borderRadius: 1,
+            fontSize: "1.25em"
           }}
           color="success"
           variant="contained"

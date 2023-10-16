@@ -313,8 +313,9 @@ function DemographicsPage() {
             marginTop: 1.5,
             marginLeft: 2,
             height: 50,
-            width: 120,
+            width: 150,
             borderRadius: 1,
+            fontSize: "1.25em"
           }}
           color="success"
           variant="contained"
