@@ -611,8 +611,11 @@ function ClientLocationInfoPage() {
         <Button
           onClick={handleSubmit}
           sx={{
-            marginTop: 1.5,
+            marginTop: 20,
             marginLeft: 2,
+            marginRight: 30,
+            marginBottom: 15,
+
             height: 50,
             width: 150,
             borderRadius: 1,
