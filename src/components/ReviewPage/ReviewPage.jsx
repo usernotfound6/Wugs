@@ -120,12 +120,12 @@ function ReviewPage() {
                   <CardContent>
                     <Box sx={{
                       display: "flex", justifyContent: "right",
-                      flexDirection: "row"
+                      flexDirection: "row",
                     }}>
                       <Button onClick={handleSubmit1}
                         sx={{
 
-                          marginTop: 1.5,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -155,7 +155,7 @@ function ReviewPage() {
                       <Typography variant="h8" component="div">
                         None Indicated
                       </Typography>
-                    }
+                    )}
                   </CardContent>
                 </Card>
               </Grid>
@@ -164,11 +164,11 @@ function ReviewPage() {
                   <CardContent>
                     <Box sx={{
                       display: "flex", justifyContent: "right",
-                      flexDirection: "row"
+                      flexDirection: "row",
                     }}>
                       <Button onClick={handleSubmit4}
                         sx={{
-                          marginTop: 1.5,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -223,11 +223,11 @@ function ReviewPage() {
                   <CardContent>
                     <Box sx={{
                       display: "flex", justifyContent: "right",
-                      flexDirection: "row"
+                      flexDirection: "row",
                     }}>
                       <Button onClick={handleSubmit3}
                         sx={{
-                          marginTop: 1.5,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -266,11 +266,11 @@ function ReviewPage() {
                   <CardContent>
                     <Box sx={{
                       display: "flex", justifyContent: "right",
-                      flexDirection: "row"
+                      flexDirection: "row",
                     }}>
                       <Button onClick={handleSubmit2}
                         sx={{
-                          marginTop: 5,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -300,7 +300,7 @@ function ReviewPage() {
                       <Typography variant="h8" component="div">
                         None Indicated
                       </Typography>
-                    }
+                    )}
                   </CardContent>
                 </Card>
               </Grid>
@@ -309,11 +309,11 @@ function ReviewPage() {
                   <CardContent>
                     <Box sx={{
                       display: "flex", justifyContent: "right",
-                      flexDirection: "row"
+                      flexDirection: "row",
                     }}>
                       <Button onClick={handleSubmit5}
                         sx={{
-                          marginTop: 15,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -344,11 +344,11 @@ function ReviewPage() {
                     </Typography>
                     <Box sx={{
                       display: "flex", justifyContent: "center",
-                      flexDirection: "row"
+                      flexDirection: "row",
                     }}>
                       <Button onClick={openCalendlyLink}
                         sx={{
-                          marginTop: 1.5,
+                          marginTop: 2,
                           marginLeft: 2,
                           height: 50,
                           width: 150,
