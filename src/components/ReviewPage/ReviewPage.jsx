@@ -19,7 +19,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import MyStepper from "../MyStepper/MyStepper";
 import { PopupWidget } from "react-calendly";
-import { withRouter } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 // Path: /clientstatus
 
@@ -114,16 +116,28 @@ function ReviewPage() {
           <Box>
             <Grid container spacing={1}>
               <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    borderRadius: 3,
-                    height: 325,
-                    backgroundColor: "#484747",
-                    boxShadow: 5,
-                  }}
-                >
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
                   <CardContent>
+                    <Box sx={{
+                      display: "flex", justifyContent: "right",
+                      flexDirection: "row",
+                    }}>
+                      <Button onClick={handleSubmit1}
+                        sx={{
+
+                          marginTop: 0,
+                          marginLeft: 2,
+                          height: 50,
+                          width: 120,
+                          borderRadius: 1,
+                        }}
+                        color="success"
+                        variant="outlined"
+                        autoFocus
+                      >
+                        Edit
+                      </Button>
+                    </Box>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -142,17 +156,19 @@ function ReviewPage() {
                         None Indicated
                       </Typography>
                     )}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Button
-                        onClick={handleSubmit1}
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
+                  <CardContent>
+                    <Box sx={{
+                      display: "flex", justifyContent: "right",
+                      flexDirection: "row",
+                    }}>
+                      <Button onClick={handleSubmit4}
                         sx={{
-                          marginTop: 15,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -165,20 +181,6 @@ function ReviewPage() {
                         Edit
                       </Button>
                     </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    borderRadius: 3,
-                    height: 325,
-                    backgroundColor: "#484747",
-                    boxShadow: 5,
-                  }}
-                >
-                  <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -213,17 +215,20 @@ function ReviewPage() {
                     <Typography variant="body2" component="div">
                       Micro Market Location: {client.micromarket_location}
                     </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Button
-                        onClick={handleSubmit4}
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
+                  <CardContent>
+                    <Box sx={{
+                      display: "flex", justifyContent: "right",
+                      flexDirection: "row",
+                    }}>
+                      <Button onClick={handleSubmit3}
                         sx={{
-                          margin: "auto",
+                          marginTop: 0,
+                          marginLeft: 2,
                           height: 50,
                           width: 120,
                           borderRadius: 1,
@@ -235,20 +240,6 @@ function ReviewPage() {
                         Edit
                       </Button>
                     </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    borderRadius: 3,
-                    height: 325,
-                    backgroundColor: "#484747",
-                    boxShadow: 5,
-                  }}
-                >
-                  <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -267,17 +258,19 @@ function ReviewPage() {
                     <Typography>
                       Neighborhood Info: {client.neighborhood_info}
                     </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Button
-                        onClick={handleSubmit3}
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
+                  <CardContent>
+                    <Box sx={{
+                      display: "flex", justifyContent: "right",
+                      flexDirection: "row",
+                    }}>
+                      <Button onClick={handleSubmit2}
                         sx={{
-                          marginTop: 5,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -290,20 +283,6 @@ function ReviewPage() {
                         Edit
                       </Button>
                     </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    borderRadius: 3,
-                    height: 325,
-                    backgroundColor: "#484747",
-                    boxShadow: 5,
-                  }}
-                >
-                  <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -322,17 +301,19 @@ function ReviewPage() {
                         None Indicated
                       </Typography>
                     )}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Button
-                        onClick={handleSubmit2}
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6} md={4}>
+                <Card variant="outlined" sx={{ borderRadius: 3, height: 325, backgroundColor: '#484747', boxShadow: 5, overflowY: "auto" }}>
+                  <CardContent>
+                    <Box sx={{
+                      display: "flex", justifyContent: "right",
+                      flexDirection: "row",
+                    }}>
+                      <Button onClick={handleSubmit5}
                         sx={{
-                          marginTop: 15,
+                          marginTop: 0,
                           marginLeft: 2,
                           height: 50,
                           width: 120,
@@ -345,20 +326,6 @@ function ReviewPage() {
                         Edit
                       </Button>
                     </Box>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4}>
-                <Card
-                  variant="outlined"
-                  sx={{
-                    borderRadius: 3,
-                    height: 325,
-                    backgroundColor: "#484747",
-                    boxShadow: 5,
-                  }}
-                >
-                  <CardContent>
                     <Typography
                       sx={{ fontSize: 24 }}
                       color="beige"
@@ -372,77 +339,51 @@ function ReviewPage() {
                     <Typography>
                       Visit Requested: {client.wugs_visit ? "Yes" : "No"}
                     </Typography>
-                    <Typography variant="subtitle2">
-                      If yes please schedule a meeting with Wugs
+                    <Typography variant='subtitle2'>
+                      Feel free to schedule a meeting with Wugs here:
                     </Typography>
-
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-evenly",
-                        flexDirection: "column",
-                        alignItems: "center",
-                      }}
-                    >
-                      <Button
-                        onClick={openCalendlyLink}
+                    <Box sx={{
+                      display: "flex", justifyContent: "center",
+                      flexDirection: "row",
+                    }}>
+                      <Button onClick={openCalendlyLink}
                         sx={{
-                          marginTop: 1.5,
+                          marginTop: 2,
                           marginLeft: 2,
                           height: 50,
-                          width: 120,
+                          width: 150,
                           borderRadius: 1,
                         }}
-                        color="inherit"
+                        color="success"
                         variant="contained"
                         autoFocus
                       >
                         Schedule Meeting
-                      </Button>
-
-                      <Button
-                        onClick={handleSubmit5}
-                        sx={{
-                          marginTop: 4,
-                          marginLeft: 2,
-                          height: 50,
-                          width: 120,
-                          borderRadius: 1,
-                        }}
-                        color="success"
-                        variant="outlined"
-                        autoFocus
-                      >
-                        Edit
+                        <ScheduleIcon sx={{ marginLeft: 1 }} />
                       </Button>
                     </Box>
+
                   </CardContent>
                 </Card>
               </Grid>
-              <Grid
-                item
-                xs={6}
-                md={4}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Box textAlign={"right"}>
+              <Grid item xs={6} md={4} container justifyContent="center" alignItems="center">
+                <Box textAlign={"right"} >
                   <Button
                     onClick={handleOpenConfirmation}
                     sx={{
                       marginTop: 1.5,
-                      height: 50,
-                      width: 200,
+                      marginLeft: 2,
+                      height: 120,
+                      width: 250,
                       borderRadius: 1,
                     }}
                     color="success"
                     variant="contained"
                     autoFocus
+                    style={{ fontSize: "18px" }}
                   >
                     CONFIRM AND SUBMIT
+                    <CheckCircleIcon sx={{ marginLeft: 1, fontSize: "35px" }} />
                   </Button>
                 </Box>
               </Grid>

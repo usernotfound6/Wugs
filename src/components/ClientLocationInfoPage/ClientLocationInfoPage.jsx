@@ -216,12 +216,12 @@ function ClientLocationInfoPage() {
 
   function dummyData() {
     const presetData = {
-      business_name: "John Marshall High School",
-      address_street: "123 Cool St",
+      business_name: "West Water High School",
+      address_street: "123 University Ave",
       address_city: "Minneapolis",
       address_state: "MN",
       address_zip: "90210",
-      website: "you&meequalsUs@AodOutlined.com",
+      website: "www.WestWaterHigh.com",
       phone: "(651) 867 - 5309",
       hours_of_operation: "9am - 5pm",
       micromarket_location: "Quad",
@@ -269,7 +269,7 @@ function ClientLocationInfoPage() {
           Who Are We Serving?
         </Typography>
       </div>{" "}
-      <Grid margin={"auto"} container spacing={-48}>
+      <Grid margin={"auto"} container spacing={-75}>
         <Box
           margin={"auto"}
           component="form"
@@ -488,7 +488,7 @@ function ClientLocationInfoPage() {
         >
           <TextField
             id="website"
-            label="Website"
+            label="Website (optional)"
             variant="outlined"
             style={{ width: 310 }}
             inputProps={{ style: { color: "beige" }, maxLength: 230 }}
