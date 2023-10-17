@@ -19,8 +19,8 @@ ul li {
 .MuiMenuItem-root,
 /* Change text color for MenuItem components */
 .MuiTextField-root,
-.MuiTablePagination-root,
-.MuiSvgIcon-root
+.MuiTablePagination-root
+/* .MuiSvgIcon-root */
 /* Change text color for TextField components */
   {
   color: beige !important;

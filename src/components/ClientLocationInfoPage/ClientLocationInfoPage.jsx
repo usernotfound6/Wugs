@@ -409,6 +409,11 @@ function ClientLocationInfoPage() {
               defaultValue="MN"
               required
               sx={{
+                "& .MuiSvgIcon-root":
+                                        {
+                                            color: "beige !important"
+
+                                        },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "gray",
                 },

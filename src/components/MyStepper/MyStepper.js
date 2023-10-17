@@ -62,7 +62,7 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   ...(!ownerState.active && !ownerState.completed && {
     backgroundColor: '#fefefe', // Change the background color of future steps
     color: '#050c42', // Change the text color of future steps
-  }),
+}),
 }));
 
 function ColorlibStepIcon(props) {

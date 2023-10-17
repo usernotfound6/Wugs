@@ -153,13 +153,18 @@ function AdminClientTable() {
                 </Typography>
 
                 <DataGrid
+                sx={{"& .MuiSvgIcon-root":
+                {
+                    color: "beige !important"
+
+                },}}
                     style={{ color: "beige" }}
                     rows={rows}
                     columns={columns}
                     onRowClick={handleRowClick}
                     getRowClassName={(params) =>
                         params.indexRelativeToCurrentPage % 2 === 0 ? 'Mui-even' : 'Mui-odd'
-                      }
+                    }
                 />
 
                 {/* -----------  MODAL START ----------- */}
@@ -333,6 +338,11 @@ function AdminClientTable() {
                                     label="Update Status"
                                     onChange={dropdown}
                                     sx={{
+                                        "& .MuiSvgIcon-root":
+                                        {
+                                            color: "beige !important"
+
+                                        },
                                         "& .MuiOutlinedInput-notchedOutline": {
                                             borderColor: "gray",
                                         },

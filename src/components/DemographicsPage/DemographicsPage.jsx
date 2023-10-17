@@ -132,6 +132,11 @@ function DemographicsPage() {
                 style={{ width: 400, marginLeft: 85 }}
                 onChange={handleChange}
                 sx={{
+                  "& .MuiSvgIcon-root":
+  {
+  color: "beige !important"
+  /* Set the text color to beige */
+},
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "gray",
                   },
