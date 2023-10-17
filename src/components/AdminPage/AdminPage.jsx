@@ -28,6 +28,11 @@ function AdminPage() {
           variant="scrollable"
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
+          sx={{
+            "& .MuiButtonBase-root.MuiTab-root.Mui-selected": {
+              // color: /
+            }
+          }}
         >
           <Tab label="Onboarding Clients" sx={{ color: "beige" }} />
           <Tab label="Interested in Wugs" sx={{ color: "beige" }} />
