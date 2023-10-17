@@ -5,10 +5,9 @@ import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import { ButtonBase, Button, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import "./FoodPreferences.css"
+import "./FoodPreferences.css";
 
 // Path: /foodpreferences
-
 
 const ImageSrc = styled("span")({
   position: "absolute",
@@ -55,23 +54,22 @@ const ImageMarked = styled("span")(({ theme }) => ({
 }));
 
 function FoodPreferencesPage() {
+  const client = useSelector((store) => store.client);
 
-  const client = useSelector((store) => store.client)
-
-  const [clickedButtons, setClickedButtons] = useState(client.product_ids || []);
+  const [clickedButtons, setClickedButtons] = useState(
+    client.product_ids || []
+  );
 
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-
-    dispatch({ type: 'FETCH_PRODUCTS' });
+    dispatch({ type: "FETCH_PRODUCTS" });
   }, [client || dispatch]);
 
   const products = useSelector((store) => store.products.data);
 
-
-  console.log("Products chosen", client.product_ids)
+  console.log("Products chosen", client.product_ids);
 
   const handleClick = (productId) => {
     // Toggle the clicked state for the clicked button
@@ -98,35 +96,32 @@ function FoodPreferencesPage() {
   const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
     // Apply hover styles to the clicked button
     ...(isclicked && {
-      
-      '& .MuiImageMarked-root': {
+      "& .MuiImageMarked-root": {
         opacity: 0,
       },
-      '& .MuiTypography-root': {
-        border: '4px solid beige',
+      "& .MuiTypography-root": {
+        border: "4px solid beige",
       },
     }),
-    position: 'relative',
+    position: "relative",
     height: 200,
-    [theme.breakpoints.down('sm')]: {
-      width: '100% !important', // Overrides inline-style
+    [theme.breakpoints.down("sm")]: {
+      width: "100% !important", // Overrides inline-style
       height: 100,
     },
-    '&:hover, &.Mui-focusVisible': {
+    "&:hover, &.Mui-focusVisible": {
       zIndex: 1,
-      '& .MuiImageBackdrop-root': {
+      "& .MuiImageBackdrop-root": {
         opacity: 0.15,
       },
-      '& .MuiImageMarked-root': {
+      "& .MuiImageMarked-root": {
         opacity: 0,
       },
-      '& .MuiTypography-root': {
-        border: '4px solid inheret',
+      "& .MuiTypography-root": {
+        border: "4px solid inheret",
       },
     },
   }));
-
-
 
   return (
     <div className="container">
@@ -150,8 +145,14 @@ function FoodPreferencesPage() {
       >
         Select Any You'd Like To Learn More About
       </Typography>
-      <Grid sx={{ display: 'flex', marginLeft: '375px' }}
-        container xs={9} spacing={2} columnGap={2} rowGap={2}>
+      <Grid
+        sx={{ display: "flex", marginLeft: "375px" }}
+        container
+        xs={9}
+        spacing={2}
+        columnGap={2}
+        rowGap={2}
+      >
         {/* <Box
         sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
       > */}
@@ -164,14 +165,22 @@ function FoodPreferencesPage() {
               onClick={() => handleClick(product.id)}
               style={{
                 width: "20em",
-
               }}
               isclicked={clickedButtons.includes(product.id)}
             >
-              <ImageSrc style={{ borderRadius: 16, borderWidth: "5px", backgroundImage: `url(${product.url})` }} />
-              <ImageBackdrop style={{
-                borderRadius: 22
-              }} className="MuiImageBackdrop-root" />
+              <ImageSrc
+                style={{
+                  borderRadius: 16,
+                  borderWidth: "5px",
+                  backgroundImage: `url(${product.url})`,
+                }}
+              />
+              <ImageBackdrop
+                style={{
+                  borderRadius: 22,
+                }}
+                className="MuiImageBackdrop-root"
+              />
               <Image>
                 <Typography
                   component="span"
@@ -182,7 +191,9 @@ function FoodPreferencesPage() {
                     p: 4,
                     pt: 2,
                     pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                    color: "black",
+                    backgroundColor: "rgba(255, 255, 255, 0.5)", // Semi-transparent white background
+                    backdropFilter: "blur(1px)", // Adjust the blur radius as needed
+                    color: "black !important", // Add !important to make it a priority
                   }}
                 >
                   {product.type}
@@ -203,22 +214,22 @@ function FoodPreferencesPage() {
           marginRight: "30px",
         }}
       >
-      <Button
-        onClick={handleSave}
-        sx={{
-          marginTop: 1.5,
-          marginLeft: 2,
-          height: 50,
-          width: 150,
-          borderRadius: 1,
-          fontSize: "1.25em"
-        }}
-        color="success"
-        variant="contained"
-        autoFocus
-      >
-        Next
-      </Button>
+        <Button
+          onClick={handleSave}
+          sx={{
+            marginTop: 1.5,
+            marginLeft: 2,
+            height: 50,
+            width: 150,
+            borderRadius: 1,
+            fontSize: "1.25em",
+          }}
+          color="success"
+          variant="contained"
+          autoFocus
+        >
+          Next
+        </Button>
       </div>
     </div>
   );
