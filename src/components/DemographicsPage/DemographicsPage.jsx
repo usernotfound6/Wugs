@@ -133,10 +133,10 @@ function DemographicsPage() {
                 onChange={handleChange}
                 sx={{
                   "& .MuiSvgIcon-root":
-  {
-  color: "beige !important"
-  /* Set the text color to beige */
-},
+                  {
+                    color: "beige !important"
+                    /* Set the text color to beige */
+                  },
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "gray",
                   },
@@ -171,7 +171,7 @@ function DemographicsPage() {
                 placeholder="Ex: Professional, International, Health Enthusiasts, Students, Senior Community, Eco-conscious, Tourist-heavy, Religious, Trendy, Urban, Rural..."
                 value={demographics}
                 multiline
-                rows={4}
+                rows={3}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {

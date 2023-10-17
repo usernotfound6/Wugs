@@ -228,7 +228,7 @@ function AdminClientTable() {
                         {/* Additional Client/Building Information */}
                         <div style={{ gridArea: "additional" }}>
                             <Typography variant="h6">
-                                Additional Client/Building Information
+                                Client/Building Information
                             </Typography>
                             <ul>
                                 <li>Demographics: {selectedRowData.demographics || "N/A"}</li>
@@ -434,7 +434,7 @@ function AdminClientTable() {
                                     <Button
                                         onClick={editClient}
                                         variant="contained"
-                                        color="secondary"
+                                        color="success"
                                         style={{
                                             borderRadius: 4,
                                             marginTop: 18,
