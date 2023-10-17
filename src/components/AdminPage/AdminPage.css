@@ -18,8 +18,9 @@ ul li {
 /* Change text color for Select components */
 .MuiMenuItem-root,
 /* Change text color for MenuItem components */
-.MuiTextField-root
-
+.MuiTextField-root,
+.MuiTablePagination-root,
+.MuiSvgIcon-root
 /* Change text color for TextField components */
   {
   color: beige !important;
