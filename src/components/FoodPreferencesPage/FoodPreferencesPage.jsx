@@ -98,14 +98,12 @@ function FoodPreferencesPage() {
   const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
     // Apply hover styles to the clicked button
     ...(isclicked && {
-      '& .MuiImageBackdrop-root': {
-        opacity: 0.15,
-      },
+      
       '& .MuiImageMarked-root': {
         opacity: 0,
       },
       '& .MuiTypography-root': {
-        border: '4px solid #f3cf2a',
+        border: '4px solid beige',
       },
     }),
     position: 'relative',
