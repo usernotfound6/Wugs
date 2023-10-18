@@ -1,7 +1,14 @@
 # Wugs Vending Onboarding React App
 ## Wugs Vending
 
-Welcome to the **Wugs Vending Onboarding React App**, a powerful web application designed to simplify the client onboarding process for **Wugs Vending**. Wugs Vending is a company that provides mini markets, smart coolers, and snack boxes for ethnic foods. This app streamlines the process of collecting client information and preferences across six steps. Clients can provide essential data, select services, choose their preferred food options, and even upload photos or documents. Furthermore, the app offers seamless integration with Google Drive and Calendly to facilitate file management and appointment scheduling.
+Welcome to the **Wugs Vending Onboarding React App** 
+
+A powerful web application designed to simplify the client onboarding process for **Wugs Vending**. 
+
+Wugs Vending is a company that provides mini markets, smart coolers, and snack boxes for ethnic foods. 
+This app streamlines the process of collecting client information and preferences across six steps. Clients can provide essential data, select services, choose their preferred food options, and even upload photos or documents. 
+
+Furthermore, the app offers seamless integration with Google Drive and Calendly to facilitate file management and appointment scheduling.
 
 
 ![Screenshot 2023-10-18 at 10 54 43 AM](https://github.com/usernotfound6/Wugs/assets/129703710/4dce627d-da22-477b-b846-2c7dc6ca8107)
