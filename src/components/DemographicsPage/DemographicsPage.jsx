@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MyStepper from "../MyStepper/MyStepper";
 import HelpIcon from "@mui/icons-material/Help";
-import { Button, Dialog, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Box, Grid, CssBaseline, } from "@mui/material";
+import { Button, Dialog, DialogContent, DialogContentText, FormControl, InputLabel, MenuItem, Select, TextField, Typography, Box, Grid } from "@mui/material";
 
 function DemographicsPage() {
   const client = useSelector((store) => store.client);
-
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -20,13 +19,6 @@ function DemographicsPage() {
   );
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
-  const [formData, setFormData] = useState({
-    number_of_people: "",
-    age_group: "",
-    demographics: "",
-    industry: "",
-    neighborhood_info: "",
-  });
 
   const handleChange = (event) => {
     setPeopleCount(event.target.value);
@@ -35,8 +27,8 @@ function DemographicsPage() {
   const handleHelpIconHover = (event) => {
     const rect = event.target.getBoundingClientRect();
     setPosition({
-      top: rect.top - 200, // Adjust this value to control the vertical position
-      left: rect.left + rect.width, // Adjust this value to control the horizontal position
+      top: rect.top - 200,
+      left: rect.left + rect.width,
     });
     setOpenConfirmation(true);
   };
@@ -46,7 +38,6 @@ function DemographicsPage() {
   };
 
   const postDemographics = () => {
-    console.log("Clicked on Demographics Next");
     dispatch({
       type: "UPDATE_DEMOGRAPHICS",
       payload: {
@@ -61,36 +52,11 @@ function DemographicsPage() {
     history.push("/foodpreferences");
   };
 
-  function dummyData() {
-    const presetData = {
-      number_of_people: "100+",
-      age_group: "Young Adults",
-      demographics: "Students",
-      industry: "Education",
-      neighborhood_info: "Large campus, mostly gas stations and laundromats",
-    };
-
-    // Update formData state
-    setFormData((prevData) => ({
-      ...prevData,
-      ...presetData,
-    }));
-
-    // Update separate state variables (optional)
-    setPeopleCount(presetData.number_of_people);
-    setAgeGroup(presetData.age_group);
-    setDemographics(presetData.demographics);
-    setIndustry(presetData.industry);
-    setNeighborhood(presetData.neighborhood_info);
-
-  }
-
   return (
     <div className="container">
       <MyStepper step={2} />
-      {/* <CssBaseline /> */}
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h4" marginTop={3} style={{ color: "beige" }} onClick={dummyData}>
+        <Typography variant="h4" marginTop={3} style={{ color: "beige" }}>
           About Your Community
         </Typography>
         <Typography variant="h6" marginTop={1} marginBottom={1} style={{ color: "beige" }}>
@@ -135,7 +101,6 @@ function DemographicsPage() {
                   "& .MuiSvgIcon-root":
                   {
                     color: "beige !important"
-                    /* Set the text color to beige */
                   },
                   "& .MuiOutlinedInput-notchedOutline": {
                     borderColor: "gray",
@@ -146,10 +111,10 @@ function DemographicsPage() {
                   "& .MuiOutlinedInput-root": {
                     borderColor: "beige",
                     "&:hover fieldset": {
-                      borderColor: "beige", // Outline color on hover
+                      borderColor: "beige",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "beige", // Outline color when focused
+                      borderColor: "beige",
                     },
                   },
                 }}
@@ -175,13 +140,13 @@ function DemographicsPage() {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
+                      borderColor: "gray",
                     },
                     "&:hover fieldset": {
-                      borderColor: "beige", // Outline color on hover
+                      borderColor: "beige",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "beige", // Outline color when focused
+                      borderColor: "beige",
                     },
                   },
                 }}
@@ -200,13 +165,13 @@ function DemographicsPage() {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
+                      borderColor: "gray",
                     },
                     "&:hover fieldset": {
-                      borderColor: "beige", // Outline color on hover
+                      borderColor: "beige",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "beige", // Outline color when focused
+                      borderColor: "beige",
                     },
                   },
                 }}
@@ -225,13 +190,13 @@ function DemographicsPage() {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
+                      borderColor: "gray",
                     },
                     "&:hover fieldset": {
-                      borderColor: "beige", // Outline color on hover
+                      borderColor: "beige",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "beige", // Outline color when focused
+                      borderColor: "beige", 
                     },
                   },
                 }}
@@ -253,13 +218,13 @@ function DemographicsPage() {
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "& fieldset": {
-                      borderColor: "gray", // Outline color when not focused
+                      borderColor: "gray",
                     },
                     "&:hover fieldset": {
-                      borderColor: "beige", // Outline color on hover
+                      borderColor: "beige",
                     },
                     "&.Mui-focused fieldset": {
-                      borderColor: "beige", // Outline color when focused
+                      borderColor: "beige",
                     },
                   },
                 }}

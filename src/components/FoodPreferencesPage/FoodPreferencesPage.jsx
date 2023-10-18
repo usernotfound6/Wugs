@@ -5,7 +5,6 @@ import { styled } from "@mui/material/styles";
 import { useHistory } from "react-router-dom";
 import { ButtonBase, Button, Grid } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import "./FoodPreferences.css";
 
 // Path: /foodpreferences
 
@@ -69,10 +68,8 @@ function FoodPreferencesPage() {
 
   const products = useSelector((store) => store.products.data);
 
-  console.log("Products chosen", client.product_ids);
-
   const handleClick = (productId) => {
-    // Toggle the clicked state for the clicked button
+    // Toggles the clicked state for the clicked button
     const updatedClickedButtons = clickedButtons.includes(productId)
       ? clickedButtons.filter((id) => id !== productId)
       : [...clickedButtons, productId];
@@ -81,20 +78,16 @@ function FoodPreferencesPage() {
   };
 
   const handleSave = () => {
-    // Send the clickedButtons data in a payload
+    // Sends the clickedButtons data in a payload
     const payload = {
       clickedButtons: clickedButtons,
       client_id: client.client_id,
     };
-
-    console.log("Clicked Buttons:", clickedButtons);
-    // Dispatch an action with the payload to save the data
     dispatch({ type: "UPDATE_FOOD_PREFERENCES", payload });
     history.push("/additionalinfo");
   };
 
   const ImageButton = styled(ButtonBase)(({ theme, isclicked }) => ({
-    // Apply hover styles to the clicked button
     ...(isclicked && {
       "& .MuiImageMarked-root": {
         opacity: 0,
@@ -107,7 +100,7 @@ function FoodPreferencesPage() {
     position: "relative",
     height: 200,
     [theme.breakpoints.down("sm")]: {
-      width: "100% !important", // Overrides inline-style
+      width: "100% !important",
       height: 100,
     },
     "&:hover, &.Mui-focusVisible": {
@@ -154,9 +147,6 @@ function FoodPreferencesPage() {
         columnGap={2}
         rowGap={2}
       >
-        {/* <Box
-        sx={{ display: "flex", flexWrap: "wrap", minWidth: 300, width: "100%" }}
-      > */}
 
         {products && products.length > 0 ? (
           products.map((product) => (
@@ -192,9 +182,9 @@ function FoodPreferencesPage() {
                     p: 4,
                     pt: 2,
                     pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                    backgroundColor: "rgba(255, 255, 255, 0.5)", // Semi-transparent white background
-                    backdropFilter: "blur(1px)", // Adjust the blur radius as needed
-                    color: "black !important", // Add !important to make it a priority
+                    backgroundColor: "rgba(255, 255, 255, 0.5)",
+                    backdropFilter: "blur(1px)",
+                    color: "black !important",
                   }}
                 >
                   {product.type}
@@ -206,7 +196,6 @@ function FoodPreferencesPage() {
         ) : (
           <p>No products available.</p>
         )}
-        {/* </Box> */}
       </Grid>
       <div
         style={{

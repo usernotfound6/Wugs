@@ -50,8 +50,8 @@ function AdminInterestedTable() {
     const [open, setOpen] = useState(false);
 
     const handleRowClick = (params) => {
-        setSelectedRowData(params.row); // Set the entire row data
-        handleOpen(); // Open the modal when a row is clicked
+        setSelectedRowData(params.row); // Sets the entire row data
+        handleOpen(); // Opens the modal when a row is clicked
     };
 
     const handleOpen = () => setOpen(true);
@@ -64,9 +64,6 @@ function AdminInterestedTable() {
                 id: selectedRowData.id,
             },
         });
-        // dispatch({
-        //     type: "FETCH_USER",
-        // });
         setDeleteConfirmationOpen(false);
         handleClose();
     }
@@ -85,7 +82,6 @@ function AdminInterestedTable() {
                         params.indexRelativeToCurrentPage % 2 === 0 ? 'Mui-even' : 'Mui-odd'
                     }
                 />
-
 
                 {/* -----------  MODAL START ----------- */}
 
@@ -140,7 +136,6 @@ function AdminInterestedTable() {
                                         marginTop: 90,
                                         color: "white",
                                         backgroundColor: "red",
-
                                     }}
                                 >
                                     Delete Client From Table

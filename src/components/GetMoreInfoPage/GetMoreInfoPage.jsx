@@ -1,18 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  DialogContentText,
-  CssBaseline,
-  Typography,
-} from "@mui/material";
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, DialogContentText, Typography } from "@mui/material";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import "./GetMoreInfoPage.css";
@@ -78,7 +68,6 @@ function GetMoreInfoPage() {
     setOpenConfirmation(true);
     event.preventDefault();
 
-    // console.log("inside handleSubmit");
     let getMoreInfoObject = {
       name: name,
       email: email,
@@ -87,7 +76,6 @@ function GetMoreInfoPage() {
       about_you: aboutClient,
       why_wugs: whyWugs,
     };
-    console.log("getMoreInfoObject before dispatch:", getMoreInfoObject);
 
     dispatch({ type: "NEW_INTERESTED", payload: getMoreInfoObject });
 
@@ -98,26 +86,6 @@ function GetMoreInfoPage() {
     setAboutClient("");
     setWhyWugs("");
   };
-  
-
-  const dummyData = () => {
-    const presetData = {
-      name: "Andrew Cannon",
-      email: "i<3Wugs@gmail.com",
-      phone_number: "(210)867-5309",
-      industry: "Healthcare",
-      about_you: "We operate a exclusive retirement/nursing home.",
-      why_wugs: "We have a diverse community and having a mini-market on-site would be a great convenience for our guests and staff.",
-    };
-
-    // Update the state variables with predefined data
-    setName(presetData.name);
-    setEmail(presetData.email);
-    setPhone(presetData.phone_number);
-    setIndustry(presetData.industry);
-    setAboutClient(presetData.about_you);
-    setWhyWugs(presetData.why_wugs);
-  }
 
   return (
     <div className="container">
@@ -128,7 +96,6 @@ function GetMoreInfoPage() {
           marginTop={0}
           marginBottom={3}
           style={{ color: "beige" }}
-          onClick={dummyData}
         >
           Get In Touch With Us
         </Typography>
@@ -162,13 +129,13 @@ function GetMoreInfoPage() {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+                borderColor: "gray",
               },
               "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
+                borderColor: "beige",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
+                borderColor: "beige",
               },
             },
           }}
@@ -190,13 +157,13 @@ function GetMoreInfoPage() {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+                borderColor: "gray", 
               },
               "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
+                borderColor: "beige",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
+                borderColor: "beige",
               },
             },
           }}
@@ -218,13 +185,13 @@ function GetMoreInfoPage() {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+                borderColor: "gray",
               },
               "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
+                borderColor: "beige",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
+                borderColor: "beige",
               },
             },
           }}
@@ -245,13 +212,13 @@ function GetMoreInfoPage() {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+                borderColor: "gray",
               },
               "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
+                borderColor: "beige",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
+                borderColor: "beige",
               },
             },
           }}
@@ -273,13 +240,13 @@ function GetMoreInfoPage() {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+                borderColor: "gray",
               },
               "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
+                borderColor: "beige",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
+                borderColor: "beige",
               },
             },
           }}
@@ -301,13 +268,13 @@ function GetMoreInfoPage() {
           sx={{
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: "gray", // Outline color when not focused
+                borderColor: "gray",
               },
               "&:hover fieldset": {
-                borderColor: "beige", // Outline color on hover
+                borderColor: "beige",
               },
               "&.Mui-focused fieldset": {
-                borderColor: "beige", // Outline color when focused
+                borderColor: "beige",
               },
             },
           }}
@@ -338,6 +305,7 @@ function GetMoreInfoPage() {
           Submit
         </Button>
       </div>
+
       {/* Confirmation Dialog */}
       <Dialog
         open={openConfirmation}

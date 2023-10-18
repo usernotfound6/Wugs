@@ -11,7 +11,6 @@ const TabContentFour = () => {
   const history = useHistory();
 
   function handlePrevious(path) {
-    console.log("inside handlePrevious");
     switch (path) {
       case "/servicechoice":
         history.push("/servicechoice");
