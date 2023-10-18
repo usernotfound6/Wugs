@@ -129,50 +129,62 @@ router.put("/servicechoice/:id", (req, res) => {
 
 // Client Location router ------------------------------------------------------------------------------------------------------------------
 
+// This route handles a PUT request to update client location information.
+
 router.put("/clientlocationinfo/:id", (req, res) => {
+  // Log the request body for debugging purposes.
   console.log("req.body", req.body);
+
+  // Extract the client ID from the request parameters.
   const clientId = Number(req.params.id);
   console.log("clientId:", clientId);
 
+  // Create an array of query parameters for the SQL update statement.
   let queryParams = [
-    req.body.business_name, //1
-    req.body.address_street, //2
-    req.body.address_city, //3
-    req.body.address_state, //4
-    req.body.address_zip, //5
-    req.body.website, //6
-    req.body.phone, //7
-    req.body.hours_of_operation, //8
-    req.body.micromarket_location, //9
-    clientId //10
+    req.body.business_name,        // 1
+    req.body.address_street,       // 2
+    req.body.address_city,         // 3
+    req.body.address_state,        // 4
+    req.body.address_zip,          // 5
+    req.body.website,              // 6
+    req.body.phone,                // 7
+    req.body.hours_of_operation,   // 8
+    req.body.micromarket_location, // 9
+    clientId                       // 10
   ];
+
+  // Define the SQL update statement to modify client location information.
   let sqlText = `
-  UPDATE client
-  SET 
-    business_name = $1,
-    address_street = $2,
-    address_city = $3,
-    address_state = $4,
-    address_zip = $5,
-    website = $6,
-    phone = $7,
-    hours_of_operation = $8,
-    micromarket_location = $9,
-    last_active = NOW()
-  WHERE client.id = $10;
+    UPDATE client
+    SET 
+      business_name = $1,
+      address_street = $2,
+      address_city = $3,
+      address_state = $4,
+      address_zip = $5,
+      website = $6,
+      phone = $7,
+      hours_of operation = $8,
+      micromarket_location = $9,
+      last_active = NOW()
+    WHERE client.id = $10;
   `;
 
+  // Use the connection pool to execute the SQL update query.
   pool
     .query(sqlText, queryParams)
     .then((result) => {
+      // Log a success message and send a 200 (OK) response to the client.
       console.log("successful PUT");
       res.sendStatus(200);
     })
     .catch((err) => {
+      // If an error occurs, log the error message and send a 500 (Internal Server Error) response.
       console.log(err);
       res.sendStatus(500);
     });
 });
+
 
 // Demographic router ------------------------------------------------------------------------------------------------------------------
 
