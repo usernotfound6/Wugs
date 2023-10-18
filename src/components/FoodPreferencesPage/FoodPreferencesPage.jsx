@@ -100,8 +100,9 @@ function FoodPreferencesPage() {
         opacity: 0,
       },
       "& .MuiTypography-root": {
-        border: "4px solid #5ced73",
+        border: "6px solid #f3cf2a",
       },
+      
     }),
     position: "relative",
     height: 200,
