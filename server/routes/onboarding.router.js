@@ -340,7 +340,7 @@ router.post("/upload/pictures/:id", upload.array("files"), async (req, res) => {
         requestBody: {
           name: file.originalname, // Set the file's name
           mimeType: file.mimetype, // Specify the MIME type of the file
-          parents: ["156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG"], // Destination folder ID
+          parents: ["16QMGnPCThQNWRsGubgH9CBDAAeuUaxom"], // Destination folder ID
         },
         media: {
           body: fs.createReadStream(file.path), // Read and upload the file from the server
@@ -412,7 +412,8 @@ router.post("/upload/contract/:id", upload.array("files"), async (req, res) => {
         requestBody: {
           name: file.originalname, // Set the file's name
           mimeType: file.mimetype, // Specify the MIME type of the file
-          parents: ["156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG"], // Destination folder ID
+          // parents: ["156Ey1X37jwuVtcg7DgBmCAMrBljLJcaG"], // Destination folder ID
+          parents: ["16QMGnPCThQNWRsGubgH9CBDAAeuUaxom"],
         },
         media: {
           body: fs.createReadStream(file.path), // Read and upload the file from the server
