@@ -19,10 +19,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// it's attempting to parse the JSON from the process.env.REACT_APP_GOOGLE_JSON_KEY environment variable, 
+// it's attempting to parse the JSON from the process.env.REACT_APP_GOOGLE_JSON_KEY environment variable,
 // but if that variable is not defined or is an empty string, it will use an empty object ({}) as a default value to avoid a potential error when calling JSON.parse.
 const googleJsonKey = JSON.parse(process.env.REACT_APP_GOOGLE_JSON_KEY || {});
-
 
 /**
  * The single client GET
@@ -126,51 +125,44 @@ router.put("/servicechoice/:id", (req, res) => {
     });
 });
 
-
 // Client Location router ------------------------------------------------------------------------------------------------------------------
 
 // This route handles a PUT request to update client location information.
 
 router.put("/clientlocationinfo/:id", (req, res) => {
-  // Log the request body for debugging purposes.
-  console.log("req.body", req.body);
-
-  // Extract the client ID from the request parameters.
   const clientId = Number(req.params.id);
-  console.log("clientId:", clientId);
 
   // Create an array of query parameters for the SQL update statement.
   let queryParams = [
-    req.body.business_name,        // 1
-    req.body.address_street,       // 2
-    req.body.address_city,         // 3
-    req.body.address_state,        // 4
-    req.body.address_zip,          // 5
-    req.body.website,              // 6
-    req.body.phone,                // 7
-    req.body.hours_of_operation,   // 8
-    req.body.micromarket_location, // 9
-    clientId                       // 10
+    req.body.business_name, //1
+    req.body.address_street, //2
+    req.body.address_city, //3
+    req.body.address_state, //4
+    req.body.address_zip, //5
+    req.body.website, //6
+    req.body.phone, //7
+    req.body.hours_of_operation, //8
+    req.body.micromarket_location, //9
+    clientId, //10
   ];
 
   // Define the SQL update statement to modify client location information.
   let sqlText = `
-    UPDATE client
-    SET 
-      business_name = $1,
-      address_street = $2,
-      address_city = $3,
-      address_state = $4,
-      address_zip = $5,
-      website = $6,
-      phone = $7,
-      hours_of operation = $8,
-      micromarket_location = $9,
-      last_active = NOW()
-    WHERE client.id = $10;
+  UPDATE client
+  SET 
+    business_name = $1,
+    address_street = $2,
+    address_city = $3,
+    address_state = $4,
+    address_zip = $5,
+    website = $6,
+    phone = $7,
+    hours_of_operation = $8,
+    micromarket_location = $9,
+    last_active = NOW()
+  WHERE client.id = $10;
   `;
 
-  // Use the connection pool to execute the SQL update query.
   pool
     .query(sqlText, queryParams)
     .then((result) => {
@@ -180,11 +172,11 @@ router.put("/clientlocationinfo/:id", (req, res) => {
     })
     .catch((err) => {
       // If an error occurs, log the error message and send a 500 (Internal Server Error) response.
+
       console.log(err);
       res.sendStatus(500);
     });
 });
-
 
 // Demographic router ------------------------------------------------------------------------------------------------------------------
 
@@ -197,12 +189,12 @@ router.put("/demographics/:id", (req, res) => {
 
   // Create an array of query parameters for the SQL update statement.
   let queryParams = [
-    req.body.number_of_people,     // 1
-    req.body.demographics,        // 2
-    req.body.neighborhood_info,   // 3
-    req.body.industry,            // 4
-    req.body.age_group,           // 5
-    clientId                      // 6
+    req.body.number_of_people, // 1
+    req.body.demographics, // 2
+    req.body.neighborhood_info, // 3
+    req.body.industry, // 4
+    req.body.age_group, // 5
+    clientId, // 6
   ];
 
   // Define the SQL update statement to modify client demographic information.
@@ -232,7 +224,6 @@ router.put("/demographics/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
-
 
 // Product Choice router ------------------------------------------------------------------------------------------------------------------
 
@@ -276,7 +267,6 @@ router.post("/foodpreferences", (req, res) => {
     });
 });
 
-
 // addtional info router ------------------------------------------------------------------------------------------------------------------
 
 // This route handles a PUT request to update additional client information.
@@ -288,10 +278,10 @@ router.put("/additionalinfo/:id", (req, res) => {
 
   // Create an array of query parameters for the SQL update statement.
   const queryParams = [
-    req.body.dimensions,      // 1
-    req.body.pictures,        // 2
-    req.body.wugs_visit,      // 3
-    clientId                 // 4
+    req.body.dimensions, // 1
+    req.body.pictures, // 2
+    req.body.wugs_visit, // 3
+    clientId, // 4
   ];
 
   // Define the SQL update statement to modify additional client information.
@@ -320,7 +310,6 @@ router.put("/additionalinfo/:id", (req, res) => {
     });
 });
 
-
 /**
  * PUT - transaction type PUT for 2 queries!
  */
@@ -337,15 +326,15 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
 
   // Define query parameters for updating client and user information.
   const clientQueryParams = [
-    req.body.phone,   // 1
-    clientId,        // 2
+    req.body.phone, // 1
+    clientId, // 2
   ];
 
   const userQueryParams = [
     req.body.first_name, // 1
-    req.body.last_name,  // 2
-    req.body.username,   // 3
-    req.body.user_id,    // 4
+    req.body.last_name, // 2
+    req.body.username, // 3
+    req.body.user_id, // 4
   ];
 
   // Establish a database connection and start a transaction.
@@ -392,7 +381,6 @@ router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
   }
 });
 
-
 // post for pictures
 router.post("/upload/pictures/:id", upload.array("files"), async (req, res) => {
   try {
@@ -431,16 +419,16 @@ router.post("/upload/pictures/:id", upload.array("files"), async (req, res) => {
     }
 
     // fileUrl = `https://drive.google.com/uc?id=${formData.id}`
-    console.log("uploadedFiles.id", uploadedFiles[0].id)
-    console.log("uploadedFiles array:", uploadedFiles)
+    console.log("uploadedFiles.id", uploadedFiles[0].id);
+    console.log("uploadedFiles array:", uploadedFiles);
 
     let uploadedFileURLs = [];
     for (let file of uploadedFiles) {
       const fileUrl = `https://drive.google.com/uc?id=${file.id}`;
       uploadedFileURLs.push(fileUrl);
     }
-    console.log("uploadedFileURLs", uploadedFileURLs)
-    console.log("client ID:", req.params.id)
+    console.log("uploadedFileURLs", uploadedFileURLs);
+    console.log("client ID:", req.params.id);
     const sqlText = `
     UPDATE client
     SET pictures = pictures || $1
@@ -457,7 +445,6 @@ router.post("/upload/pictures/:id", upload.array("files"), async (req, res) => {
         console.log("Error completing PUT service query", err);
         res.sendStatus(500);
       });
-
   } catch (error) {
     // Handle and log any errors that occur during the file upload process
     console.error(error);
@@ -504,16 +491,16 @@ router.post("/upload/contract/:id", upload.array("files"), async (req, res) => {
     }
 
     // fileUrl = `https://drive.google.com/uc?id=${formData.id}`
-    console.log("uploadedFiles.id", uploadedFiles[0].id)
-    console.log("uploadedFiles array:", uploadedFiles)
+    console.log("uploadedFiles.id", uploadedFiles[0].id);
+    console.log("uploadedFiles array:", uploadedFiles);
 
     let uploadedFileURLs = [];
     for (let file of uploadedFiles) {
       const fileUrl = `https://drive.google.com/uc?id=${file.id}`;
       uploadedFileURLs.push(fileUrl);
     }
-    console.log("uploadedFileURLs", uploadedFileURLs)
-    console.log("client ID:", req.params.id)
+    console.log("uploadedFileURLs", uploadedFileURLs);
+    console.log("client ID:", req.params.id);
     const sqlText = `
     UPDATE client
     SET contract = contract || $1
@@ -530,7 +517,6 @@ router.post("/upload/contract/:id", upload.array("files"), async (req, res) => {
         console.log("Error completing PUT service query", err);
         res.sendStatus(500);
       });
-
   } catch (error) {
     // Handle and log any errors that occur during the file upload process
     console.error(error);
