@@ -11,7 +11,6 @@ import {
   Typography,
   Container,
   Grid,
-  Input,
 } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useHistory } from "react-router-dom";
@@ -175,7 +174,6 @@ function UserPage() {
         );
 
         const data = response.data;
-        console.log("Uploaded files: ", data.files);
         if (data) {
           handleClickOpen();
           setPictureFileLength(0);
@@ -190,8 +188,6 @@ function UserPage() {
 
   const handleContractUpload = async () => {
     const files = contractFileInputRef.current.files;
-    console.log("Selected files:", files);
-    // console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
 
     // // Check if there are selected files
     if (files.length > 0) {
@@ -202,7 +198,6 @@ function UserPage() {
         formData.append("files", files[i]);
       }
       console.log("Uploading files:", formData);
-      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
       const clientId = client.client_id;
       console.log("clientId is:", clientId);
 
