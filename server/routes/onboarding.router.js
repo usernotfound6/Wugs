@@ -83,34 +83,49 @@ router.get("/client/:id", (req, res) => {
 
 // Service Choice router ------------------------------------------------------------------------------------------------------------------
 
+// This route handles a PUT request to update a client's service choices.
 router.put("/servicechoice/:id", (req, res) => {
+  // Log the request body for debugging purposes.
   console.log("req.body is:", req.body);
+
+  // Extract the client ID from the request parameters.
   const client_id = Number(req.params.id);
+
+  // Extract the array of service IDs from the request body.
   const service_id = req.body.service_id; // Assuming service_id is an array
 
+  // Define a query to delete the existing service choices for the client.
   const deleteQuery = `DELETE FROM client_service WHERE client_id = $1`;
   const deleteValues = [client_id];
 
+  // Use a connection pool to execute the delete query.
   pool
     .query(deleteQuery, deleteValues)
     .then(() => {
-      // Use a loop to insert multiple rows
+      // Use a loop to insert multiple rows into the client_service table.
+
+      // Define a query to insert the new service choices for the client.
       const insertQuery = `
         INSERT INTO client_service (client_id, service_id)
         SELECT $1, unnest($2::int[]);
       `;
       const insertValues = [client_id, service_id];
+
+      // Execute the insert query to update the service choices.
       return pool.query(insertQuery, insertValues);
     })
     .then(() => {
+      // Log a success message and send a 200 (OK) response to the client.
       console.log("successful PUT");
       res.sendStatus(200);
     })
     .catch((err) => {
+      // If an error occurs, log an error message and send a 500 (Internal Server Error) response.
       console.log("Error completing PUT service query", err);
       res.sendStatus(500);
     });
 });
+
 
 // Client Location router ------------------------------------------------------------------------------------------------------------------
 
