@@ -188,40 +188,51 @@ router.put("/clientlocationinfo/:id", (req, res) => {
 
 // Demographic router ------------------------------------------------------------------------------------------------------------------
 
+// This route handles a PUT request to update client demographic information.
+
 router.put("/demographics/:id", (req, res) => {
+  // Extract the client ID from the request parameters.
   const clientId = Number(req.params.id);
   console.log("clientId:", clientId);
 
+  // Create an array of query parameters for the SQL update statement.
   let queryParams = [
-    req.body.number_of_people, //1
-    req.body.demographics, //2
-    req.body.neighborhood_info, //3
-    req.body.industry, //4
-    req.body.age_group, //5
-    clientId, //6
+    req.body.number_of_people,     // 1
+    req.body.demographics,        // 2
+    req.body.neighborhood_info,   // 3
+    req.body.industry,            // 4
+    req.body.age_group,           // 5
+    clientId                      // 6
   ];
+
+  // Define the SQL update statement to modify client demographic information.
   let queryText = `
-  UPDATE client
-  SET 
-    number_of_people = $1,
-    demographics = $2,
-    neighborhood_info = $3,
-    industry = $4,
-    target_age_group = $5,
-    last_active = NOW()
-  WHERE client.id = $6;
+    UPDATE client
+    SET 
+      number_of_people = $1,
+      demographics = $2,
+      neighborhood_info = $3,
+      industry = $4,
+      target_age_group = $5,
+      last_active = NOW()
+    WHERE client.id = $6;
   `;
+
+  // Use the connection pool to execute the SQL update query.
   pool
     .query(queryText, queryParams)
     .then((result) => {
+      // Log a success message and send a 200 (OK) response to the client.
       console.log("successful PUT");
       res.sendStatus(200);
     })
     .catch((err) => {
+      // If an error occurs, log the error message and send a 500 (Internal Server Error) response.
       console.log(err);
       res.sendStatus(500);
     });
 });
+
 
 // Product Choice router ------------------------------------------------------------------------------------------------------------------
 
