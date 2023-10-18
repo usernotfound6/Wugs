@@ -279,36 +279,47 @@ router.post("/foodpreferences", (req, res) => {
 
 // addtional info router ------------------------------------------------------------------------------------------------------------------
 
+// This route handles a PUT request to update additional client information.
+
 router.put("/additionalinfo/:id", (req, res) => {
-  // POST route code here
+  // Extract the client ID from the request parameters.
   const clientId = Number(req.params.id);
   console.log("clientId:", clientId);
+
+  // Create an array of query parameters for the SQL update statement.
   const queryParams = [
-    req.body.dimensions, //1
-    req.body.pictures, //2
-    req.body.wugs_visit, //3
-    clientId, //4
+    req.body.dimensions,      // 1
+    req.body.pictures,        // 2
+    req.body.wugs_visit,      // 3
+    clientId                 // 4
   ];
+
+  // Define the SQL update statement to modify additional client information.
   const queryText = `
-  UPDATE client
-  SET 
-    dimensions = $1,
-    pictures = $2,
-    wugs_visit = $3,
-    last_active = NOW()
-  WHERE client.id = $4;
+    UPDATE client
+    SET 
+      dimensions = $1,
+      pictures = $2,
+      wugs_visit = $3,
+      last_active = NOW()
+    WHERE client.id = $4;
   `;
+
+  // Use the connection pool to execute the SQL update query.
   pool
     .query(queryText, queryParams)
     .then((result) => {
+      // Log a success message and send a 200 (OK) response to the client.
       console.log("successful PUT");
       res.sendStatus(200);
     })
     .catch((err) => {
+      // If an error occurs, log the error message and send a 500 (Internal Server Error) response.
       console.log(err);
       res.sendStatus(500);
     });
 });
+
 
 /**
  * PUT - transaction type PUT for 2 queries!
