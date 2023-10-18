@@ -1,6 +1,17 @@
 import React, { useState, useEffect, useRef, createRef } from "react";
+import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Card, CardContent, Modal, TextField, Typography, Container, Grid, Input } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Modal,
+  TextField,
+  Typography,
+  Container,
+  Grid,
+} from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useHistory } from "react-router-dom";
 import { PopupWidget } from "react-calendly";
@@ -12,7 +23,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 function UserPage() {
-
   const rootElement = document.getElementById("popup-root");
 
   const user = useSelector((store) => store.user);
@@ -82,6 +92,10 @@ function UserPage() {
   }, [photoIndex]);
 
   const handleSave = () => {
+    // console.log("firstName is:", firstName)
+    // console.log("lastName is:", lastName)
+    // console.log("phone is:", phone)
+    // console.log("username is:", username)
     if (!firstName || !lastName || !phone || !username || !confirmUsername) {
       alert("please complete all inputs");
     } else if (username !== confirmUsername) {
@@ -136,7 +150,7 @@ function UserPage() {
   // Function to handle file upload to Google Drive
   const handlePictureUpload = async () => {
     const files = pictureFileInputRef.current.files;
-    console.log("files length:", files.length)
+    console.log("files length:", files.length);
     // Check if there are selected files
     if (files.length > 0) {
       const formData = new FormData();
@@ -160,7 +174,6 @@ function UserPage() {
         );
 
         const data = response.data;
-        console.log("Uploaded files: ", data.files);
         if (data) {
           handleClickOpen();
           setPictureFileLength(0);
@@ -175,7 +188,6 @@ function UserPage() {
 
   const handleContractUpload = async () => {
     const files = contractFileInputRef.current.files;
-    console.log("Selected files:", files);
 
     // // Check if there are selected files
     if (files.length > 0) {
@@ -216,18 +228,23 @@ function UserPage() {
   };
 
   const openCalendlyLink = () => {
-    Calendly.initPopupWidget({ url: "https://calendly.com/seleymolubah/meeting" });
+    Calendly.initPopupWidget({
+      url: "https://calendly.com/seleymolubah/meeting",
+    });
   };
-
 
   return (
     <div className="container">
-      <Typography marginLeft={40} variant="h4">Welcome, {user.first_name || user.username}!</Typography>
-      <Typography marginLeft={40} variant="h6">Onboarding Status: {client.status_name}</Typography>
+      <Typography marginLeft={40} variant="h4">
+        Welcome, {user.first_name || user.username}!
+      </Typography>
+      <Typography marginLeft={40} variant="h6">
+        Onboarding Status: {client.status_name}
+      </Typography>
       <div
         style={{
           display: "flex",
-          justifyContent: 'right',
+          justifyContent: "right",
           marginRight: "40px",
         }}
       >
@@ -235,8 +252,6 @@ function UserPage() {
           variant="contained"
           onClick={() => dispatch({ type: "LOGOUT" })}
           style={{
-
-
             marginRight: "300px",
             marginTop: -50,
             marginBottom: 120,
@@ -250,7 +265,7 @@ function UserPage() {
         sx={{
           width: "100%",
           height: "60vh",
-          marginBottom: "100px"
+          marginBottom: "100px",
         }}
       >
         <Grid container spacing={1}>
@@ -356,7 +371,10 @@ function UserPage() {
               }}
             >
               <CardContent>
-                <Typography variant="h6" style={{ marginBottom: "15px", color: "#f5f5dc" }}>
+                <Typography
+                  variant="h6"
+                  style={{ marginBottom: "15px", color: "#f5f5dc" }}
+                >
                   Upload Image of Vending Space to WUGS
                 </Typography>
                 <div className="custom-upload-button">
@@ -369,11 +387,12 @@ function UserPage() {
                       multiple
                       onChange={handlePictureSelected}
                     />
-                    <Button
-                      variant="contained"
-                      component="span"
-                    >
-                      {pictureFileLength > 1 ? `${pictureFileLength} Files Selected` : pictureFileLength > 0 ? `${pictureFileLength} File Selected` : "Choose Files"}
+                    <Button variant="contained" component="span">
+                      {pictureFileLength > 1
+                        ? `${pictureFileLength} Files Selected`
+                        : pictureFileLength > 0
+                        ? `${pictureFileLength} File Selected`
+                        : "Choose Files"}
                     </Button>
                   </label>
                   <Button
@@ -390,13 +409,18 @@ function UserPage() {
                   </Button>
                 </div>
 
-                <hr style={{
-                  marginBottom: "20px",
-                  marginTop: "25px",
-                }} />
+                <hr
+                  style={{
+                    marginBottom: "20px",
+                    marginTop: "25px",
+                  }}
+                />
 
                 <div className="custom-upload-button">
-                  <Typography variant="h6" style={{ marginBottom: "15px", color: "#f5f5dc" }}>
+                  <Typography
+                    variant="h6"
+                    style={{ marginBottom: "15px", color: "#f5f5dc" }}
+                  >
                     Upload Signed Contract to WUGS
                   </Typography>
                   <label htmlFor="contract-input">
@@ -408,11 +432,12 @@ function UserPage() {
                       multiple
                       onChange={handleContractSelected}
                     />
-                    <Button
-                      variant="contained"
-                      component="span"
-                    >
-                      {contractFileLength > 1 ? `${contractFileLength} Files Selected` : contractFileLength > 0 ? `${contractFileLength} File Selected` : "Choose Files"}
+                    <Button variant="contained" component="span">
+                      {contractFileLength > 1
+                        ? `${contractFileLength} Files Selected`
+                        : contractFileLength > 0
+                        ? `${contractFileLength} File Selected`
+                        : "Choose Files"}
                     </Button>
                   </label>
                   <Button
@@ -428,7 +453,6 @@ function UserPage() {
                     Upload Files
                   </Button>
                 </div>
-
               </CardContent>
             </Card>
           </Grid>
@@ -478,13 +502,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray",
+                    borderColor: "gray", // Outline color when not focused
                   },
                   "&:hover fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color on hover
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color when focused
                   },
                 },
               }}
@@ -494,7 +518,6 @@ function UserPage() {
               id="lastName"
               label="Last Name"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="lastName"
               value={lastName}
@@ -503,13 +526,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray",
+                    borderColor: "gray", // Outline color when not focused
                   },
                   "&:hover fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color on hover
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color when focused
                   },
                 },
               }}
@@ -527,13 +550,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray",
+                    borderColor: "gray", // Outline color when not focused
                   },
                   "&:hover fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color on hover
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color when focused
                   },
                 },
               }}
@@ -551,13 +574,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray",
+                    borderColor: "gray", // Outline color when not focused
                   },
                   "&:hover fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color on hover
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color when focused
                   },
                 },
               }}
@@ -574,13 +597,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray",
+                    borderColor: "gray", // Outline color when not focused
                   },
                   "&:hover fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color on hover
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red",
+                    borderColor: "red", // Outline color when focused
                   },
                 },
               }}
