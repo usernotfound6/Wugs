@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import "./LandingPage.css";
 import { Card, Button } from "@mui/material";
@@ -7,9 +7,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
-
-// CUSTOM COMPONENTS
-// import RegisterForm from '../RegisterForm/RegisterForm';
 
 // Path: /home (when not logged in)
 
@@ -22,32 +19,32 @@ function LandingPage() {
 
   return (
     <div className="container">
-         <Card
-            elevation={14}
-            sx={{
-              margin: "auto",
-            width: 250,
-              backgroundColor: "blue",
-              borderRadius: 100,
-              marginBottom: 10,
-            }}
-            
-          >
-      <img
-        src="https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"
-        height={250}
-        style={{ display: "flex", marginLeft: "auto", marginRight: "auto" }}
-      ></img>
-</Card>
+      <Card
+        elevation={14}
+        sx={{
+          margin: "auto",
+          width: 250,
+          backgroundColor: "blue",
+          borderRadius: 100,
+          marginBottom: 10,
+        }}
+
+      >
+        <img
+          src="https://thumb.tildacdn.com/tild3130-3239-4066-a230-373164373863/-/resize/778x/-/format/webp/Untitled_design_12_1.png"
+          height={250}
+          style={{ display: "flex", marginLeft: "auto", marginRight: "auto" }}
+        ></img>
+      </Card>
       <div style={{ position: "absolute", right: 40, top: 120 }}>
-      <Typography variant="h6" marginTop={-4} marginBottom={2}>Already a Member?</Typography>
+        <Typography variant="h6" marginTop={-4} marginBottom={2}>Already a Member?</Typography>
         <Button
           style={{ position: "absolute", right: 10 }}
           color="success"
           variant="contained"
           autoFocus
           onClick={onLogin}
-          
+
         >
           Login
         </Button>
@@ -63,10 +60,10 @@ function LandingPage() {
               marginBottom: 6,
               maxWidth: 440,
               minWidth: 280,
-              height:550,
+              height: 550,
               backgroundColor: "beige",
               borderRadius: 3,
-              
+
             }}
             className="hover-card"
             onClick={() => {
@@ -102,7 +99,7 @@ function LandingPage() {
               marginTop: -7,
               maxWidth: 440,
               minWidth: 280,
-              height:550,
+              height: 550,
               backgroundColor: "beige",
               borderRadius: 3,
             }}

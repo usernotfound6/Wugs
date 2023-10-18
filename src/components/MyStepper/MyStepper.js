@@ -1,11 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import { withRouter } from 'react-router-dom'; 
-import {
-  Step,
-  StepLabel,
-  Stepper
-} from '@mui/material/'
+import { withRouter } from 'react-router-dom';
+import { Step, StepLabel, Stepper } from '@mui/material/'
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import PropTypes from 'prop-types';
 import LunchDiningIcon from '@mui/icons-material/LunchDining';
@@ -60,9 +56,9 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
       'linear-gradient( 136deg, #f3cf2a 0%, #050c42 50%, #050c42 100%)',
   }),
   ...(!ownerState.active && !ownerState.completed && {
-    backgroundColor: '#fefefe', // Change the background color of future steps
-    color: '#050c42', // Change the text color of future steps
-}),
+    backgroundColor: '#fefefe', // Changes the background color of future steps
+    color: '#050c42', // Changes the text color of future steps
+  }),
 }));
 
 function ColorlibStepIcon(props) {
@@ -120,32 +116,32 @@ function MyStepper(props) {
 
     <div>
 
-<Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
-  {steps.map((label, index) => (
-    <Step key={label}>
-      <StepLabel
-        className="custom-step-label"
-        StepIconComponent={ColorlibStepIcon}
-        onClick={() => handleStepClick(index)}
-        sx={{ 
-          "& .MuiStepLabel-label.MuiStepLabel-alternativeLabel":{
-            color: "beige"
-          },
-          "& .MuiStepLabel-label.Mui-completed":{
-          color: "#beige"
-        },
-        
+      <Stepper alternativeLabel activeStep={step} connector={<ColorlibConnector />}>
+        {steps.map((label, index) => (
+          <Step key={label}>
+            <StepLabel
+              className="custom-step-label"
+              StepIconComponent={ColorlibStepIcon}
+              onClick={() => handleStepClick(index)}
+              sx={{
+                "& .MuiStepLabel-label.MuiStepLabel-alternativeLabel": {
+                  color: "beige"
+                },
+                "& .MuiStepLabel-label.Mui-completed": {
+                  color: "#beige"
+                },
+
                 "& .MuiStepLabel-label.Mui-active": {
-                    color: "#f3cf2a", // Outline color when not focused
-                  },
-                  
-                 }}
-      >
-        {label}
-      </StepLabel>
-    </Step>
-  ))}
-</Stepper>
+                  color: "#f3cf2a",
+                },
+
+              }}
+            >
+              {label}
+            </StepLabel>
+          </Step>
+        ))}
+      </Stepper>
     </div>
   );
 }

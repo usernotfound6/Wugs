@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import MyStepper from "../MyStepper/MyStepper";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Typography, Button, Box, Card, CardContent, CardMedia, Grid, CssBaseline, Checkbox, } from "@mui/material";
+import { Typography, Button, Card, CardContent, CardMedia, Grid, CssBaseline, Checkbox, } from "@mui/material";
 
 // Path: /servicechoice
 
@@ -13,8 +13,6 @@ function ServiceChoicePage() {
   const user = useSelector((store) => store.user);
   const singleClient = useSelector((store) => store.client);
   const client = useSelector((store) => store.client);
-
-  console.log("client!!!", singleClient);
 
   let defaultMicroMarketCheckedState =
     client?.service_names?.includes("Micro Markets");
@@ -62,24 +60,12 @@ function ServiceChoicePage() {
     history.push("/clientlocationinfo");
   };
 
-  function dummyData() {
-    const presetData = {
-      micromarketChecked: true,
-      smartcoolersChecked: true,
-      snackboxesChecked: true,
-    };
-
-    setMicromarketChecked(presetData.micromarketChecked);
-    setSmartcoolersChecked(presetData.smartcoolersChecked);
-    setSnackboxesChecked(presetData.snackboxesChecked);
-  }
-
   return (
     <div className="container">
       <MyStepper step={0} />
       <CssBaseline />
       <div style={{ textAlign: "center" }}>
-        <Typography variant="h4" marginTop={3} marginBottom={1} style={{ color: "beige" }} onClick={dummyData}>
+        <Typography variant="h4" marginTop={3} marginBottom={1} style={{ color: "beige" }}>
           Services
         </Typography>
         <Typography variant="h6" marginBottom={4} style={{ color: "beige" }}>
@@ -89,6 +75,7 @@ function ServiceChoicePage() {
       <div style={{ display: "flex", justifyContent: "space-around" }}>
         <form className="checkbox-container">
           <Grid container spacing={5}>
+
             {/* Micro Markets */}
             <Grid item xs={12} sm={6} md={4}>
               <Checkbox
@@ -103,7 +90,6 @@ function ServiceChoicePage() {
                 Micro Markets
               </label>
               <br />
-
               <Card
                 sx={{
                   width: 450,
@@ -142,7 +128,6 @@ function ServiceChoicePage() {
                 Smart Coolers
               </label>
               <br />
-
               <Card
                 sx={{
                   width: 450,
@@ -208,7 +193,6 @@ function ServiceChoicePage() {
           </Grid>
         </form>
       </div>
-      {/* Added a margin and flex-end to the services button */}
       <div
         style={{
           display: "flex",

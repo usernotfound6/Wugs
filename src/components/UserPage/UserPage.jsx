@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, createRef } from "react";
-import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Card, CardContent, Modal, TextField, Typography, Container, Grid, Input } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -83,10 +82,6 @@ function UserPage() {
   }, [photoIndex]);
 
   const handleSave = () => {
-    // console.log("firstName is:", firstName)
-    // console.log("lastName is:", lastName)
-    // console.log("phone is:", phone)
-    // console.log("username is:", username)
     if (!firstName || !lastName || !phone || !username || !confirmUsername) {
       alert("please complete all inputs");
     } else if (username !== confirmUsername) {
@@ -138,8 +133,6 @@ function UserPage() {
     setPhone(formattedValue);
   };
 
-
-
   // Function to handle file upload to Google Drive
   const handlePictureUpload = async () => {
     const files = pictureFileInputRef.current.files;
@@ -183,8 +176,6 @@ function UserPage() {
   const handleContractUpload = async () => {
     const files = contractFileInputRef.current.files;
     console.log("Selected files:", files);
-    // console.log("Here is Google Key", process.env.REACT_APP_GOOGLE_JSON_KEY);
-
 
     // // Check if there are selected files
     if (files.length > 0) {
@@ -195,7 +186,6 @@ function UserPage() {
         formData.append("files", files[i]);
       }
       console.log("Uploading files:", formData);
-      // const fileUrl = `https://drive.google.com/uc?id=${formData.id}`;
       const clientId = client.client_id;
       console.log("clientId is:", clientId);
 
@@ -245,8 +235,8 @@ function UserPage() {
           variant="contained"
           onClick={() => dispatch({ type: "LOGOUT" })}
           style={{
-            
-            
+
+
             marginRight: "300px",
             marginTop: -50,
             marginBottom: 120,
@@ -339,22 +329,7 @@ function UserPage() {
             </Card>
           </Grid>
 
-          {/* <Grid item xs={4}> */}
           <Grid item xs={4} md={6}>
-            {/* <Card
-              variant="outlined"
-              sx={{
-                borderRadius: '50%',
-                width: '500px',
-                height: '500px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent background
-
-              }}
-            >
-              <CardContent> */}
             <img
               src={photos[photoIndex]}
               alt={`Photo ${photoIndex + 1}`}
@@ -365,8 +340,6 @@ function UserPage() {
                 borderRadius: "2%",
               }}
             />
-            {/* </CardContent>
-            </Card> */}
           </Grid>
 
           <Grid item xs={6} md={6}>
@@ -417,13 +390,13 @@ function UserPage() {
                   </Button>
                 </div>
 
-                <hr    style={{
-                      marginBottom: "20px",
-                      marginTop: "25px",
-                    }}/>
+                <hr style={{
+                  marginBottom: "20px",
+                  marginTop: "25px",
+                }} />
 
                 <div className="custom-upload-button">
-                <Typography variant="h6" style={{ marginBottom: "15px", color: "#f5f5dc" }}>
+                  <Typography variant="h6" style={{ marginBottom: "15px", color: "#f5f5dc" }}>
                     Upload Signed Contract to WUGS
                   </Typography>
                   <label htmlFor="contract-input">
@@ -497,7 +470,6 @@ function UserPage() {
               id="firstName"
               label="First Name"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="text"
               value={firstName}
@@ -506,13 +478,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
+                    borderColor: "gray",
                   },
                   "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
+                    borderColor: "red",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
+                    borderColor: "red",
                   },
                 },
               }}
@@ -531,13 +503,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
+                    borderColor: "gray",
                   },
                   "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
+                    borderColor: "red",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
+                    borderColor: "red",
                   },
                 },
               }}
@@ -547,7 +519,6 @@ function UserPage() {
               id="phone"
               label="Phone Number"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="phone"
               value={phone}
@@ -556,13 +527,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
+                    borderColor: "gray",
                   },
                   "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
+                    borderColor: "red",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
+                    borderColor: "red",
                   },
                 },
               }}
@@ -572,7 +543,6 @@ function UserPage() {
               id="username"
               label="Username / Email"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="email"
               value={username}
@@ -581,13 +551,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
+                    borderColor: "gray",
                   },
                   "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
+                    borderColor: "red",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
+                    borderColor: "red",
                   },
                 },
               }}
@@ -596,7 +566,6 @@ function UserPage() {
               id="confirmusername"
               label="Confirm Username / Email"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="email"
               value={confirmUsername}
@@ -605,13 +574,13 @@ function UserPage() {
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "& fieldset": {
-                    borderColor: "gray", // Outline color when not focused
+                    borderColor: "gray",
                   },
                   "&:hover fieldset": {
-                    borderColor: "red", // Outline color on hover
+                    borderColor: "red",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "red", // Outline color when focused
+                    borderColor: "red",
                   },
                 },
               }}

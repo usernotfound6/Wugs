@@ -1,27 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import {
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
-    DialogActions,
-    CssBaseline,
-    Box,
-    Button,
-    Typography,
-    Modal,
-    InputLabel,
-    MenuItem,
-    FormControl,
-    Select,
-    TextField,
-    Container,
-} from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, CssBaseline, Box, Button, Typography, Modal, InputLabel, MenuItem, FormControl, Select, TextField, Container } from "@mui/material";
 import Columns from "./Columns";
 import "./AdminPage.css";
-import { yellow } from "@mui/material/colors";
 
 function AdminClientTable() {
     const dispatch = useDispatch();
@@ -153,11 +135,12 @@ function AdminClientTable() {
                 </Typography>
 
                 <DataGrid
-                sx={{"& .MuiSvgIcon-root":
-                {
-                    color: "beige !important"
-
-                },}}
+                    sx={{
+                        "& .MuiSvgIcon-root":
+                        {
+                            color: "beige !important"
+                        },
+                    }}
                     style={{ color: "beige" }}
                     rows={rows}
                     columns={columns}
@@ -187,7 +170,7 @@ function AdminClientTable() {
                             gridTemplateRows: "repeat(2, 1fr)",
                             gap: "6px",
                             gridTemplateAreas: '"contact business" "additional extra"',
-                            overflowY: "auto", // Enable vertical scrolling when needed
+                            overflowY: "auto", // Enables vertical scrolling when needed
                         }}
                     >
                         {/* Contact Information */}
@@ -351,13 +334,13 @@ function AdminClientTable() {
                                         },
                                         "& .MuiOutlinedInput-root": {
                                             "& fieldset": {
-                                                borderColor: "beige", // Outline color when not focused
+                                                borderColor: "beige",
                                             },
                                             "&:hover fieldset": {
-                                                borderColor: "beige", // Outline color on hover
+                                                borderColor: "beige",
                                             },
                                             "&.Mui-focused fieldset": {
-                                                borderColor: "beige", // Outline color when focused
+                                                borderColor: "beige",
                                             },
                                         },
                                     }}
@@ -387,22 +370,6 @@ function AdminClientTable() {
                                     </Button>
                                 </div>
                             </FormControl>
-                            {/* <div>
-                                <Box textAlign={"right"}>
-                                    <Button
-                                        onClick={handleDeleteConfirmationOpen}
-                                        style={{
-                                            borderRadius: 4,
-                                            marginTop: 90,
-                                            color: "white",
-                                            backgroundColor: "red",
-                                            marginRight: 200,
-                                        }}
-                                    >
-                                        Delete Client File
-                                    </Button>
-                                </Box>
-                            </div> */}
                         </div>
                         <div>
                             <FormControl fullWidth>
@@ -419,13 +386,13 @@ function AdminClientTable() {
                                     sx={{
                                         "& .MuiOutlinedInput-root": {
                                             "& fieldset": {
-                                                borderColor: "gray", // Outline color when not focused
+                                                borderColor: "gray",
                                             },
                                             "&:hover fieldset": {
-                                                borderColor: "beige", // Outline color on hover
+                                                borderColor: "beige",
                                             },
                                             "&.Mui-focused fieldset": {
-                                                borderColor: "beige", // Outline color when focused
+                                                borderColor: "beige",
                                             },
                                         },
                                     }}
@@ -445,22 +412,6 @@ function AdminClientTable() {
                                         Save Edits
                                     </Button>
                                 </Box>
-                                {/* <div>
-                  <Box textAlign={"right"}>
-                    <Button
-                      onClick={handleDeleteConfirmationOpen}
-                      style={{
-                        borderRadius: 4,
-                        marginTop: -28,
-                        color: "white",
-                        backgroundColor: "red",
-                        marginRight: 200,
-                      }}
-                    >
-                      Delete Client File
-                    </Button>
-                  </Box>
-                </div> */}
                             </FormControl>
                         </div>
 
