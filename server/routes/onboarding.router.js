@@ -236,35 +236,46 @@ router.put("/demographics/:id", (req, res) => {
 
 // Product Choice router ------------------------------------------------------------------------------------------------------------------
 
+// This route handles a POST request to update client food preferences.
+
 router.post("/foodpreferences", (req, res) => {
+  // Extract the client ID and selected product IDs from the request body.
   const client_id = req.body.client_id;
   const product_ids = req.body.clickedButtons;
 
-
-  const deleteQuery = `DELETE FROM client_product WHERE client_id = \$1 AND product_id NOT IN (${product_ids.join()})`;
+  // Define a query to delete client product preferences that are not in the updated list.
+  const deleteQuery = `DELETE FROM client_product WHERE client_id = $1 AND product_id NOT IN (${product_ids.join()})`;
   const deleteValues = [client_id];
+
+  // Use the connection pool to execute the delete query.
   pool
     .query(deleteQuery, deleteValues)
     .then(() => {
+      // Define a query to insert the updated client product preferences.
+      // The "ON CONFLICT" clause ensures that conflicts (duplicates) are handled by doing nothing.
       const insertQuery = `
         INSERT INTO client_product (client_id, product_id)
-        SELECT \$1, unnest(\$2::int[])
+        SELECT $1, unnest($2::int[])
         ON CONFLICT (client_id, product_id) DO NOTHING
       `;
 
       const insertValues = [client_id, product_ids];
 
+      // Execute the insert query to update the client's food preferences.
       return pool.query(insertQuery, insertValues);
     })
     .then(() => {
-      console.log("successful PUT");
+      // Log a success message and send a 200 (OK) response to the client.
+      console.log("successful POST");
       res.sendStatus(200);
     })
     .catch((err) => {
-      console.log("Error completing PUT service query", err);
+      // If an error occurs, log the error message and send a 500 (Internal Server Error) response.
+      console.log("Error completing POST food preferences query", err);
       res.sendStatus(500);
     });
 });
+
 
 // addtional info router ------------------------------------------------------------------------------------------------------------------
 
