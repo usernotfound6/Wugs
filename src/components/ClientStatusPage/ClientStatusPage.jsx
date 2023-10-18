@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import TabContentOne from "./TabContentOne";
 import TabContentTwo from "./TabContentTwo";
@@ -15,23 +15,16 @@ import { Typography } from "@mui/material";
 
 const theme = createTheme({
   palette: {
-    mode: "dark", // or 'dark' for the dark theme
+    mode: "dark",
   },
 });
 
 function ClientStatusPage() {
 
-
-  const dispatch = useDispatch();
   const history = useHistory();
   const client = useSelector((store) => store.client);
 
-
-  console.log("Here is the client", client);
-  
-
   function handlePrevious(path) {
-    console.log("inside handlePrevious");
     switch (path) {
       case "/servicechoice":
         history.push("/servicechoice");
@@ -49,7 +42,6 @@ function ClientStatusPage() {
         history.push("/demographics");
         break;
       default:
-      // code block? Not sure what to add for default
     }
   }
 
@@ -98,16 +90,12 @@ function ClientStatusPage() {
         </div>
         <Container
           maxWidth="lg"
-        // sx={{
-        //   width: "100%",
-        //   height: "70vh",
-        // }}
         >
           {value === 0 && <TabContentOne />}
           {value === 1 && <TabContentThree />}
+          {value === 2 && <TabContentFive />}
           {value === 3 && <TabContentTwo />}
           {value === 4 && <TabContentFour />}
-          {value === 2 && <TabContentFive />}
         </Container>
 
       </div>

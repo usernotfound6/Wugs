@@ -1,111 +1,31 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-  Button,
-  MenuItem,
-  Select,
-  Typography,
-  FormControl,
-  InputLabel,
-  Grid,
-  Box,
-  TextField,
-  CssBaseline,
-} from "@mui/material";
+import { Button, MenuItem, Select, Typography, FormControl, InputLabel, Grid, Box, TextField } from "@mui/material";
 import MyStepper from "../MyStepper/MyStepper";
 
 // Path: /clientlocationmoreinfo
 
 function ClientLocationInfoPage() {
   const client = useSelector((store) => store.client);
-  const [formData, setFormData] = useState({
-    business_name: "",
-    address_street: "",
-    address_city: "",
-    address_state: "MN",
-    address_zip: 0,
-    website: "",
-    phone: 0,
-    hours_of_operation: "",
-    micromarket_location: "",
-  });
 
-  const allStates = [
-    "AL",
-    "AK",
-    "AZ",
-    "AR",
-    "CA",
-    "CO",
-    "CT",
-    "DE",
-    "FL",
-    "GA",
-    "HI",
-    "ID",
-    "IL",
-    "IN",
-    "IA",
-    "KS",
-    "KY",
-    "LA",
-    "ME",
-    "MD",
-    "MA",
-    "MI",
-    "MN",
-    "MS",
-    "MO",
-    "MT",
-    "NE",
-    "NV",
-    "NH",
-    "NJ",
-    "NM",
-    "NY",
-    "NC",
-    "ND",
-    "OH",
-    "OK",
-    "OR",
-    "PA",
-    "RI",
-    "SC",
-    "SD",
-    "TN",
-    "TX",
-    "UT",
-    "VT",
-    "VA",
-    "WA",
-    "WV",
-    "WI",
-    "WY",
-  ];
+  const allStates = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
 
   const [businessname, setBusinessName] = useState(client.business_name || "");
   const [businessnameError, setBusinessNameError] = useState("");
-
-  const [addressStreet, setAddressStreet] = useState(
-    client.address_street || ""
-  );
+  const [addressStreet, setAddressStreet] = useState(client.address_street || "");
   const [addressStreetError, setAddressStreetError] = useState("");
   const [addressCity, setAddressCity] = useState(client.address_city || "");
   const [addressCityError, setAddressCityError] = useState("");
-
   const [addressState, setAddressState] = useState(client.address_state || "");
   const [addressZip, setAddressZip] = useState(client.address_zip || "");
   const [addressZipError, setAddressZipError] = useState("");
-
   const [website, setWebsite] = useState(client.website || "");
   const [phone, setPhone] = useState(client.phone || "");
   const [phoneError, setPhoneError] = useState("");
 
   const [hours, setHours] = useState(client.hours_of_operation || "");
-  const [micromarket, setMicroMarket] = useState(
-    client.micromarket_location || ""
-  );
+  const [micromarket, setMicroMarket] = useState(client.micromarket_location || "");
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
 
@@ -137,7 +57,7 @@ function ClientLocationInfoPage() {
       }
     );
     const errorMessageStyle = {
-      color: "orange", // Change the color to your desired color
+      color: "orange",
     };
 
     return output;
@@ -214,49 +134,16 @@ function ClientLocationInfoPage() {
     history.push("/demographics");
   };
 
-  function dummyData() {
-    const presetData = {
-      business_name: "West Water High School",
-      address_street: "123 University Ave",
-      address_city: "Minneapolis",
-      address_state: "MN",
-      address_zip: "90210",
-      website: "www.WestWaterHigh.com",
-      phone: "(651) 867 - 5309",
-      hours_of_operation: "9am - 5pm",
-      micromarket_location: "Quad",
-    };
-
-    // Update formData state
-    setFormData((prevData) => ({
-      ...prevData,
-      ...presetData,
-    }));
-
-    // Update separate state variables (optional)
-    setBusinessName(presetData.business_name);
-    setAddressStreet(presetData.address_street);
-    setAddressCity(presetData.address_city);
-    setAddressState(presetData.address_state);
-    setAddressZip(presetData.address_zip);
-    setWebsite(presetData.website);
-    setPhone(presetData.phone);
-    setHours(presetData.hours_of_operation);
-    setMicroMarket(presetData.micromarket_location);
-  }
-
   return (
     <div className="container">
       <div>
         <MyStepper step={1} />
       </div>
-      {/* <CssBaseline /> */}
       <div style={{ textAlign: "center" }}>
         <Typography
           variant="h4"
           marginTop={3}
           style={{ color: "beige" }}
-          onClick={dummyData}
         >
           Location Information
         </Typography>
@@ -350,13 +237,13 @@ function ClientLocationInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
@@ -386,13 +273,13 @@ function ClientLocationInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
@@ -409,22 +296,23 @@ function ClientLocationInfoPage() {
               defaultValue="MN"
               required
               sx={{
-                "& .MuiSvgIcon-root": {
-                  color: "beige !important",
+                "& .MuiSvgIcon-root":
+                {
+                  color: "beige !important"
                 },
                 "& .MuiOutlinedInput-notchedOutline": {
                   borderColor: "gray",
                 },
                 "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "beige", // Change this to your desired hover outline color
+                  borderColor: "beige",
                 },
                 "& .MuiOutlinedInput-root": {
-                  borderColor: "beige", // Outline color when not focused
+                  borderColor: "beige",
                   "&:hover fieldset": {
-                    borderColor: "beige", // Outline color on hover
+                    borderColor: "beige",
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: "beige", // Outline color when focused
+                    borderColor: "beige",
                   },
                 },
               }}
@@ -450,9 +338,7 @@ function ClientLocationInfoPage() {
             value={addressZip}
             onChange={(event) => {
               setAddressZip(event.target.value);
-              setAddressZipError(
-                event.target.value.trim() === "" ? "Zip is required" : ""
-              );
+              setAddressZipError(event.target.value.trim() === "" ? "Zip is required" : "");
             }}
             error={!!addressZipError}
             helperText={
@@ -462,13 +348,13 @@ function ClientLocationInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
@@ -504,13 +390,13 @@ function ClientLocationInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
@@ -534,13 +420,13 @@ function ClientLocationInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
@@ -562,19 +448,18 @@ function ClientLocationInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
           />
           <br />
-
           <TextField
             id="micromarket"
             label="Micro-Market Location Inside Building"
@@ -590,13 +475,13 @@ function ClientLocationInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}

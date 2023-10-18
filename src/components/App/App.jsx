@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  HashRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
-
+import { HashRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Nav from "../Nav/Nav";
@@ -42,8 +36,6 @@ function App() {
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
-
-  console.log(user.id);
 
   return (
     <Router>
@@ -175,9 +167,7 @@ function App() {
             )}
           </ProtectedRoute>
 
-          {/* PROTECTED */}
-
-          {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+          {/* ------ PROTECTED ------ */}
 
           <Route exact path="/login">
             {user.id ? (

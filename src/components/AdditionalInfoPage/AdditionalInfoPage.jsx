@@ -1,12 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from "axios";
 import { useHistory } from 'react-router-dom';
+import axios from "axios";
 import { styled } from '@mui/material/styles';
 import MyStepper from '../MyStepper/MyStepper'
-import {
-  Box, TextField, Button, Stack, Switch, Typography, CssBaseline, Input, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
-} from "@mui/material";
+import { Box, TextField, Button, Stack, Switch, Typography, CssBaseline, Input, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import HelpIcon from "@mui/icons-material/Help";
@@ -14,28 +12,23 @@ import HelpIcon from "@mui/icons-material/Help";
 function AdditionalInfoPage() {
 
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const fileInputRef = useRef(null); // Needed for the googel drive post
+  const fileInputRef = useRef(null);
 
   const client = useSelector((store) => store.client)
 
   const [dimensions, setDimensions] = useState(client.dimensions || "");
   const [wugsVisit, setWugsVisit] = useState(client.wugs_visit || false);
-  const [formData, setFormData] = useState({
-    dimensions: "",
-  });
 
-  const [dioOpen, dioSetOpen] = React.useState(false);
+  const [dioOpen, dioSetOpen] = useState(false);
 
   const [openConfirmation, setOpenConfirmation] = useState(false);
   const [position, setPosition] = useState({ top: 0, left: 0 });
 
-  console.log("selectedFiles", selectedFiles)
-
   const handleHelpIconHover = (event) => {
     const rect = event.target.getBoundingClientRect();
     setPosition({
-      top: rect.top - 200, // Adjust this value to control the vertical position
-      left: rect.left + rect.width, // Adjust this value to control the horizontal position
+      top: rect.top - 200,
+      left: rect.left + rect.width,
     });
     setOpenConfirmation(true);
   };
@@ -54,8 +47,6 @@ function AdditionalInfoPage() {
     setSelectedFiles([...selectedFiles, ...fileNames]);
   };
 
-  console.log("client", client)
-
   const handleClickOpen = () => {
     dioSetOpen(true);
   };
@@ -71,14 +62,14 @@ function AdditionalInfoPage() {
     if (files.length > 0) {
       const formData = new FormData();
 
-      // Iterate over the selected files and append them to the form data
+      // Iterating over the selected files and append them to the form data
       for (let i = 0; i < files.length; i++) {
         formData.append("files", files[i]);
       }
       const clientId = client.client_id;
 
       try {
-        // Send a POST request to the '/api/onboarding/upload' endpoint with the form data
+        // Sending a POST request to the '/api/onboarding/upload' endpoint with the form data
         const response = await axios.post(
           `/api/onboarding/upload/pictures/${clientId}`,
           formData,
@@ -90,7 +81,6 @@ function AdditionalInfoPage() {
         );
 
         const data = response.data;
-        console.log("Uploaded files: ", data.files);
         if (data) {
           handleClickOpen();
         } else {
@@ -117,18 +107,6 @@ function AdditionalInfoPage() {
     history.push('/review')
   }
 
-  function dummyData() {
-    const presetData = {
-      dimensions: "12 ft wide x 4 ft depth x 10 ft high",
-    };
-    // Update formData state
-    setFormData((prevData) => ({
-      ...prevData,
-      ...presetData,
-    }));
-    // Update separate state variables (optional)
-    setDimensions(presetData.dimensions);
-  }
   const AntSwitch = styled(Switch)(({ theme }) => ({
     width: 28,
     height: 16,
@@ -184,7 +162,6 @@ function AdditionalInfoPage() {
             variant='h4'
             marginTop={3}
             style={{ color: "beige" }}
-            onClick={dummyData}
           >Additional Information
           </Typography>
           <Typography
@@ -230,13 +207,13 @@ function AdditionalInfoPage() {
             sx={{
               "& .MuiOutlinedInput-root": {
                 "& fieldset": {
-                  borderColor: "gray", // Outline color when not focused
+                  borderColor: "gray",
                 },
                 "&:hover fieldset": {
-                  borderColor: "beige", // Outline color on hover
+                  borderColor: "beige",
                 },
                 "&.Mui-focused fieldset": {
-                  borderColor: "beige", // Outline color when focused
+                  borderColor: "beige",
                 },
               },
             }}
@@ -246,7 +223,7 @@ function AdditionalInfoPage() {
           <Stack display='flex' margin={'auto'} justifyContent='center' direction="row" spacing={1} alignItems="center">
             <Typography color='beige'>No</Typography>
             <AntSwitch
-              checked={wugsVisit} // Add the checked prop to bind it to state
+              checked={wugsVisit}
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
             <Typography color='beige'>Yes</Typography>
           </Stack>
@@ -268,7 +245,7 @@ function AdditionalInfoPage() {
             >
               Select Files
             </Button>
-          </label>          
+          </label>
           {selectedFiles.length > 0 && (
             <div>
               <Button
@@ -276,7 +253,7 @@ function AdditionalInfoPage() {
                 onClick={handleFileUpload}
                 style={{
                   justifyContent: "left",
-                  marginLeft: "7px", // Add left margin
+                  marginLeft: "7px",
                 }}
                 autoFocus
               ><CloudUploadIcon />Upload Files

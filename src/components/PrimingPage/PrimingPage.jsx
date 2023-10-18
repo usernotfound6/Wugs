@@ -36,10 +36,6 @@ function PrimingPage() {
       <Box sx={styles.cardContainer}>
         <Card elevation={15} sx={styles.card}>
           <CardContent>
-            {/* <Typography style={{ textAlign: "center" }} variant="h2" color="beige" gutterBottom>
-                  WELCOME SNACKER!
-                </Typography> */}
-
             <Typography
               style={{ textAlign: "center" }}
               color="beige"
