@@ -339,22 +339,8 @@ function UserPage() {
             </Card>
           </Grid>
 
-          {/* <Grid item xs={4}> */}
           <Grid item xs={4} md={6}>
-            {/* <Card
-              variant="outlined"
-              sx={{
-                borderRadius: '50%',
-                width: '500px',
-                height: '500px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0)', // Transparent background
-
-              }}
-            >
-              <CardContent> */}
+            
             <img
               src={photos[photoIndex]}
               alt={`Photo ${photoIndex + 1}`}
@@ -365,8 +351,7 @@ function UserPage() {
                 borderRadius: "2%",
               }}
             />
-            {/* </CardContent>
-            </Card> */}
+            
           </Grid>
 
           <Grid item xs={6} md={6}>
@@ -497,7 +482,6 @@ function UserPage() {
               id="firstName"
               label="First Name"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="text"
               value={firstName}
@@ -522,7 +506,6 @@ function UserPage() {
               id="lastName"
               label="Last Name"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="lastName"
               value={lastName}
@@ -547,7 +530,6 @@ function UserPage() {
               id="phone"
               label="Phone Number"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="phone"
               value={phone}
@@ -572,7 +554,6 @@ function UserPage() {
               id="username"
               label="Username / Email"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="email"
               value={username}
@@ -596,7 +577,6 @@ function UserPage() {
               id="confirmusername"
               label="Confirm Username / Email"
               variant="outlined"
-              // inputProps={{ style: { color: "red" } }}
               InputLabelProps={{ style: { color: "beige" } }}
               type="email"
               value={confirmUsername}
