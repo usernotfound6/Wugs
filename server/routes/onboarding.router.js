@@ -325,54 +325,73 @@ router.put("/additionalinfo/:id", (req, res) => {
  * PUT - transaction type PUT for 2 queries!
  */
 
+// This route handles a PUT request to change contact information for a client.
+
+// Require authentication using 'rejectUnauthenticated' middleware.
+
 router.put("/changecontact/:id", rejectUnauthenticated, async (req, res) => {
+  // Extract the client ID from the request parameters.
   const clientId = Number(req.params.id);
   console.log("clientId:", clientId);
   console.log("req.body:", req.body);
 
+  // Define query parameters for updating client and user information.
   const clientQueryParams = [
-    req.body.phone, //1
-    clientId, //2
-  ];
-  const userQueryParams = [
-    req.body.first_name, //1
-    req.body.last_name, //2
-    req.body.username, //3
-    req.body.user_id, //4
+    req.body.phone,   // 1
+    clientId,        // 2
   ];
 
+  const userQueryParams = [
+    req.body.first_name, // 1
+    req.body.last_name,  // 2
+    req.body.username,   // 3
+    req.body.user_id,    // 4
+  ];
+
+  // Establish a database connection and start a transaction.
   const connection = await pool.connect();
+
   try {
     await connection.query("BEGIN");
+
+    // Define SQL statements for updating client and user tables.
     const clientSqlText = `
-    UPDATE client
-    SET 
-      phone = $1
-      last_active = NOW()
-    WHERE id = $2;
-  `;
+      UPDATE client
+      SET 
+        phone = $1,
+        last_active = NOW()
+      WHERE id = $2;
+    `;
+
     const userSqlText = `
-    UPDATE "user"
-    SET 
-      first_name = $1,
-      last_name = $2,
-      username = $3
-    WHERE id = $4;
-  `;
-    // first run query to update client
+      UPDATE "user"
+      SET 
+        first_name = $1,
+        last_name = $2,
+        username = $3
+      WHERE id = $4;
+    `;
+
+    // Execute the client update query.
     await connection.query(clientSqlText, clientQueryParams);
-    // then run query to update user table
+
+    // Execute the user update query.
     await connection.query(userSqlText, userQueryParams);
+
+    // Commit the transaction if everything was successful.
     await connection.query("COMMIT");
     res.sendStatus(200);
   } catch (error) {
+    // Roll back the transaction and handle any errors.
     await connection.query("ROLLBACK");
     console.log("Transaction Error - Rolling back transfer", error);
     res.sendStatus(500);
   } finally {
+    // Release the database connection.
     connection.release();
   }
 });
+
 
 // post for pictures
 router.post("/upload/pictures/:id", upload.array("files"), async (req, res) => {
