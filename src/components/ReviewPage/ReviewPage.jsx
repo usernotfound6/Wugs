@@ -43,7 +43,7 @@ function ReviewPage() {
   };
 
   const openCalendlyLink = () => {
-    Calendly.initPopupWidget({ url: "https://calendly.com/dontyellwillcry" });
+    Calendly.initPopupWidget({ url: "https://calendly.com/seleymolubah/meeting" });
   };
 
   const handleConfirmSubmit = () => {
