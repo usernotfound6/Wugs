@@ -1,17 +1,7 @@
 import React, { useState, useEffect, useRef, createRef } from "react";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Modal,
-  TextField,
-  Typography,
-  Container,
-  Grid,
-} from "@mui/material";
+import { Box, Button, Card, CardContent, Modal, TextField, Typography, Container, Grid, } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useHistory } from "react-router-dom";
 import { PopupWidget } from "react-calendly";
@@ -92,10 +82,6 @@ function UserPage() {
   }, [photoIndex]);
 
   const handleSave = () => {
-    // console.log("firstName is:", firstName)
-    // console.log("lastName is:", lastName)
-    // console.log("phone is:", phone)
-    // console.log("username is:", username)
     if (!firstName || !lastName || !phone || !username || !confirmUsername) {
       alert("please complete all inputs");
     } else if (username !== confirmUsername) {
@@ -391,8 +377,8 @@ function UserPage() {
                       {pictureFileLength > 1
                         ? `${pictureFileLength} Files Selected`
                         : pictureFileLength > 0
-                        ? `${pictureFileLength} File Selected`
-                        : "Choose Files"}
+                          ? `${pictureFileLength} File Selected`
+                          : "Choose Files"}
                     </Button>
                   </label>
                   <Button
@@ -436,8 +422,8 @@ function UserPage() {
                       {contractFileLength > 1
                         ? `${contractFileLength} Files Selected`
                         : contractFileLength > 0
-                        ? `${contractFileLength} File Selected`
-                        : "Choose Files"}
+                          ? `${contractFileLength} File Selected`
+                          : "Choose Files"}
                     </Button>
                   </label>
                   <Button

@@ -278,9 +278,8 @@ router.put("/additionalinfo/:id", (req, res) => {
   // Create an array of query parameters for the SQL update statement.
   const queryParams = [
     req.body.dimensions, // 1
-    req.body.pictures, // 2
-    req.body.wugs_visit, // 3
-    clientId, // 4
+    req.body.wugs_visit, // 2
+    clientId, // 3
   ];
 
   // Define the SQL update statement to modify additional client information.
@@ -288,10 +287,9 @@ router.put("/additionalinfo/:id", (req, res) => {
     UPDATE client
     SET 
       dimensions = $1,
-      pictures = $2,
-      wugs_visit = $3,
+      wugs_visit = $2,
       last_active = NOW()
-    WHERE client.id = $4;
+    WHERE client.id = $3;
   `;
 
   // Use the connection pool to execute the SQL update query.

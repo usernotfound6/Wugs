@@ -100,8 +100,7 @@ function AdditionalInfoPage() {
       type: 'UPDATE_ADDINFO', payload: {
         client_id: client.client_id,
         dimensions: dimensions,
-        wugs_visit: wugsVisit,
-        pictures: selectedFiles
+        wugs_visit: wugsVisit
       }
     })
     history.push('/review')
@@ -227,6 +226,8 @@ function AdditionalInfoPage() {
               onChange={() => setWugsVisit(!wugsVisit)} inputProps={{ 'aria-label': 'ant design' }} />
             <Typography color='beige'>Yes</Typography>
           </Stack>
+
+
           <Typography>Upload Photos (optional):</Typography>
           <Typography variant="subtitle2">Provide a photo of your space</Typography>
           <Input
