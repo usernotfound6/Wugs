@@ -140,7 +140,7 @@ function FoodPreferencesPage() {
         Select Any You'd Like To Learn More About
       </Typography>
       <Grid
-        sx={{ display: "flex", marginLeft: "375px" }}
+        sx={{ display: "flex", margin: "auto" }}
         container
         xs={9}
         spacing={2}
