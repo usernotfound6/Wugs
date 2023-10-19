@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { Typography } from '@mui/material';
 
 function Nav() {
   const user = useSelector((store) => store.user);
@@ -10,7 +11,10 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Wugs On-Boarding</h2>
+      
+        <img src='https://static.tildacdn.com/tild3130-3239-4066-a230-373164373863/Untitled_design_12_1.png' display='flex'height='100px'margin='auto'></img>
+        <Typography margin={'auto'} marginTop={-9} marginLeft={11} marginBottom={4} color={'beige'}>WUGS ONBOARDING</Typography>
+        
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
