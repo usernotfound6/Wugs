@@ -43,7 +43,7 @@ const TabContentThree= () => {
       >
         <Card
           variant="outlined"
-          onClick={() => handlePrevious("/foodpreferences")}
+          onClick={() => handlePrevious("/clientlocationinfo")}
           sx={{
             width: "500px", // Set the desired width
             height: "400px", // Set the desired height
