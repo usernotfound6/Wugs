@@ -257,7 +257,7 @@ function UserPage() {
             marginBottom: 120,
           }}
         >
-          Logout
+          Log Out
         </Button>
       </div>
       <Container
